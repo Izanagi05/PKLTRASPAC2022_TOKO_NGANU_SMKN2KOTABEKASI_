@@ -29,7 +29,7 @@
             max-width="400"
             max-height="950"
             variant="outlined"
-            style="margin-top: 87px"
+            style="margin-top: 57px"
           >
             <v-card-item>
               <div>
@@ -68,7 +68,7 @@
                       "
                       >Buat Akun</v-btn
                     >
-                    <div class="login">
+                    <div class="login" style="padding-bottom: 20px">
                       Sudah punya akun?
                       <a href="#">Login</a>
                     </div>
@@ -110,6 +110,11 @@ export default {
       },
     ],
   }),
+  method: {
+    login() {
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 <style>
