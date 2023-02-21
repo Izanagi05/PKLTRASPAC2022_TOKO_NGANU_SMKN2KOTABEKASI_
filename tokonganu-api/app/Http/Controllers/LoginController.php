@@ -19,7 +19,7 @@ class LoginController extends Controller
             return response()->json([
                 'success' => true,
                 'message'=>'login sukses',
-                'data' => $user
+                'data' => $success
             ]);
         }else{
             return response()->json([
