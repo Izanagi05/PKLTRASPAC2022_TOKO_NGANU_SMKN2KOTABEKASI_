@@ -38,47 +38,46 @@
                 </div>
                 <v-sheet width="300" class="mx-auto">
                   <!-- <v-form fast-fail @submit.prevent> -->
-                    <v-text-field
-                      v-model="dataregist.nama"
-                      label="Nama"
-                      :rules="namaRules"
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="dataregist.email"
-                      label="E-mail"
-                      :rules="emailRules"
-                    ></v-text-field>
+                  <v-text-field
+                    v-model="dataregist.nama"
+                    label="Nama"
+                    :rules="namaRules"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="dataregist.email"
+                    label="E-mail"
+                    :rules="emailRules"
+                  ></v-text-field>
 
-                    <v-text-field
-                      v-model="dataregist.password"
-                      label="Password"
-                      :rules="passwordRules"
-                      type="password"
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="dataregist.salt_password"
-                      label="Password"
-                      :rules="passwordRules"
-                      type="password"
-                    ></v-text-field>
+                  <v-text-field
+                    v-model="dataregist.password"
+                    label="Password"
+                    :rules="passwordRules"
+                    type="password"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="dataregist.salt_password"
+                    label="Password"
+                    :rules="passwordRules"
+                    type="password"
+                  ></v-text-field>
 
-                    <v-btn
-                      type="submit"
-                      block
-                      class="mt-2 white--text"
-                      style="
-                        border-radius: 50px;
-                        margin-top: 30px;
-                        margin-bottom: 20px;
-                        background-color: #2f432d;
-                      "
-                      @click="register()"
-                      >Buat Akun</v-btn
-                    >
-                    <div class="login">
-                      Sudah punya akun?
-                      <a href="#">Login</a>
-                    </div>
+                  <v-btn
+                    type="submit"
+                    block
+                    class="mt-2 white--text"
+                    style="
+                      border-radius: 50px;
+                      margin-top: 30px;
+                      margin-bottom: 20px;
+                      background-color: #2f432d;
+                    "
+                    >Buat Akun</v-btn
+                  >
+                  <div class="login" style="padding-bottom: 20px">
+                    Sudah punya akun?
+                    <a href="#">Login</a>
+                  </div>
                   <!-- </v-form> -->
                 </v-sheet>
               </div>
@@ -90,7 +89,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data: () => ({
     dataregist: {
@@ -98,7 +97,6 @@ export default {
       email: "",
       password: "",
       salt_password: "",
-
     },
     namaRules: [
       (value) => {
@@ -123,12 +121,13 @@ export default {
     ],
   }),
   methods: {
-    register(){
-      axios.post('http://127.0.0.1:8000/registrasi', this.dataregist).then(respon=> {
-        this.data = respon.data
-      })
-
-    }
+    register() {
+      axios
+        .post("http://127.0.0.1:8000/registrasi", this.dataregist)
+        .then((respon) => {
+          this.data = respon.data;
+        });
+    },
   },
 };
 </script>

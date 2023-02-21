@@ -14,7 +14,7 @@
         </v-col>
         <v-col>
           <div class="store-name f24sb">
-            <div>Toko Nganu </div>
+            <div>Toko Nganu</div>
           </div>
         </v-col>
         <v-col>
@@ -38,7 +38,7 @@
                 </div>
 
                 <v-sheet width="300" class="mx-auto">
-                  <v-form fast-fail @submit.prevent = "loginuser()">
+                  <v-form fast-fail @submit.prevent="loginuser()">
                     <v-text-field
                       v-model="email"
                       label="E-mail"
@@ -56,10 +56,19 @@
                       type="submit"
                       block
                       class="mt-2 white--text"
-                      style=" border-radius:50px; margin-top: 30px;  margin-bottom: 20px;background-color: #2f432d;
+                      style="
+                        border-radius: 50px;
+                        margin-top: 30px;
+                        margin-bottom: 20px;
+                        background-color: #2f432d;
                       "
-                      >Login</v-btn
                     >
+                      Login
+                    </v-btn>
+                    <div class="buat-akun" style="padding-bottom: 20px">
+                      Belum punya akun?
+                      <a href="#">Buat Akun</a>
+                    </div>
                   </v-form>
                 </v-sheet>
               </div>
@@ -71,14 +80,14 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data: () => ({
-    userdata:[],
+    userdata: [],
     email: null,
-    tes:null,
-    dtk:null,
-    dtr:null,
+    tes: null,
+    dtk: null,
+    dtr: null,
     password: null,
     emailRules: [
       (value) => {
@@ -96,18 +105,18 @@ export default {
     ],
   }),
   methods: {
-    getuser(){
-        axios.get('http://127.0.0.1:8000/user').then(respon =>{
-          this.userdata  = respon.data.data
-        })
-      },
-      loginuser(){
-        this.tes = this.userdata
-        axios.post('http://127.0.0.1:8000/login', {
-          email: this.email,
-          password: this.password
-        });
-        this.$router.push("/")
+    getuser() {
+      axios.get("http://127.0.0.1:8000/user").then((respon) => {
+        this.userdata = respon.data.data;
+      });
+    },
+    loginuser() {
+      this.tes = this.userdata;
+      axios.post("http://127.0.0.1:8000/login", {
+        email: this.email,
+        password: this.password,
+      });
+      this.$router.push("/");
 
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
@@ -120,12 +129,12 @@ export default {
       //     console.log("ggl")
 
       //   }
-        // console.log(this.dtk)
-        // console.log(this.dtr)
-    }
+      // console.log(this.dtk)
+      // console.log(this.dtr)
+    },
   },
   created() {
-    this.getuser()
+    this.getuser();
   },
 };
 </script>
