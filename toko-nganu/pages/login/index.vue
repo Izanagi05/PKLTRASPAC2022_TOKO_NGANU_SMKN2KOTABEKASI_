@@ -38,7 +38,7 @@
                 </div>
 
                 <v-sheet width="300" class="mx-auto">
-                  <!-- <v-form fast-fail @submit.prevent> -->
+                  <v-form fast-fail @submit.prevent = "loginuser()">
                     <v-text-field
                       v-model="email"
                       label="E-mail"
@@ -56,12 +56,11 @@
                       type="submit"
                       block
                       class="mt-2 white--text"
-                      @click="loginuser()"
-                      style=" border-radius: 50px; margin-top: 30px;  margin-bottom: 20px;background-color: #2f432d;
+                      style=" border-radius:50px; margin-top: 30px;  margin-bottom: 20px;background-color: #2f432d;
                       "
                       >Login</v-btn
                     >
-                  <!-- </v-form> -->
+                  </v-form>
                 </v-sheet>
               </div>
             </v-card>
@@ -101,23 +100,28 @@ export default {
         axios.get('http://127.0.0.1:8000/user').then(respon =>{
           this.userdata  = respon.data.data
         })
-    },
-    loginuser(){
-      this.tes = this.userdata
+      },
+      loginuser(){
+        this.tes = this.userdata
+        axios.post('http://127.0.0.1:8000/login', {
+          email: this.email,
+          password: this.password
+        });
+        this.$router.push("/")
 
-      for(let i=0; i<this.tes.length; i++){
-         this.dtk =this.userdata[i]
-         this.dtr =this.userdata[i].password
-         console.log(this.dtk)
-        }
-        if(this.email === this.dtk && this.password === this.dtr){
-         console.log("berhasil")
-       }else{
-          console.log("ggl")
+      // for(let i=0; i<this.tes.length; i++){
+      //    this.dtk =this.userdata[i]
+      //    this.dtr =this.userdata[i].password
+      //    console.log(this.dtk)
+      //   }
+      //   if(this.email === this.dtk && this.password === this.dtr){
+      //    console.log("berhasil")
+      //  }else{
+      //     console.log("ggl")
 
-        }
-        console.log(this.dtk)
-        console.log(this.dtr)
+      //   }
+        // console.log(this.dtk)
+        // console.log(this.dtr)
     }
   },
   created() {
