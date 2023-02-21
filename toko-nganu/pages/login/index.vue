@@ -62,8 +62,13 @@
                         margin-bottom: 20px;
                         background-color: #2f432d;
                       "
-                      >Login</v-btn
                     >
+                      Login
+                    </v-btn>
+                    <div class="buat-akun" style="padding-bottom: 20px">
+                      Belum punya akun?
+                      <a href="#">Buat Akun</a>
+                    </div>
                   </v-form>
                 </v-sheet>
               </div>

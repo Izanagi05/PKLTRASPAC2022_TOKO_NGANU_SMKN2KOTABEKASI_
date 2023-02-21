@@ -72,10 +72,9 @@
                       margin-bottom: 20px;
                       background-color: #2f432d;
                     "
-                    @click="register()"
                     >Buat Akun</v-btn
                   >
-                  <div class="login">
+                  <div class="login" style="padding-bottom: 20px">
                     Sudah punya akun?
                     <a href="#">Login</a>
                   </div>
