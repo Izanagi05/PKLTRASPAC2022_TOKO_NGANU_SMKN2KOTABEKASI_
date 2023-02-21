@@ -29,7 +29,7 @@
             max-width="400"
             max-height="950"
             variant="outlined"
-            style="margin-top: 87px"
+            style="margin-top: 17px"
           >
             <v-card-item>
               <div>
