@@ -1,5 +1,8 @@
 <template>
-  <Navbar />
+  <div>
+    <Navbar />
+    <p>wleo</p>
+  </div>
 </template>
 
 <script>
