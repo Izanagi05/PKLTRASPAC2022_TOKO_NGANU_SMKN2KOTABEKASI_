@@ -31,13 +31,14 @@
             variant="outlined"
             style="margin-top: 100px"
           >
-            <v-card-item>
+            <v-card>
               <div>
                 <div class="judul" style="font-weight: 700; font-size: 40px">
                   Login
                 </div>
+
                 <v-sheet width="300" class="mx-auto">
-                  <v-form fast-fail @submit.prevent>
+                  <v-form fast-fail @submit.prevent="loginuser()">
                     <v-text-field
                       v-model="email"
                       label="E-mail"
@@ -61,17 +62,12 @@
                         margin-bottom: 20px;
                         background-color: #2f432d;
                       "
+                      >Login</v-btn
                     >
-                      Login
-                    </v-btn>
-                    <div class="buat-akun" style="padding-bottom: 20px">
-                      Belum punya akun?
-                      <a href="#">Buat Akun</a>
-                    </div>
                   </v-form>
                 </v-sheet>
               </div>
-            </v-card-item>
+            </v-card>
           </v-card>
         </center>
       </div>
@@ -79,10 +75,15 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data: () => ({
-    email: "",
-    password: "",
+    userdata: [],
+    email: null,
+    tes: null,
+    dtk: null,
+    dtr: null,
+    password: null,
     emailRules: [
       (value) => {
         if (value?.length > 0) return true;
@@ -98,10 +99,37 @@ export default {
       },
     ],
   }),
-  method: {
-    register() {
-      this.$router.push("/register");
+  methods: {
+    getuser() {
+      axios.get("http://127.0.0.1:8000/user").then((respon) => {
+        this.userdata = respon.data.data;
+      });
     },
+    loginuser() {
+      this.tes = this.userdata;
+      axios.post("http://127.0.0.1:8000/login", {
+        email: this.email,
+        password: this.password,
+      });
+      this.$router.push("/");
+
+      // for(let i=0; i<this.tes.length; i++){
+      //    this.dtk =this.userdata[i]
+      //    this.dtr =this.userdata[i].password
+      //    console.log(this.dtk)
+      //   }
+      //   if(this.email === this.dtk && this.password === this.dtr){
+      //    console.log("berhasil")
+      //  }else{
+      //     console.log("ggl")
+
+      //   }
+      // console.log(this.dtk)
+      // console.log(this.dtr)
+    },
+  },
+  created() {
+    this.getuser();
   },
 };
 </script>
