@@ -37,7 +37,7 @@
                   Buat Akun
                 </div>
                 <v-sheet width="300" class="mx-auto">
-                  <!-- <v-form fast-fail @submit.prevent> -->
+                  <v-form fast-fail @submit.prevent="register()">
                   <v-text-field
                     v-model="dataregist.nama"
                     label="Nama"
@@ -51,12 +51,6 @@
 
                   <v-text-field
                     v-model="dataregist.password"
-                    label="Password"
-                    :rules="passwordRules"
-                    type="password"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="dataregist.salt_password"
                     label="Password"
                     :rules="passwordRules"
                     type="password"
@@ -78,7 +72,7 @@
                     Sudah punya akun?
                     <a href="#">Login</a>
                   </div>
-                  <!-- </v-form> -->
+                  </v-form>
                 </v-sheet>
               </div>
             </v-card-item>
@@ -96,7 +90,6 @@ export default {
       nama: "",
       email: "",
       password: "",
-      salt_password: "",
     },
     namaRules: [
       (value) => {
@@ -127,6 +120,7 @@ export default {
         .then((respon) => {
           this.data = respon.data;
         });
+        this.$router.push('/login')
     },
   },
 };
