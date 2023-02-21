@@ -30,13 +30,13 @@
         ></v-img>
       </div>
       <div class="profile_icon_keranjang">
-        <button class="round-btn">
+        <nuxt-link to="/keranjang" class="round-btn">
           <v-img
             :src="require('~/assets/keranjang_icon.png')"
             width="38"
             class="keranjang"
           ></v-img>
-        </button>
+        </nuxt-link>
         <button class="round-btn">
           <v-img
             :src="require('~/assets/dingin_coy.png')"
@@ -51,7 +51,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+      return {
+        cari:null
+      }
+    },
+
+
+  methods: {
+
+  },
+};
 </script>
 
 <style>

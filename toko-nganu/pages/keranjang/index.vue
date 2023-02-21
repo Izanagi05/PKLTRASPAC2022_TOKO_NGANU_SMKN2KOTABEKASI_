@@ -22,7 +22,7 @@
               <div class="cart-content">
                 <div v-for="(dataa, index) in tes" :key="index">
                   <v-row>
-                    <div class="cart-card">
+                    <div class="cart-card d-flex">
                       <v-col>
                         <v-img
                           :src="require('~/assets/barang.png')"
