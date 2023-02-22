@@ -1,5 +1,12 @@
 <template>
   <div>
+<<<<<<< HEAD
+    <Navbar />
+    <div class="all-home">
+      <div class="home">
+        <div class="home-image">
+          <v-img :src="require('~/assets/home-img.png')"></v-img>
+=======
     <div class="home">
       <div class="ppp">
     <div class="contact white--text">
@@ -196,23 +203,96 @@
               </v-card>
             </v-col>
           </v-row>
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
         </div>
+
+        <div class="filter">
+          <v-btn>
+            Filter
+            <v-icon>mdi-filter</v-icon>
+          </v-btn>
+        </div>
+
+        <div class="recomend f24sb">Rekomendasi untuk anda</div>
+
         <div>
-          <div class="text-center view-more">
-            <v-btn class="rounded-xl view-more-btn2 f16sb" outlined
-              >Lihat Lainnya</v-btn
-            >
+          <div class="product-card">
+            <v-row class="p-0">
+              <v-col class="card-col p-0" width="204px">
+                <v-card width="204px">
+                  <v-img
+                    :src="require('~/assets/barang.png')"
+                    width="204px"
+                  ></v-img>
+                  <v-row>
+                    <v-col cols="5" class="">
+                      <div class="title-product f14sb pl-1">Mas bro</div>
+                    </v-col>
+                    <v-col>
+                      <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <div class="desc-product font-weight-regular pl-1">
+                        Bingung masbro
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <div class="btn-card pl-1 pb-1">
+                    <button
+                      class="rounded-xl view-more-btn font-weight-regular"
+                      style="font-size: 12px"
+                    >
+                      Lebih lengkap
+                    </button>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
+          <div>
+            <div class="text-center view-more">
+              <v-btn class="rounded-xl view-more-btn2 f16sb" outlined
+                >Lihat Lainnya</v-btn
+              >
+            </div>
           </div>
         </div>
+        <!-- <div class="card">
+          <div class="row mb-3 gy-3">
+            <div v-for="hy in ambildata" :key="hy.id">
+              <div class="col-md-10 mt-4 ml-5">
+                <b-card
+                  :title="hy.title"
+                  :img-src="hy.thumbnail"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 20rem max-height: 10rem"
+                  class="mb-2"
+                >
+                  <b-card-text>
+                    <h1>${{ hy.price }}</h1>
+                    <details>
+                      <summary>Description</summary>
+                      {{ hy.description }}
+                    </details>
+                  </b-card-text>
+                  <v-btn @click="editItem(item)">EDIT<v-icon></v-icon></v-btn>
+                  <v-btn @click="deleteItem(item)"
+                    >DELETE<v-icon></v-icon
+                  ></v-btn>
+                </b-card>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <style>
-* {
-  padding: 0px;
-  margin: 0px;
-}
 .f24sb {
   font-weight: 600;
   font-size: 24px;
@@ -253,11 +333,7 @@
 
 } */
 .home {
-  padding-bottom: 66px;
-}
-.contact {
-  background: #2f432d;
-  padding: 9px 0px 10px 154px;
+  padding: 0px 123px 66px 123px;
 }
 .contact-text {
   font-size: 16px;
@@ -282,12 +358,12 @@
 .card-col {
   margin-top: 15px;
 }
-.title-product {
-  /* padding-left: 3px; */
-}
-.price-product {
-  /* padding-right: 4px; */
-}
+/* .title-product {
+  padding-left: 3px;
+} */
+/* .price-product {
+  padding-right: 4px;
+} */
 .desc-product {
   font-size: 10px;
 }
@@ -305,7 +381,6 @@
   margin-top: 54px;
 }
 .home_image {
-  width: 43px;
 }
 
 
