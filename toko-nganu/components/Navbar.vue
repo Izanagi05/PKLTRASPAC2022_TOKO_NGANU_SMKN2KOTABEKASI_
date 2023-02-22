@@ -2,9 +2,7 @@
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
-        <div class="icon_telepon">
-          <v-img :src="require('~/assets/telepon.png')"></v-img>
-        </div>
+        <v-icon color="white">mdi-phone</v-icon>
         <div>+62-000-000-000</div>
       </div>
     </div>
@@ -15,7 +13,7 @@
       <div class="nama_toko">
         <div>Toko Nganu</div>
       </div>
-      <v-card flat class="rounded-pill" color="#d9d9d9">
+      <div flat class="rounded-pill search" color="#d9d9d9">
         <v-text-field
           class="nyari rounded-pill"
           v-model="cari"
@@ -26,26 +24,18 @@
           append-icon="mdi-magnify"
           placehoder="Ni ai wo wo ai ni mi xue bing cheng tianmi mi ni ai wo wo ai ni"
         ></v-text-field>
-        <!-- <v-img
-          :src="require('~/assets/search_icon.png')"
-          class="icon_search"
-        ></v-img> -->
-      </v-card>
+      </div>
       <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" class="round-btn">
-          <v-img
-            :src="require('~/assets/keranjang_icon.png')"
-            width="38"
-            class="keranjang"
-          ></v-img>
+        <nuxt-link to="/keranjang" tag="v-button">
+          <v-btn elevation="2" fab color="d9d9d9" icon
+            ><v-icon size="29px">mdi-cart</v-icon></v-btn
+          >
         </nuxt-link>
-        <button class="round-btn">
-          <v-img
-            :src="require('~/assets/dingin_coy.png')"
-            width="49"
-            class="user_foto"
-          ></v-img>
-        </button>
+        <nuxt-link to="/user-view" tag="v-button">
+          <v-btn elevation="2" fab icon color="d9d9d9"
+            ><v-icon size="29px">mdi-account</v-icon></v-btn
+          >
+        </nuxt-link>
         <div class="namanya">Mas BroNyatirrrrrrrrrrrr</div>
       </div>
     </div>
@@ -54,16 +44,13 @@
 
 <script>
 export default {
-    data() {
-      return {
-        cari:null
-      }
-    },
-
-
-  methods: {
-
+  data() {
+    return {
+      cari: null,
+    };
   },
+
+  methods: {},
 };
 </script>
 
@@ -77,20 +64,8 @@ export default {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
-.search-class {
-  display: flex;
-  border-radius: 24px;
-  width: 268px;
-  height: 49px;
-  background-color: #d9d9d9;
+.search {
   margin-left: 500px;
-}
-.search-class .nyari {
-  width: 183px;
-}
-.search-class .icon_search {
-  width: 38px;
-  height: 38px;
 }
 .round-btn {
   border-radius: 50%;
@@ -128,7 +103,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin-top: 11px;
+  margin-top: 14px;
   margin-left: 12px;
   font-size: 20px;
   font-family: "Poppins", sans-serif;
