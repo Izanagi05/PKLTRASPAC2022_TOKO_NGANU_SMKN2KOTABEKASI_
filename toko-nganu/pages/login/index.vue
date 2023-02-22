@@ -1,37 +1,18 @@
 <template>
   <div>
-    <div class="bar">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">+62-000-000-000</div>
-      </div>
-    </div>
+    <NavbarPolos />
     <div class="home-container">
-      <v-row>
-        <v-col cols="1">
-          <div class="">
-            <v-img :src="require('~/assets/logo.png')" width="100px"></v-img>
-          </div>
-        </v-col>
-        <v-col>
-          <div class="store-name f24sb">
-            <div>Toko Nganu</div>
-          </div>
-        </v-col>
-        <v-col>
-          <!-- <v-text-field class="search" rounded  placeholder="Search nganu" append-icon="mdi-magnify"></v-text-field> -->
-          <!-- <input type="text" class="search" placeholder="Search nganu"> -->
-        </v-col>
-      </v-row>
       <div class="card">
         <center>
           <v-card
+            flat
             class="mx-auto"
             max-width="400"
             max-height="950"
             variant="outlined"
             style="margin-top: 100px"
           >
-            <v-card>
+            <v-card flat>
               <div>
                 <div class="judul" style="font-weight: 700; font-size: 40px">
                   Login
@@ -81,6 +62,7 @@
 </template>
 <script>
 import axios from "axios";
+import NavbarPolos from "~/components/NavbarPolos.vue";
 export default {
   middleware: 'middlewareku',
   data: () => ({
@@ -94,14 +76,12 @@ export default {
     emailRules: [
       (value) => {
         if (value?.length > 0) return true;
-
         return "E-mail tidak boleh kosong";
       },
     ],
     passwordRules: [
       (value) => {
         if (value?.length > 0) return true;
-
         return "Password tidak boleh kosong";
       },
     ],
@@ -113,6 +93,10 @@ export default {
       axios.post("http://127.0.0.1:8000/api/login", {
         email: this.email,
         password: this.password,
+<<<<<<< HEAD
+      });
+      this.$router.push("/");
+=======
       }).then(respon=>{
 
         console.log(respon)
@@ -121,6 +105,7 @@ export default {
       })
       // this.$router.push("/login");
 
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
       //    this.dtr =this.userdata[i].password
@@ -130,13 +115,19 @@ export default {
       //    console.log("berhasil")
       //  }else{
       //     console.log("ggl")
-
       //   }
       // console.log(this.dtk)
       // console.log(this.dtr)
     },
   },
+<<<<<<< HEAD
+  created() {
+    this.getuser();
+  },
+  components: { NavbarPolos },
+=======
 
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
 };
 </script>
 <style>

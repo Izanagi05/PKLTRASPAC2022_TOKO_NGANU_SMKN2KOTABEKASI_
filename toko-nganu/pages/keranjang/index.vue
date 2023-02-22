@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <div>
       <div class="cart">
         <v-row>
@@ -134,7 +135,6 @@ export default {
   methods: {
     countplus(dataa) {
       dataa.quantity++;
-
 
       this.pricetotal = parseInt(this.tes.quantity) * parseInt(this.price);
     },
