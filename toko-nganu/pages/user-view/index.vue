@@ -1,31 +1,7 @@
 <template>
   <div>
-    <div class="bar">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">+62-000-000-000</div>
-      </div>
-    </div>
+    <Navbar />
     <div class="home-container">
-      <v-row>
-        <v-col cols="1">
-          <div class="">
-            <v-img :src="require('~/assets/logo.png')" width="100px"></v-img>
-          </div>
-        </v-col>
-        <v-col>
-          <div class="store-name f24sb">
-            <div>Toko Nganu</div>
-          </div>
-        </v-col>
-        <v-col>
-          <!-- <v-text-field
-            class="search"
-            rounded
-            placeholder="Search nganu"
-            append-icon="mdi-magnify"
-          ></v-text-field>           -->
-        </v-col>
-      </v-row>
       <div class="content">
         <div class="kiri">
           <div class="sub-title" style="margin-left: 27px">Profil Pengguna</div>
@@ -62,7 +38,7 @@
             </v-col>
             <v-col>
               <v-row>
-                <div class="info">
+                <div class="informasi">
                   <div class="sub-judul">Info Pengguna</div>
                   <v-col cols="6">
                     <div class="nama-user">Nama</div>

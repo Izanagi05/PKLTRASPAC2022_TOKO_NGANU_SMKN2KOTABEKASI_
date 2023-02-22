@@ -15,20 +15,22 @@
       <div class="nama_toko">
         <div>Toko Nganu</div>
       </div>
-      <div class="search-class">
+      <v-card flat class="rounded-pill" color="#d9d9d9">
         <v-text-field
-          class="nyari"
+          class="nyari rounded-pill"
           v-model="cari"
           label="Cari Nganu"
           single-line
           hide-details
+          outlined
+          append-icon="mdi-magnify"
           placehoder="Ni ai wo wo ai ni mi xue bing cheng tianmi mi ni ai wo wo ai ni"
-        ></v-text-field
-        ><v-img
+        ></v-text-field>
+        <!-- <v-img
           :src="require('~/assets/search_icon.png')"
           class="icon_search"
-        ></v-img>
-      </div>
+        ></v-img> -->
+      </v-card>
       <div class="profile_icon_keranjang">
         <button class="round-btn">
           <v-img
@@ -70,7 +72,7 @@ export default {};
   width: 268px;
   height: 49px;
   background-color: #d9d9d9;
-  margin-left: 447px;
+  margin-left: 500px;
 }
 .search-class .nyari {
   width: 183px;
