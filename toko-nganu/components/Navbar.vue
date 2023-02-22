@@ -44,6 +44,7 @@
 
 <script>
 export default {
+<<<<<<< HEAD
   data() {
     return {
       cari: null,
@@ -55,6 +56,12 @@ export default {
      const  usernama=  this.$cookies.get('cookieku')
      this.nama=usernama.data.nama
     },
+
+
+  methods: {
+
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
+  },
 
   methods: {},
 };
