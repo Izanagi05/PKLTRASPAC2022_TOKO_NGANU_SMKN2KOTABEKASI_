@@ -1,27 +1,7 @@
 <template>
   <div>
-    <div class="bar">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">+62-000-000-000</div>
-      </div>
-    </div>
+    <NavbarPolos />
     <div class="home-container">
-      <v-row>
-        <v-col cols="1">
-          <div class="">
-            <v-img :src="require('~/assets/logo.png')" width="100px"></v-img>
-          </div>
-        </v-col>
-        <v-col>
-          <div class="store-name f24sb">
-            <div>Toko Nganu</div>
-          </div>
-        </v-col>
-        <v-col>
-          <!-- <v-text-field class="search" rounded  placeholder="Search nganu" append-icon="mdi-magnify"></v-text-field> -->
-          <!-- <input type="text" class="search" placeholder="Search nganu"> -->
-        </v-col>
-      </v-row>
       <center>
         <div class="card">
           <v-card
@@ -38,40 +18,40 @@
                 </div>
                 <v-sheet width="300" class="mx-auto">
                   <v-form fast-fail @submit.prevent="register()">
-                  <v-text-field
-                    v-model="dataregist.nama"
-                    label="Nama"
-                    :rules="namaRules"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="dataregist.email"
-                    label="E-mail"
-                    :rules="emailRules"
-                  ></v-text-field>
+                    <v-text-field
+                      v-model="dataregist.nama"
+                      label="Nama"
+                      :rules="namaRules"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="dataregist.email"
+                      label="E-mail"
+                      :rules="emailRules"
+                    ></v-text-field>
 
-                  <v-text-field
-                    v-model="dataregist.password"
-                    label="Password"
-                    :rules="passwordRules"
-                    type="password"
-                  ></v-text-field>
+                    <v-text-field
+                      v-model="dataregist.password"
+                      label="Password"
+                      :rules="passwordRules"
+                      type="password"
+                    ></v-text-field>
 
-                  <v-btn
-                    type="submit"
-                    block
-                    class="mt-2 white--text"
-                    style="
-                      border-radius: 50px;
-                      margin-top: 30px;
-                      margin-bottom: 20px;
-                      background-color: #2f432d;
-                    "
-                    >Buat Akun</v-btn
-                  >
-                  <div class="login" style="padding-bottom: 20px">
-                    Sudah punya akun?
-                    <a href="#">Login</a>
-                  </div>
+                    <v-btn
+                      type="submit"
+                      block
+                      class="mt-2 white--text"
+                      style="
+                        border-radius: 50px;
+                        margin-top: 30px;
+                        margin-bottom: 20px;
+                        background-color: #2f432d;
+                      "
+                      >Buat Akun</v-btn
+                    >
+                    <div class="login" style="padding-bottom: 20px">
+                      Sudah punya akun?
+                      <a href="#">Login</a>
+                    </div>
                   </v-form>
                 </v-sheet>
               </div>
@@ -120,7 +100,7 @@ export default {
         .then((respon) => {
           this.data = respon.data;
         });
-        this.$router.push('/login')
+      this.$router.push("/login");
     },
   },
 };

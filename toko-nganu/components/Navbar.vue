@@ -56,7 +56,6 @@ export default {
 
 <style>
 .ppp {
-  overflow: hidden;
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;
 }

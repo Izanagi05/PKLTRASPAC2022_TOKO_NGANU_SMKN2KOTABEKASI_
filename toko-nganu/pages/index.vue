@@ -60,6 +60,35 @@
             </div>
           </div>
         </div>
+        <!-- <div class="card">
+          <div class="row mb-3 gy-3">
+            <div v-for="hy in ambildata" :key="hy.id">
+              <div class="col-md-10 mt-4 ml-5">
+                <b-card
+                  :title="hy.title"
+                  :img-src="hy.thumbnail"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 20rem max-height: 10rem"
+                  class="mb-2"
+                >
+                  <b-card-text>
+                    <h1>${{ hy.price }}</h1>
+                    <details>
+                      <summary>Description</summary>
+                      {{ hy.description }}
+                    </details>
+                  </b-card-text>
+                  <v-btn @click="editItem(item)">EDIT<v-icon></v-icon></v-btn>
+                  <v-btn @click="deleteItem(item)"
+                    >DELETE<v-icon></v-icon
+                  ></v-btn>
+                </b-card>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
