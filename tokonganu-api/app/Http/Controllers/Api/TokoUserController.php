@@ -25,7 +25,7 @@ class TokoUserController extends Controller
         $data= Toko::where('user_id', $id)->get();
         // $data= $userdata->UserToko()->nama;
         // dd($data);
-        return response()->json(['data'=>$data]);
+        return response()->json($data);
     }
 
     public function createtoko(Request $request, $id){

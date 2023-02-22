@@ -26,17 +26,17 @@
         ></v-text-field>
       </div>
       <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" tag="v-button">
+        <nuxt-link to="/keranjang" >
           <v-btn elevation="2" fab color="d9d9d9" icon
             ><v-icon size="29px">mdi-cart</v-icon></v-btn
           >
         </nuxt-link>
-        <nuxt-link to="/user-view" tag="v-button">
+        <nuxt-link to="/user-view" >
           <v-btn elevation="2" fab icon color="d9d9d9"
             ><v-icon size="29px">mdi-account</v-icon></v-btn
           >
         </nuxt-link>
-        <div class="namanya">Mas BroNyatirrrrrrrrrrrr</div>
+        <div class="namanya">{{ nama }}</div>
       </div>
     </div>
   </div>
@@ -44,35 +44,17 @@
 
 <script>
 export default {
-<<<<<<< HEAD
   data() {
     return {
       cari: null,
+      nama: null,
     };
-=======
-    data() {
-      return {
-        cari:null,
-        nama:null
-      }
-    },
 
-    created(){
-     const  namaparse=  this.$cookies.get('cookieku')
-    //  this.nama=namaparse.data.nama
-    console.log(namaparse)
-    },
-    computed:{
-      namaa(){
-        // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
-      }
-    },
-
-
-  methods: {
-
->>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
   },
+  created(){
+     const  usernama=  this.$cookies.get('cookieku')
+     this.nama=usernama.data.nama
+    },
 
   methods: {},
 };

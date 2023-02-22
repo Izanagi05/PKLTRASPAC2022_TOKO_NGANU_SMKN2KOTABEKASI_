@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\TokoUserController;
+use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +22,11 @@ use App\Http\Controllers\Api\UserController;
 
 Route::post('/registrasi', [RegisterController::class, 'regisstore']);
 Route::post('/login', [LoginController::class, 'postlogin']);
-Route::get('/gettoko/{id}', [TokoUserController::class, 'gettoko']);
 Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
+Route::get('/gettoko/{id}', [TokoUserController::class, 'gettoko']);
+Route::post('/createbarang/{id}', [BarangController::class, 'createbarang']);
+Route::get('/getbarang/{id}', [BarangController::class, 'getbarang']);
+Route::get('/getkategori/{id}', [KategoriController::class, 'getkategori']);
 // Route::get('/user', [UserController::class, 'getuser']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

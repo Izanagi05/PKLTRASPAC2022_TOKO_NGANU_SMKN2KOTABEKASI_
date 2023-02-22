@@ -1,209 +1,10 @@
 <template>
   <div>
-<<<<<<< HEAD
     <Navbar />
     <div class="all-home">
       <div class="home">
         <div class="home-image">
           <v-img :src="require('~/assets/home-img.png')"></v-img>
-=======
-    <div class="home">
-      <div class="ppp">
-    <div class="contact white--text">
-      <div class="contact-text font-weight-regular">
-        <div class="icon_telepon">
-          <v-img :src="require('~/assets/telepon.png')"></v-img>
-        </div>
-        <div>+62-000-000-000</div>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="logo">
-        <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
-      </div>
-      <div class="nama_toko">
-        <div>Toko nganu</div>
-      </div>
-      <div class="search-class">
-        <v-text-field
-          class="nyari"
-          v-model="cari"
-          label="Cari Nganu"
-          single-line
-          hide-details
-          placehoder="Ni ai wo wo ai ni mi xue bing cheng tianmi mi ni ai wo wo ai ni"
-        ></v-text-field
-        ><v-img
-          :src="require('~/assets/search_icon.png')"
-          class="icon_search"
-        ></v-img>
-      </div>
-      <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" class="round-btn">
-          <v-img
-            :src="require('~/assets/keranjang_icon.png')"
-            width="38"
-            class="keranjang"
-          ></v-img>
-        </nuxt-link>
-        <button class="round-btn">
-          <v-img
-            :src="require('~/assets/dingin_coy.png')"
-            width="49"
-            class="user_foto"
-          ></v-img>
-        </button>
-        <div class="namanya">{{nama}}</div>
-      </div>
-    </div>
-  </div>
-
-      <div class="home-image">
-        <v-img :src="require('~/assets/home-img.png')"></v-img>
-      </div>
-
-      <div class="filter">
-        <v-btn>
-          Filter
-          <v-icon>mdi-filter</v-icon>
-        </v-btn>
-      </div>
-
-      <div class="recomend f24sb">Rekomendasi untuk anda</div>
-      <div v-for="tk in Toko" :key="tk">
-
-      </div>
-      <div>{{ tk }}</div>
-
-      <div>
-        <div class="product-card">
-          <v-row class="p-0">
-            <v-col class="card-col p-0" width="204px">
-              <v-card width="204px">
-                <v-img
-                  :src="require('~/assets/barang.png')"
-                  width="204px"
-                ></v-img>
-                <v-row>
-                  <v-col cols="5" class="">
-                    <div class="title-product f14sb pl-1">Mas bro</div>
-                  </v-col>
-                  <v-col>
-                    <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <div class="desc-product font-weight-regular pl-1">
-                      Bingung masbro
-                    </div>
-                  </v-col>
-                </v-row>
-                <div class="btn-card pl-1 pb-1">
-                  <button
-                    class="rounded-xl view-more-btn font-weight-regular"
-                    style="font-size: 12px"
-                  >
-                    Lebih lengkap
-                  </button>
-                </div>
-              </v-card>
-            </v-col>
-            <v-col class="card-col p-0">
-              <v-card width="204px">
-                <v-img
-                  :src="require('~/assets/barang.png')"
-                  width="204px"
-                ></v-img>
-                <v-row>
-                  <v-col cols="5" class="">
-                    <div class="title-product f14sb pl-1">Mas bro</div>
-                  </v-col>
-                  <v-col>
-                    <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <div class="desc-product font-weight-regular pl-1">
-                      Bingung masbro
-                    </div>
-                  </v-col>
-                </v-row>
-                <div class="btn-card pl-1 pb-1">
-                  <button
-                    class="rounded-xl view-more-btn font-weight-regular"
-                    style="font-size: 12px"
-                  >
-                    Lebih lengkap
-                  </button>
-                </div>
-              </v-card>
-            </v-col>
-            <v-col class="card-col p-0">
-              <v-card width="204px">
-                <v-img
-                  :src="require('~/assets/barang.png')"
-                  width="204px"
-                ></v-img>
-                <v-row>
-                  <v-col cols="5" class="">
-                    <div class="title-product f14sb pl-1">Mas bro</div>
-                  </v-col>
-                  <v-col>
-                    <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <div class="desc-product font-weight-regular pl-1">
-                      Bingung masbro
-                    </div>
-                  </v-col>
-                </v-row>
-                <div class="btn-card pl-1 pb-1">
-                  <button
-                    class="rounded-xl view-more-btn font-weight-regular"
-                    style="font-size: 12px"
-                  >
-                    Lebih lengkap
-                  </button>
-                </div>
-              </v-card>
-            </v-col>
-            <v-col class="card-col p-0">
-              <v-card width="204px">
-                <v-img
-                  :src="require('~/assets/barang.png')"
-                  width="204px"
-                ></v-img>
-                <v-row>
-                  <v-col cols="5" class="">
-                    <div class="title-product f14sb pl-1">Mas bro</div>
-                  </v-col>
-                  <v-col>
-                    <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <div class="desc-product font-weight-regular pl-1">
-                      Bingung masbro
-                    </div>
-                  </v-col>
-                </v-row>
-                <div class="btn-card pl-1 pb-1">
-                  <button
-                    class="rounded-xl view-more-btn font-weight-regular"
-                    style="font-size: 12px"
-                  >
-                    Lebih lengkap
-                  </button>
-                </div>
-              </v-card>
-            </v-col>
-          </v-row>
->>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
         </div>
 
         <div class="filter">
@@ -214,7 +15,19 @@
         </div>
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
-
+        <!-- {{ Toko }} -->
+        <h1>Daftar Toko</h1>
+        <div v-for="(tk, index) in Toko" :key="index">
+          <v-row>
+            Nama Toko{{ tk.nama }}
+          </v-row>
+          <v-row>
+            Deskripsi toko{{ tk.deskripsi }}
+          </v-row>
+          <v-row>
+            Alamat Toko: {{ tk.alamat }}
+          </v-row>
+        </div>
         <div>
           <div class="product-card">
             <v-row class="p-0">
@@ -472,11 +285,7 @@ export default {
       }
     },
 
-    computed:{
-      namaa(){
-        // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
-      }
-    },
+
 
 
   methods: {
@@ -484,7 +293,6 @@ export default {
       axios.get('http://127.0.0.1:8000/api/gettoko/'+this.tokouser).then(respon=>{
         this.Toko = respon.data
       })
-      // console.log()
     }
   },
 

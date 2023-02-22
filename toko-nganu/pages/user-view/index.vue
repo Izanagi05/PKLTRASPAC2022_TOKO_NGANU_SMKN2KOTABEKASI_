@@ -8,10 +8,10 @@
             Profil Pengguna
           </div>
           <div class="menu">
-            <NuxtLink to="/" class="my-link" tag="v-button">
+            <NuxtLink to="/" class="my-link">
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <NuxtLink to="/" class="my-link" tag="v-button">
+            <NuxtLink to="/" class="my-link">
               <v-icon large>mdi-account-tie</v-icon> Atmin
             </NuxtLink>
           </div>

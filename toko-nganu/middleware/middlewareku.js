@@ -7,7 +7,7 @@ export default function({store, redirect}){
     return redirect('/login')
   }else{
     // console.log('sedang login')
-    return redirect('/')
+    // return redirect('/')
 
   }
 

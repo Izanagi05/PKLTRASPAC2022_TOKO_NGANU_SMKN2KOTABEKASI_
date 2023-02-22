@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Barang extends Model
 {
     use HasFactory;
+    public $timestamps=false;
     protected $primaryKey = 'barang_id';
     protected $table ='barang';
     protected $fillable = [
         'nama',
+        'toko_id',
+        'kategori_id',
         'deskripsi',
     ];
     public function Toko(){

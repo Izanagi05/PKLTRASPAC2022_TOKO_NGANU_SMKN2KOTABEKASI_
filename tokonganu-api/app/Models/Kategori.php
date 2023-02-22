@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
     use HasFactory;
+    public $timestamps=false;
     protected $primaryKey = 'kategori_id';
     protected $table ='kategori';
     protected $fillable = [
