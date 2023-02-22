@@ -26,11 +26,60 @@
           ></v-text-field>           -->
         </v-col>
       </v-row>
+      <div class="dialog-edit">
+        <v-dialog v-model="dialog" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Edit Barang</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedBarang.foto"
+                      label="Foto Barang"
+                    ></v-text-field
+                  ></v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedBarang.nama"
+                      label="Nama Barang"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedBarang.harga"
+                      label="Harga Barang"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedBarang.stok"
+                      label="Stok Barang"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedBarang.deskripsi"
+                      label="Deskripsi Barang"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
+              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
       <div class="content">
         <div class="kiri">
-          <div class="sub-title ml-5" width="170px" height="30px">
-            Halaman Admin
-          </div>
+          <div class="sub-title" height="30px">Halaman Admin</div>
           <div class="produk ml-6" style="font-size: 16px">
             <span class="mdi mdi-package-variant-closed">Produk</span>
           </div>
@@ -44,7 +93,7 @@
           </div>
         </div>
         <div class="pembatas mb-6"></div>
-        <div class="content">
+        <div class="crud">
           <div class="barang pt-5">
             <div>
               <div class="product-card">
@@ -212,6 +261,7 @@
                             background: #2f432d;
                             color: white;
                           "
+                          @click.prevent="editBarang(barang)"
                         >
                           Edit
                         </v-btn>
@@ -234,6 +284,42 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data: () => ({
+    dialog: false,
+    barang: [],
+    editedIndex: -1,
+    editedBarang: {
+      foto: "",
+      nama: "",
+      harga: 0,
+      stok: 0,
+      deskripsi: "",
+    },
+  }),
+  method: {
+    editBarang(barang) {
+      this.editedIndex = this.barang.indexOf(barang);
+      this.editedBarang = Object.assign({}, barang);
+      this.dialog = true;
+    },
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.barang[this.editedIndex], this.editedBarang);
+      } else {
+        this.barang.push(this.editedBarang);
+      }
+      this.close();
+    },
+  },
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "Tambah Barang" : "Edit Barang";
+    },
+  },
+};
+</script>
 <style>
 .contact {
   background-color: #2f432d;
@@ -255,7 +341,7 @@
 .sub-title {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
 }
 .menu {
   font-family: "Poppins", sans-serif;
@@ -273,6 +359,5 @@
   border-radius: 20px;
   height: 750px;
   margin-right: 10px;
-  margin-left: 17px;
 }
 </style>

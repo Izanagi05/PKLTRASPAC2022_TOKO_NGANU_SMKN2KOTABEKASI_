@@ -52,28 +52,25 @@
 
 <script>
 export default {
-    data() {
-      return {
-        cari:null,
-        nama:null
-      }
-    },
-
-    created(){
-     const  namaparse=  this.$cookies.get('cookieku')
-    //  this.nama=namaparse.data.nama
-    console.log(namaparse)
-    },
-    computed:{
-      namaa(){
-        // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
-      }
-    },
-
-
-  methods: {
-
+  data() {
+    return {
+      cari: null,
+      nama: null,
+    };
   },
+
+  created() {
+    const namaparse = this.$cookies.get("cookieku");
+    //  this.nama=namaparse.data.nama
+    console.log(namaparse);
+  },
+  computed: {
+    namaa() {
+      // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
+    },
+  },
+
+  methods: {},
 };
 </script>
 
