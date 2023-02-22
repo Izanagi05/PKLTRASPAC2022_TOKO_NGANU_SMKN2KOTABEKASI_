@@ -92,6 +92,11 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  middleware: 'middlewareku',
+}
+</script>
 <style>
 .contact {
   background-color: #2f432d;

@@ -63,6 +63,10 @@
       </div>
 
       <div class="recomend f24sb">Rekomendasi untuk anda</div>
+      <div v-for="tk in Toko" :key="tk">
+
+      </div>
+      <div>{{ tk }}</div>
 
       <div>
         <div class="product-card">
@@ -387,15 +391,12 @@ export default {
   data() {
       return {
         cari:null,
-        nama:null
+        nama:null,
+        tokouser:null,
+        Toko:null
       }
     },
 
-    created(){
-     const  namaparse=  this.$cookies.get('cookieku')
-     this.nama=namaparse.data.nama
-    console.log(namaparse)
-    },
     computed:{
       namaa(){
         // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
@@ -404,8 +405,22 @@ export default {
 
 
   methods: {
-
+    gettoko(){
+      axios.get('http://127.0.0.1:8000/api/gettoko/'+this.tokouser).then(respon=>{
+        this.Toko = respon.data
+      })
+      // console.log()
+    }
   },
+
+  created(){
+     const  usernama=  this.$cookies.get('cookieku')
+     const  userid = this.$cookies.get('cookieku')
+     this.nama=usernama.data.nama
+    console.log(usernama)
+    this.tokouser = userid.data.id
+    this.gettoko()
+    },
 
 };
 </script>

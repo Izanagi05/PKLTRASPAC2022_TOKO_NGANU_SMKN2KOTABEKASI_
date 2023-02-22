@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TokoUserController extends Controller
 {
-    public function gettoko(Request $request){
+    public function gettoko(Request $request, $id){
         // dd(Toko::get());
         // $user= User::get();
         // $user = User::select('id')->where('id', 2)->first();
@@ -20,9 +20,9 @@ class TokoUserController extends Controller
         //     return $user->UserToko->nama;
         // }
 
-        $userdata = User::select('id')->where('email', $request->email)->first();
+        // $userdata = User::select('id')->where('email', $request->email)->first();
         // dd($userdata);
-        $data= Toko::select('nama')->where('user_id', $userdata)->first();
+        $data= Toko::where('user_id', $id)->get();
         // $data= $userdata->UserToko()->nama;
         // dd($data);
         return response()->json(['data'=>$data]);

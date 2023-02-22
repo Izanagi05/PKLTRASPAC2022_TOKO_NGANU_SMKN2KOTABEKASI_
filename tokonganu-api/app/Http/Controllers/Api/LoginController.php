@@ -28,7 +28,7 @@ class LoginController extends Controller
         // if (Auth::attempt(['email' =>  $request->email, 'password' => md5($request->password).$salt_password->salt_password])){
         if ($pass == $passdb->password){
 
-            $data = User::select('nama', 'no_telepon', 'foto_profil')->where('email', $request->email)->first();
+            $data = User::select('nama', 'no_telepon', 'foto_profil', 'id')->where('email', $request->email)->first();
             // dd($data);
             // $request->authenticate();
             // $user = auth()->user();

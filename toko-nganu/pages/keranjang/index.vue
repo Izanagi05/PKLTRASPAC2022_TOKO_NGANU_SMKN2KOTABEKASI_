@@ -114,6 +114,7 @@
 </template>
 <script>
 export default {
+  middleware: 'middlewareku',
   data() {
     return {
       price: 100000,

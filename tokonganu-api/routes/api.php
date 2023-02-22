@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\UserController;
 
 Route::post('/registrasi', [RegisterController::class, 'regisstore']);
 Route::post('/login', [LoginController::class, 'postlogin']);
-Route::get('/gettoko', [TokoUserController::class, 'gettoko']);
+Route::get('/gettoko/{id}', [TokoUserController::class, 'gettoko']);
 Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
 // Route::get('/user', [UserController::class, 'getuser']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
