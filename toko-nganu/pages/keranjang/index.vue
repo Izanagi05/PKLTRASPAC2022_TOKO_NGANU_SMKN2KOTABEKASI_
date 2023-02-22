@@ -22,7 +22,7 @@
               <div class="cart-content">
                 <div v-for="(dataa, index) in tes" :key="index">
                   <v-row>
-                    <div class="cart-card">
+                    <div class="cart-card d-flex">
                       <v-col>
                         <v-img
                           :src="require('~/assets/barang.png')"
@@ -116,7 +116,7 @@
 export default {
   data() {
     return {
-      price: 1000000,
+      price: 100000,
       pricetotal: 0,
 
       tes: [
@@ -127,12 +127,14 @@ export default {
         { title: "tes tes tes5", quantity: 0 },
         { title: "tes tes tes6", quantity: 0 },
         { title: "tes tes tes7", quantity: 0 },
+        { title: "tes tes tes7", quantity: 0 },
       ],
     };
   },
   methods: {
     countplus(dataa) {
       dataa.quantity++;
+
 
       this.pricetotal = parseInt(this.tes.quantity) * parseInt(this.price);
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <p>wleo</p>
+    <p>wleowleo</p>
   </div>
 </template>
 
