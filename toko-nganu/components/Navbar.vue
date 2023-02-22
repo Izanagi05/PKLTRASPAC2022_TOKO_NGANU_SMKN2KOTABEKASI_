@@ -48,6 +48,26 @@ export default {
   data() {
     return {
       cari: null,
+      nama: null,
+    };
+  },
+
+  created() {
+    const namaparse = this.$cookies.get("cookieku");
+    //  this.nama=namaparse.data.nama
+    console.log(namaparse);
+  },
+  computed: {
+    namaa() {
+      // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
+    },
+  },
+
+=======
+<<<<<<< HEAD
+  data() {
+    return {
+      cari: null,
     };
 =======
     data() {
@@ -74,6 +94,7 @@ export default {
 >>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
   },
 
+>>>>>>> 02c40f3972cae6a6d31cf68a305d37fe374eb16b
   methods: {},
 };
 </script>

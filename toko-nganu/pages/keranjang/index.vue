@@ -2,6 +2,7 @@
   <div>
     <Navbar />
     <div>
+      <Navbar />
       <div class="cart">
         <v-row>
           <v-col class="">
