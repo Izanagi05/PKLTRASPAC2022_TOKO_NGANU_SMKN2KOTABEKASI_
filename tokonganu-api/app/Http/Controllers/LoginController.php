@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+// use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -12,15 +13,28 @@ class LoginController extends Controller
 {
     public function postlogin(Request $request){
 
-        if (Auth::attempt(['email'=> $request->email, 'password'=> $request->password])){
-            $user = Auth::user();
-            $success['nama']= $user->nama;
-            $success['email']= $user->email;
+        // dd(md5($request->password).$salt_password->salt_password);
+        // dd($request->session()->put('email'));
+        // dd($request->session()->put(['email'=> $request->email, 'password'=> md5($request->password).$salt_password->salt_password]));
+            // dd(Auth::attempt(['email'=> $request->email, 'password'=> md5($request->password).$salt_password->salt_password]));
+            // ['email'=> $request->email, 'password'=> md5($request->password).$salt_password->salt_password]
+            // dd(md5($request->password).$salt_password->salt_password);
+
+        $salt_password = User::select('salt_password')->where('email',  $request->email)->first();
+            $pass =md5($request->password).$salt_password->salt_password;
+            $passdb =User::select('password')->where('email', $request->email)->first();
+        if ($pass == $passdb->password){
+            // $user = Auth::user();
+            // $success['nama']= $user->nama;
+            // $success['email']= $user->email;
+            // $success = $request->session()->put('email', 'tes');
+            $success = $request->session()->put('email', $request->email);
             return response()->json([
                 'success' => true,
                 'message'=>'login sukses',
                 'data' => $success
             ]);
+            // $request->session()->regenerate();
         }else{
             return response()->json([
                 'success' => false,
