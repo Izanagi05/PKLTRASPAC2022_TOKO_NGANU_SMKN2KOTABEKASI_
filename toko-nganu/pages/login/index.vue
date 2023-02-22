@@ -110,7 +110,7 @@ export default {
 
     loginuser() {
       this.tes = this.userdata;
-      axios.post("http://127.0.0.1:8000/login", {
+      axios.post("http://127.0.0.1:8000/api/login", {
         email: this.email,
         password: this.password,
       }).then(respon=>{
