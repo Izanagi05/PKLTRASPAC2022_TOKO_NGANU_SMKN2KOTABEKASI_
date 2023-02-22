@@ -13,7 +13,7 @@
         <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
       </div>
       <div class="nama_toko">
-        <div>Toko Nganu</div>
+        <div>Toko nganu</div>
       </div>
       <div class="search-class">
         <v-text-field
@@ -54,7 +54,19 @@
 export default {
     data() {
       return {
-        cari:null
+        cari:null,
+        nama:null
+      }
+    },
+
+    created(){
+     const  namaparse=  this.$cookies.get('cookieku')
+    //  this.nama=namaparse.data.nama
+    console.log(namaparse)
+    },
+    computed:{
+      namaa(){
+        // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
       }
     },
 

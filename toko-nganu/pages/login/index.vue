@@ -82,9 +82,11 @@
 <script>
 import axios from "axios";
 export default {
+  middleware: 'middlewareku',
   data: () => ({
-    userdata: [],
     email: null,
+    nama: null,
+    no_telepon: null,
     tes: null,
     dtk: null,
     dtr: null,
@@ -105,18 +107,19 @@ export default {
     ],
   }),
   methods: {
-    getuser() {
-      axios.get("http://127.0.0.1:8000/user").then((respon) => {
-        this.userdata = respon.data.data;
-      });
-    },
+
     loginuser() {
       this.tes = this.userdata;
       axios.post("http://127.0.0.1:8000/login", {
         email: this.email,
         password: this.password,
-      });
-      this.$router.push("/");
+      }).then(respon=>{
+
+        console.log(respon)
+        this.nama = respon.data
+        this.$store.dispatch("users/login", this.nama)
+      })
+      // this.$router.push("/login");
 
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
@@ -133,9 +136,7 @@ export default {
       // console.log(this.dtr)
     },
   },
-  created() {
-    this.getuser();
-  },
+
 };
 </script>
 <style>

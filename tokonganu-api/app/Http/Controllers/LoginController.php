@@ -28,11 +28,13 @@ class LoginController extends Controller
             // $success['nama']= $user->nama;
             // $success['email']= $user->email;
             // $success = $request->session()->put('email', 'tes');
-            $success = $request->session()->put('email', $request->email);
+            // $success = $request->session()->put('email', $request->email);
+            $data = User::select('nama', 'no_telepon', 'foto_profil')->where('email', $request->email)->first();
+            // dd($data);
             return response()->json([
                 'success' => true,
                 'message'=>'login sukses',
-                'data' => $success
+                'data' => $data
             ]);
             // $request->session()->regenerate();
         }else{
