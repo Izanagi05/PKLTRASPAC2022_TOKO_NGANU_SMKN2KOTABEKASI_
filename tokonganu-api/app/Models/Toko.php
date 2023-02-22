@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Toko extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $primaryKey = 'toko_id';
     protected $table ='toko';
     protected $fillable = [
         'nama',
+        'user_id',
         'alamat',
         'deskripsi',
         'no_telepon',
