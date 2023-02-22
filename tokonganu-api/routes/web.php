@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TokoUserController;
 use App\Http\Controllers\UserController;
 
 
@@ -21,6 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/registrasi', [RegisterController::class, 'regisstore']);
-Route::post('/login', [LoginController::class, 'postlogin']);
-Route::get('/user', [UserController::class, 'getuser']);
+// Route::post('/registrasi', [RegisterController::class, 'regisstore']);
+// Route::post('/login', [LoginController::class, 'postlogin']);
+// Route::get('/gettoko', [TokoUserController::class, 'gettoko']);
+// Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
+// Route::get('/user', [UserController::class, 'getuser']);

@@ -11,7 +11,7 @@
         <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
       </div>
       <div class="nama_toko">
-        <div>Toko Nganu</div>
+        <div>Toko nganu</div>
       </div>
       <div flat class="rounded-pill search" color="#d9d9d9">
         <v-text-field
@@ -44,10 +44,34 @@
 
 <script>
 export default {
+<<<<<<< HEAD
   data() {
     return {
       cari: null,
     };
+=======
+    data() {
+      return {
+        cari:null,
+        nama:null
+      }
+    },
+
+    created(){
+     const  namaparse=  this.$cookies.get('cookieku')
+    //  this.nama=namaparse.data.nama
+    console.log(namaparse)
+    },
+    computed:{
+      namaa(){
+        // return this.nama =  JSON.parse(this.$cookies.get('cookieku'))
+      }
+    },
+
+
+  methods: {
+
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
   },
 
   methods: {},

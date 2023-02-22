@@ -38,7 +38,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios','nuxt-webfontloader'
+    '@nuxtjs/axios','nuxt-webfontloader','cookie-universal-nuxt'
   ],
 
   webfontloader: {

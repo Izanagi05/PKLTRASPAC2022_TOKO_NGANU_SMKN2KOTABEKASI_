@@ -64,9 +64,11 @@
 import axios from "axios";
 import NavbarPolos from "~/components/NavbarPolos.vue";
 export default {
+  middleware: 'middlewareku',
   data: () => ({
-    userdata: [],
     email: null,
+    nama: null,
+    no_telepon: null,
     tes: null,
     dtk: null,
     dtr: null,
@@ -85,18 +87,25 @@ export default {
     ],
   }),
   methods: {
-    getuser() {
-      axios.get("http://127.0.0.1:8000/user").then((respon) => {
-        this.userdata = respon.data.data;
-      });
-    },
+
     loginuser() {
       this.tes = this.userdata;
-      axios.post("http://127.0.0.1:8000/login", {
+      axios.post("http://127.0.0.1:8000/api/login", {
         email: this.email,
         password: this.password,
+<<<<<<< HEAD
       });
       this.$router.push("/");
+=======
+      }).then(respon=>{
+
+        console.log(respon)
+        this.nama = respon.data
+        this.$store.dispatch("users/login", this.nama)
+      })
+      // this.$router.push("/login");
+
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
       //    this.dtr =this.userdata[i].password
@@ -111,10 +120,14 @@ export default {
       // console.log(this.dtr)
     },
   },
+<<<<<<< HEAD
   created() {
     this.getuser();
   },
   components: { NavbarPolos },
+=======
+
+>>>>>>> ec2c14fe71f972d4eec3828211d50cbde6eef00d
 };
 </script>
 <style>

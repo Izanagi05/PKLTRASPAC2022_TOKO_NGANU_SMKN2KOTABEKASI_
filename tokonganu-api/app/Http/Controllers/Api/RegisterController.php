@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,8 +24,15 @@ class RegisterController extends Controller
         $validatedData['salt_password'] = Str::random(32);
         $validatedData['password'] = md5($validatedData['password']).$validatedData['salt_password'];
         // Hash::make($validatedData['salt_password']);
-         User::create($validatedData);
+
+         $uuu =User::create($validatedData);
+         $success = $uuu->createToken('auth_token')->plainTextToken;
         // return csrf_token();
+        return response()->json([
+            "success" => true,
+            "message" => "berhasil registrasi",
+            "data" => $success,
+        ]);
     }
 
 
