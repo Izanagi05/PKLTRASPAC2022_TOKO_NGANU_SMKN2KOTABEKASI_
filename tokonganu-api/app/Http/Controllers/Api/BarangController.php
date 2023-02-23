@@ -10,24 +10,8 @@ use App\Models\User;
 class BarangController extends Controller
 {
     public function getbarang(Request $request, $id){
+        $data = Barang::where('toko_id', $id)->get();
 
-        // $data = User::select('id')->where('id', $userid)->first();
-
-        // $barang= Barang::where('toko_id', $id)->get();
-        // return response()->json([$barang, $data]);
-        $data = Toko::where('user_id', $id)->get();
-
-
-        // dd($data);
-        // return $data;
-        // dd(count($data));
-        // return ;
-        foreach ($data as $key=> $dt) {
-             $data[$key]['barang']=$dt->Barang;
-
-
-
-        }
         return response()->json($data);
 
 
@@ -52,5 +36,16 @@ class BarangController extends Controller
         $validatedData['toko_id'] = $tk;
         // dd($validatedData['user_id']);
         Barang::create($validatedData);
+    }
+    public function updatebarang(Request $request, $id ){
+        $data = Barang::where('barang_id', $id)->update([
+            // "id" => $request->id,
+            "nama" => $request->nama,
+            "deskripsi" => $request->deskripsi,
+            "kategori_id" => $request->kategori_id,
+        ]);
+
+        // dd($id);
+        return response()->json($data, 200);
     }
 }

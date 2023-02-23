@@ -2,11 +2,17 @@
   <div>
     <Navbar />
     detail toko
+{{params.id  }}
+    {{ Toko }}
   </div>
 </template>
 <script>
 import axios from 'axios';
 export default {
+  validate ({ params }) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  },
   middleware:'middlewareku',
   data() {
     return {
@@ -17,7 +23,7 @@ export default {
   },
   methods: {
     getbarang(){
-      axios.get('http://127.0.0.1:8000/api/getbarang/1').then(respon=>{
+      axios.get('http://127.0.0.1:8000/api/getbarang/18').then(respon=>{
         this.Toko = respon.data
       })
     }

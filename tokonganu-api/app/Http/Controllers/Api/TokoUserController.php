@@ -14,10 +14,16 @@ class TokoUserController extends Controller
         return response()->json($data);
 
     }
-    public function gettoko(Request $request, $id){
+    public function gettokobyuser(Request $request, $id){
         $data= Toko::where('user_id', $id)->get();
         // $data= $userdata->UserToko()->nama;
         // dd($data);
+        foreach ($data as $key=> $dt) {
+            $data[$key]['barang']=$dt->Barang;
+
+
+
+       }
         return response()->json($data);
     }
 
@@ -46,6 +52,12 @@ class TokoUserController extends Controller
             "no_telepon" => $request->no_telepon,
             "logo" => $request->logo
         ]);
+
+        // dd($id);
+        return response()->json($data, 200);
+    }
+    public function deletetoko(Request $request, $id ){
+        $data = Toko::where('toko_id', $id)->delete();
 
         // dd($id);
         return response()->json($data, 200);
