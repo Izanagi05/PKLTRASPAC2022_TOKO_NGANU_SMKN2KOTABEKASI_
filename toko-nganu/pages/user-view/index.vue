@@ -8,10 +8,10 @@
             Profil Pengguna
           </div>
           <div class="menu">
-            <NuxtLink to="/" class="my-link">
+            <NuxtLink to="/" class="my-link" tag="v-button">
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <NuxtLink to="/" class="my-link">
+            <NuxtLink to="/" class="my-link" tag="v-button">
               <v-icon large>mdi-account-tie</v-icon> Atmin
             </NuxtLink>
           </div>
@@ -22,7 +22,8 @@
         <div class="pembatas"></div>
         <div class="profil">
           <div class="navigasi">
-            Home<span class="mdi mdi-chevron-right">Profil Pengguna</span>
+            <NuxtLink to="/" class="my-link" tag="v-button"> Home </NuxtLink
+            ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
           <v-row class="isi">
             <v-col>
@@ -33,38 +34,48 @@
               </div>
               <div class="btn-card pl-1 pb-1">
                 <v-btn
-                  class="profil-btn font-weight-medium"
-                  width="310px"
-                  style="font-size: 24px; font-family: 'Poppins', sans-serif"
+                  outlined
+                  rounded
+                  class="profil-btn"
+                  width="270px"
+                  height="40px"
                 >
                   Edit Profil
                 </v-btn>
               </div>
             </v-col>
             <v-col>
-              <v-row>
-                <div class="informasi">
-                  <div class="sub-judul">Info Pengguna</div>
-                  <v-col cols="6">
-                    <div class="nama-user">Nama</div>
-                    <div class="alamat-user">Alamat</div>
-                  </v-col>
-                  <div class="info-kontak">
-                    <div class="sub-judul">Info Kontak</div>
-                    <v-col>
-                      <div class="telepon">Telepon</div>
-                      <div class="email">E-mail</div>
-                    </v-col>
-                  </div>
-                  <v-col>
-                    <div class="isi">Masbro Adip</div>
-                    <div class="isi">Rumah</div>
-                  </v-col>
-                  <v-col>
-                    <div class="isi">+62-0786565</div>
-                    <div class="isi">masbro@gmail.com</div>
-                  </v-col>
-                </div>
+              <v-row dense justify="center">
+                <v-col cols="12">
+                  <div class="informasi-judul">Info Pengguna</div>
+                </v-col>
+              </v-row>
+
+              <v-row dense justify="center">
+                <v-col cols="12" sm="6">
+                  <p>Nama</p>
+                  <p>Alamat</p>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <p>MasBro</p>
+                  <p>Nyatir</p>
+                </v-col>
+              </v-row>
+              <v-row dense justify="center">
+                <v-col cols="12">
+                  <div class="informasi-judul">Info Kontak</div>
+                </v-col>
+              </v-row>
+
+              <v-row dense justify="center">
+                <v-col cols="12" sm="6">
+                  <p>Telepon</p>
+                  <p>Email</p>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <p>+62-8126365467</p>
+                  <p>masbronyatir@gmail.com</p>
+                </v-col>
               </v-row>
             </v-col>
           </v-row>
@@ -75,8 +86,8 @@
 </template>
 <script>
 export default {
-  middleware: 'middlewareku',
-}
+  middleware: "middlewareku",
+};
 </script>
 <style>
 .contact {
@@ -117,12 +128,10 @@ export default {
 .profil-btn {
   height: 30px;
   width: 114px;
-  border: 1px black solid;
-  border-radius: 20px;
 }
 .profil-btn:hover {
   background: #2f432d;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 .kiri {
   margin-top: 19px;
@@ -134,5 +143,13 @@ export default {
 }
 .isi {
   margin-top: 26px;
+}
+.btn-card {
+  margin-top: 30px;
+}
+.informasi-judul {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
 }
 </style>
