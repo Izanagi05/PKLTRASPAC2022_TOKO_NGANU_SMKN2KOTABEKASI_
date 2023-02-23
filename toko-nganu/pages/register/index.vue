@@ -50,7 +50,7 @@
                     >
                     <div class="login" style="padding-bottom: 20px">
                       Sudah punya akun?
-                      <a href="#">Login</a>
+                      <NuxtLink to="/login" class="my-link"> Login </NuxtLink>
                     </div>
                   </v-form>
                 </v-sheet>
