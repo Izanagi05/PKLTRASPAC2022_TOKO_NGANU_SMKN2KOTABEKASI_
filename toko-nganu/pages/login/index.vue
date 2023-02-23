@@ -48,7 +48,9 @@
                     </v-btn>
                     <div class="buat-akun" style="padding-bottom: 20px">
                       Belum punya akun?
-                      <a href="#">Buat Akun</a>
+                      <NuxtLink to="/register" class="my-link">
+                        Buat Akun
+                      </NuxtLink>
                     </div>
                   </v-form>
                 </v-sheet>
@@ -64,10 +66,10 @@
 import axios from "axios";
 import NavbarPolos from "~/components/NavbarPolos.vue";
 export default {
-  middleware: ['middlewareku','middlewarelogin'],
+  middleware: ["middlewareku", "middlewarelogin"],
   data: () => ({
     email: null,
-    nama: null,
+    ket: null,
     no_telepon: null,
     tes: null,
     dtk: null,
@@ -87,14 +89,15 @@ export default {
     ],
   }),
   methods: {
-
     loginuser() {
       this.tes = this.userdata;
       axios.post("http://127.0.0.1:8000/api/login", {
         email: this.email,
         password: this.password,
-      });
-      this.$router.push("/");
+      }).then(respon=> {
+        this.ket= respon.data
+        this.$store.dispatch('users/login', this.ket)
+      })
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
       //    this.dtr =this.userdata[i].password

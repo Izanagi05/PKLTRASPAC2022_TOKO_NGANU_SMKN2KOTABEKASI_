@@ -21,7 +21,7 @@ class Toko extends Model
         'transaksi_terakhir',
     ];
     public function Barang(){
-        return $this->hasMany(Barang::class);
+        return $this->hasMany(Barang::class, 'toko_id');
     }
     public function TokoUser(){
         return $this->belongsTo(User::class, 'user_id');

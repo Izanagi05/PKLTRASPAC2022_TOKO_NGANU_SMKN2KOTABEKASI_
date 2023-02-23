@@ -22,11 +22,17 @@ use App\Http\Controllers\Api\KategoriController;
 
 Route::post('/registrasi', [RegisterController::class, 'regisstore']);
 Route::post('/login', [LoginController::class, 'postlogin']);
+
+Route::post('/updatetoko/{id}', [TokoUserController::class, 'updatetoko']);
 Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
 Route::get('/gettoko/{id}', [TokoUserController::class, 'gettoko']);
+Route::get('/getalltoko', [TokoUserController::class, 'getalltoko']);
+
+
 Route::post('/createbarang/{id}', [BarangController::class, 'createbarang']);
 Route::get('/getbarang/{id}', [BarangController::class, 'getbarang']);
-Route::get('/getkategori/{id}', [KategoriController::class, 'getkategori']);
+Route::get('/getkategori/{id}', [KategoriController::class, 'getkategorbybarang']);
+Route::get('/getallkategori', [KategoriController::class, 'getallkategori']);
 // Route::get('/user', [UserController::class, 'getuser']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

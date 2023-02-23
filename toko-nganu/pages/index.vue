@@ -16,12 +16,6 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-        <h1>Daftar Toko</h1>
-        <div v-for="(tk, index) in Toko" :key="index">
-          <v-row> Nama Toko{{ tk.nama }} </v-row>
-          <v-row> Deskripsi toko{{ tk.deskripsi }} </v-row>
-          <v-row> Alamat Toko: {{ tk.alamat }} </v-row>
-        </div>
         <div>
           <div class="product-card">
             <v-row class="p-0">
@@ -277,6 +271,15 @@ export default {
       tokouser: null,
       Toko: null,
     };
+  },
+  methods: {
+    gettoko() {
+      axios
+        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+        .then((respon) => {
+          this.Toko = respon.data;
+        });
+    },
   },
 
   methods: {
