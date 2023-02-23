@@ -2,7 +2,6 @@
   <div>
     <Navbar />
     <div>
-      <Navbar />
       <div class="cart">
         <v-row>
           <v-col class="">
@@ -116,7 +115,7 @@
 </template>
 <script>
 export default {
-  middleware: 'middlewareku',
+  middleware: "middlewareku",
   data() {
     return {
       price: 100000,

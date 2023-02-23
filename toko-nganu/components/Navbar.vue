@@ -26,12 +26,12 @@
         ></v-text-field>
       </div>
       <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" >
+        <nuxt-link to="/keranjang">
           <v-btn elevation="2" fab color="d9d9d9" icon
             ><v-icon size="29px">mdi-cart</v-icon></v-btn
           >
         </nuxt-link>
-        <nuxt-link to="/user-view" >
+        <nuxt-link to="/user-view">
           <v-btn elevation="2" fab icon color="d9d9d9"
             ><v-icon size="29px">mdi-account</v-icon></v-btn
           >
@@ -49,12 +49,11 @@ export default {
       cari: null,
       nama: null,
     };
-
   },
-  created(){
-     const  usernama=  this.$cookies.get('cookieku')
-     this.nama=usernama.data.nama
-    },
+  // created() {
+  //   const usernama = this.$cookies.get("cookieku");
+  //   this.nama = usernama.data.nama;
+  // },
 
   methods: {},
 };
