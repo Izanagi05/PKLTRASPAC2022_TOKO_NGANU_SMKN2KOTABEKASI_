@@ -17,9 +17,15 @@
             <NuxtLink to="/toko-user" class="my-link">
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
+            <NuxtLink to="/user-view/tambah-toko" class="my-link">
+              <v-icon large></v-icon> Buka Toko
+            </NuxtLink>
+            <NuxtLink to="/user-view/tambah-barang" class="my-link">
+              <v-icon large></v-icon> tambah barang
+            </NuxtLink>
           </div>
           <div class="logout" style="margin-left: 27px">
-            <span class="mdi mdi-logout mdi-35px">Logout</span>
+            <v-btn text @click="logout()" class=" mdi-35px"><v-icon>mdi-logout</v-icon>Logout</v-btn>
           </div>
         </div>
         <div class="pembatas"></div>
@@ -38,7 +44,7 @@
                 <v-btn
                   class="profil-btn font-weight-medium"
                   width="310px"
-                  style="font-size: 24px; font-family: 'Poppins', sans-serif"
+                  style="font-size: 24px; font-family: Poppins, sans-serif"
                 >
                   Edit Profil
                 </v-btn>
@@ -79,6 +85,12 @@
 <script>
 export default {
   middleware: 'middlewareku',
+
+  methods: {
+    logout(){
+      this.$store.dispatch('users/logout')
+    }
+  },
 }
 </script>
 <style>
