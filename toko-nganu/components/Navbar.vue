@@ -26,7 +26,7 @@
         ></v-text-field>
       </div>
       <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang">
+        <nuxt-link to="/keranjang" tag="v-button">
           <v-btn elevation="2" fab color="d9d9d9" icon
             ><v-icon size="29px">mdi-cart</v-icon></v-btn
           >
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       cari: null,
-      nama: null,
+      nama: "Masbroonyatir",
     };
   },
   // created() {
