@@ -10,7 +10,7 @@
           Edit Profil
         </div>
         <v-row class="isi">
-          <v-col>
+          <v-col cols="6">
             <div class="foto-profil pl-5">
               <v-avatar width="270px" height="270px">
                 <v-img :src="require('~/assets/barang.png')"></v-img>
@@ -26,86 +26,66 @@
               </v-btn>
             </div>
           </v-col>
-          <v-col>
+          <v-col cols="6">
             <v-row>
-              <div class="informasi">
-                <div class="info-user">
-                  <div class="nama pt-5">
-                    <v-row>
-                      <v-col cols="4"> Nama </v-col>
-                      <v-col class="align-content-center" cols="8">
-                        <v-text-field
-                          v-model="nama"
-                          label="Masukkan Nama"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div class="alamat pt-5">
-                    <v-row>
-                      <v-col cols="4">Alamat</v-col>
-                      <v-col cols="8"
-                        ><v-textarea
-                          v-model="alamat"
-                          label="Masukkan Alamat"
-                        ></v-textarea
-                      ></v-col>
-                    </v-row>
-                  </div>
+              <v-col cols="12" sm="3">
+                <div class="nama pt-5 pb-5">Nama</div>
+                <div class="alamat pb-5">Alamat</div>
+                <div class="telepon pb-5">Telepon</div>
+                <div class="email pb-5">E-Mail</div>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <div class="text-nama pt-5 pb-5">
+                  <v-text-field
+                    solo
+                    v-model="nama"
+                    label="Masukkan Nama"
+                  ></v-text-field>
                 </div>
-                <div class="info-kontak pt-6 pb-6">
-                  <div class="telepon">
-                    <v-row>
-                      <v-col cols="4"> Telepon </v-col>
-                      <v-col cols="8"
-                        ><v-text-field
-                          v-model="telepon"
-                          label="Masukkan No.Telepon"
-                        ></v-text-field
-                      ></v-col>
-                    </v-row>
-                  </div>
-                  <div class="email pt-5">
-                    <v-row>
-                      <v-col cols="4">E-Mail</v-col>
-                      <v-col cols="8"
-                        ><v-text-field
-                          v-model="email"
-                          label="Masukkan Email"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div class="button pb-6 pt-4">
-                    <v-row>
-                      <v-col cols="4">
-                        <div class="batal">
-                          <v-btn class="rounded-pill" x-large outlined
-                            >Batal</v-btn
-                          >
-                        </div>
-                      </v-col>
-                      <v-col cols="6">
-                        <div class="bayar">
-                          <v-btn
-                            class="rounded-pill"
-                            width="307px"
-                            x-large
-                            outlined
-                            style="
-                              background: #2f432d;
-                              color: white;
-                              size: 105px;
-                            "
-                            >Simpan</v-btn
-                          >
-                        </div>
-                      </v-col>
-                    </v-row>
-                  </div>
+                <div class="text-alamat pb-5">
+                  <v-textarea
+                    solo
+                    v-model="alamat"
+                    label="Masukkan Alamat"
+                  ></v-textarea>
                 </div>
-              </div>
+                <div class="text-telepon pb-5">
+                  <v-text-field
+                    solo
+                    v-model="telepon"
+                    label="Masukkan No.Telepon"
+                  ></v-text-field>
+                </div>
+                <div class="text-email pb-5">
+                  <v-text-field
+                    solo
+                    v-model="email"
+                    label="Masukkan Email"
+                  ></v-text-field>
+                </div>
+              </v-col>
             </v-row>
+            <div class="button pb-6 pt-5">
+              <v-row>
+                <v-col cols="4">
+                  <div class="batal">
+                    <v-btn class="rounded-pill" x-large outlined>Batal</v-btn>
+                  </div>
+                </v-col>
+                <v-col cols="6">
+                  <div class="bayar">
+                    <v-btn
+                      class="rounded-pill"
+                      width="307px"
+                      x-large
+                      outlined
+                      style="background: #2f432d; color: white; size: 105px"
+                      >Simpan</v-btn
+                    >
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
           </v-col>
         </v-row>
       </center>
@@ -124,3 +104,15 @@ export default {
   },
 };
 </script>
+<style>
+.nama {
+  margin-top: 10px;
+  margin-bottom: 57px;
+}
+.alamat {
+  margin-bottom: 150px;
+}
+.telepon {
+  margin-bottom: 57px;
+}
+</style>
