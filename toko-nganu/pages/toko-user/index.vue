@@ -3,7 +3,16 @@
     <Navbar/>
 
     <div>
-      <v-dialog v-model="dialogedit"   max-width="700" persistent transition="dialog-bottom-transition">
+
+
+  <v-data-table data-app
+  :headers="headers"
+  :items="Toko"
+
+
+       >
+       <template v-slot:[`item.aksi`]="{ item }">
+        <v-dialog v-model="dialogedit"   max-width="700" persistent transition="dialog-bottom-transition">
     <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #4caf50;">
       <div style="background:#4caf50;padding:10px 30px;color:white;">
 <h1>Ubah data</h1>
@@ -23,14 +32,6 @@
 </v-container>
     </v-card>
   </v-dialog>
-
-  <v-data-table data-app
-  :headers="headers"
-  :items="Toko"
-
-
-       >
-       <template v-slot:[`item.aksi`]="{ item }">
           <v-btn class="mx-2" fab small  @click="klikdetail(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark>mdi-eye</v-icon>
                     </v-btn>
