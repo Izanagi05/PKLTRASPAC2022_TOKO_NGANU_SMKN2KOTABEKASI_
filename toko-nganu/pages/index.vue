@@ -16,7 +16,6 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-
         <div>
           <div class="product-card">
             <v-row class="p-0">
@@ -182,9 +181,9 @@
 .view-more-btn2 {
   margin-top: 54px;
 }
-.home_image {
+/* .home_image {
 }
-
+ */
 
 .ppp {
   overflow: hidden;
@@ -262,33 +261,44 @@
 }
 </style>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  middleware: 'middlewareku',
+  middleware: "middlewareku",
   data() {
-      return {
-        cari:null,
-        nama:null,
-        tokouser:null,
-        Toko:null
-      }
-    },
+    return {
+      cari: null,
+      nama: null,
+      tokouser: null,
+      Toko: null,
+    };
+  },
   methods: {
-    gettoko(){
-      axios.get('http://127.0.0.1:8000/api/gettoko/'+this.tokouser).then(respon=>{
-        this.Toko = respon.data
-      })
-    }
+    gettoko() {
+      axios
+        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+        .then((respon) => {
+          this.Toko = respon.data;
+        });
+    },
   },
 
-  created(){
-     const  usernama=  this.$cookies.get('cookieku')
-     const  userid = this.$cookies.get('cookieku')
-     this.nama=usernama.data.nama
-    console.log(usernama)
-    this.tokouser = userid.data.id
-    this.gettoko()
+  methods: {
+    gettoko() {
+      axios
+        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+        .then((respon) => {
+          this.Toko = respon.data;
+        });
     },
+  },
 
+  created() {
+    const usernama = this.$cookies.get("cookieku");
+    const userid = this.$cookies.get("cookieku");
+    this.nama = usernama.data.nama;
+    console.log(usernama);
+    this.tokouser = userid.data.id;
+    this.gettoko();
+  },
 };
 </script>
