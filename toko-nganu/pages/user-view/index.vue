@@ -12,7 +12,10 @@
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
             <NuxtLink to="/" class="my-link">
-              <v-icon large>mdi-account-tie</v-icon> Atmin
+              <v-icon large>mdi-account-tie</v-icon> Admin
+            </NuxtLink>
+            <NuxtLink to="/toko-user" class="my-link">
+              <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
           </div>
           <div class="logout" style="margin-left: 27px">

@@ -22,7 +22,7 @@ class TokoUserController extends Controller
 
         // $userdata = User::select('id')->where('email', $request->email)->first();
         // dd($userdata);
-        $data= Toko::where('user_id', $id)->get();
+        $data= Toko::select('toko_id')->where('toko_id', $id)->get();
         // $data= $userdata->UserToko()->nama;
         // dd($data);
         return response()->json($data);

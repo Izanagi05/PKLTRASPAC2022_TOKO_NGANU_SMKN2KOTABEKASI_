@@ -67,7 +67,7 @@ export default {
   middleware: ['middlewareku','middlewarelogin'],
   data: () => ({
     email: null,
-    nama: null,
+    ket: null,
     no_telepon: null,
     tes: null,
     dtk: null,
@@ -93,8 +93,10 @@ export default {
       axios.post("http://127.0.0.1:8000/api/login", {
         email: this.email,
         password: this.password,
-      });
-      this.$router.push("/");
+      }).then(respon=> {
+        this.ket= respon.data
+        this.$store.dispatch('users/login', this.ket)
+      })
       // for(let i=0; i<this.tes.length; i++){
       //    this.dtk =this.userdata[i]
       //    this.dtr =this.userdata[i].password
