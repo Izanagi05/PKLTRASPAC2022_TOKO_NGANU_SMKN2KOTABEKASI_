@@ -23,7 +23,7 @@ class BarangController extends Controller
         // dd(count($data));
         // return ;
         foreach ($data as $key=> $dt) {
-             $data[$key]['barang']=$dt->Barang[0]->nama;
+             $data[$key]['barang']=$dt->Barang;
 
 
 

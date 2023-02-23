@@ -9,20 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TokoUserController extends Controller
 {
-    public function gettoko(Request $request, $id){
-        // dd(Toko::get());
-        // $user= User::get();
-        // $user = User::select('id')->where('id', 2)->first();
-        // $data= Toko::where('toko_id', $user)->first();
-        // $data = $user->UserToko[1]->nama;\
-        // dd($user[1]->UserToko);
-        // foreach ($user as $key => $usr) {
-        //     return $user->UserToko->nama;
-        // }
+    public function getalltoko(){
+        $data = Toko::get();
+        return response()->json($data);
 
-        // $userdata = User::select('id')->where('email', $request->email)->first();
-        // dd($userdata);
-        $data= Toko::select('toko_id')->where('toko_id', $id)->get();
+    }
+    public function gettoko(Request $request, $id){
+        $data= Toko::where('user_id', $id)->get();
         // $data= $userdata->UserToko()->nama;
         // dd($data);
         return response()->json($data);
@@ -42,5 +35,19 @@ class TokoUserController extends Controller
         $validatedData['user_id'] = $user;
         // dd($validatedData['user_id']);
         Toko::create($validatedData);
+    }
+
+    public function updatetoko(Request $request, $id ){
+        $data = Toko::where('toko_id', $id)->update([
+            // "id" => $request->id,
+            "nama" => $request->nama,
+            "deskripsi" => $request->deskripsi,
+            "alamat" => $request->alamat,
+            "no_telepon" => $request->no_telepon,
+            "logo" => $request->logo
+        ]);
+
+        // dd($id);
+        return response()->json($data, 200);
     }
 }
