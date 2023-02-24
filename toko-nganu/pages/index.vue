@@ -6,52 +6,121 @@
         <div class="home-image">
           <v-img :src="require('~/assets/home-img.png')"></v-img>
         </div>
-
-        <div class="filter">
-          <v-btn>
-            Filter
-            <v-icon>mdi-filter</v-icon>
-          </v-btn>
-        </div>
+        <v-row>
+          <div class="filter">
+            <v-col cols="4">
+              <v-btn @click="getallbarang()"> Semua Kategori </v-btn>
+            </v-col>
+          </div>
+          <div class="filter" v-for="(ktg, index) in allkategori" :key="index">
+            <v-col cols="4">
+              <v-btn @click="getkategori(ktg)"> {{ ktg.nama }} </v-btn>
+            </v-col>
+          </div>
+        </v-row>
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-        <div >
+        <div>
           <div class="product-card">
-            <v-row class="p-0" >
-              <v-col class="card-col p-0" width="204px" v-for="(brg, index) in allbarang" :key="index">
-                <v-card width="204px">
-                  <v-img
-                    :src="require('~/assets/barang.png')"
-                    width="204px"
-                  ></v-img>
-                  <v-row>
-                    <v-col cols="5" class="">
-                      <div class="title-product f14sb pl-1">{{ brg.nama }}</div>
-                    </v-col>
-                    <v-col>
-                      <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <div class="desc-product font-weight-regular pl-1">
-                        Bingung masbro
+            <div class="tampil1" v-if="set == 0">
+              <v-row class="p-0">
+                <v-col
+                  class="card-col"
+                  width="204px"
+                  v-for="(brg, index) in allbarang"
+                  :key="index"
+                >
+                  <div class="card">
+                    <v-card width="204px">
+                      <v-img
+                        :src="require('~/assets/barang.png')"
+                        width="204px"
+                      ></v-img>
+                      <v-row>
+                        <v-col cols="5" class="">
+                          <div class="title-product f14sb pl-1">
+                            {{ brg.nama }}
+                          </div>
+                        </v-col>
+                        <v-col>
+                          <div class="price-product f14sb pr-1">
+                            Rp. 1.999.999
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col>
+                          <div class="desc-product font-weight-regular pl-1">
+                            Bingung masbro
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card pl-1 pb-1">
+                        <button
+                          class="rounded-xl view-more-btn font-weight-regular"
+                          style="font-size: 12px"
+                          @click="todetail(brg)"
+                        >
+                          Lebih lengkap
+                        </button>
                       </div>
-                    </v-col>
-                  </v-row>
-                  <div class="btn-card pl-1 pb-1">
-                    <button
-                      class="rounded-xl view-more-btn font-weight-regular"
-                      style="font-size: 12px"
-                      @click="todetail(brg)"
-                    >
-                      Lebih lengkap
-                    </button>
+                    </v-card>
                   </div>
-                </v-card>
-              </v-col>
-            </v-row>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="tampil2" v-else>
+              <v-row
+                class="p-0"
+                v-for="(brg, index) in hasilKategori"
+                :key="index"
+              >
+                <v-col
+                  class="card-col p-0"
+                  width="204px"
+                  v-for="(barang, index) in brg.barang"
+                  :key="index"
+                >
+                  <div class="card">
+                    <v-card width="204px">
+                      <v-img
+                        :src="require('~/assets/barang.png')"
+                        width="204px"
+                      ></v-img>
+                      <v-row>
+                        <v-col cols="5" class="">
+                          <div class="title-product f14sb pl-1">
+                            {{ barang.nama }}
+                          </div>
+                        </v-col>
+                        <v-col>
+                          <div class="price-product f14sb pr-1">
+                            Rp. 1.999.999
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col>
+                          <div class="desc-product font-weight-regular pl-1">
+                            Bingung masbro
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card pl-1 pb-1">
+                        <button
+                          class="rounded-xl view-more-btn font-weight-regular"
+                          style="font-size: 12px"
+                          @click="todetail(brg)"
+                        >
+                          Lebih lengkap
+                        </button>
+                      </div>
+                    </v-card>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
           </div>
           <div>
             <div class="text-center view-more">
@@ -61,7 +130,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -73,13 +141,20 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      set: 0,
       cari: null,
       nama: null,
       tokouser: null,
       Toko: null,
-      barangparam:null,
-      allbarang:{
-      barang_id:'',
+      barangparam: null,
+      allbarang: {
+        barang_id: "",
+      },
+      allkategori: {
+        kategori_id: "",
+      },
+      hasilKategori: {
+        barang_id: "",
       },
     };
   },
@@ -92,27 +167,30 @@ export default {
         });
     },
     getallbarang() {
-      axios
-        .get("http://127.0.0.1:8000/api/getallbarangtoko" )
-        .then((respon) => {
-          this.allbarang = respon.data;
-        });
+      axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
+        this.allbarang = respon.data;
+      });
+      this.set = 0;
     },
-    todetail(brg){
+    getallkategori() {
+      axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
+        this.allkategori = respon.data;
+      });
+    },
+    getkategori(ktg) {
+      axios
+        .get(`http://127.0.0.1:8000/api/getkategori/${ktg.kategori_id}`)
+        .then((respon) => {
+          console.log(respon.data);
+          this.hasilKategori = respon.data;
+        });
+      this.set = 1;
+    },
+    todetail(brg) {
       // console.log(brg.barang_id)
-      this.$router.push(`/detail/${brg.barang_id}`)
-    }
+      this.$router.push(`/detail/${brg.barang_id}`);
+    },
   },
-
-  // methods: {
-  //   gettoko() {
-  //     axios
-  //       .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
-  //       .then((respon) => {
-  //         this.Toko = respon.data;
-  //       });
-  //   },
-  // },
 
   created() {
     const userid = this.$cookies.get("cookieku");
@@ -120,6 +198,7 @@ export default {
     console.log(userid);
     this.tokouser = userid.data.id;
     this.gettoko();
+    this.getallkategori();
     this.getallbarang();
   },
 };

@@ -14,7 +14,7 @@
         <v-col>
           <div class="detail pt-4">
             <div class="nama-barang font-weight-bold" style="font-size: 30px">
-              {{dtlbrg.nama  }}
+              {{ dtlbrg.nama }}
             </div>
             <div class="harga font-weight-bold pt-3" style="font-size: 40px">
               Rp. 1.999.999
@@ -25,15 +25,16 @@
             >
               Bingung Masbro
             </div>
-            <div>
-              nama toko: {{ dtlbrg.toko.nama }}
-            </div>
+            <div>nama toko: {{ dtlbrg.toko.nama }}</div>
           </div>
           <div class="button pb-4" style="padding-top: 200px">
             <v-row>
               <v-col cols="4">
                 <div class="tambah-troli pl-6">
-                  <v-btn class="rounded-pill" x-large outlined
+                  <v-btn
+                    class="rounded-pill"
+                    x-large
+                    outlined
                     @click="tambahkeranjang(dtlbrg)"
                     >Tambah <span class="mdi mdi-cart-outline"></span
                   ></v-btn>
@@ -55,7 +56,7 @@
           </div>
         </v-col>
       </v-row>
-      <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
+      <v-row class="rekomendasi pb-6 item-center" style="margin-left: 35px">
         <div class="recomend f24sb pt-5">Barang yang mungkin kamu suka</div>
         <div>
           <div class="product-card pt-4">
@@ -187,43 +188,51 @@
             </v-row>
           </div>
         </div>
-      </div>
+      </v-row>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
-      prm:this.$route.params,
-      detailbarang:null,
-      userid:null,
-      dtlbrg:{
-        barang_id:'',
-        kauntitas:1
-      }
-    }
+      prm: this.$route.params,
+      detailbarang: null,
+      userid: null,
+      dtlbrg: {
+        barang_id: "",
+        kauntitas: 1,
+      },
+    };
   },
   methods: {
-    getbarangtokobyid(){
-      axios.get('http://127.0.0.1:8000/api/getbarangtokobyid/'+this.prm.barang_id).then(respon=>{
-        this.detailbarang = respon.data
-      })
+    getbarangtokobyid() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/getbarangtokobyid/" + this.prm.barang_id
+        )
+        .then((respon) => {
+          this.detailbarang = respon.data;
+        });
     },
-    tambahkeranjang(dtlbrg){
-      axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, dtlbrg).then(respon=>{
-        console.log(respon)
-      })
+    tambahkeranjang(dtlbrg) {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/addkeranjangbyuser/" + this.userid,
+          dtlbrg
+        )
+        .then((respon) => {
+          console.log(respon);
+        });
     },
-
   },
 
   created() {
-    const usid = this.$cookies.get('cookieku')
-    this.userid =usid.data.id
-    this.getbarangtokobyid()
+    const usid = this.$cookies.get("cookieku");
+    this.userid = usid.data.id;
+    this.getbarangtokobyid();
   },
-}
+};
 </script>
