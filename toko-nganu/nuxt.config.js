@@ -38,8 +38,11 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios','nuxt-webfontloader','cookie-universal-nuxt'
+    '@nuxtjs/axios','nuxt-webfontloader','cookie-universal-nuxt', '@nuxtjs/toast',
   ],
+  toast: {
+    position: 'top-center'
+  },
 
   webfontloader: {
     google: {
