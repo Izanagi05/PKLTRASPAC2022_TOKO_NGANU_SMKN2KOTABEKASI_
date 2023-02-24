@@ -52,10 +52,11 @@ class TokoUserController extends Controller
         // dd($id);
         return response()->json($data, 200);
     }
-    public function deletetoko(Request $request, $id ){
-        $data = Toko::where('toko_id', $id)->delete();
+    public function deletetoko($id ){
+        $data = Toko::find($id);
+        $data->Barang()->delete();
+        $data->delete();
 
-        // dd($id);
         return response()->json($data, 200);
     }
 }

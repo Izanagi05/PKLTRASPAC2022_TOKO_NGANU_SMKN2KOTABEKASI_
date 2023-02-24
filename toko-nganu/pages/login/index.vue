@@ -48,9 +48,9 @@
                     </v-btn>
                     <div class="buat-akun" style="padding-bottom: 20px">
                       Belum punya akun?
-                      <NuxtLink to="/register" class="my-link">
+                      <nuxt-link to="/register" class="my-link">
                         Buat Akun
-                      </NuxtLink>
+                      </nuxt-link>
                     </div>
                   </v-form>
                 </v-sheet>

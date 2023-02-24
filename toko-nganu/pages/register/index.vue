@@ -11,13 +11,13 @@
             variant="outlined"
             style="margin-top: 17px"
           >
-            <v-card-item>
+            <v-card>
               <div>
                 <div class="judul" style="font-weight: 700; font-size: 40px">
                   Buat Akun
                 </div>
                 <v-sheet width="300" class="mx-auto">
-                  <v-form fast-fail @submit.prevent="register()">
+                  <v-form fast-fail @submit.prevent="registrasi">
                     <v-text-field
                       v-model="dataregist.nama"
                       label="Nama"
@@ -55,7 +55,7 @@
                   </v-form>
                 </v-sheet>
               </div>
-            </v-card-item>
+            </v-card>
           </v-card>
         </div>
       </center>
@@ -94,13 +94,13 @@ export default {
     ],
   }),
   methods: {
-    register() {
+    registrasi() {
       axios
-        .post("http://127.0.0.1:8000/registrasi", this.dataregist)
+        .post("http://127.0.0.1:8000/api/registrasi", this.dataregist)
         .then((respon) => {
           this.data = respon.data;
         });
-      this.$router.push("/login");
+        window.location.replace('/')
     },
   },
 };
