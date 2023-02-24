@@ -45,9 +45,9 @@
                       prepend-icon="mdi-camera"
                       label="Pilih Foto"
                       v-on:change="upload"
+                      v-model="foto"
                     ></v-file-input>
                   </v-card-text>
-                  <v-form>
                     <v-card-actions>
                       <div class="btn-dialog pl-4 pb-4">
                         <v-row>
@@ -55,12 +55,11 @@
                             <v-btn @click="dialog = false">Batal</v-btn>
                           </v-col>
                           <v-col cols="6">
-                            <v-btn type="submit">Pilih</v-btn>
+                            <v-btn type="submit" @click="konfirmfoto" >Pilih</v-btn>
                           </v-col>
                         </v-row>
                       </div>
                     </v-card-actions>
-                  </v-form>
                 </v-card>
               </v-dialog>
             </div>
@@ -149,8 +148,10 @@ export default {
         nama: null,
         alamat: null,
         no_telepon: null,
+        foto_profil: null,
         email: null,
       },
+      foto:null,
       userid: null,
       dialog: false,
       preview: "",
@@ -185,12 +186,17 @@ export default {
         });
       this.$router.push("/user-view");
     },
+    konfirmfoto(){
+      this.editprofil.foto_profil = this.foto
+      // console.log(this.foto)
+      this.dialog=false
+    },
     backprofil() {
       this.$router.push("/user-view");
     },
     upload(foto) {
       const fotobaru = foto.name;
-      this.editprofil.fotoprofil = fotobaru;
+      // this.editprofil.foto_profil = fotobaru;
       this.preview = URL.createObjectURL(foto);
     },
   },
