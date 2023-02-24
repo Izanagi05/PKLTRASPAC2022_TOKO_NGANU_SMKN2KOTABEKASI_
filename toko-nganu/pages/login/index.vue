@@ -91,25 +91,25 @@ export default {
   methods: {
     loginuser() {
       this.tes = this.userdata;
-      axios.post("http://127.0.0.1:8000/api/login", {
-        email: this.email,
-        password: this.password,
-      }).then(respon=> {
-        this.ket= respon.data
-        this.$store.dispatch('users/login', this.ket)
-      })
-      // for(let i=0; i<this.tes.length; i++){
-      //    this.dtk =this.userdata[i]
-      //    this.dtr =this.userdata[i].password
-      //    console.log(this.dtk)
-      //   }
-      //   if(this.email === this.dtk && this.password === this.dtr){
-      //    console.log("berhasil")
-      //  }else{
-      //     console.log("ggl")
-      //   }
-      // console.log(this.dtk)
-      // console.log(this.dtr)
+      if (
+        this.username === null ||
+        this.username === "" ||
+        this.password === null ||
+        this.password === ""
+      ) {
+        this.$toast.error("Username dan Password harus sesuai");
+      } else {
+        axios
+          .post("http://127.0.0.1:8000/api/login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then((respon) => {
+            this.ket = respon.data;
+            this.$store.dispatch("users/login", this.ket);
+          });
+        this.$toast.success("Login berhasil");
+      }
     },
   },
 

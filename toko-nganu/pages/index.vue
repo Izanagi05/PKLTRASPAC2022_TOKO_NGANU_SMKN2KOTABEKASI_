@@ -13,9 +13,7 @@
             <v-icon>mdi-filter</v-icon>
           </v-btn>
         </div>
-
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
-        <!-- {{ Toko }} -->
         <div>
           <div class="product-card">
             <v-row class="p-0">
@@ -60,35 +58,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="card">
-          <div class="row mb-3 gy-3">
-            <div v-for="hy in ambildata" :key="hy.id">
-              <div class="col-md-10 mt-4 ml-5">
-                <b-card
-                  :title="hy.title"
-                  :img-src="hy.thumbnail"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem max-height: 10rem"
-                  class="mb-2"
-                >
-                  <b-card-text>
-                    <h1>${{ hy.price }}</h1>
-                    <details>
-                      <summary>Description</summary>
-                      {{ hy.description }}
-                    </details>
-                  </b-card-text>
-                  <v-btn @click="editItem(item)">EDIT<v-icon></v-icon></v-btn>
-                  <v-btn @click="deleteItem(item)"
-                    >DELETE<v-icon></v-icon
-                  ></v-btn>
-                </b-card>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -129,10 +98,6 @@
   font-size: 10px;
   line-height: 15px;
 }
-
-/* .store-name{
-
-} */
 .home {
   padding: 0px 123px 66px 123px;
 }
@@ -152,19 +117,11 @@
   border-radius: 25px;
 }
 .recomend {
-  /* font-size: 24px;
-  font-weight: 600; */
   margin-top: 13px;
 }
 .card-col {
   margin-top: 15px;
 }
-/* .title-product {
-  padding-left: 3px;
-} */
-/* .price-product {
-  padding-right: 4px;
-} */
 .desc-product {
   font-size: 10px;
 }
@@ -181,10 +138,6 @@
 .view-more-btn2 {
   margin-top: 54px;
 }
-/* .home_image {
-}
- */
-
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;
@@ -281,17 +234,6 @@ export default {
         });
     },
   },
-
-  // methods: {
-  //   gettoko() {
-  //     axios
-  //       .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
-  //       .then((respon) => {
-  //         this.Toko = respon.data;
-  //       });
-  //   },
-  // },
-
   created() {
     const usernama = this.$cookies.get("cookieku");
     const userid = this.$cookies.get("cookieku");
