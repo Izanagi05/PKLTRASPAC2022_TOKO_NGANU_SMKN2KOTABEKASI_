@@ -41,12 +41,6 @@
 <h1>Detail</h1>
 </div>
     <v-container style="padding:30px;">
-    <!-- <v-row>
-      <v-col>
-      </v-col>
-      <v-col>
-      </v-col>
-    </v-row> -->
     <div style="margin:20px;">
       <v-row>
         <v-col cols="5">
@@ -95,6 +89,9 @@
     <v-btn class="mx-2" fab small  @click="klikdetail(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark>mdi-eye</v-icon>
                     </v-btn>
+    <v-btn class="mx-2" fab small  @click="detailbarang(item)" style="margin:15px 15px 15px 0px;">
+                        <v-icon dark>mdi-magnify</v-icon>
+                    </v-btn>
                     <v-btn class="mx-2"  fab small  @click="ubahdata(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark >mdi-pencil</v-icon>
                     </v-btn>
@@ -129,6 +126,7 @@ export default {
         Toko:[],
         UbahToko:null,
         edittokoid:null,
+        tess:18,
 
         datatoko: [],
      dialogdetail: false,
@@ -174,6 +172,9 @@ export default {
     klikdetail(item){
      this.detaildatadialog = Object.assign({}, item)
      this.dialogdetail= true
+   },
+   detailbarang(item){
+    this.$router.push(`/toko-user/detailtoko/${item.toko_id}` )
    },
    closedetail(){
     this.$nextTick(() => {

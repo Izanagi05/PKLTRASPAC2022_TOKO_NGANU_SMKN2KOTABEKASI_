@@ -282,15 +282,15 @@ export default {
     },
   },
 
-  methods: {
-    gettoko() {
-      axios
-        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
-        .then((respon) => {
-          this.Toko = respon.data;
-        });
-    },
-  },
+  // methods: {
+  //   gettoko() {
+  //     axios
+  //       .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+  //       .then((respon) => {
+  //         this.Toko = respon.data;
+  //       });
+  //   },
+  // },
 
   created() {
     const usernama = this.$cookies.get("cookieku");

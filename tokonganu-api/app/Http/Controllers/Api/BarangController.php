@@ -48,4 +48,8 @@ class BarangController extends Controller
         // dd($id);
         return response()->json($data, 200);
     }
+    public function deletebarang(Request $request, $id ){
+        $data = Barang::where('barang_id', $id)->delete();
+        return response()->json($data, 200);
+    }
 }

@@ -14,14 +14,10 @@ class TokoUserController extends Controller
         return response()->json($data);
 
     }
-    public function gettokobyuser(Request $request, $id){
+    public function getbarangbytokouser(Request $request, $id){
         $data= Toko::where('user_id', $id)->get();
-        // $data= $userdata->UserToko()->nama;
-        // dd($data);
         foreach ($data as $key=> $dt) {
             $data[$key]['barang']=$dt->Barang;
-
-
 
        }
         return response()->json($data);

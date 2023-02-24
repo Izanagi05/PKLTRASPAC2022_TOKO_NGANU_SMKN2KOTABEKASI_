@@ -20,8 +20,8 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="cart-content">
-                <div v-for="(dataa, index) in tes" :key="index">
+              <div class="cart-content" v-for="(user, index) in datakeranjang" :key="index">
+                <div v-for="(dataa, index) in user.user_keranjang" :key="index">
                   <v-row>
                     <div class="cart-card d-flex">
                       <v-col>
@@ -32,16 +32,16 @@
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                          {{ dataa.title }}
+                         masih id barang:{{dataa.barang_id}}
                         </div>
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">Rp. {{ price }}</div>
                       </v-col>
                       <v-col>
-                        <div class="d-flex quantity">
+                        <div class="d-flex kuantitas">
                           <div>
-                            <div v-if="dataa.quantity == 0">
+                            <div v-if="dataa.kuantitas == 0">
                               <button @click="countmin" disabled type="submit">
                                 <v-icon color="AAAAAA">mdi-minus</v-icon>
                               </button>
@@ -54,10 +54,10 @@
                           </div>
 
                           <div class="font-weight-medium">
-                            {{ dataa.quantity }}
+                            {{ dataa.kuantitas }}
                           </div>
                           <button
-                            class="plusquantity"
+                            class="pluskuantitas"
                             @click="countplus(dataa)"
                             type="submit"
                           >
@@ -114,39 +114,55 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   middleware: "middlewareku",
   data() {
     return {
       price: 100000,
       pricetotal: 0,
+      datakeranjang: {
+        barang_id:'',
+        kuantitas:'',
+      },
+      userid: null,
 
       tes: [
-        { title: "tes tes tes1", quantity: 1 },
-        { title: "tes tes tes2", quantity: 0 },
-        { title: "tes tes tes3", quantity: 0 },
-        { title: "tes tes tes4", quantity: 0 },
-        { title: "tes tes tes5", quantity: 0 },
-        { title: "tes tes tes6", quantity: 0 },
-        { title: "tes tes tes7", quantity: 0 },
-        { title: "tes tes tes7", quantity: 0 },
+        { title: "tes tes tes1", kuantitas: 1 },
+        { title: "tes tes tes2", kuantitas: 0 },
+        { title: "tes tes tes3", kuantitas: 0 },
+        { title: "tes tes tes4", kuantitas: 0 },
+        { title: "tes tes tes5", kuantitas: 0 },
+        { title: "tes tes tes6", kuantitas: 0 },
+        { title: "tes tes tes7", kuantitas: 0 },
+        { title: "tes tes tes7", kuantitas: 0 },
       ],
     };
   },
   methods: {
+    getkeranjang(){
+      axios.get('http://127.0.0.1:8000/api/keranjangbyuser/'+this.userid).then(respon=>{
+        this.datakeranjang = respon.data
+      })
+    },
     countplus(dataa) {
-      dataa.quantity++;
+      dataa.kuantitas++;
 
-      this.pricetotal = parseInt(this.tes.quantity) * parseInt(this.price);
+      this.pricetotal = parseInt(this.tes.kuantitas) * parseInt(this.price);
     },
     countmin() {
-      if (this.quantity < 1) {
-        this.quantity = 0;
+      if (this.kuantitas < 1) {
+        this.kuantitas = 0;
       } else {
-        this.tes.quantity -= 1;
+        this.tes.kuantitas -= 1;
       }
       console.log("pp");
     },
+  },
+  created() {
+    const usid = this.$cookies.get('cookieku')
+    this.userid = usid.data.id
+    this.getkeranjang()
   },
 };
 </script>
@@ -203,7 +219,7 @@ export default {
 .head-title {
   color: #7a7a7a;
 }
-.quantity {
+.kuantitas {
   background: #d9d9d9;
   border-radius: 15px;
 }
