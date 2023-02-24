@@ -18,13 +18,23 @@ class UserController extends Controller
         return response()->json($data, 200);
 
     }
-    public function updateuserlogin(Request $reqeust, $id){
-        $data = User::where('id', $id)->update([
-            'nama'=>$reqeust->nama,
-            'email'=>$reqeust->email,
-            'no_telepon'=>$reqeust->no_telepon,
-            'foto_profil'=>$reqeust->foto_profil,
-        ]);
+    public function updateuserlogin(Request $request, $id){
+        $rules = [
+            'nama'=>'required',
+            'email'=>'required|email:dns',
+            'no_telepon'=>'',
+            'foto_profil'=>''
+        ];
+        $validasi = $request->validate($rules);
+        // if($request->hasFile('foto_profil')){
+        //     $request->file('foto_profil')->move('uprofil/', $request->file('foto_profil')->getClientOriginalName());
+        //     $data->foto_profil= $request->file('foto_profil')->getClientOriginalName();
+        //     $data->save();
+        // }
+        if($request->file('foto_profil')) { //true jika ada request foto berupa file foto_profil kloa gaada request(up foto) sblum di insert ngambil foto di unsplash
+            $validasi['foto_profil'] = $request->file('foto_profil')->store('post-images'); //klo kosong ga dijalanin krena false. kalo ada isinya dijalanain karena true
+        }
+        $data = User::where('id', $id)->update($validasi);
 
         return response()->json($data, 200);
     }
