@@ -16,10 +16,10 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-        <div>
+        <div >
           <div class="product-card">
-            <v-row class="p-0">
-              <v-col class="card-col p-0" width="204px">
+            <v-row class="p-0" >
+              <v-col class="card-col p-0" width="204px" v-for="(brg, index) in allbarang" :key="index">
                 <v-card width="204px">
                   <v-img
                     :src="require('~/assets/barang.png')"
@@ -27,7 +27,7 @@
                   ></v-img>
                   <v-row>
                     <v-col cols="5" class="">
-                      <div class="title-product f14sb pl-1">Mas bro</div>
+                      <div class="title-product f14sb pl-1">{{ brg.nama }}</div>
                     </v-col>
                     <v-col>
                       <div class="price-product f14sb pr-1">Rp. 1.999.999</div>
@@ -44,6 +44,7 @@
                     <button
                       class="rounded-xl view-more-btn font-weight-regular"
                       style="font-size: 12px"
+                      @click="todetail(brg)"
                     >
                       Lebih lengkap
                     </button>
@@ -60,39 +61,69 @@
             </div>
           </div>
         </div>
-        <!-- <div class="card">
-          <div class="row mb-3 gy-3">
-            <div v-for="hy in ambildata" :key="hy.id">
-              <div class="col-md-10 mt-4 ml-5">
-                <b-card
-                  :title="hy.title"
-                  :img-src="hy.thumbnail"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem max-height: 10rem"
-                  class="mb-2"
-                >
-                  <b-card-text>
-                    <h1>${{ hy.price }}</h1>
-                    <details>
-                      <summary>Description</summary>
-                      {{ hy.description }}
-                    </details>
-                  </b-card-text>
-                  <v-btn @click="editItem(item)">EDIT<v-icon></v-icon></v-btn>
-                  <v-btn @click="deleteItem(item)"
-                    >DELETE<v-icon></v-icon
-                  ></v-btn>
-                </b-card>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+export default {
+  middleware: "middlewareku",
+  data() {
+    return {
+      cari: null,
+      nama: null,
+      tokouser: null,
+      Toko: null,
+      barangparam:null,
+      allbarang:{
+      barang_id:'',
+      },
+    };
+  },
+  methods: {
+    gettoko() {
+      axios
+        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+        .then((respon) => {
+          this.Toko = respon.data;
+        });
+    },
+    getallbarang() {
+      axios
+        .get("http://127.0.0.1:8000/api/getallbarangtoko" )
+        .then((respon) => {
+          this.allbarang = respon.data;
+        });
+    },
+    todetail(brg){
+      // console.log(brg.barang_id)
+      this.$router.push(`/detail/${brg.barang_id}`)
+    }
+  },
+
+  // methods: {
+  //   gettoko() {
+  //     axios
+  //       .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
+  //       .then((respon) => {
+  //         this.Toko = respon.data;
+  //       });
+  //   },
+  // },
+
+  created() {
+    const userid = this.$cookies.get("cookieku");
+    this.nama = userid.data.nama;
+    console.log(userid);
+    this.tokouser = userid.data.id;
+    this.gettoko();
+    this.getallbarang();
+  },
+};
+</script>
 <style>
 .f24sb {
   font-weight: 600;
@@ -260,45 +291,3 @@
   margin-left: 5px;
 }
 </style>
-<script>
-import axios from "axios";
-export default {
-  middleware: "middlewareku",
-  data() {
-    return {
-      cari: null,
-      nama: null,
-      tokouser: null,
-      Toko: null,
-    };
-  },
-  methods: {
-    gettoko() {
-      axios
-        .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
-        .then((respon) => {
-          this.Toko = respon.data;
-        });
-    },
-  },
-
-  // methods: {
-  //   gettoko() {
-  //     axios
-  //       .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
-  //       .then((respon) => {
-  //         this.Toko = respon.data;
-  //       });
-  //   },
-  // },
-
-  created() {
-    const usernama = this.$cookies.get("cookieku");
-    const userid = this.$cookies.get("cookieku");
-    this.nama = usernama.data.nama;
-    console.log(usernama);
-    this.tokouser = userid.data.id;
-    this.gettoko();
-  },
-};
-</script>

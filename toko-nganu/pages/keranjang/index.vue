@@ -2,6 +2,17 @@
   <div>
     <Navbar />
     <div>
+      <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-card>
+            <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancel</v-btn>
+              <v-btn color="blue-darken-1" variant="text" @click="confirmhapuskeranjang">OK</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+</v-dialog>
       <div class="cart">
         <v-row>
           <v-col class="">
@@ -69,6 +80,7 @@
                         <div class="font-weight-medium">Rp. 10.000.000</div>
                       </v-col>
                     </div>
+                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-trash</v-icon></v-btn></div>
                   </v-row>
                 </div>
               </div>
@@ -119,13 +131,21 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      dialogDelete:false,
       price: 100000,
       pricetotal: 0,
       datakeranjang: {
         barang_id:'',
         kuantitas:'',
       },
+      // editedIndex:0,
+      detaildatadialog: {
+        keranjang_user_id:'',
+        barang_id:'',
+        kuantitas:'',
+      },
       userid: null,
+
 
       tes: [
         { title: "tes tes tes1", kuantitas: 1 },
@@ -158,7 +178,29 @@ export default {
       }
       console.log("pp");
     },
+    hapuskeranjang (item) {
+      this.editedIndex = this.datakeranjang.indexOf(item)
+        this.detaildatadialog = Object.assign({}, item)
+        this.dialogDelete = true
+        console.log(this.editedIndex)
+      },
+    confirmhapuskeranjang(){
+      axios.delete('http://127.0.0.1:8000/api/deletekeranjang/'+ this.detaildatadialog.keranjang_user_id).then(respon =>{
+       console.log(respon)
+       location.reload()
+        alert('berhasil hapus')
+        })
+        // this.datakeranjang.splice(this.editedIndex, 1)
+        this.closeDelete()
+
   },
+  closeDelete () {
+        this.dialogDelete = false
+        this.$nextTick(() => {
+          this.editedIndex = -1
+        })
+      },
+    },
   created() {
     const usid = this.$cookies.get('cookieku')
     this.userid = usid.data.id

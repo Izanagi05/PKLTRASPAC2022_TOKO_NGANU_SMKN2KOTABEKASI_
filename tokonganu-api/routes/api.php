@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\TokoUserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\KeranjangUserController;
 use App\Http\Controllers\Api\KategoriController;
 
 /*
@@ -27,7 +28,10 @@ Route::post('/login', [LoginController::class, 'postlogin']);
 Route::get('/getuserlogin/{id}', [UserController::class, 'getuserlogin']);
 Route::post('/updateuserlogin/{id}', [UserController::class, 'updateuserlogin']);
 Route::get('/gettokobyuserlogin/{id}', [UserController::class, 'gettokobyuserlogin']);
-Route::get('/keranjangbyuser/{id}', [UserController::class, 'keranjangbyuser']);
+
+Route::get('/keranjangbyuser/{id}', [KeranjangUserController::class, 'keranjangbyuser']);
+Route::post('/addkeranjangbyuser/{id}', [KeranjangUserController::class, 'addkeranjangbyuser']);
+Route::delete('/deletekeranjang/{id}', [KeranjangUserController::class, 'deletekeranjang']);
 
 Route::post('/updatetoko/{id}', [TokoUserController::class, 'updatetoko']);
 Route::delete('/hapustoko/{id}', [TokoUserController::class, 'deletetoko']);
@@ -40,6 +44,8 @@ Route::post('/createbarang/{id}', [BarangController::class, 'createbarang']);
 Route::post('/updatebarang/{id}', [BarangController::class, 'updatebarang']);
 Route::delete('/deletebarang/{id}', [BarangController::class, 'deletebarang']);
 Route::get('/getbarang/{id}', [BarangController::class, 'getbarang']);
+Route::get('/getallbarangtoko', [BarangController::class, 'getallbarangtoko']);
+Route::get('/getbarangtokobyid/{id}', [BarangController::class, 'getbarangtokobyid']);
 Route::get('/getkategori/{id}', [KategoriController::class, 'getkategorbybarang']);
 
 Route::get('/getallkategori', [KategoriController::class, 'getallkategori']);

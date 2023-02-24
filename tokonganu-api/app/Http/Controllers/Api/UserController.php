@@ -40,11 +40,5 @@ class UserController extends Controller
        }
         return response()->json($data);
     }
-    public function keranjangbyuser($id){
-        $keranjang = User::where('id', $id)->get();
-        foreach ($keranjang as $key => $krnjng) {
-           $keranjang[$key]['user_keranjang']=$krnjng->UserKeranjang;
-        }
-        return response()->json($keranjang);
-    }
+
 }
