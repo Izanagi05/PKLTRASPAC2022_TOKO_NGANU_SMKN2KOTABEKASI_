@@ -87,7 +87,7 @@
                         <div class="font-weight-medium">Rp. 10.000.000</div>
                       </v-col>
                     </div>
-                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-trash</v-icon></v-btn></div>
+                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
                   </v-row>
                 </div>
               </div>
