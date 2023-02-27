@@ -38,7 +38,7 @@
           <div class="store-name f24sb">
             <div>Toko Nganu</div>
             <div v-for="(asr, index) in alluser" :key="index">
-            {{ asr.nama }}
+            {{ asr.nama }}  ====== <v-btn @click="hapususer (asr)">hapus</v-btn>
             </div>
           </div>
         </v-col>
