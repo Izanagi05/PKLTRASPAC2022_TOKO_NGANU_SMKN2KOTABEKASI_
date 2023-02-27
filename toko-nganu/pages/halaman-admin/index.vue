@@ -243,6 +243,7 @@
                       </v-btn>
                     </div>
                   </v-card>
+                  <v-divider class="mx-4"></v-divider>
                 </v-col>
               </v-row>
             </div>
