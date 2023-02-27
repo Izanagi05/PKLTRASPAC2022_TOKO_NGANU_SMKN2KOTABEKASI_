@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function getallUser(){
-        $data = User::get();
-        return response()->json(['data'=>$data], 200);
-    }
+
+
 
     public function getuserlogin($id){
         $data = User::where('id', $id)->first();
@@ -20,8 +19,8 @@ class UserController extends Controller
     }
     public function updateuserlogin(Request $request, $id){
         $rules = [
-            'nama'=>'required',
-            'email'=>'required|email:dns',
+            'nama'=>'',
+            'email'=>'',
             'no_telepon'=>'',
             'foto_profil'=>''
         ];
@@ -30,13 +29,25 @@ class UserController extends Controller
         //     $request->file('foto_profil')->move('uprofil/', $request->file('foto_profil')->getClientOriginalName());
         //     $data->foto_profil= $request->file('foto_profil')->getClientOriginalName();
         //     $data->save();
-        // }
-        if($request->file('foto_profil')) { //true jika ada request foto berupa file foto_profil kloa gaada request(up foto) sblum di insert ngambil foto di unsplash
-            $validasi['foto_profil'] = $request->file('foto_profil')->store('post-images'); //klo kosong ga dijalanin krena false. kalo ada isinya dijalanain karena true
+        // dd(validasi)
+        // $path= public_path('fotoprofil');
+        // if(!empty($))
+        if($request->file('foto_profil')) {
+            // dd($request->oldImage);
+            // return $request->foto_profil;
+            // $image = time().'.'.$request->foto_profil->extension();
+            if(!empty(User::find($id)->foto_profil)) {
+                // unlink('storage/public/post-images'.User::where('id', $id)->foto_profil);
+                Storage::delete(User::find($id)->foto_profil);
+                // unlink(storage_path('public/post-images'.User::find($id)->foto_profil));
+                // dd("tes");
+
+            }
+            $validasi['foto_profil'] = $request->file('foto_profil')->store('public/post-images');
         }
         $data = User::where('id', $id)->update($validasi);
 
-        return response()->json($data, 200);
+        // return response()->json($data, 200);
     }
 
 

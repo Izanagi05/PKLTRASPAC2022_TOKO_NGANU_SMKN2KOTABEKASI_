@@ -25,8 +25,13 @@ class LoginController extends Controller
         $salt_password = User::select('salt_password')->where('email',  $request->email)->first();
             $pass =md5($request->password).$salt_password->salt_password;
             $passdb =User::select('password')->where('email', $request->email)->first();
+
+            // $emailreq = $request->email;
+            // $emaildb = User::select('email')->get();
+
+            // dd($emaildb);
         // if (Auth::attempt(['email' =>  $request->email, 'password' => md5($request->password).$salt_password->salt_password])){
-        if ($pass == $passdb->password){
+        if ($pass == $passdb->password ){
 
             $data = User::select('nama', 'no_telepon', 'foto_profil', 'id')->where('email', $request->email)->first();
             // dd($data);
@@ -36,10 +41,16 @@ class LoginController extends Controller
             // return (new UserResource($user))->additional([
             //     'token' => $user->createToken('myAppToken')->plainTextToken,
             // ]);
+            $role= User::where('email', $request->email)->first();
+            // foreach ($role as $key => $rl) {
+
+            //     $role[$key]['k  ']= $rl->RoleUser;
+            // }
             return response()->json([
                 'success' => true,
                 'message'=>'login sukses',
                 'data' => $data,
+                'role' => $role->RoleUser->nama,
                 // 'data2' => $token,
 
             ]);

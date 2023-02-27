@@ -3,6 +3,7 @@
     <Navbar/>
 
     <div>
+      <nuxt-link to="/user-view/toko-user/tambah-barang"><v-btn color="primary">Tambah barang</v-btn></nuxt-link>
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
@@ -26,7 +27,7 @@
 <v-text-field type="text" v-model="detaildatadialog.alamat" label="alamat" outline></v-text-field>
 <v-text-field type="text" v-model="detaildatadialog.no_telepon"  label="no telepon" outline></v-text-field>
 <v-text-field type="text" v-model="detaildatadialog.deskripsi"  label="deskripsi" outline></v-text-field>
-<v-text-field type="text" v-model="detaildatadialog.logo"  label="logo" outline></v-text-field>
+<input type="file"  v-on:change="upload" label="logo" />
 <!-- <div></div> -->
 <v-card-actions >
 <v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
@@ -120,6 +121,7 @@ export default {
       return {
         dialogDelete:false,
         dialogedit:false,
+        datafoto:null,
         cari:null,
         nama:null,
         tokouser:null,
@@ -174,7 +176,7 @@ export default {
      this.dialogdetail= true
    },
    detailbarang(item){
-    this.$router.push(`/toko-user/detailtoko/${item.toko_id}` )
+    this.$router.push(`/user-view/toko-user/detailtoko/${item.toko_id}` )
    },
    closedetail(){
     this.$nextTick(() => {
@@ -195,7 +197,17 @@ export default {
         })
     this.dialogedit=false
   },
+  upload(foto){
+    let files = foto.target.files[0];
+    this.datafoto = files;
+    console.log(foto);
+  },
     updatetoko(){
+      let formData = new FormData()
+    formData.append('logo', this.datafoto)
+      axios.post('http://127.0.0.1:8000/api/updatetoko/'+this.detaildatadialog.toko_id, formData, {
+            'content-type': 'multipart/form-data'
+          });
       axios.post('http://127.0.0.1:8000/api/updatetoko/'+this.detaildatadialog.toko_id, this.detaildatadialog).then(respon=>{
         console.log(respon.data)
       })

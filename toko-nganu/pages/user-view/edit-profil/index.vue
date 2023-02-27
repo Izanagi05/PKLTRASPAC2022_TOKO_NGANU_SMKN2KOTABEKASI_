@@ -13,7 +13,8 @@
           <v-col cols="6">
             <div class="foto-profil pl-5">
               <v-avatar width="270px" height="270px">
-                <v-img :src="require('~/assets/barang.png')"></v-img>
+                <!-- <img  :src="'storage/'+editprofil.foto_profil"/> -->
+                <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
             </div>
             <div class="btn-card pl-1 pb-1 pt-3">
@@ -37,17 +38,16 @@
                         width="200px"
                       ></v-img>
                     </div>
-                    <v-file-input
+                    <input
                       class="file-input pt-6"
                       :rules="rules"
-                      accept="image/png, image/jpeg, image/bmp"
+                      type="file"
                       placeholder="Pilih Foto"
                       prepend-icon="mdi-camera"
                       label="Pilih Foto"
                       v-on:change="upload"
-                    ></v-file-input>
+                    />
                   </v-card-text>
-                  <v-form>
                     <v-card-actions>
                       <div class="btn-dialog pl-4 pb-4">
                         <v-row>
@@ -55,12 +55,11 @@
                             <v-btn @click="dialog = false">Batal</v-btn>
                           </v-col>
                           <v-col cols="6">
-                            <v-btn type="submit">Pilih</v-btn>
+                            <v-btn type="submit" @click="konfirmfoto" >Pilih</v-btn>
                           </v-col>
                         </v-row>
                       </div>
                     </v-card-actions>
-                  </v-form>
                 </v-card>
               </v-dialog>
             </div>
@@ -149,11 +148,15 @@ export default {
         nama: null,
         alamat: null,
         no_telepon: null,
+        foto_profil: null,
         email: null,
       },
+      foto:null,
       userid: null,
       dialog: false,
-      preview: "",
+      preview: null,
+      datafoto: null,
+      tampungfoto: null,
       rules: [
         (value) => {
           return (
@@ -174,24 +177,57 @@ export default {
           this.editprofil = respon.data;
         });
     },
+    upload(foto) {
+    let files = foto.target.files[0];
+    this.datafoto = files;
+    let fotobaru = foto.name;
+    console.log(this.editprofil.foto_profil)
+    this.preview = URL.createObjectURL(files);
+    this.tampungfoto = fotobaru;
+    // this.editprofil.foto_profil = fotobaru;
+  },
+
+    backprofil() {
+      this.$router.push("/user-view");
+    },
+
+    konfirmfoto(){
+      this.dialog=false;
+      // this.editprofil.foto_profil = this.foto
+    },
     updateuser() {
+      let formData = new FormData()
+    formData.append('foto_profil', this.datafoto)
+//       const json = JSON.stringify({
+//     nama: this.editprofil.nama,
+//     no_telepon: this.editprofil.no_telepon,
+//     email: this.editprofil.email,
+// });
+
+  //  formData.append('User',json)
+      // this.editprofil.foto_profil = tes;
+      // console.log(this.editprofil.foto_profil)
       axios
         .post(
-          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
-          this.editprofil
+          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid, formData, {
+            'content-type': 'multipart/form-data'
+          }
         )
+        // 'Content-Type': 'multipart/form-data;  charset=utf-8; boundary='+ Math.random().toString().substr(2)
+        .then((respon) => {
+          console.log(respon);
+        });
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid, this.editprofil, {
+            'content-type': 'multipart/form-data'
+          }
+        )
+        // 'Content-Type': 'multipart/form-data;  charset=utf-8; boundary='+ Math.random().toString().substr(2)
         .then((respon) => {
           console.log(respon);
         });
       this.$router.push("/user-view");
-    },
-    backprofil() {
-      this.$router.push("/user-view");
-    },
-    upload(foto) {
-      const fotobaru = foto.name;
-      this.editprofil.fotoprofil = fotobaru;
-      this.preview = URL.createObjectURL(foto);
     },
   },
   created() {

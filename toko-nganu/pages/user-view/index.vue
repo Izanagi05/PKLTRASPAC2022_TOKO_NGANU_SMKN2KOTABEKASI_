@@ -11,16 +11,21 @@
             <NuxtLink to="/" class="my-link black--text  text-decoration-none" >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <NuxtLink to="/" class="my-link black--text  text-decoration-none" >
+            <div v-if="cekuserrole =='Admin'">
+              <NuxtLink to="/halaman-admin" class="my-link black--text  text-decoration-none" >
               <v-icon large>mdi-account-tie</v-icon> Admin
             </NuxtLink>
-            <NuxtLink to="/toko-user" class="my-link black--text  text-decoration-none">
+            </div>
+            <div v-else>
+
+            </div>
+            <NuxtLink to="/user-view/toko-user" class="my-link black--text  text-decoration-none">
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
             <NuxtLink to="/user-view/tambah-toko" class="my-link black--text  text-decoration-none">
               <v-icon large></v-icon> Buka Toko
             </NuxtLink>
-            <NuxtLink to="/user-view/tambah-barang" class="my-link black--text  text-decoration-none">
+            <NuxtLink to="/user-view/toko-user/tambah-barang" class="my-link black--text  text-decoration-none">
               <v-icon large></v-icon> tambah barang
             </NuxtLink>
           </div>
@@ -108,6 +113,7 @@ export default {
         no_telepon:null,
         email:null
       },
+      cekuserrole:null,
       userid:null,
     }
   },
@@ -130,6 +136,8 @@ export default {
     const usid = this.$cookies.get('cookieku')
     this.userid=usid.data.id
     this.getuser()
+    this.cekuserrole = usid.role
+
   },
 };
 </script>
