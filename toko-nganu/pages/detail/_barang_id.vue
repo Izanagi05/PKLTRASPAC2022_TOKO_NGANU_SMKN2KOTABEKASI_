@@ -113,6 +113,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+<<<<<<< HEAD
       prm: this.$route.params,
       detailbarang: null,
       userid: null,
@@ -120,6 +121,22 @@ export default {
       dtlbrg: {
         barang_id: "",
         kauntitas: 1,
+=======
+      prm:this.$route.params,
+      detailbarang:[],
+      userid:null,
+      // dtlbrg:{
+      //   toko_id:'',
+      //   barang_id:'',
+      //   kuantitas:1,
+      //   varian_id:1
+      // },
+      detbarker:{
+        user_id:'',
+        barang_id:1,
+        kuantitas:1,
+        varian_id:1
+>>>>>>> b3eefa9183259060c1daffe4bd1da136439569d3
       },
       no_admin: "+62-815-6315-1038",
     };
@@ -134,6 +151,7 @@ export default {
           this.detailbarang = respon.data;
         });
     },
+<<<<<<< HEAD
     tambahkeranjang(dtlbrg) {
       axios
         .post(
@@ -156,6 +174,33 @@ export default {
       window.open(
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );
+=======
+    pilihanvarian(varian){
+      this.pilihan = varian.varian_id
+      let namasetvar = varian.nama
+      // this.$toast.success("berhasil pilih varian "+ namasetvar);
+      alert('varian pilihan :' + namasetvar)
+      // if(this.setpil===0){
+      //   this.$cookies.set('cookiekeranjang', {dataa: this.pilihan})
+      //   this.setpil=1
+      // }else if(this.setpil===1){
+      //   this.setpil=0
+      //   this.$cookies.remove('cookiekeranjang',  {dataa: this.pilihan})
+      //   this.$cookies.set('cookiekeranjang', this.pilihan)
+      // }
+      // console.log(varian.varian_id)
+    },
+    tambahkeranjang(){
+      // console.log(dtlbrg)
+     this.detbarker.user_id=this.userid,
+        this.detbarker.barang_id=this.prm.barang_id,
+        this.detbarker.kuantitas=1,
+        this.detbarker.varian_id=this.pilihan
+      axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, this.detbarker).then(respon=>{
+        console.log(respon)
+      })
+      console.log(this.pilihan)
+>>>>>>> b3eefa9183259060c1daffe4bd1da136439569d3
     },
   },
 

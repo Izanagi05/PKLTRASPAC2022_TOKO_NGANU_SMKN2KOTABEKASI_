@@ -29,7 +29,7 @@ class Barang extends Model
     // public function BarangKeranjang(){
     //     return $this->hasMany(Keranjang_User::class);
     // }
-    public function BarangVarian(){
+    public function barangVarian(){
         return $this->hasMany(Varian::class, 'barang_id');
     }
 }
