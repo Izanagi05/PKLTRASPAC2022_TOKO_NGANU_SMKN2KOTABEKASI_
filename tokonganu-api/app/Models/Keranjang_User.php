@@ -14,11 +14,15 @@ class Keranjang_User extends Model
     protected $fillable = [
         'user_id',
         'barang_id',
+        'varian_id',
         'kuantitas',
     ];
 
     public function KeranjangUser(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function keranjangVarian(){
+        return $this->belongsTo(Varian::class, 'varian_id');
     }
     public function KeranjangBarang(){
         return $this->belongsTo(Barang::class, 'barang_id');

@@ -121,10 +121,17 @@ export default {
       prm:this.$route.params,
       detailbarang:[],
       userid:null,
-      dtlbrg:{
-        toko_id:'',
-        barang_id:'',
-        kauntitas:1
+      // dtlbrg:{
+      //   toko_id:'',
+      //   barang_id:'',
+      //   kuantitas:1,
+      //   varian_id:1
+      // },
+      detbarker:{
+        user_id:'',
+        barang_id:1,
+        kuantitas:1,
+        varian_id:1
       },
       Toko:[],
       gettk:'',
@@ -140,18 +147,26 @@ export default {
     },
     pilihanvarian(varian){
       this.pilihan = varian.varian_id
-      if(this.setpil===0){
-        this.$cookies.set('cookiekeranjang', {dataa: this.pilihan})
-        this.setpil=1
-      }else if(this.setpil===1){
-        this.setpil=0
-        this.$cookies.remove('cookiekeranjang',  {dataa: this.pilihan})
-        this.$cookies.set('cookiekeranjang', this.pilihan)
-      }
+      let namasetvar = varian.nama
+      // this.$toast.success("berhasil pilih varian "+ namasetvar);
+      alert('varian pilihan :' + namasetvar)
+      // if(this.setpil===0){
+      //   this.$cookies.set('cookiekeranjang', {dataa: this.pilihan})
+      //   this.setpil=1
+      // }else if(this.setpil===1){
+      //   this.setpil=0
+      //   this.$cookies.remove('cookiekeranjang',  {dataa: this.pilihan})
+      //   this.$cookies.set('cookiekeranjang', this.pilihan)
+      // }
       // console.log(varian.varian_id)
     },
-    tambahkeranjang(dtlbrg){
-      axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, dtlbrg).then(respon=>{
+    tambahkeranjang(){
+      // console.log(dtlbrg)
+     this.detbarker.user_id=this.userid,
+        this.detbarker.barang_id=this.prm.barang_id,
+        this.detbarker.kuantitas=1,
+        this.detbarker.varian_id=this.pilihan
+      axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, this.detbarker).then(respon=>{
         console.log(respon)
       })
       console.log(this.pilihan)
