@@ -24,14 +24,18 @@ class TokoUserController extends Controller
         $user = $id;
         $validatedData = $request->validate([
             'user_id'=>'',
-            'nama'=> 'required',
-            'deskripsi' => 'required',
-            'alamat'=> 'required',
-            'no_telepon'=> 'required',
-            'logo' =>'required',
+            'nama'=> '',
+            'deskripsi' => '',
+            'alamat'=> '',
+            'no_telepon'=> '',
+            'logo' =>'',
         ]);
 
         $validatedData['user_id'] = $user;
+        // if($request->file('logo')){
+
+        //     $validatedData['logo'] =  $request->file('logo')->store('logotoko');
+        // }
         // dd($validatedData['user_id']);
         Toko::create($validatedData);
     }
@@ -60,16 +64,19 @@ class TokoUserController extends Controller
                 // unlink('storage/public/post-images'.Toko::where('id', $id)->logo);
                 Storage::delete(Toko::find($id)->logo);
             }
-            $validasi['logo'] = $request->file('logo')->store('public/logotoko');
+            $validasi['logo'] = $request->file('logo')->store('logotoko');
         }
         $data = Toko::where('toko_id', $id)->update($validasi);
 
         return response()->json($data, 200);
     }
         public function deletetoko($id ){
-            $data = Toko::find($id);
-            $data->Barang()->delete();
-            $data->delete();
+            // $data = Toko::find($id);
+            if(!empty(Toko::find($id)->logo)) {
+                Storage::delete(Toko::find($id)->logo);
+            }
+            $data = Toko::where('toko_id', $id)->delete();
+            // $data->Barang()->delete();
 
             return response()->json($data, 200);
         }

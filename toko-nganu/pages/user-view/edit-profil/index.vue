@@ -13,7 +13,12 @@
           <v-col cols="6">
             <div class="foto-profil pl-5">
               <v-avatar width="270px" height="270px">
-                <!-- <img  :src="'storage/'+editprofil.foto_profil"/> -->
+                <img
+                  v-if="editprofil.foto_profil"
+                  :src="
+                    'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
+                  "
+                />
                 <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
             </div>
@@ -21,6 +26,9 @@
               <v-btn
                 class="profil-btn rounded-pill font-weight-medium"
                 width="310px"
+                outlined
+                rounded
+                height="40px"
                 @click="dialog = true"
                 style="font-size: 24px; font-family: 'Poppins', sans-serif"
               >
@@ -39,6 +47,7 @@
                       ></v-img>
                     </div>
                     <input
+                      accept="image/*"
                       class="file-input pt-6"
                       :rules="rules"
                       type="file"
@@ -48,18 +57,20 @@
                       v-on:change="upload"
                     />
                   </v-card-text>
-                    <v-card-actions>
-                      <div class="btn-dialog pl-4 pb-4">
-                        <v-row>
-                          <v-col cols="6">
-                            <v-btn @click="dialog = false">Batal</v-btn>
-                          </v-col>
-                          <v-col cols="6">
-                            <v-btn type="submit" @click="konfirmfoto" >Pilih</v-btn>
-                          </v-col>
-                        </v-row>
-                      </div>
-                    </v-card-actions>
+                  <v-card-actions>
+                    <div class="btn-dialog pl-4 pb-4">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn @click="dialog = false">Batal</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn type="submit" @click="konfirmfoto"
+                            >Pilih</v-btn
+                          >
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-card-actions>
                 </v-card>
               </v-dialog>
             </div>
@@ -151,7 +162,7 @@ export default {
         foto_profil: null,
         email: null,
       },
-      foto:null,
+      foto: null,
       userid: null,
       dialog: false,
       preview: null,
@@ -163,7 +174,7 @@ export default {
             !value ||
             !value.length ||
             value[0].size < 2000000 ||
-            "Avatar size should be less than 2 MB!"
+            "Foto tidak boleh lebih dari 2 MB!"
           );
         },
       ],
@@ -178,52 +189,45 @@ export default {
         });
     },
     upload(foto) {
-    let files = foto.target.files[0];
-    this.datafoto = files;
-    let fotobaru = foto.name;
-    console.log(this.editprofil.foto_profil)
-    this.preview = URL.createObjectURL(files);
-    this.tampungfoto = fotobaru;
-    // this.editprofil.foto_profil = fotobaru;
-  },
+      let files = foto.target.files[0];
+      this.datafoto = files;
+      let fotobaru = foto.name;
+      console.log(files);
+      this.preview = URL.createObjectURL(files);
+      this.tampungfoto = fotobaru;
+    },
 
     backprofil() {
       this.$router.push("/user-view");
     },
 
-    konfirmfoto(){
-      this.dialog=false;
+    konfirmfoto() {
+      this.dialog = false;
       // this.editprofil.foto_profil = this.foto
     },
     updateuser() {
-      let formData = new FormData()
-    formData.append('foto_profil', this.datafoto)
-//       const json = JSON.stringify({
-//     nama: this.editprofil.nama,
-//     no_telepon: this.editprofil.no_telepon,
-//     email: this.editprofil.email,
-// });
+      let formData = new FormData();
+      formData.append("foto_profil", this.datafoto);
 
-  //  formData.append('User',json)
-      // this.editprofil.foto_profil = tes;
-      // console.log(this.editprofil.foto_profil)
       axios
         .post(
-          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid, formData, {
-            'content-type': 'multipart/form-data'
+          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
+          formData,
+          {
+            "content-type": "multipart/form-data",
           }
         )
-        // 'Content-Type': 'multipart/form-data;  charset=utf-8; boundary='+ Math.random().toString().substr(2)
         .then((respon) => {
           console.log(respon);
         });
       axios
         .post(
-          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid, this.editprofil, {
-            'content-type': 'multipart/form-data'
+          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
+          this.editprofil,
+          {
+            "content-type": "multipart/form-data",
           }
         )
-        // 'Content-Type': 'multipart/form-data;  charset=utf-8; boundary='+ Math.random().toString().substr(2)
         .then((respon) => {
           console.log(respon);
         });

@@ -8,24 +8,37 @@
             Profil Pengguna
           </div>
           <div class="menu">
-            <NuxtLink to="/" class="my-link black--text  text-decoration-none" >
+            <NuxtLink
+              to="/user-view"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <div v-if="cekuserrole =='Admin'">
-              <NuxtLink to="/halaman-admin" class="my-link black--text  text-decoration-none" >
-              <v-icon large>mdi-account-tie</v-icon> Admin
-            </NuxtLink>
+            <div v-if="cekuserrole == 'Admin'">
+              <NuxtLink
+                to="/halaman-admin"
+                class="my-link black--text text-decoration-none pt-6 pb-6"
+              >
+                <v-icon large>mdi-account-tie</v-icon> Admin
+              </NuxtLink>
             </div>
-            <div v-else>
-
-            </div>
-            <NuxtLink to="/user-view/toko-user" class="my-link black--text  text-decoration-none">
+            <div v-else></div>
+            <NuxtLink
+              to="/user-view/toko-user"
+              class="my-link black--text text-decoration-none pt-6"
+            >
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
-            <NuxtLink to="/user-view/tambah-toko" class="my-link black--text  text-decoration-none">
+            <NuxtLink
+              to="/user-view/tambah-toko"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large></v-icon> Buka Toko
             </NuxtLink>
-            <NuxtLink to="/user-view/toko-user/tambah-barang" class="my-link black--text  text-decoration-none">
+            <NuxtLink
+              to="/user-view/toko-user/tambah-barang"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large></v-icon> tambah barang
             </NuxtLink>
           </div>
@@ -38,14 +51,21 @@
         <div class="pembatas"></div>
         <div class="profil">
           <div class="navigasi">
-            <NuxtLink to="/" class="my-link text-decoration-none black--text" > Home </NuxtLink
+            <NuxtLink to="/" class="my-link text-decoration-none black--text">
+              Home </NuxtLink
             ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
           <v-row class="isi">
             <v-col>
               <div class="foto-profil">
                 <v-avatar width="270px" height="270px">
-                  <v-img :src="require('~/assets/barang.png')"></v-img>
+                  <!-- {{ dataprofil.foto_profil }} -->
+                  <img
+                    v-if="dataprofil.foto_profil"
+                    :src="
+                      'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
+                    "
+                  />
                 </v-avatar>
               </div>
               <div class="btn-card pl-1 pb-1">
@@ -75,7 +95,7 @@
                   <p>Alamat</p>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <p>{{dataprofil.nama}}</p>
+                  <p>{{ dataprofil.nama }}</p>
                 </v-col>
               </v-row>
               <v-row dense justify="center">
@@ -91,7 +111,7 @@
                 </v-col>
                 <v-col cols="12" sm="6">
                   <p>{{ dataprofil.no_telepon }}</p>
-                  <p>{{dataprofil.email}}</p>
+                  <p>{{ dataprofil.email }}</p>
                 </v-col>
               </v-row>
             </v-col>
@@ -102,42 +122,43 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   middleware: "middlewareku",
   data() {
     return {
-      dataprofil:{
-        nama:null,
-        no_telepon:null,
-        email:null
+      dataprofil: {
+        nama: null,
+        no_telepon: null,
+        email: null,
       },
-      cekuserrole:null,
-      userid:null,
-    }
+      cekuserrole: null,
+      userid: null,
+    };
   },
 
   methods: {
-    getuser(){
-      axios.get('http://127.0.0.1:8000/api/getuserlogin/'+ this.userid).then(respon=>{
-        this.dataprofil=respon.data
-      })
+    getuser() {
+      axios
+        .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
+        .then((respon) => {
+          this.dataprofil = respon.data;
+        });
     },
     logout() {
       this.$store.dispatch("users/logout");
     },
-    pushprofil(){
-      this.$router.push('/user-view/edit-profil')
-    }
+    pushprofil() {
+      this.$router.push("/user-view/edit-profil");
+    },
   },
 
   created() {
-    const usid = this.$cookies.get('cookieku')
-    this.userid=usid.data.id
-    this.getuser()
-    this.cekuserrole = usid.role
-
+    const usid = this.$cookies.get("cookieku");
+    this.userid = usid.data.id;
+    this.getuser();
+    this.cekuserrole = usid.role;
   },
 };
 </script>

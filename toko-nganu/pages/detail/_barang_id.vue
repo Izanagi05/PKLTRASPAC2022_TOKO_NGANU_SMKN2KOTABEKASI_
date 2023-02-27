@@ -48,6 +48,7 @@
                     width="287px"
                     x-large
                     outlined
+                    @click="nomer()"
                     style="background: #2f432d; color: white; size: 105px"
                     >Beli Sekarang</v-btn
                   >
@@ -115,10 +116,12 @@ export default {
       prm: this.$route.params,
       detailbarang: null,
       userid: null,
+      price: 1999999,
       dtlbrg: {
         barang_id: "",
         kauntitas: 1,
       },
+      no_admin: "+62-815-6315-1038",
     };
   },
   methods: {
@@ -140,6 +143,19 @@ export default {
         .then((respon) => {
           console.log(respon);
         });
+    },
+    nomer() {
+      let no = this.no_admin;
+      let pesan =
+        "Hi!%20Saya%20ingin%20memesan%20" +
+        this.detailbarang +
+        "%20sebanyak%20" +
+        this.dtlbrg.kauntitas +
+        "%20dengan%20harga%20Rp." +
+        this.price;
+      window.open(
+        "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
+      );
     },
   },
 

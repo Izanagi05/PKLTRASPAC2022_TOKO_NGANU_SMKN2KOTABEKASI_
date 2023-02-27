@@ -99,8 +99,8 @@ export default {
         .post("http://127.0.0.1:8000/api/registrasi", this.dataregist)
         .then((respon) => {
           this.data = respon.data;
+          window.location.replace('/')
         });
-        window.location.replace('/')
     },
   },
 };

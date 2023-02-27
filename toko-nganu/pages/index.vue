@@ -38,7 +38,7 @@
                         width="204px"
                       ></v-img>
                       <v-row>
-                        <v-col cols="5" class="">
+                        <v-col cols="3" class="">
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -89,7 +89,7 @@
                         width="204px"
                       ></v-img>
                       <v-row>
-                        <v-col cols="5" class="">
+                        <v-col cols="3" class="">
                           <div class="title-product f14sb pl-1">
                             {{ barang.nama }}
                           </div>
