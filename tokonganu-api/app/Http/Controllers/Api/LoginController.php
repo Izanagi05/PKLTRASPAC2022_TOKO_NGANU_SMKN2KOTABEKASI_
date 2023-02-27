@@ -34,13 +34,7 @@ class LoginController extends Controller
         if ($pass == $passdb->password ){
 
             $data = User::select('nama', 'no_telepon', 'foto_profil', 'id')->where('email', $request->email)->first();
-            // dd($data);
-            // $request->authenticate();
-            // $user = auth()->user();
-            // $token = $data->createToken('auth_token')->plainTextToken;
-            // return (new UserResource($user))->additional([
-            //     'token' => $user->createToken('myAppToken')->plainTextToken,
-            // ]);
+
             $role= User::where('email', $request->email)->first();
             // foreach ($role as $key => $rl) {
 
