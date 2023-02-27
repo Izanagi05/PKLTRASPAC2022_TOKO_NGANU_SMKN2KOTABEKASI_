@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function getallUser(){
-        $data = User::get();
-        return response()->json(['data'=>$data], 200);
-    }
+
+
 
     public function getuserlogin($id){
         $data = User::where('id', $id)->first();
@@ -21,8 +19,8 @@ class UserController extends Controller
     }
     public function updateuserlogin(Request $request, $id){
         $rules = [
-            'nama'=>'required',
-            'email'=>'required|email:dns',
+            'nama'=>'',
+            'email'=>'',
             'no_telepon'=>'',
             'foto_profil'=>''
         ];
@@ -31,17 +29,25 @@ class UserController extends Controller
         //     $request->file('foto_profil')->move('uprofil/', $request->file('foto_profil')->getClientOriginalName());
         //     $data->foto_profil= $request->file('foto_profil')->getClientOriginalName();
         //     $data->save();
-
+        // dd(validasi)
+        // $path= public_path('fotoprofil');
+        // if(!empty($))
         if($request->file('foto_profil')) {
             // dd($request->oldImage);
-            if($request->foto_profil) {
-                Storage::delete($request->foto_profil);
+            // return $request->foto_profil;
+            // $image = time().'.'.$request->foto_profil->extension();
+            if(!empty(User::find($id)->foto_profil)) {
+                // unlink('storage/public/post-images'.User::where('id', $id)->foto_profil);
+                Storage::delete(User::find($id)->foto_profil);
+                // unlink(storage_path('public/post-images'.User::find($id)->foto_profil));
+                // dd("tes");
+
             }
             $validasi['foto_profil'] = $request->file('foto_profil')->store('public/post-images');
         }
         $data = User::where('id', $id)->update($validasi);
 
-        return response()->json($data, 200);
+        // return response()->json($data, 200);
     }
 
 

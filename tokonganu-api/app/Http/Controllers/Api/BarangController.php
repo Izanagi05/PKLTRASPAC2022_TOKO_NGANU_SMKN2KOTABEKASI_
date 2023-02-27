@@ -35,6 +35,19 @@ class BarangController extends Controller
         return response()->json($data);
 
     }
+    public function getbarangvariantokobyid($id){
+        $data = Barang::where('barang_id', $id)->get();
+        $data = Barang::where('barang_id', $id)->get();
+
+        foreach ($data as $key => $dtv) {
+
+            $data[$key]['toko'] =$dtv->Toko;
+                $data[$key]['barang_varian'] =$dtv->BarangVarian;
+        }
+        return response()->json($data);
+
+    }
+
 
     public function createbarang(Request $request, $id){
         $tk = $id;

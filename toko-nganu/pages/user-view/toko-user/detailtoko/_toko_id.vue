@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     detail toko
-{{prm.toko_id  }}
+<!-- {{prm.toko_id  }} -->
 
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -41,6 +41,12 @@
     <template v-slot:[`item.aksi`]="{ item }">
                     <v-btn class="mx-2"  fab small  @click="ubahbarang(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark >mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn class="mx-2"  fab small  @click="detailbarang(item)" style="margin:15px 15px 15px 0px;">
+                        <v-icon dark >mdi-magnify</v-icon>
+                    </v-btn>
+                    <v-btn class="mx-2"   small  @click="detailfotobarang(item)" style="margin:15px 15px 15px 0px;">
+                        info foto barang
                     </v-btn>
           <v-btn class="mx-2" fab small  @click="hapusbarang(item)" style="background:#FF2A30;">
                         <v-icon dark>mdi-delete</v-icon>
@@ -93,7 +99,12 @@ export default {
         this.Toko = respon.data
       })
     },
-
+    detailbarang(item){
+    this.$router.push(`/user-view/toko-user/detailtoko/detailbarang/varianbarang/${item.barang_id}` )
+   },
+    detailfotobarang(item){
+    this.$router.push(`/user-view/toko-user/detailtoko/detailbarang/fotobarang/${item.barang_id}` )
+   },
     ubahbarang(item){
     this.indexnya = this.Toko.indexOf(item)
     this.detaildatadialog = Object.assign({}, item)

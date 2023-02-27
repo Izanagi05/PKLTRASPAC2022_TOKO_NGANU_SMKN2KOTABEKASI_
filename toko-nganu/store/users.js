@@ -2,6 +2,7 @@
 export const state = () =>{
   return {
     authenticated:null,
+    cekuser:null,
     // getcookie: null
 
   }
@@ -13,8 +14,9 @@ export const mutations = {
 
   msetcookie(state, payload){
     state.authenticated = payload
-
-
+  },
+  msetcookiecekuser(state, payload){
+    state.cekuser = payload
   }
 }
 export const actions = {
@@ -26,6 +28,16 @@ export const actions = {
     this.$cookies.set('cookieku', payload)
     commit('msetcookie')
     window.location.replace('/')
+    // return redirect('/')
+  },
+  logincekuser({commit}, payload){
+    this.$cookies.set('cekuserlogin', payload)
+    commit('msetcookiecekuser')
+    // return redirect('/')
+  },
+  resetlogincekuser({commit}){
+    this.$cookies.remove('cekuserlogin')
+    commit('msetcookiecekuser')
     // return redirect('/')
   },
   logout({commit}){

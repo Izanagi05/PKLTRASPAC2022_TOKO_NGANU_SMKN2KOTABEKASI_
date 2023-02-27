@@ -75,6 +75,8 @@ export default {
     dtk: null,
     dtr: null,
     password: null,
+    cekketusr: null,
+
     emailRules: [
       (value) => {
         if (value?.length > 0) return true;
@@ -105,13 +107,24 @@ export default {
             password: this.password,
           })
           .then((respon) => {
-            this.ket = respon.data;
-            this.$store.dispatch("users/login", this.ket);
+            this.ket = respon.data
+            this.cekketusr = respon.data.message;
+
+
+            this.$store.dispatch("users/logincekuser", this.cekketusr);
+            if( this.cekketusr === "login gagal"){
+              this.$store.dispatch("users/resetlogincekuser");
+              alert('Isi email atau password dengan benar')
+            }else{
+              this.$toast.success("Login berhasil");
+              this.$store.dispatch("users/resetlogincekuser");
+              this.$store.dispatch("users/login", this.ket);
+            }
           });
-        this.$toast.success("Login berhasil");
       }
     },
   },
+
 
   components: { NavbarPolos },
 };

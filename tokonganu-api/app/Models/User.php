@@ -56,7 +56,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
     public function UserToko(){
-        return $this->hasMany(Toko::class);
+        return $this->hasMany(Toko::class, 'toko_id');
     }
     public function UserAlamat(){
         return $this->hasMany(Alamat_User::class);
