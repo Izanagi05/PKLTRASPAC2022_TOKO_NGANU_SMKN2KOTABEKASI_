@@ -41,6 +41,7 @@ Route::get('/keranjangbyuser/{id}', [KeranjangUserController::class, 'keranjangb
 Route::get('/barangvariankeranjang/{id}', [KeranjangUserController::class, 'barangvariankeranjang']);
 Route::post('/addkeranjangbyuser/{id}', [KeranjangUserController::class, 'addkeranjangbyuser']);
 Route::delete('/deletekeranjang/{id}', [KeranjangUserController::class, 'deletekeranjang']);
+Route::get('/barangvarianharga/{id}/varian/{varian_id}', [KeranjangUserController::class, 'barangvarianharga']);
 
 Route::post('/updatetoko/{id}', [TokoUserController::class, 'updatetoko']);
 Route::delete('/hapustoko/{id}', [TokoUserController::class, 'deletetoko']);
@@ -58,6 +59,7 @@ Route::get('/getbarangvariantokobyid/{id}', [BarangController::class, 'getbarang
 
 
 Route::get('/getvarianbarang/{id}', [VarianBarangController::class, 'getbarangvarian']);
+Route::get('/getvarian/{id}', [VarianBarangController::class, 'getvarian']);
 Route::post('/createvarianbarang/{id}', [VarianBarangController::class, 'createvarianbarang']);
 Route::post('/updatevarianbarang/{id}', [VarianBarangController::class, 'updatevarianbarang']);
 Route::delete('/deletevarianbarang/{id}', [VarianBarangController::class, 'deletevarianbarang']);

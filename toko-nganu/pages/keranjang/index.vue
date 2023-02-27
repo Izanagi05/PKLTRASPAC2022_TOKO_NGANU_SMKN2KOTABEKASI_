@@ -31,9 +31,11 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="cart-content" v-for="(user, index) in datakeranjang" :key="index">
-                <div v-for="(dataa, index) in user.user_keranjang" :key="index">
+              <!-- {{ datakeranjang.user_keranjang.varian_id }} -->
+              <div class="cart-content" >
+                <div v-for="(dataa, index) in datakeranjang.user_keranjang" :key="index">
                   <v-row>
+                    <!-- {{ dataa.varian_id }} -->
                     <div class="cart-card d-flex">
                       <v-col>
                         <v-img
@@ -43,7 +45,12 @@
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                         masih id barang:{{dataa.barang_id}}
+                          barang:{{dataa.barang_id}}
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium">
+                          varian:{{dataa.varian_id}}
                         </div>
                       </v-col>
                       <v-col>
@@ -134,32 +141,26 @@ export default {
       dialogDelete:false,
       price: 100000,
       pricetotal: 0,
-      datakeranjang: {
-        barang_id:'',
-        kuantitas:'',
-      },
+      datakeranjang: {},
       // editedIndex:0,
       detaildatadialog: {
         keranjang_user_id:'',
         barang_id:'',
+        varian_id:'',
         kuantitas:'',
       },
       userid: null,
 
 
-      tes: [
-        { title: "tes tes tes1", kuantitas: 1 },
-        { title: "tes tes tes2", kuantitas: 0 },
-        { title: "tes tes tes3", kuantitas: 0 },
-        { title: "tes tes tes4", kuantitas: 0 },
-        { title: "tes tes tes5", kuantitas: 0 },
-        { title: "tes tes tes6", kuantitas: 0 },
-        { title: "tes tes tes7", kuantitas: 0 },
-        { title: "tes tes tes7", kuantitas: 0 },
-      ],
     };
   },
   methods: {
+    gethargavarian(){
+      // console.log(this.datakeranjang);
+      // axios.get('http://127.0.0.1:8000/api/barangvarianharga/'+this.datakeranjang.barang_id+ this.datakeranjang.varian_id).then(respon=>{
+      //   console.log(respon.data)
+      // })
+    },
     getkeranjang(){
       axios.get('http://127.0.0.1:8000/api/keranjangbyuser/'+this.userid).then(respon=>{
         this.datakeranjang = respon.data
@@ -167,7 +168,6 @@ export default {
     },
     countplus(dataa) {
       dataa.kuantitas++;
-
       this.pricetotal = parseInt(this.tes.kuantitas) * parseInt(this.price);
     },
     countmin() {
@@ -190,7 +190,6 @@ export default {
        location.reload()
         alert('berhasil hapus')
         })
-        // this.datakeranjang.splice(this.editedIndex, 1)
         this.closeDelete()
 
   },
@@ -204,6 +203,7 @@ export default {
   created() {
     const usid = this.$cookies.get('cookieku')
     this.userid = usid.data.id
+    this.gethargavarian()
     this.getkeranjang()
   },
 };

@@ -22,7 +22,6 @@ class VarianBarangController extends Controller
     }
     public function updatevarianbarang(Request $request, $id ){
         $data = Varian::where('varian_id', $id)->update([
-            // "id" => $request->id,
             "nama" => $request->nama,
             "harga" => $request->harga,
             "stok" => $request->stok,
@@ -37,10 +36,12 @@ class VarianBarangController extends Controller
     public function getbarangvarian($id){
         $data = Varian::where('barang_id', $id)->get();
 
-        // foreach ($data as $key => $dt) {
+        return response()->json($data);
 
-        //     $data[$key]['barang_varian'] =$dt->BarangVarian;
-        // }
+    }
+    public function getvarian($id){
+        $data = Varian::where('varian_id', $id)->get();
+
         return response()->json($data);
 
     }
