@@ -57,7 +57,7 @@ export default {
     },
     tbhbarang(){
       axios.post('http://127.0.0.1:8000/api/createbarang/'+ this.databarang.toko_id, this.databarang).then(respon=> {
-        this.$router.push('/toko-user')
+        this.$router.push('/user-view/toko-user')
         console.log(respon)
       })
     }

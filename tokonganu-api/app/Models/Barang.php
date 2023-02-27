@@ -24,12 +24,12 @@ class Barang extends Model
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
     public function BarangFoto(){
-        return $this->hasMany(Foto_Barang::class);
+        return $this->hasMany(Foto_Barang::class, 'barang_id');
     }
     // public function BarangKeranjang(){
     //     return $this->hasMany(Keranjang_User::class);
     // }
     public function BarangVarian(){
-        return $this->hasMany(Varian::class);
+        return $this->hasMany(Varian::class, 'barang_id');
     }
 }

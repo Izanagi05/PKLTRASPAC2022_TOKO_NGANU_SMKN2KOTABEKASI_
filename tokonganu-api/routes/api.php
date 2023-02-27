@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\KeranjangUserController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\VarianBarangController;
+use App\Http\Controllers\Api\FotoBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +27,18 @@ use App\Http\Controllers\Api\KategoriController;
 Route::post('/registrasi', [RegisterController::class, 'regisstore']);
 Route::post('/login', [LoginController::class, 'postlogin']);
 
+//<admin>
+Route::get('/getalluser', [AdminController::class, 'getalluser']);
+Route::get('/getalltoko', [AdminController::class, 'getalltoko']);
+Route::delete('/deleteuser/{id}', [AdminController::class, 'deleteuser']);
+//</admin>
 
 Route::get('/getuserlogin/{id}', [UserController::class, 'getuserlogin']);
 Route::post('/updateuserlogin/{id}', [UserController::class, 'updateuserlogin']);
 Route::get('/gettokobyuserlogin/{id}', [UserController::class, 'gettokobyuserlogin']);
 
 Route::get('/keranjangbyuser/{id}', [KeranjangUserController::class, 'keranjangbyuser']);
+Route::get('/barangvariankeranjang/{id}', [KeranjangUserController::class, 'barangvariankeranjang']);
 Route::post('/addkeranjangbyuser/{id}', [KeranjangUserController::class, 'addkeranjangbyuser']);
 Route::delete('/deletekeranjang/{id}', [KeranjangUserController::class, 'deletekeranjang']);
 
@@ -37,7 +46,6 @@ Route::post('/updatetoko/{id}', [TokoUserController::class, 'updatetoko']);
 Route::delete('/hapustoko/{id}', [TokoUserController::class, 'deletetoko']);
 Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
 Route::get('/gettoko/{id}', [TokoUserController::class, 'getbarangbytokouser']);
-Route::get('/getalltoko', [TokoUserController::class, 'getalltoko']);
 
 
 Route::post('/createbarang/{id}', [BarangController::class, 'createbarang']);
@@ -46,8 +54,22 @@ Route::delete('/deletebarang/{id}', [BarangController::class, 'deletebarang']);
 Route::get('/getbarang/{id}', [BarangController::class, 'getbarang']);
 Route::get('/getallbarangtoko', [BarangController::class, 'getallbarangtoko']);
 Route::get('/getbarangtokobyid/{id}', [BarangController::class, 'getbarangtokobyid']);
-Route::get('/getkategori/{id}', [KategoriController::class, 'getkategorbybarang']);
+Route::get('/getbarangvariantokobyid/{id}', [BarangController::class, 'getbarangvariantokobyid']);
 
+
+Route::get('/getvarianbarang/{id}', [VarianBarangController::class, 'getbarangvarian']);
+Route::post('/createvarianbarang/{id}', [VarianBarangController::class, 'createvarianbarang']);
+Route::post('/updatevarianbarang/{id}', [VarianBarangController::class, 'updatevarianbarang']);
+Route::delete('/deletevarianbarang/{id}', [VarianBarangController::class, 'deletevarianbarang']);
+
+
+Route::get('/getfotobarang/{id}', [FotoBarangController::class, 'getfotobarang']);
+Route::post('/createfotobarang/{id}', [FotoBarangController::class, 'createfotobarang']);
+Route::post('/updatefotobarang/{id}', [FotoBarangController::class, 'updatefotobarang']);
+Route::delete('/deletefotobarang/{id}', [FotoBarangController::class, 'deletefotobarang']);
+
+
+Route::get('/getkategori/{id}', [KategoriController::class, 'getkategorbybarang']);
 Route::get('/getallkategori', [KategoriController::class, 'getallkategori']);
 // Route::get('/user', [UserController::class, 'getuser']);
 
