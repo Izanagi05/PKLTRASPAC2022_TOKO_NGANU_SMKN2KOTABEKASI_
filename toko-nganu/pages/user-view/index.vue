@@ -8,19 +8,28 @@
             Profil Pengguna
           </div>
           <div class="menu">
-            <NuxtLink to="/" class="my-link black--text  text-decoration-none" >
+            <NuxtLink to="/" class="my-link black--text text-decoration-none">
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <NuxtLink to="/" class="my-link black--text  text-decoration-none" >
+            <NuxtLink to="/" class="my-link black--text text-decoration-none">
               <v-icon large>mdi-account-tie</v-icon> Admin
             </NuxtLink>
-            <NuxtLink to="/toko-user" class="my-link black--text  text-decoration-none">
+            <NuxtLink
+              to="/toko-user"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
-            <NuxtLink to="/user-view/tambah-toko" class="my-link black--text  text-decoration-none">
+            <NuxtLink
+              to="/user-view/tambah-toko"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large></v-icon> Buka Toko
             </NuxtLink>
-            <NuxtLink to="/user-view/tambah-barang" class="my-link black--text  text-decoration-none">
+            <NuxtLink
+              to="/user-view/crud"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large></v-icon> tambah barang
             </NuxtLink>
           </div>
@@ -33,7 +42,8 @@
         <div class="pembatas"></div>
         <div class="profil">
           <div class="navigasi">
-            <NuxtLink to="/" class="my-link text-decoration-none black--text" > Home </NuxtLink
+            <NuxtLink to="/" class="my-link text-decoration-none black--text">
+              Home </NuxtLink
             ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
           <v-row class="isi">
@@ -70,7 +80,7 @@
                   <p>Alamat</p>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <p>{{dataprofil.nama}}</p>
+                  <p>{{ dataprofil.nama }}</p>
                 </v-col>
               </v-row>
               <v-row dense justify="center">
@@ -86,7 +96,7 @@
                 </v-col>
                 <v-col cols="12" sm="6">
                   <p>{{ dataprofil.no_telepon }}</p>
-                  <p>{{dataprofil.email}}</p>
+                  <p>{{ dataprofil.email }}</p>
                 </v-col>
               </v-row>
             </v-col>
@@ -97,39 +107,41 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   middleware: "middlewareku",
   data() {
     return {
-      dataprofil:{
-        nama:null,
-        no_telepon:null,
-        email:null
+      dataprofil: {
+        nama: null,
+        no_telepon: null,
+        email: null,
       },
-      userid:null,
-    }
+      userid: null,
+    };
   },
 
   methods: {
-    getuser(){
-      axios.get('http://127.0.0.1:8000/api/getuserlogin/'+ this.userid).then(respon=>{
-        this.dataprofil=respon.data
-      })
+    getuser() {
+      axios
+        .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
+        .then((respon) => {
+          this.dataprofil = respon.data;
+        });
     },
     logout() {
       this.$store.dispatch("users/logout");
     },
-    pushprofil(){
-      this.$router.push('/user-view/edit-profil')
-    }
+    pushprofil() {
+      this.$router.push("/user-view/edit-profil");
+    },
   },
 
   created() {
-    const usid = this.$cookies.get('cookieku')
-    this.userid=usid.data.id
-    this.getuser()
+    const usid = this.$cookies.get("cookieku");
+    this.userid = usid.data.id;
+    this.getuser();
   },
 };
 </script>

@@ -16,10 +16,15 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-        <div >
+        <div>
           <div class="product-card">
-            <v-row class="p-0" >
-              <v-col class="card-col p-0" width="204px" v-for="(brg, index) in allbarang" :key="index">
+            <v-row class="p-0">
+              <v-col
+                class="card-col p-0"
+                width="204px"
+                v-for="(brg, index) in allbarang"
+                :key="index"
+              >
                 <v-card width="204px">
                   <v-img
                     :src="require('~/assets/barang.png')"
@@ -61,7 +66,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -77,9 +81,9 @@ export default {
       nama: null,
       tokouser: null,
       Toko: null,
-      barangparam:null,
-      allbarang:{
-      barang_id:'',
+      barangparam: null,
+      allbarang: {
+        barang_id: "",
       },
     };
   },
@@ -92,16 +96,14 @@ export default {
         });
     },
     getallbarang() {
-      axios
-        .get("http://127.0.0.1:8000/api/getallbarangtoko" )
-        .then((respon) => {
-          this.allbarang = respon.data;
-        });
+      axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
+        this.allbarang = respon.data;
+      });
     },
-    todetail(brg){
+    todetail(brg) {
       // console.log(brg.barang_id)
-      this.$router.push(`/detail/${brg.barang_id}`)
-    }
+      this.$router.push(`/detail/${brg.barang_id}`);
+    },
   },
 
   // methods: {
