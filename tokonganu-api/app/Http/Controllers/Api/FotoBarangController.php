@@ -25,7 +25,7 @@ class FotoBarangController extends Controller
         ]);
 
         $validatedData['barang_id'] = $tk;
-        $validatedData['file'] =  $request->file('file')->store('public/fotobarang');;
+        $validatedData['file'] =  $request->file('file')->store('fotobarang');;
         // dd($validatedData['user_id']);
         Foto_Barang::create($validatedData);
 
@@ -43,7 +43,7 @@ class FotoBarangController extends Controller
             if(!empty(Foto_Barang::find($id)->file)) {
                 Storage::delete(Foto_Barang::find($id)->file);
             }
-            $validasi['file'] = $request->file('file')->store('public/fotobarang');
+            $validasi['file'] = $request->file('file')->store('fotobarang');
 
             $data = Foto_Barang::where('foto_barang_id', $id)->update($validasi);
             return response()->json($data, 200);

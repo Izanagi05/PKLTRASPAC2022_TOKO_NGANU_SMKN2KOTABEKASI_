@@ -37,216 +37,214 @@
       <div v-for="(asr, index) in alluser" :key="index">
         {{ asr.nama }}
       </div>
-      <div v-for="(atr, index) in alltoko" :key="index">
-        {{ atr.nama }} ====== <v-btn @click="hapustoko(atr)">hapus</v-btn>
-      </div>
-      <!-- <v-text-field
+    </div>
+    <div v-for="(atr, index) in alltoko" :key="index">
+      {{ atr.nama }} ====== <v-btn @click="hapustoko(atr)">hapus</v-btn>
+    </div>
+    <!-- <v-text-field
             class="search"
             rounded
             placeholder="Search nganu"
             append-icon="mdi-magnify"
           ></v-text-field>           -->
-      <div class="content">
-        <div class="kiri">
-          <div class="sub-title ml-5" width="170px" height="30px">
-            Halaman Admin
-          </div>
-          <div class="produk ml-6" style="font-size: 16px">
-            <span class="mdi mdi-package-variant-closed">Produk</span>
-          </div>
-          <div class="tambah-produk ml-6" style="font-size: 16px">
-            <span class="mdi mdi-package-variant-closed-plus"
-              >Tambah Produk</span
-            >
-          </div>
-          <div class="logout ml-6 pb-4" style="font-size: 16px">
-            <span class="mdi mdi-logout mdi-35px">Logout</span>
-          </div>
+    <div class="content">
+      <div class="kiri">
+        <div class="sub-title ml-5" width="170px" height="30px">
+          Halaman Admin
         </div>
-        <div class="pembatas mb-6"></div>
-        <div class="content">
-          <div class="barang pt-5">
-            <div>
-              <div class="product-card">
-                <v-row class="p-0">
-                  <v-col class="card-col p-0" width="204px">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/barang.png')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="5" class="">
-                          <div class="title-product f14sb pl-1">Mas bro</div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="btn-card pl-2 pb-3 pt-3">
-                        <v-btn
-                          class="rounded-xl edit-btn font-weight-regular"
-                          style="
-                            font-size: 12px;
-                            background: #2f432d;
-                            color: white;
-                          "
-                        >
-                          Edit
-                        </v-btn>
-                        <v-btn
-                          class="rounded-xl hapus-btn font-weight-medium pl-3"
-                          outlined
-                          style="font-size: 12px; color: red"
-                        >
-                          Hapus
-                        </v-btn>
-                      </div>
-                    </v-card>
-                  </v-col>
-                  <v-col class="card-col p-0">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/barang.png')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="5" class="">
-                          <div class="title-product f14sb pl-1">Mas bro</div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="btn-card pl-2 pb-3 pt-3">
-                        <v-btn
-                          class="rounded-xl edit-btn font-weight-regular"
-                          style="
-                            font-size: 12px;
-                            background: #2f432d;
-                            color: white;
-                          "
-                        >
-                          Edit
-                        </v-btn>
-                        <v-btn
-                          class="rounded-xl hapus-btn font-weight-medium pl-3"
-                          outlined
-                          style="font-size: 12px; color: red"
-                        >
-                          Hapus
-                        </v-btn>
-                      </div>
-                    </v-card>
-                  </v-col>
-                  <v-col class="card-col p-0">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/barang.png')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="5" class="">
-                          <div class="title-product f14sb pl-1">Mas bro</div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="btn-card pl-2 pb-3 pt-3">
-                        <v-btn
-                          class="rounded-xl edit-btn font-weight-regular"
-                          style="
-                            font-size: 12px;
-                            background: #2f432d;
-                            color: white;
-                          "
-                        >
-                          Edit
-                        </v-btn>
-                        <v-btn
-                          class="rounded-xl hapus-btn font-weight-medium pl-3"
-                          outlined
-                          style="font-size: 12px; color: red"
-                        >
-                          Hapus
-                        </v-btn>
-                      </div>
-                    </v-card>
-                  </v-col>
-                  <v-col class="card-col p-0">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/barang.png')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="5" class="">
-                          <div class="title-product f14sb pl-1">Mas bro</div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="btn-card pl-2 pb-3 pt-3">
-                        <v-btn
-                          class="rounded-xl edit-btn font-weight-regular"
-                          style="
-                            font-size: 12px;
-                            background: #2f432d;
-                            color: white;
-                          "
-                        >
-                          Edit
-                        </v-btn>
-                        <v-btn
-                          class="rounded-xl hapus-btn font-weight-medium pl-3"
-                          outlined
-                          style="font-size: 12px; color: red"
-                        >
-                          Hapus
-                        </v-btn>
-                      </div>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </div>
+        <div class="produk ml-6" style="font-size: 16px">
+          <span class="mdi mdi-package-variant-closed">Produk</span>
+        </div>
+        <div class="tambah-produk ml-6" style="font-size: 16px">
+          <span class="mdi mdi-package-variant-closed-plus">Tambah Produk</span>
+        </div>
+        <div class="logout ml-6 pb-4" style="font-size: 16px">
+          <span class="mdi mdi-logout mdi-35px">Logout</span>
+        </div>
+      </div>
+      <div class="pembatas mb-6"></div>
+      <div class="content">
+        <div class="barang pt-5">
+          <div>
+            <div class="product-card">
+              <v-row class="p-0">
+                <v-col class="card-col p-0" width="204px">
+                  <v-card width="204px">
+                    <v-img
+                      :src="require('~/assets/barang.png')"
+                      width="204px"
+                    ></v-img>
+                    <v-row>
+                      <v-col cols="5" class="">
+                        <div class="title-product f14sb pl-1">Mas bro</div>
+                      </v-col>
+                      <v-col>
+                        <div class="price-product f14sb pr-1">
+                          Rp. 1.999.999
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="desc-product font-weight-regular pl-1">
+                          Bingung masbro
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card pl-2 pb-3 pt-3">
+                      <v-btn
+                        class="rounded-xl edit-btn font-weight-regular"
+                        style="
+                          font-size: 12px;
+                          background: #2f432d;
+                          color: white;
+                        "
+                      >
+                        Edit
+                      </v-btn>
+                      <v-btn
+                        class="rounded-xl hapus-btn font-weight-medium pl-3"
+                        outlined
+                        style="font-size: 12px; color: red"
+                      >
+                        Hapus
+                      </v-btn>
+                    </div>
+                  </v-card>
+                </v-col>
+                <v-col class="card-col p-0">
+                  <v-card width="204px">
+                    <v-img
+                      :src="require('~/assets/barang.png')"
+                      width="204px"
+                    ></v-img>
+                    <v-row>
+                      <v-col cols="5" class="">
+                        <div class="title-product f14sb pl-1">Mas bro</div>
+                      </v-col>
+                      <v-col>
+                        <div class="price-product f14sb pr-1">
+                          Rp. 1.999.999
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="desc-product font-weight-regular pl-1">
+                          Bingung masbro
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card pl-2 pb-3 pt-3">
+                      <v-btn
+                        class="rounded-xl edit-btn font-weight-regular"
+                        style="
+                          font-size: 12px;
+                          background: #2f432d;
+                          color: white;
+                        "
+                      >
+                        Edit
+                      </v-btn>
+                      <v-btn
+                        class="rounded-xl hapus-btn font-weight-medium pl-3"
+                        outlined
+                        style="font-size: 12px; color: red"
+                      >
+                        Hapus
+                      </v-btn>
+                    </div>
+                  </v-card>
+                </v-col>
+                <v-col class="card-col p-0">
+                  <v-card width="204px">
+                    <v-img
+                      :src="require('~/assets/barang.png')"
+                      width="204px"
+                    ></v-img>
+                    <v-row>
+                      <v-col cols="5" class="">
+                        <div class="title-product f14sb pl-1">Mas bro</div>
+                      </v-col>
+                      <v-col>
+                        <div class="price-product f14sb pr-1">
+                          Rp. 1.999.999
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="desc-product font-weight-regular pl-1">
+                          Bingung masbro
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card pl-2 pb-3 pt-3">
+                      <v-btn
+                        class="rounded-xl edit-btn font-weight-regular"
+                        style="
+                          font-size: 12px;
+                          background: #2f432d;
+                          color: white;
+                        "
+                      >
+                        Edit
+                      </v-btn>
+                      <v-btn
+                        class="rounded-xl hapus-btn font-weight-medium pl-3"
+                        outlined
+                        style="font-size: 12px; color: red"
+                      >
+                        Hapus
+                      </v-btn>
+                    </div>
+                  </v-card>
+                </v-col>
+                <v-col class="card-col p-0">
+                  <v-card width="204px">
+                    <v-img
+                      :src="require('~/assets/barang.png')"
+                      width="204px"
+                    ></v-img>
+                    <v-row>
+                      <v-col cols="5" class="">
+                        <div class="title-product f14sb pl-1">Mas bro</div>
+                      </v-col>
+                      <v-col>
+                        <div class="price-product f14sb pr-1">
+                          Rp. 1.999.999
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="desc-product font-weight-regular pl-1">
+                          Bingung masbro
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card pl-2 pb-3 pt-3">
+                      <v-btn
+                        class="rounded-xl edit-btn font-weight-regular"
+                        style="
+                          font-size: 12px;
+                          background: #2f432d;
+                          color: white;
+                        "
+                      >
+                        Edit
+                      </v-btn>
+                      <v-btn
+                        class="rounded-xl hapus-btn font-weight-medium pl-3"
+                        outlined
+                        style="font-size: 12px; color: red"
+                      >
+                        Hapus
+                      </v-btn>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
             </div>
           </div>
         </div>

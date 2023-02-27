@@ -13,7 +13,7 @@
           <v-col cols="6">
             <div class="foto-profil pl-5">
               <v-avatar width="270px" height="270px">
-                <!-- <img  :src="'storage/'+editprofil.foto_profil"/> -->
+                <img v-if="editprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/'+editprofil.foto_profil"/>
                 <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
             </div>
@@ -181,10 +181,9 @@ export default {
     let files = foto.target.files[0];
     this.datafoto = files;
     let fotobaru = foto.name;
-    console.log(this.editprofil.foto_profil)
+    console.log(files)
     this.preview = URL.createObjectURL(files);
     this.tampungfoto = fotobaru;
-    // this.editprofil.foto_profil = fotobaru;
   },
 
     backprofil() {

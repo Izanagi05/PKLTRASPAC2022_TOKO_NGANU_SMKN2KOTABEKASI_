@@ -25,13 +25,7 @@ class UserController extends Controller
             'foto_profil'=>''
         ];
         $validasi = $request->validate($rules);
-        // if($request->hasFile('foto_profil')){
-        //     $request->file('foto_profil')->move('uprofil/', $request->file('foto_profil')->getClientOriginalName());
-        //     $data->foto_profil= $request->file('foto_profil')->getClientOriginalName();
-        //     $data->save();
-        // dd(validasi)
-        // $path= public_path('fotoprofil');
-        // if(!empty($))
+
         if($request->file('foto_profil')) {
             // dd($request->oldImage);
             // return $request->foto_profil;
@@ -43,7 +37,7 @@ class UserController extends Controller
                 // dd("tes");
 
             }
-            $validasi['foto_profil'] = $request->file('foto_profil')->store('public/post-images');
+            $validasi['foto_profil'] = $request->file('foto_profil')->store('post-images');
         }
         $data = User::where('id', $id)->update($validasi);
 

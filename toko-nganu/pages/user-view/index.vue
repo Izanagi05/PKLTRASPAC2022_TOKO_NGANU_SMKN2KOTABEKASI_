@@ -56,7 +56,8 @@
             <v-col>
               <div class="foto-profil">
                 <v-avatar width="270px" height="270px">
-                  <v-img :src="require('~/assets/barang.png')"></v-img>
+                  <!-- {{ dataprofil.foto_profil }} -->
+                  <img v-if="dataprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/'+dataprofil.foto_profil"/>
                 </v-avatar>
               </div>
               <div class="btn-card pl-1 pb-1">

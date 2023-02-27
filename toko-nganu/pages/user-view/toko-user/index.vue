@@ -86,6 +86,12 @@
 
 
   >
+
+  <template v-slot:[`item.logo`]="{ item }">
+        <v-img width="200"  :src="'http://127.0.0.1:8000/storage/'+item.logo">
+
+        </v-img>
+      </template>
   <template v-slot:[`item.aksi`]="{ item }">
     <v-btn class="mx-2" fab small  @click="klikdetail(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark>mdi-eye</v-icon>

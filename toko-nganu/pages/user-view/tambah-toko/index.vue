@@ -57,6 +57,27 @@ export default {
           console.log(respon);
         });
     },
+    upload(foto) {
+      let files = foto.target.files[0];
+      this.preview = URL.createObjectURL(files);
+      this.photo = files;
+    },
+    buattoko() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/createtoko/" + this.userid,
+          this.databarang
+        )
+        .then((respon) => {
+          this.$router.push("/user-view/toko-user");
+          console.log(respon);
+        });
+      // let formData = new FormData()
+      // formData.append('logo', this.photo)
+      //   axios.post('http://127.0.0.1:8000/api/createtoko/'+ this.userid, formData, {
+      //         'content-type': 'multipart/form-data'
+      //       })
+    },
   },
   created() {
     const usid = this.$cookies.get("cookieku");
