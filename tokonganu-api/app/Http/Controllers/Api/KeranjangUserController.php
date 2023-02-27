@@ -20,6 +20,17 @@ class KeranjangUserController extends Controller
         // }
         return response()->json($keranjang);
     }
+    public function keranjanguser($id,){
+        $keranjang = Keranjang_User::where('user_id', $id)->get();
+
+
+        // $keranjang['user_keranjang']=$keranjang->UserKeranjang;
+        // foreach ($keranjang as $key => $krnjng) {
+
+        // }
+
+        return response()->json($keranjang);
+    }
 
     public function barangvarianharga($id, $varian_id){
         $keranjang= Barang::where('barang_id', $id)->with(['barangVarian' => function ($query) use($varian_id){
@@ -48,18 +59,11 @@ class KeranjangUserController extends Controller
             };
         }
         $barangkeranjang = Barang::whereIn('barang_id', $idbarang)->get();
-        // $barangvariankeranjang = Varian::where('varian_id', )->get();
-        // DD($keranjangbarangid);
-
         foreach ($keranjang as $key => $krnjng) {
 
 
             $keranjang[$key]['user_keranjang']=$krnjng->UserKeranjang;
             $keranjang[$key]['barangg']=$barangkeranjang;
-            // $keranjang[$key]['varian']=$barangvariankeranjang;
-            // foreach ($keranjang[$key]['user_keranjang'] as $k => $brg) {
-            //     $keranjang[$key]['user_keranjang']= $brg->barang_id;
-            // }
         }
         // $keranjang['barangvarian'] = Barang::where('id', $id);
         return response()->json([$keranjang]);

@@ -38,6 +38,7 @@ Route::post('/updateuserlogin/{id}', [UserController::class, 'updateuserlogin'])
 Route::get('/gettokobyuserlogin/{id}', [UserController::class, 'gettokobyuserlogin']);
 
 Route::get('/keranjangbyuser/{id}', [KeranjangUserController::class, 'keranjangbyuser']);
+Route::get('/keranjanguser/{id}', [KeranjangUserController::class, 'keranjanguser']);
 Route::get('/barangvariankeranjang/{id}', [KeranjangUserController::class, 'barangvariankeranjang']);
 Route::post('/addkeranjangbyuser/{id}', [KeranjangUserController::class, 'addkeranjangbyuser']);
 Route::delete('/deletekeranjang/{id}', [KeranjangUserController::class, 'deletekeranjang']);
