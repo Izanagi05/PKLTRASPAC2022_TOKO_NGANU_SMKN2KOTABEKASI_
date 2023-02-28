@@ -9,9 +9,10 @@
             max-width="400"
             max-height="950"
             variant="outlined"
+            flat
             style="margin-top: 17px"
           >
-            <v-card>
+            <v-card flat>
               <div>
                 <div class="judul" style="font-weight: 700; font-size: 40px">
                   Buat Akun
@@ -99,7 +100,7 @@ export default {
         .post("http://127.0.0.1:8000/api/registrasi", this.dataregist)
         .then((respon) => {
           this.data = respon.data;
-          window.location.replace('/')
+          window.location.replace("/");
         });
     },
   },

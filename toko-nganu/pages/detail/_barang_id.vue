@@ -115,7 +115,7 @@ export default {
       // this.$toast.success("berhasil pilih varian "+ namasetvar);
       alert('varian pilihan :' + namasetvar)
     },
-    tambahkeranjang(){
+    tambahkeranjang() {
       // console.log(dtlbrg)
      this.detbarker.user_id=this.userid,
         this.detbarker.barang_id=this.prm.barang_id,

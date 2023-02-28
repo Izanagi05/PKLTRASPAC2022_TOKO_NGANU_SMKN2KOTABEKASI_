@@ -12,8 +12,24 @@
 </template>
 
 <style>
+.foto-profil {
+  margin-bottom: 20px;
+}
 .tambah-container {
-  padding: 0px 123px;
+  padding: 0px 400px;
+}
+.dalam-container {
+  padding: 50px 50px;
+  border-radius: 2%;
+  color: rgb(0, 0, 0);
+  background: #ffffff;
+}
+.panel {
+  margin-bottom: 20px;
+}
+.button-aksi {
+  color: rgb(255, 255, 255) !important;
+  background: #2f432d;
 }
 </style>
 
