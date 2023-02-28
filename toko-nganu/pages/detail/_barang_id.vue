@@ -8,7 +8,7 @@
       <v-row >
         <v-col>
           <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
-            <v-img :src="require('~/assets/barang.png')" width="479px"></v-img>
+            <v-img :src="require('~/assets/makanan.jpg')" width="479px"></v-img>
           </div>
         </v-col>
         <v-col>
@@ -17,13 +17,12 @@
               {{dtlbrg.nama  }}
             </div>
             <div class="harga font-weight-bold pt-3" style="font-size: 40px">
-              Rp. 1.999.999
+              <!-- Rp. 1.999.999 -->
             </div>
             <div
               class="deskripsi font-weight-regular pt-3"
               style="font-size: 20px"
             >
-              Bingung Masbro
             </div>
             <div>
               nama toko: {{ dtlbrg.toko.nama }}
@@ -31,8 +30,8 @@
             pilih varian
             <v-row>
               <v-col v-for="(varian, index) in dtlbrg.barang_varian" :key="index">
-                <p>foto</p>
-                <p>stok{{ varian.stok }}</p>
+                <!-- <p>foto</p> -->
+                <p>stok: {{ varian.stok }}</p>
                 <p>harga {{varian.harga}}</p>
                 <p></p>
                 <v-btn @click="pilihanvarian(varian)">{{ varian.nama }}</v-btn>
@@ -80,17 +79,13 @@
 <script>
 import axios from 'axios';
 export default {
+  middleware: "middlewareku",
   data() {
     return {
       prm:this.$route.params,
       detailbarang:[],
       userid:null,
-      // dtlbrg:{
-      //   toko_id:'',
-      //   barang_id:'',
-      //   kuantitas:1,
-      //   varian_id:1
-      // },
+
       detbarker:{
         user_id:'',
         barang_id:1,
@@ -123,6 +118,7 @@ export default {
         this.detbarker.varian_id=this.pilihan
       axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, this.detbarker).then(respon=>{
         console.log(respon)
+
       })
       console.log(this.pilihan)
     },

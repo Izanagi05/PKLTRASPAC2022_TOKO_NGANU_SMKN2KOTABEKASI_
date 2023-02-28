@@ -66,6 +66,7 @@
 <script>
 import axios from "axios";
 export default {
+  middleware: ["middlewareku", "middlewarelogin"],
   data: () => ({
     dataregist: {
       nama: "",
