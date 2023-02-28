@@ -2,10 +2,10 @@
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
-        <div class="icon_telepon">
-          <v-img :src="require('~/assets/telepon.png')"></v-img>
-        </div>
-        <div>+62-000-000-000</div>
+        <button class="kontak" type="submit" @click="kontak">
+          <v-icon color="white">mdi-phone</v-icon>
+          +62-815-6315-1038
+        </button>
       </div>
     </div>
     <div class="nav">
@@ -18,12 +18,24 @@
     </div>
   </div>
 </template>
-  
-  <script>
-export default {};
+
+<script>
+export default {
+  data() {
+    return {
+      no_admin: "6281563151038",
+    };
+  },
+  methods: {
+    kontak() {
+      let nomer = this.no_admin;
+      window.open("https://wa.me/" + nomer);
+    },
+  },
+};
 </script>
-  
-  <style>
+
+<style>
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;

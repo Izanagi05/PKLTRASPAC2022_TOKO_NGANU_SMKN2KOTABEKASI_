@@ -8,13 +8,16 @@
             Profil Pengguna
           </div>
           <div class="menu">
-            <NuxtLink to="/" class="my-link black--text text-decoration-none">
+            <NuxtLink
+              to="/user-view"
+              class="my-link black--text text-decoration-none"
+            >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
             <div v-if="cekuserrole == 'Admin'">
               <NuxtLink
                 to="/halaman-admin"
-                class="my-link black--text text-decoration-none"
+                class="my-link black--text text-decoration-none pt-6 pb-6"
               >
                 <v-icon large>mdi-account-tie</v-icon> Admin
               </NuxtLink>
@@ -22,7 +25,7 @@
             <div v-else></div>
             <NuxtLink
               to="/user-view/toko-user"
-              class="my-link black--text text-decoration-none"
+              class="my-link black--text text-decoration-none pt-6"
             >
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
