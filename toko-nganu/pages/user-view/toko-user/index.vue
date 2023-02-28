@@ -1,11 +1,11 @@
 <template>
   <div>
     <Navbar />
-
+    <div class="pl-15 pb-5 font-weight-medium">Detail Toko</div> 
     <div>
       <div class="button-add pl-4 pb-6">
         <nuxt-link
-          class="text-decoration-none"
+          class="text-decoration-none px-15"
           to="/user-view/crud"
           ><v-btn class="btn-add rounded-pill white--text" color="#2f432d"
             >Tambah barang</v-btn
@@ -148,7 +148,7 @@
           </v-container>
         </v-card>
       </v-dialog> -->
-      <v-data-table data-app :headers="headers" :items="Toko">
+      <v-data-table data-app :headers="headers" :items="Toko" class="px-15">
         <template v-slot:[`item.logo`]="{ item }">
           <v-img
             width="200"

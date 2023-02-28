@@ -3,7 +3,7 @@
     <Navbar />
     <div class="crud-container">
       <v-row class="judul">
-        <v-col cols="12" md="6"> Tambah Produk</v-col>
+        <v-col cols="12" md="6"> Tambah Barang</v-col>
       </v-row>
 
       <v-row dense justify="center">

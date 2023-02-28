@@ -48,9 +48,7 @@
                     </v-btn>
                     <div class="buat-akun" style="padding-bottom: 20px">
                       Belum punya akun?
-                      <nuxt-link to="/register" class="my-link">
-                        Buat Akun
-                      </nuxt-link>
+                    <nuxt-link to="/register">Buat akun</nuxt-link>
                     </div>
                   </v-form>
                 </v-sheet>
@@ -66,7 +64,7 @@
 import axios from "axios";
 import NavbarPolos from "~/components/NavbarPolos.vue";
 export default {
-  middleware: ["middlewareku", "middlewarelogin"],
+  middleware: [ "middlewarelogin"],
   data: () => ({
     email: null,
     ket: null,

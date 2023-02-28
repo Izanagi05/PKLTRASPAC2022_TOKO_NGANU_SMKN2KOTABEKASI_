@@ -33,6 +33,23 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="dialogDeletebarang" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5"
+          >Yakin ingin menghapus Barang ini?</v-card-title
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue-darken-1" variant="text" @click="closeDeletebarang"
+            >Cancel</v-btn
+          >
+          <v-btn color="blue-darken-1" variant="text" @click="confirmhapusbarang"
+            >OK</v-btn
+          >
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <div class="home-container">
       <div class="kiri">
         <div class="sub-title ml-5" width="170px" height="30px">
@@ -82,7 +99,7 @@
                   </v-list-item>
 
                   <v-card-actions>
-                    <v-btn outlined rounded text @click="hapususer(atr)">
+                    <v-btn outlined rounded text @click="hapususer(asr)">
                       Hapus
                     </v-btn>
                   </v-card-actions>
@@ -157,7 +174,7 @@
                   </v-list-item>
 
                   <v-card-actions>
-                    <v-btn outlined rounded text @click="hapusbarang(atr)">
+                    <v-btn outlined rounded text @click="hapusbarang(brg)">
                       Hapus
                     </v-btn>
                   </v-card-actions>
@@ -167,9 +184,9 @@
           </v-tabs>
         </v-card>
 
-        <div class="logout ml-6 pb-4" style="font-size: 16px">
+        <!-- <div class="logout ml-6 pb-4" style="font-size: 16px">
           <span class="mdi mdi-logout mdi-35px">Logout</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -188,6 +205,7 @@ export default {
       },
 
       dialogDeleteuser: false,
+      dialogDeletebarang: false,
       dialogDeletetoko: false,
       editedIndex: 0,
       detaildatadialoguser: {
@@ -195,6 +213,9 @@ export default {
       },
       detaildatadialogtoko: {
         toko_id: "",
+      },
+      detaildatadialogbarang: {
+        barang_id: "",
       },
       allbarang: {
         barang_id: "",
@@ -262,6 +283,32 @@ export default {
     },
     closeDeletetoko() {
       this.dialogDeletetoko = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+    hapusbarang(item) {
+      this.editedIndex = this.allbarang.indexOf(item);
+      this.detaildatadialogbarang = Object.assign({}, item);
+      this.dialogDeletebarang = true;
+      console.log(item);
+    },
+    confirmhapusbarang() {
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/deletebarang/" +
+            this.detaildatadialogbarang.barang_id
+        )
+        .then((respon) => {
+          console.log(respon);
+          alert("berhasil hapus");
+        });
+      this.allbarang.splice(this.editedIndex, 1);
+      this.closeDeletebarang();
+    },
+    closeDeletebarang() {
+      this.dialogDeletebarang = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
