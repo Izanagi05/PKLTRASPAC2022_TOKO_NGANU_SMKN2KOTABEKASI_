@@ -152,6 +152,7 @@
 <script>
 import axios from "axios";
 export default {
+  middleware: "middlewareku",
   data() {
     return {
       olddata: null,
