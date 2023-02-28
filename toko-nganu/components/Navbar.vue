@@ -2,8 +2,10 @@
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
-        <v-icon color="white">mdi-phone</v-icon>
-        <div>+62-000-000-000</div>
+        <button class="kontak" type="submit" @click="kontak">
+          <v-icon color="white">mdi-phone</v-icon>
+          +62-815-6315-1038
+        </button>
       </div>
     </div>
     <div class="nav">
@@ -48,6 +50,7 @@ export default {
     return {
       cari: null,
       nama: "Masbroonyatir",
+      no_admin: "6281563151038",
     };
   },
   // created() {
@@ -55,7 +58,12 @@ export default {
   //   this.nama = usernama.data.nama;
   // },
 
-  methods: {},
+  methods: {
+    kontak() {
+      let nomer = this.no_admin;
+      window.open("https://wa.me/" + nomer);
+    },
+  },
 };
 </script>
 

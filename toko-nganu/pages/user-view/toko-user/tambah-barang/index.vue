@@ -218,6 +218,9 @@ export default {
         return "";
       }
     },
+    backprofil() {
+      this.$router.push("/user-view/toko-user");
+    },
   },
   created() {
     const idnya = this.$cookies.get("cookieku");
