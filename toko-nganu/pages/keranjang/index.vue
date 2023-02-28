@@ -118,7 +118,12 @@
                         </div>
                       </v-row>
                     </div>
+<<<<<<< HEAD
                   </div>
+=======
+                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
+                  </v-row>
+>>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
                 </div>
               </div>
             </v-row>

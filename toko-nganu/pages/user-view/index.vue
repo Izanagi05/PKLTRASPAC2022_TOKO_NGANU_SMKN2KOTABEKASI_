@@ -36,7 +36,7 @@
               <v-icon large></v-icon> Buka Toko
             </NuxtLink>
             <NuxtLink
-              to="/user-view/toko-user/tambah-barang"
+              to="/user-view/crud"
               class="my-link black--text text-decoration-none"
             >
               <v-icon large></v-icon> tambah barang

@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< HEAD
     <NavbarPolos2 />
     <div class="card">
       <center>
@@ -74,9 +75,36 @@
           </v-card>
         </v-card>
       </center>
+=======
+    <NavbarPolos />
+    <div class="tambah-container">
+      <h1>Tambah toko</h1>
+      <v-text-field v-model="databarang.nama" placeholder="Nama"></v-text-field>
+      <v-text-field
+        v-model="databarang.alamat"
+        placeholder="Alamat"
+      ></v-text-field>
+      <v-text-field
+        v-model="databarang.deskripsi"
+        placeholder="Deskripsi"
+      ></v-text-field>
+      <v-text-field
+        v-model="databarang.no_telepon"
+        placeholder="No Telepon"
+      ></v-text-field>
+      <v-text-field v-model="databarang.logo" placeholder="logo"></v-text-field>
+      <v-btn @click="buattoko()">buat</v-btn>
+>>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
     </div>
   </div>
 </template>
+
+<style>
+.tambah-container {
+  padding: 0px 123px;
+}
+</style>
+
 <script>
 import axios from "axios";
 export default {
@@ -95,6 +123,20 @@ export default {
   },
 
   methods: {
+<<<<<<< HEAD
+=======
+    buattoko() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/createtoko/" + this.userid,
+          this.databarang
+        )
+        .then((respon) => {
+          this.$router.push("/user-view/toko-user");
+          console.log(respon);
+        });
+    },
+>>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
     upload(foto) {
       let files = foto.target.files[0];
       this.preview = URL.createObjectURL(files);
@@ -116,9 +158,12 @@ export default {
       //         'content-type': 'multipart/form-data'
       //       })
     },
+<<<<<<< HEAD
     backprofil() {
       this.$router.push("/user-view");
     },
+=======
+>>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
   },
   created() {
     const usid = this.$cookies.get("cookieku");

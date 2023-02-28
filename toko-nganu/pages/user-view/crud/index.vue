@@ -70,9 +70,9 @@
                   <v-col cols="8" class="text--secondary">
                     <v-fade-transition leave-absolute>
                       <span v-if="open" key="0"> Pilih Toko </span>
-                      <span v-else key="1">
-                        <div v-for="(toko, index) in usertoko" :key="index">
-                          {{ toko.nama }}
+                      <span v-else>
+                        <div>
+                          {{ getTokoText(databarang.toko_id) }}
                         </div>
                       </span>
                     </v-fade-transition>
@@ -86,7 +86,7 @@
                     <div>
                       <v-select
                         v-model="databarang.toko_id"
-                        :items="toko"
+                        :items="usertoko"
                         item-text="nama"
                         item-value="toko_id"
                         chips
@@ -164,7 +164,7 @@ export default {
   data() {
     return {
       // items:null,
-      usertoko: null,
+      usertoko: [],
       userid: null,
       kategori: [],
       databarang: {
@@ -178,12 +178,10 @@ export default {
 
   methods: {
     gettokouser() {
-      axios
-        .get("http://127.0.0.1:8000/api/gettoko/" + this.userid)
-        .then((respon) => {
-          this.usertoko = respon.data;
-          //  this.items = respon.data
-        });
+      axios.get("http://127.0.0.1:8000/api/getalltoko").then((respon) => {
+        this.usertoko = respon.data;
+        //  this.items = respon.data
+      });
     },
     getkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
@@ -211,7 +209,6 @@ export default {
     },
     getTokoText(val) {
       const data = this.usertoko.find((element) => element.toko_id === val);
-      console.log(data.nama);
       if (data) {
         return data.nama;
       } else {
@@ -226,25 +223,6 @@ export default {
     this.getkategori();
   },
 };
-// export default {
-//   data: () => ({
-//     date: null,
-//     trip: {
-//       name: "",
-//       location: null,
-//       start: null,
-//       end: null,
-//     },
-//     locations: [
-//       "Australia",
-//       "Barbados",
-//       "Chile",
-//       "Denmark",
-//       "Ecuador",
-//       "France",
-//     ],
-//   }),
-// };
 </script>
 
 <style>
