@@ -51,21 +51,6 @@
               <!-- <div v-on="getharga()">l</div> -->
               <!-- <div v-on="getharga()"></div> -->
                 <div v-for="(dataa, index) in datakeranjang.user_keranjang" :key="index">
-          </v-col>
-        </v-row>
-        <v-row>
-          <div
-            class="cart-content"
-            v-for="(user, index) in datakeranjang"
-            :key="index"
-          >
-            <div v-for="(dataa, index) in user.user_keranjang" :key="index">
-              <!-- {{ datakeranjang.user_keranjang.varian_id }} -->
-              <div class="cart-content">
-                <div
-                  v-for="(dataa, index) in datakeranjang.user_keranjang"
-                  :key="index"
-                >
                   <v-row>
                     <!-- {{ dataa.varian_id }} -->
 
@@ -82,13 +67,7 @@
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="font-weight-medium">
-                          varian:{{dataa.varian_id}}
->>>>>>> b3eefa9183259060c1daffe4bd1da136439569d3
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="font-weight-medium">Rp. {{ price }}</div>
+                        <div class="font-weight-medium">Rp. {{ varharga.harga }}</div>
                       </v-col>
                       <v-col>
                         <div class="d-flex kuantitas">
@@ -121,28 +100,12 @@
                         <div class="font-weight-medium">Rp. {{totalprice}}</div>
                       </v-col>
                     </div>
-<<<<<<<<< Temporary merge branch 1
                     <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
-=========
-                    <div>
-                      <v-btn @click="hapuskeranjang(dataa)"
-                        ><v-icon>mdi-trash</v-icon></v-btn
-                      >
-                    </div>
->>>>>>>>> Temporary merge branch 2
                   </v-row>
                 </div>
-                <div>
-                  <v-btn @click="hapuskeranjang(dataa)"
-                    ><v-icon>mdi-delete</v-icon></v-btn
-                  >
-                </div>
               </div>
-            </div>
-          </div>
-        </v-row>
-      </div>
-    </div>
+            </v-row>
+          </v-col>
 
           <v-col class="">
             <div class="total-detail">
@@ -154,22 +117,22 @@
                     Jumlah
                   </div>
                 </v-col>
-                <v-col class="f14sb"> x40 </v-col>
+                <v-col class="f14sb"> {{ kuan }} </v-col>
               </v-row>
               <v-row>
                 <v-col> Harga </v-col>
-                <v-col class="f14sb"> Rp. {{ price }} </v-col>
+                <v-col class="f14sb"> Rp. {{ varharga.harga }} </v-col>
               </v-row>
               <v-row>
                 <v-col>
                   <div class="line"></div>
                   Total Harga
                 </v-col>
-                <v-col class="f14sb"> Rp. {{ pricetotal }} </v-col>
+                <v-col class="f14sb"> Rp. {{ totalprice }} </v-col>
               </v-row>
               <div class="f24sb">
                 <button
-                  class="checkout-btn text-decoration-none white--text"
+                  class="checkout-btn b text-decoration-none white--text"
                   @click="nomer()"
                   type="submit"
                 >
@@ -205,31 +168,14 @@ export default {
       detaildatadialog: {
         keranjang_user_id: "",
         barang_id: "",
-        varian_id: "",
         kuantitas: "",
       },
       userid: null,
       no_admin: "+62-815-6315-1038",
-      tesbarang: "barang ini",
-      tes: [
-        { title: "tes tes tes1", kuantitas: 1 },
-        { title: "tes tes tes2", kuantitas: 0 },
-        { title: "tes tes tes3", kuantitas: 0 },
-        { title: "tes tes tes4", kuantitas: 0 },
-        { title: "tes tes tes5", kuantitas: 0 },
-        { title: "tes tes tes6", kuantitas: 0 },
-        { title: "tes tes tes7", kuantitas: 0 },
-        { title: "tes tes tes7", kuantitas: 0 },
-      ],
+      tesbarang: null,
     };
   },
   methods: {
-    gethargavarian() {
-      // console.log(this.datakeranjang);
-      // axios.get('http://127.0.0.1:8000/api/barangvarianharga/'+this.datakeranjang.barang_id+ this.datakeranjang.varian_id).then(respon=>{
-      //   console.log(respon.data)
-      // })
-    },
     getkeranjang() {
       axios
         .get("http://127.0.0.1:8000/api/keranjangbyuser/" + this.userid)
@@ -280,29 +226,6 @@ export default {
       this.detaildatadialog = Object.assign({}, item);
       this.dialogDelete = true;
       console.log(this.editedIndex);
-=======
-    hapuskeranjang (item) {
-      this.editedIndex = this.datakeranjang.indexOf(item)
-        this.detaildatadialog = Object.assign({}, item)
-        this.dialogDelete = true
-        console.log(this.editedIndex)
-      },
-    confirmhapuskeranjang(){
-      axios.delete('http://127.0.0.1:8000/api/deletekeranjang/'+ this.detaildatadialog.keranjang_user_id).then(respon =>{
-       console.log(respon)
-       location.reload()
-        alert('berhasil hapus')
-        })
-        this.closeDelete()
-
-  },
-  closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedIndex = -1
-        })
-      },
->>>>>>> b3eefa9183259060c1daffe4bd1da136439569d3
     },
     confirmhapuskeranjang() {
       axios
@@ -340,7 +263,6 @@ export default {
   created() {
     const usid = this.$cookies.get("cookieku");
     this.userid = usid.data.id;
-    this.gethargavarian();
     this.getkeranjang();
     this.getidkeranjang();
   },

@@ -1,8 +1,6 @@
 <template>
   <div>
     <Navbar />
-    detail toko
-<!-- {{prm.toko_id  }} -->
 
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -76,7 +74,7 @@ export default {
       headers:[
 
       {text:'Nama Barang', value:'nama'},
-      {text:'Nama Barang', value:'deskripsi'},
+      {text:'Deskripsi', value:'deskripsi'},
       {text:'Aksi', value:'aksi'},
       ],
       detaildatadialog:{
