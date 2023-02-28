@@ -1,6 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
     <NavbarPolos />
     <div class="toko-container">
       <center>
@@ -85,161 +84,160 @@
           </v-card>
         </v-card>
       </center>
-=======
-    <Navbar />
-    <div class="crud-container">
-      <v-row class="judul">
-        <v-col cols="12" md="6"> Tambah Produk</v-col>
-      </v-row>
+      <Navbar />
+      <div class="crud-container">
+        <v-row class="judul">
+          <v-col cols="12" md="6"> Tambah Produk</v-col>
+        </v-row>
 
-      <v-row dense justify="center">
-        <v-col cols="12" sm="3"
-          ><div class="list">Nama Barang</div>
-          <div class="list">Kategori</div>
-          <div class="list">Toko</div>
-          <div class="list">Deskripsi</div></v-col
-        >
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="Nama Barang"
-            placeholder="Masukan Nama Barang"
-            solo
-            v-model="databarang.nama"
-          ></v-text-field>
-          <v-expansion-panels class="panel">
-            <v-expansion-panel class="panel-kategori">
-              <v-expansion-panel-header v-slot="{ open }">
-                <v-row no-gutters>
-                  <v-col> Kategori </v-col>
-                  <v-col cols="8" class="text--secondary">
-                    <v-fade-transition leave-absolute>
-                      <span v-if="open" key="0"> Pilih Kategori </span>
-                      <span v-else>
-                        <div>
-                          {{ getKategoriText(databarang.kategori_id) }}
-                        </div>
-                      </span>
-                    </v-fade-transition>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-row no-gutters>
-                  <v-spacer></v-spacer>
-                  <v-col cols="5">
-                    <div>
-                      <v-select
-                        v-model="databarang.kategori_id"
-                        :items="kategori"
-                        item-text="nama"
-                        item-value="kategori_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
-                    </div>
-                  </v-col>
-                </v-row>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="secondary"> Cancel </v-btn>
-                  <v-btn text color="primary"> Save </v-btn>
-                </v-card-actions>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-            <v-expansion-panel>
-              <v-expansion-panel-header v-slot="{ open }">
-                <v-row no-gutters>
-                  <v-col> Toko </v-col>
-                  <v-col cols="8" class="text--secondary">
-                    <v-fade-transition leave-absolute>
-                      <span v-if="open" key="0"> Pilih Toko </span>
-                      <span v-else key="1">
-                        <div v-for="(toko, index) in usertoko" :key="index">
-                          {{ toko.nama }}
-                        </div>
-                      </span>
-                    </v-fade-transition>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-row no-gutters>
-                  <v-spacer></v-spacer>
-                  <v-col cols="5">
-                    <div>
-                      <v-select
-                        v-model="databarang.toko_id"
-                        :items="toko"
-                        item-text="nama"
-                        item-value="toko_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
-                    </div>
-                  </v-col>
-                </v-row>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="secondary"> Cancel </v-btn>
-                  <v-btn text color="primary"> Save </v-btn>
-                </v-card-actions>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-
-          <v-textarea
-            solo
-            name="input-7-4"
-            label="Deskripsi Barang"
-            v-model="databarang.deskripsi"
-          ></v-textarea
-        ></v-col>
-        <v-col cols="12" sm="3"
-          ><div class="gambar-produk">
-            <v-img
-              dense
-              justify="center"
-              contain
-              max-height="200"
-              max-width="200"
-              :src="require('~/assets/barang.png')"
-            ></v-img>
-          </div>
-          <v-btn
-            rounded
-            outlined
-            class="edit-image"
-            width="200px"
-            height="40px"
+        <v-row dense justify="center">
+          <v-col cols="12" sm="3"
+            ><div class="list">Nama Barang</div>
+            <div class="list">Kategori</div>
+            <div class="list">Toko</div>
+            <div class="list">Deskripsi</div></v-col
           >
-            Tambah Foto
-          </v-btn></v-col
-        >
-      </v-row>
-      <v-row class="judul" justify="end">
-        <v-col cols="12" md="2"
-          ><nuxt-link to="/user-view"
-            ><v-btn rounded outlined width="150px" class="button-aksi"
-              >Batal</v-btn
-            ></nuxt-link
-          ></v-col
-        ><v-col cols="12" md="2"
-          ><v-btn
-            outlined
-            rounded
-            width="150px"
-            class="button-aksi-jual"
-            @click="tbhbarang()"
-            >Jual</v-btn
-          ></v-col
-        >
-      </v-row>
->>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
+          <v-col cols="12" sm="6">
+            <v-text-field
+              label="Nama Barang"
+              placeholder="Masukan Nama Barang"
+              solo
+              v-model="databarang.nama"
+            ></v-text-field>
+            <v-expansion-panels class="panel">
+              <v-expansion-panel class="panel-kategori">
+                <v-expansion-panel-header v-slot="{ open }">
+                  <v-row no-gutters>
+                    <v-col> Kategori </v-col>
+                    <v-col cols="8" class="text--secondary">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="open" key="0"> Pilih Kategori </span>
+                        <span v-else>
+                          <div>
+                            {{ getKategoriText(databarang.kategori_id) }}
+                          </div>
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <v-row no-gutters>
+                    <v-spacer></v-spacer>
+                    <v-col cols="5">
+                      <div>
+                        <v-select
+                          v-model="databarang.kategori_id"
+                          :items="kategori"
+                          item-text="nama"
+                          item-value="kategori_id"
+                          chips
+                          flat
+                          solo
+                        ></v-select>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="secondary"> Cancel </v-btn>
+                    <v-btn text color="primary"> Save </v-btn>
+                  </v-card-actions>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+              <v-expansion-panel>
+                <v-expansion-panel-header v-slot="{ open }">
+                  <v-row no-gutters>
+                    <v-col> Toko </v-col>
+                    <v-col cols="8" class="text--secondary">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="open" key="0"> Pilih Toko </span>
+                        <span v-else key="1">
+                          <div v-for="(toko, index) in usertoko" :key="index">
+                            {{ toko.nama }}
+                          </div>
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <v-row no-gutters>
+                    <v-spacer></v-spacer>
+                    <v-col cols="5">
+                      <div>
+                        <v-select
+                          v-model="databarang.toko_id"
+                          :items="toko"
+                          item-text="nama"
+                          item-value="toko_id"
+                          chips
+                          flat
+                          solo
+                        ></v-select>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="secondary"> Cancel </v-btn>
+                    <v-btn text color="primary"> Save </v-btn>
+                  </v-card-actions>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <v-textarea
+              solo
+              name="input-7-4"
+              label="Deskripsi Barang"
+              v-model="databarang.deskripsi"
+            ></v-textarea
+          ></v-col>
+          <v-col cols="12" sm="3"
+            ><div class="gambar-produk">
+              <v-img
+                dense
+                justify="center"
+                contain
+                max-height="200"
+                max-width="200"
+                :src="require('~/assets/barang.png')"
+              ></v-img>
+            </div>
+            <v-btn
+              rounded
+              outlined
+              class="edit-image"
+              width="200px"
+              height="40px"
+            >
+              Tambah Foto
+            </v-btn></v-col
+          >
+        </v-row>
+        <v-row class="judul" justify="end">
+          <v-col cols="12" md="2"
+            ><nuxt-link to="/user-view"
+              ><v-btn rounded outlined width="150px" class="button-aksi"
+                >Batal</v-btn
+              ></nuxt-link
+            ></v-col
+          ><v-col cols="12" md="2"
+            ><v-btn
+              outlined
+              rounded
+              width="150px"
+              class="button-aksi-jual"
+              @click="tbhbarang()"
+              >Jual</v-btn
+            ></v-col
+          >
+        </v-row>
+      </div>
     </div>
   </div>
 </template>

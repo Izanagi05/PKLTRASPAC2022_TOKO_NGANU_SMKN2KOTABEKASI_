@@ -37,135 +37,129 @@
                 <div class="f14sb head-title">Total</div>
               </v-col>
             </v-row>
-            <v-row>
-              <div
-                class="cart-content"
-                v-for="(user, index) in datakeranjang"
-                :key="index"
-              >
-                <div v-for="(dataa, index) in user.user_keranjang" :key="index">
-                  <!-- {{ datakeranjang.user_keranjang.varian_id }} -->
-                  <div class="cart-content">
-                    <div
-                      v-for="(dataa, index) in datakeranjang.user_keranjang"
-                      :key="index"
-                    >
-                      <v-row>
-                        <!-- {{ dataa.varian_id }} -->
-                        <div class="cart-card d-flex">
-                          <v-col>
-                            <v-img
-                              :src="require('~/assets/barang.png')"
-                              width="143px"
-                            ></v-img>
-                          </v-col>
-                          <v-col>
-                            <div class="font-weight-medium">
-                              masih id barang:{{ dataa.barang_id }} barang:{{
-                                dataa.barang_id
-                              }}
-                            </div>
-                          </v-col>
-                          <v-col>
-                            <div class="font-weight-medium">
-                              varian:{{ dataa.varian_id }}
-                            </div>
-                          </v-col>
-                          <v-col>
-                            <div class="font-weight-medium">
-                              Rp. {{ price }}
-                            </div>
-                          </v-col>
-                          <v-col>
-                            <div class="d-flex kuantitas">
-                              <div>
-                                <div v-if="dataa.kuantitas == 0">
-                                  <button
-                                    @click="countmin"
-                                    disabled
-                                    type="submit"
-                                  >
-                                    <v-icon color="AAAAAA">mdi-minus</v-icon>
-                                  </button>
-                                </div>
-                                <div v-else>
-                                  <button @click="countmin" type="submit">
-                                    <v-icon color="black">mdi-minus</v-icon>
-                                  </button>
-                                </div>
-                              </div>
-
-                              <div class="font-weight-medium">
-                                {{ dataa.kuantitas }}
-                              </div>
-                              <button
-                                class="pluskuantitas"
-                                @click="countplus(dataa)"
-                                type="submit"
-                              >
-                                <v-icon color="black">mdi-plus</v-icon>
+          </v-col>
+        </v-row>
+        <v-row>
+          <div
+            class="cart-content"
+            v-for="(user, index) in datakeranjang"
+            :key="index"
+          >
+            <div v-for="(dataa, index) in user.user_keranjang" :key="index">
+              <!-- {{ datakeranjang.user_keranjang.varian_id }} -->
+              <div class="cart-content">
+                <div
+                  v-for="(dataa, index) in datakeranjang.user_keranjang"
+                  :key="index"
+                >
+                  <v-row>
+                    <!-- {{ dataa.varian_id }} -->
+                    <div class="cart-card d-flex">
+                      <v-col>
+                        <v-img
+                          :src="require('~/assets/barang.png')"
+                          width="143px"
+                        ></v-img>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium">
+                          masih id barang:{{ dataa.barang_id }} barang:{{
+                            dataa.barang_id
+                          }}
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium">
+                          varian:{{ dataa.varian_id }}
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium">Rp. {{ price }}</div>
+                      </v-col>
+                      <v-col>
+                        <div class="d-flex kuantitas">
+                          <div>
+                            <div v-if="dataa.kuantitas == 0">
+                              <button @click="countmin" disabled type="submit">
+                                <v-icon color="AAAAAA">mdi-minus</v-icon>
                               </button>
                             </div>
-                          </v-col>
-                          <v-col>
-                            <div class="font-weight-medium">Rp. 10.000.000</div>
-                          </v-col>
-                        </div>
-                        <div>
-                          <v-btn @click="hapuskeranjang(dataa)"
-                            ><v-icon>mdi-trash</v-icon></v-btn
+                            <div v-else>
+                              <button @click="countmin" type="submit">
+                                <v-icon color="black">mdi-minus</v-icon>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="font-weight-medium">
+                            {{ dataa.kuantitas }}
+                          </div>
+                          <button
+                            class="pluskuantitas"
+                            @click="countplus(dataa)"
+                            type="submit"
                           >
+                            <v-icon color="black">mdi-plus</v-icon>
+                          </button>
                         </div>
-                      </v-row>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium">Rp. 10.000.000</div>
+                      </v-col>
                     </div>
-<<<<<<< HEAD
-                  </div>
-=======
-                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
+                    <div>
+                      <v-btn @click="hapuskeranjang(dataa)"
+                        ><v-icon>mdi-trash</v-icon></v-btn
+                      >
+                    </div>
                   </v-row>
->>>>>>> 0ca85d369a2cc8add5795d7a1c59fda9a34ddd93
+                </div>
+                <div>
+                  <v-btn @click="hapuskeranjang(dataa)"
+                    ><v-icon>mdi-delete</v-icon></v-btn
+                  >
                 </div>
               </div>
-            </v-row>
-          </v-col>
-
-          <v-col class="">
-            <div class="total-detail">
-              <div class="rincian-title">Rincian Order</div>
-              <v-row>
-                <v-col>
-                  <div>
-                    <div class="line"></div>
-                    Jumlah
-                  </div>
-                </v-col>
-                <v-col class="f14sb"> x40 </v-col>
-              </v-row>
-              <v-row>
-                <v-col> Harga </v-col>
-                <v-col class="f14sb"> Rp. {{ price }} </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <div class="line"></div>
-                  Total Harga
-                </v-col>
-                <v-col class="f14sb"> Rp. {{ pricetotal }} </v-col>
-              </v-row>
-              <div class="f24sb">
-                <button
-                  class="checkout-btn text-decoration-none white--text"
-                  @click="nomer()"
-                  type="submit"
-                >
-                  Checkout
-                </button>
-              </div>
             </div>
-          </v-col>
+          </div>
         </v-row>
       </div>
     </div>
+
+    <v-col class="">
+      <div class="total-detail">
+        <div class="rincian-title">Rincian Order</div>
+        <v-row>
+          <v-col>
+            <div>
+              <div class="line"></div>
+              Jumlah
+            </div>
+          </v-col>
+          <v-col class="f14sb"> x40 </v-col>
+        </v-row>
+        <v-row>
+          <v-col> Harga </v-col>
+          <v-col class="f14sb"> Rp. {{ price }} </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div class="line"></div>
+            Total Harga
+          </v-col>
+          <v-col class="f14sb"> Rp. {{ pricetotal }} </v-col>
+        </v-row>
+        <div class="f24sb">
+          <button
+            class="checkout-btn text-decoration-none white--text"
+            @click="nomer()"
+            type="submit"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </v-col>
   </div>
 </template>
 <script>
