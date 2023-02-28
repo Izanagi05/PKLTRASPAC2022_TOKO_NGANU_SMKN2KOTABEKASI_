@@ -6,7 +6,7 @@
       <div class="button-add pl-4 pb-6">
         <nuxt-link
           class="text-decoration-none"
-          to="/user-view/toko-user/tambah-barang"
+          to="/user-view/crud"
           ><v-btn class="btn-add rounded-pill white--text" color="#2f432d"
             >Tambah barang</v-btn
           ></nuxt-link
@@ -88,7 +88,7 @@
           </v-container>
         </v-card>
       </v-dialog>
-      <v-dialog
+      <!-- <v-dialog
         v-model="dialogdetail"
         max-width="700"
         persistent
@@ -136,7 +136,7 @@
                   </div>
                 </v-col>
               </v-row>
-              <!-- <div></div> -->
+
             </div>
             <v-card-actions>
               <v-btn
@@ -147,7 +147,7 @@
             </v-card-actions>
           </v-container>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
       <v-data-table data-app :headers="headers" :items="Toko">
         <template v-slot:[`item.logo`]="{ item }">
           <v-img
@@ -157,7 +157,7 @@
           </v-img>
         </template>
         <template v-slot:[`item.aksi`]="{ item }">
-          <v-btn
+          <!-- <v-btn
             class="mx-2"
             fab
             small
@@ -165,15 +165,15 @@
             style="margin: 15px 15px 15px 0px"
           >
             <v-icon dark>mdi-eye</v-icon>
-          </v-btn>
+          </v-btn> -->
           <v-btn
             class="mx-2"
-            fab
+
             small
             @click="detailbarang(item)"
             style="margin: 15px 15px 15px 0px"
           >
-            <v-icon dark>mdi-magnify</v-icon>
+            Detail barang
           </v-btn>
           <v-btn
             class="mx-2"

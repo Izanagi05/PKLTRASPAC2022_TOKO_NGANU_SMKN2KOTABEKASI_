@@ -1,8 +1,6 @@
 <template>
   <div>
     <Navbar />
-    detail toko
-<!-- {{prm.toko_id  }} -->
 
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -42,12 +40,12 @@
                     <v-btn class="mx-2"  fab small  @click="ubahbarang(item)" style="margin:15px 15px 15px 0px;">
                         <v-icon dark >mdi-pencil</v-icon>
                     </v-btn>
-                    <v-btn class="mx-2"  fab small  @click="detailbarang(item)" style="margin:15px 15px 15px 0px;">
-                        <v-icon dark >mdi-magnify</v-icon>
+                    <v-btn class="mx-2"   small  @click="detailbarang(item)" style="margin:15px 15px 15px 0px;">
+                        buat varian
                     </v-btn>
-                    <v-btn class="mx-2"   small  @click="detailfotobarang(item)" style="margin:15px 15px 15px 0px;">
+                    <!-- <v-btn class="mx-2"   small  @click="detailfotobarang(item)" style="margin:15px 15px 15px 0px;">
                         info foto barang
-                    </v-btn>
+                    </v-btn> -->
           <v-btn class="mx-2" fab small  @click="hapusbarang(item)" style="background:#FF2A30;">
                         <v-icon dark>mdi-delete</v-icon>
                     </v-btn>
@@ -76,7 +74,7 @@ export default {
       headers:[
 
       {text:'Nama Barang', value:'nama'},
-      {text:'Nama Barang', value:'deskripsi'},
+      {text:'Deskripsi', value:'deskripsi'},
       {text:'Aksi', value:'aksi'},
       ],
       detaildatadialog:{

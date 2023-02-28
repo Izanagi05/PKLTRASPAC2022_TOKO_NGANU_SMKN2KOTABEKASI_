@@ -9,6 +9,11 @@ use App\Models\User;
 
 class BarangController extends Controller
 {
+    public function search($search){
+        $data= Barang::where('nama', 'LIKE', '%'.$search.'%')->orWhere('deskripsi', 'LIKE', '%'.$search.'%')->get();
+
+        return response()->json($data);
+    }
     public function getbarang(Request $request, $id){
         $data = Barang::where('toko_id', $id)->get();
 
@@ -25,6 +30,13 @@ class BarangController extends Controller
         return response()->json($data);
 
     }
+    // public function getbarangkeranjangid(){
+    //     $data = Barang::get();
+
+
+    //     return response()->json($data);
+
+    // }
     public function getbarangtokobyid($id){
         $data = Barang::where('barang_id', $id)->get();
 

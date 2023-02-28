@@ -2,242 +2,35 @@
   <div>
     <NavbarPolos />
     <div class="toko-container">
-      <center>
-        <v-card
-          flat
-          max-width="500"
-          max-height="950"
-          variant="outlined"
-          style="margin-top: 100px"
+      <div>Tambah barang toko</div>
+      <v-text-field v-model="databarang.nama" placeholder="Nama"></v-text-field>
+      <v-text-field
+        v-model="databarang.deskripsi"
+        placeholder="Deskripsi"
+      ></v-text-field>
+      <!-- <v-text-field v-model="databarang.kategori_id" placeholder="Kategori"></v-text-field> -->
+      <!-- {{ usertoko }} -->
+      <select v-model="databarang.kategori_id" label="Pilih">
+        <option disabled>Pilih Toko</option>
+        <option
+          v-for="(toko, index) in kategori"
+          :value="toko.kategori_id"
+          :key="index"
         >
-          <v-card flat>
-            <div>
-              <div
-                class="judul text-h3 font-weight-bold pb-4"
-                style="font-family: 'Poppins', sans-serif"
-              >
-                Tambah barang toko
-              </div>
-            </div>
-            <v-sheet width="400">
-              <v-form>
-                <v-text-field
-                  v-model="databarang.nama"
-                  placeholder="Nama"
-                ></v-text-field>
-                <v-text-field
-                  v-model="databarang.deskripsi"
-                  placeholder="Deskripsi"
-                ></v-text-field>
-                <!-- <v-text-field v-model="databarang.kategori_id" placeholder="Kategori"></v-text-field> -->
-                <!-- {{ usertoko }} -->
-                <select v-model="databarang.kategori_id" label="Pilih">
-                  <option disabled>Pilih Toko</option>
-                  <option
-                    v-for="(toko, index) in kategori"
-                    :value="toko.kategori_id"
-                    :key="index"
-                  >
-                    {{ toko.nama }}
-                  </option>
-                </select>
-                <select v-model="databarang.toko_id" label="Pilih">
-                  <option disabled>Pilih Toko</option>
-                  <option
-                    v-for="(toko, index) in usertoko"
-                    :value="toko.toko_id"
-                    :key="index"
-                  >
-                    {{ toko.nama }}
-                  </option>
-                </select>
-                <div class="button pb-6 pt-5">
-                  <v-row>
-                    <v-col cols="4">
-                      <div class="batal">
-                        <v-btn
-                          class="rounded-pill"
-                          x-large
-                          outlined
-                          @click="backprofil"
-                          >Batal</v-btn
-                        >
-                      </div>
-                    </v-col>
-                    <v-col cols="6">
-                      <div class="bayar">
-                        <v-btn
-                          class="rounded-pill"
-                          width="207px"
-                          x-large
-                          outlined
-                          style="background: #2f432d; color: white; size: 105px"
-                          @click="tbhbarang()"
-                          >Tambah</v-btn
-                        >
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-              </v-form>
-            </v-sheet>
-          </v-card>
-        </v-card>
-      </center>
-      <Navbar />
-      <div class="crud-container">
-        <v-row class="judul">
-          <v-col cols="12" md="6"> Tambah Produk</v-col>
-        </v-row>
-
-        <v-row dense justify="center">
-          <v-col cols="12" sm="3"
-            ><div class="list">Nama Barang</div>
-            <div class="list">Kategori</div>
-            <div class="list">Toko</div>
-            <div class="list">Deskripsi</div></v-col
-          >
-          <v-col cols="12" sm="6">
-            <v-text-field
-              label="Nama Barang"
-              placeholder="Masukan Nama Barang"
-              solo
-              v-model="databarang.nama"
-            ></v-text-field>
-            <v-expansion-panels class="panel">
-              <v-expansion-panel class="panel-kategori">
-                <v-expansion-panel-header v-slot="{ open }">
-                  <v-row no-gutters>
-                    <v-col> Kategori </v-col>
-                    <v-col cols="8" class="text--secondary">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="open" key="0"> Pilih Kategori </span>
-                        <span v-else>
-                          <div>
-                            {{ getKategoriText(databarang.kategori_id) }}
-                          </div>
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-row no-gutters>
-                    <v-spacer></v-spacer>
-                    <v-col cols="5">
-                      <div>
-                        <v-select
-                          v-model="databarang.kategori_id"
-                          :items="kategori"
-                          item-text="nama"
-                          item-value="kategori_id"
-                          chips
-                          flat
-                          solo
-                        ></v-select>
-                      </div>
-                    </v-col>
-                  </v-row>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="secondary"> Cancel </v-btn>
-                    <v-btn text color="primary"> Save </v-btn>
-                  </v-card-actions>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header v-slot="{ open }">
-                  <v-row no-gutters>
-                    <v-col> Toko </v-col>
-                    <v-col cols="8" class="text--secondary">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="open" key="0"> Pilih Toko </span>
-                        <span v-else key="1">
-                          <div v-for="(toko, index) in usertoko" :key="index">
-                            {{ toko.nama }}
-                          </div>
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-row no-gutters>
-                    <v-spacer></v-spacer>
-                    <v-col cols="5">
-                      <div>
-                        <v-select
-                          v-model="databarang.toko_id"
-                          :items="toko"
-                          item-text="nama"
-                          item-value="toko_id"
-                          chips
-                          flat
-                          solo
-                        ></v-select>
-                      </div>
-                    </v-col>
-                  </v-row>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="secondary"> Cancel </v-btn>
-                    <v-btn text color="primary"> Save </v-btn>
-                  </v-card-actions>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <v-textarea
-              solo
-              name="input-7-4"
-              label="Deskripsi Barang"
-              v-model="databarang.deskripsi"
-            ></v-textarea
-          ></v-col>
-          <v-col cols="12" sm="3"
-            ><div class="gambar-produk">
-              <v-img
-                dense
-                justify="center"
-                contain
-                max-height="200"
-                max-width="200"
-                :src="require('~/assets/barang.png')"
-              ></v-img>
-            </div>
-            <v-btn
-              rounded
-              outlined
-              class="edit-image"
-              width="200px"
-              height="40px"
-            >
-              Tambah Foto
-            </v-btn></v-col
-          >
-        </v-row>
-        <v-row class="judul" justify="end">
-          <v-col cols="12" md="2"
-            ><nuxt-link to="/user-view"
-              ><v-btn rounded outlined width="150px" class="button-aksi"
-                >Batal</v-btn
-              ></nuxt-link
-            ></v-col
-          ><v-col cols="12" md="2"
-            ><v-btn
-              outlined
-              rounded
-              width="150px"
-              class="button-aksi-jual"
-              @click="tbhbarang()"
-              >Jual</v-btn
-            ></v-col
-          >
-        </v-row>
-      </div>
+          {{ toko.nama }}
+        </option>
+      </select>
+      <select v-model="databarang.toko_id" label="Pilih">
+        <option disabled>Pilih Toko</option>
+        <option
+          v-for="(toko, index) in usertoko"
+          :value="toko.toko_id"
+          :key="index"
+        >
+          {{ toko.nama }}
+        </option>
+      </select>
+      <v-btn @click="tbhbarang()">buat</v-btn>
     </div>
   </div>
 </template>
@@ -386,3 +179,4 @@ export default {
   margin-bottom: 30px;
 }
 </style>
+

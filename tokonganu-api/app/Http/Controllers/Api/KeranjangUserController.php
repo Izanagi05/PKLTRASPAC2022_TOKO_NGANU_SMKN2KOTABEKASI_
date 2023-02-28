@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class KeranjangUserController extends Controller
 {
-    public function keranjangbyuser($id,){
+    public function keranjangbyuser($id){
         $keranjang = User::where('id', $id)->first();
 
 
@@ -20,14 +20,10 @@ class KeranjangUserController extends Controller
         // }
         return response()->json($keranjang);
     }
-    public function keranjanguser($id,){
-        $keranjang = Keranjang_User::where('user_id', $id)->get();
+    public function keranjanguser($id){
+        $keranjang = Keranjang_User::where('user_id', $id)->first();
 
 
-        // $keranjang['user_keranjang']=$keranjang->UserKeranjang;
-        // foreach ($keranjang as $key => $krnjng) {
-
-        // }
 
         return response()->json($keranjang);
     }

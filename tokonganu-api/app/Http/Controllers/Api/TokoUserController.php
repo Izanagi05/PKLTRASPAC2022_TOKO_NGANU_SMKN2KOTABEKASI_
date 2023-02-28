@@ -75,8 +75,10 @@ class TokoUserController extends Controller
             if(!empty(Toko::find($id)->logo)) {
                 Storage::delete(Toko::find($id)->logo);
             }
-            $data = Toko::where('toko_id', $id)->delete();
+            $data = Toko::where('toko_id', $id);
+
             // $data->Barang()->delete();
+            $data->delete();
 
             return response()->json($data, 200);
         }

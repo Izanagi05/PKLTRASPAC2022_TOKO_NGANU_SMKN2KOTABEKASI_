@@ -2,7 +2,8 @@
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak">
+        <button class="kontak" type="submit" @click="kontak"  >
+
           <v-icon color="white">mdi-phone</v-icon>
           +62-815-6315-1038
         </button>
@@ -16,16 +17,7 @@
         <div>Toko nganu</div>
       </div>
       <div flat class="rounded-pill search" color="#d9d9d9">
-        <v-text-field
-          class="nyari rounded-pill"
-          v-model="cari"
-          label="Cari Nganu"
-          single-line
-          hide-details
-          outlined
-          append-icon="mdi-magnify"
-          placehoder="Ni ai wo wo ai ni mi xue bing cheng tianmi mi ni ai wo wo ai ni"
-        ></v-text-field>
+
       </div>
       <div class="profile_icon_keranjang">
         <nuxt-link to="/keranjang" class="text-decoration-none">
@@ -35,34 +27,41 @@
         </nuxt-link>
         <nuxt-link to="/user-view" class="text-decoration-none">
           <v-btn elevation="2" fab icon color="d9d9d9"
-            ><v-icon size="29px">mdi-account</v-icon></v-btn
-          >
+            >  <v-icon>mdi-account</v-icon> </v-btn>
+
         </nuxt-link>
-        <div class="namanya">{{ nama }}</div>
+        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
+      editprofil:[],
       cari: null,
-      nama: "Masbroonyatir",
+      nama: "tes",
       no_admin: "6281563151038",
     };
   },
-  // created() {
-  //   const usernama = this.$cookies.get("cookieku");
-  //   this.nama = usernama.data.nama;
-  // },
-
   methods: {
     kontak() {
       let nomer = this.no_admin;
       window.open("https://wa.me/" + nomer);
     },
+    getuserlogin() {
+      axios
+        .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
+        .then((respon) => {
+          this.editprofil = respon.data;
+        });
+    },
+  },
+  created() {
+    this.getuserlogin()
   },
 };
 </script>

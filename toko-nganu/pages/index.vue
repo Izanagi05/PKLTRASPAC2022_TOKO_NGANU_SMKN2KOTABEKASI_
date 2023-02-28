@@ -1,6 +1,52 @@
 <template>
   <div>
-    <Navbar />
+    <!-- <Navbar  /> -->
+    <div class="ppp">
+    <div class="contact white--text">
+      <div class="contact-text font-weight-regular">
+        <button class="kontak" type="submit" @click="kontak"  >
+
+          <v-icon color="white">mdi-phone</v-icon>
+          +62-815-6315-1038
+        </button>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="logo">
+        <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+      </div>
+      <div class="nama_toko">
+        <div>Toko nganu</div>
+      </div>
+      <div flat class="rounded-pill search" color="#d9d9d9">
+        <v-text-field
+        class="nyari rounded-pill"
+        v-model="cari"
+          label="Cari Nganu"
+          single-line
+          hide-details
+          outlined
+          @keyup.enter="getsearchbarang()"
+          append-icon="mdi-magnify"
+          placehoder="search"
+
+        ></v-text-field>
+      </div>
+      <div class="profile_icon_keranjang">
+        <nuxt-link to="/keranjang" class="text-decoration-none">
+          <v-btn elevation="2" fab color="d9d9d9" icon
+            ><v-icon size="29px">mdi-cart</v-icon></v-btn
+          >
+        </nuxt-link>
+        <nuxt-link to="/user-view" class="text-decoration-none">
+          <v-btn elevation="2" fab icon color="d9d9d9"
+            ><v-icon size="29px">mdi-account</v-icon></v-btn
+          >
+        </nuxt-link>
+        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
+      </div>
+    </div>
+  </div>
     <div class="all-home">
       <div class="home">
         <div class="home-image">
@@ -38,7 +84,54 @@
                         width="204px"
                       ></v-img>
                       <v-row>
-                        <v-col cols="3" class="">
+                        <v-col  class="">
+                          <div class="title-product f14sb pl-1">
+                            {{ brg.nama }}
+                          </div>
+                        </v-col>
+                        <v-col>
+                          <div class="price-product f14sb pr-1">
+                            Rp. 1.999.999
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col>
+                          <div class="desc-product font-weight-regular pl-1">
+                            Bingung masbro
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card pl-1 pb-1">
+                        <button
+                          class="rounded-xl view-more-btn font-weight-regular"
+                          style="font-size: 12px"
+                          @click="todetail(brg)"
+                        >
+                          Lebih lengkap
+                        </button>
+                      </div>
+                    </v-card>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="tampil3" v-if="set == 2">
+              <v-row class="p-0">
+                <v-col
+                  class="card-col"
+                  width="204px"
+                  v-for="(brg, index) in hasilcari"
+                  :key="index"
+                >
+                  <div class="card">
+                    <v-card width="204px">
+                      <v-img
+                        :src="require('~/assets/barang.png')"
+                        width="204px"
+                      ></v-img>
+                      <v-row>
+                        <v-col  class="">
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -123,11 +216,7 @@
             </div>
           </div>
           <div>
-            <div class="text-center view-more">
-              <v-btn class="rounded-xl view-more-btn2 f16sb" outlined
-                >Lihat Lainnya</v-btn
-              >
-            </div>
+
           </div>
         </div>
       </div>
@@ -143,6 +232,8 @@ export default {
     return {
       set: 0,
       cari: null,
+      hasilcari:[],
+      no_admin: "6281563151038",
       nama: null,
       tokouser: null,
       Toko: null,
@@ -159,6 +250,14 @@ export default {
     };
   },
   methods: {
+    search(){
+      // this.searchteks = this.$emit('emitsearch')
+      console.log("ets"+ this.searchteks)
+    },
+    kontak(){
+      let nomer = this.no_admin;
+      window.open("https://wa.me/" + nomer);
+    },
     gettoko() {
       axios
         .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
@@ -171,6 +270,13 @@ export default {
         this.allbarang = respon.data;
       });
       this.set = 0;
+    },
+    getsearchbarang() {
+      axios.get("http://127.0.0.1:8000/api/search/"+this.cari).then((respon) => {
+        this.hasilcari = respon.data;
+        console.log(respon.data)
+      });
+      this.set = 2;
     },
     getallkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
@@ -199,6 +305,7 @@ export default {
     this.tokouser = userid.data.id;
     this.gettoko();
     this.getallkategori();
+    this.getsearchbarang();
     this.getallbarang();
   },
 };
@@ -239,10 +346,68 @@ export default {
   font-size: 10px;
   line-height: 15px;
 }
+.ppp {
+  margin-bottom: 51px;
+  font-family: "Poppins", sans-serif;
+}
+.contact {
+  background: #2f432d;
+  padding: 9px 123px 10px 123px;
+}
+.search {
+  margin-left: 500px;
+}
+.round-btn {
+  border-radius: 50%;
+  width: 49px;
+  height: 49px;
+  background-color: #d9d9d9;
+}
+.contact-text {
+  display: flex;
+  font-size: 16px;
+  line-height: 24px;
+}
+.contact-text .icon_telepon {
+  margin-right: 11px;
+  margin-top: 3px;
+}
+.nav {
+  padding: 39px 123px 10px 123px;
+  display: flex;
+}
+.logo {
+  width: 43px;
+  height: auto;
+}
+.nama_toko {
+  margin-top: 4px;
+  margin-left: 33px;
+  font-size: 24px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.namanya {
+  display: inline-block;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 14px;
+  margin-left: 12px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.profile_icon_keranjang {
+  display: flex;
+  gap: 11px;
+  margin-left: 32px;
+}
+.keranjang {
+  margin-left: 5px;
+}
 
-/* .store-name{
-
-} */
 .home {
   padding: 0px 123px 66px 123px;
 }
