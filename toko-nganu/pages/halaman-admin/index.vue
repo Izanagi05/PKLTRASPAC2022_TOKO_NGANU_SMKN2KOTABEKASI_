@@ -69,6 +69,9 @@
                     <v-list-item-content>
                       <div class="text-overline mb-4">User</div>
                       <v-list-item-title>{{ asr.nama }} </v-list-item-title>
+                      <v-list-item-subtitle>{{
+                        asr.email
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-avatar
@@ -100,9 +103,9 @@
                     <v-list-item-content>
                       <div class="text-overline mb-4">Toko</div>
                       <v-list-item-title>{{ atr.nama }} </v-list-item-title>
-                      <v-list-item-subtitle
-                        >Deskripsi Toko</v-list-item-subtitle
-                      >
+                      <v-list-item-subtitle>{{
+                        atr.deskripsi
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-avatar
@@ -131,13 +134,19 @@
                 >
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4">Barang</div>
+                      <div
+                        v-for="(grb, index) in brg.toko"
+                        :key="index"
+                        class="text-overline mb-4"
+                      >
+                        {{ grb }}
+                      </div>
                       <v-list-item-title class="text-h5 mb-1">
                         {{ brg.nama }}
                       </v-list-item-title>
-                      <v-list-item-subtitle
-                        >Deskripsi Barang</v-list-item-subtitle
-                      >
+                      <v-list-item-subtitle>{{
+                        brg.deskripsi
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-avatar
@@ -174,6 +183,9 @@ export default {
     return {
       alluser: {},
       alltoko: {},
+      allbarang: {
+        toko_id: " ",
+      },
 
       dialogDeleteuser: false,
       dialogDeletetoko: false,

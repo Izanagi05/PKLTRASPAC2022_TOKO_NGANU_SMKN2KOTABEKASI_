@@ -58,7 +58,7 @@
           <v-row class="isi">
             <v-col>
               <div class="foto-profil">
-                <v-avatar width="270px" height="270px">
+                <v-avatar class="foto-profilan" width="270px" height="270px">
                   <!-- {{ dataprofil.foto_profil }} -->
                   <img
                     v-if="dataprofil.foto_profil"
@@ -224,5 +224,8 @@ export default {
   font-family: Poppins;
   font-weight: 700;
   font-size: 20px;
+}
+.foto-profilan {
+  background: #d9d9d9;
 }
 </style>

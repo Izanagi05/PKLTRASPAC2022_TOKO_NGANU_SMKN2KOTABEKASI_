@@ -38,23 +38,23 @@
               </v-col>
             </v-row>
             <v-row>
-              <div
-                class="cart-content"
-
-              >
-              <!-- <div v-for="gthrg in varharga" :key="gthrg">
+              <div class="cart-content">
+                <!-- <div v-for="gthrg in varharga" :key="gthrg">
 
                 <div v-on="ambilharga(gthrg)">
 
                 </div>
               </div> -->
-              <!-- <div v-on="getharga()">l</div> -->
-              <!-- <div v-on="getharga()"></div> -->
-                <div v-for="(dataa, index) in datakeranjang.user_keranjang" :key="index">
+                <!-- <div v-on="getharga()">l</div> -->
+                <!-- <div v-on="getharga()"></div> -->
+                <div
+                  v-for="(dataa, index) in datakeranjang.user_keranjang"
+                  :key="index"
+                >
                   <v-row>
                     <!-- {{ dataa.varian_id }} -->
 
-                    <div class="cart-card d-flex" >
+                    <div class="cart-card d-flex">
                       <v-col>
                         <v-img
                           :src="require('~/assets/barang.png')"
@@ -67,13 +67,19 @@
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="font-weight-medium">Rp. {{ varharga.harga }}</div>
+                        <div class="font-weight-medium">
+                          Rp. {{ varharga.harga }}
+                        </div>
                       </v-col>
                       <v-col>
                         <div class="d-flex kuantitas">
                           <div>
                             <div v-if="dataa.kuantitas == 1">
-                              <button @click="countmin(dataa)" disabled type="submit">
+                              <button
+                                @click="countmin(dataa)"
+                                disabled
+                                type="submit"
+                              >
                                 <v-icon color="AAAAAA">mdi-minus</v-icon>
                               </button>
                             </div>
@@ -97,10 +103,16 @@
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="font-weight-medium">Rp. {{totalprice}}</div>
+                        <div class="font-weight-medium">
+                          Rp. {{ totalprice }}
+                        </div>
                       </v-col>
                     </div>
-                    <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
+                    <div>
+                      <v-btn @click="hapuskeranjang(dataa)"
+                        ><v-icon>mdi-delete</v-icon></v-btn
+                      >
+                    </div>
                   </v-row>
                 </div>
               </div>
@@ -154,12 +166,12 @@ export default {
     return {
       dialogDelete: false,
       price: 100000,
-      varharga:[],
+      varharga: [],
       pricetotal: 0,
-      getidker:null,
-      kuan:1,
-      totalprice:0,
-      namabarangker:null,
+      getidker: null,
+      kuan: 1,
+      totalprice: 0,
+      namabarangker: null,
       datakeranjang: {
         barang_id: "",
         kuantitas: "",
@@ -183,44 +195,51 @@ export default {
           this.datakeranjang = respon.data;
         });
     },
-    getharga(){
-      axios.get('http://127.0.0.1:8000/api/getvarian/'+this.getidker.varian_id).then(respon=>{
-        // if(){
+    getharga() {
+      axios
+        .get("http://127.0.0.1:8000/api/getvarian/" + this.getidker.varian_id)
+        .then((respon) => {
+          // if(){
 
-          this.varharga = respon.data[0]
-        // }
-        this.totalprice=this.varharga.harga
-      })
+          this.varharga = respon.data[0];
+          // }
+          this.totalprice = this.varharga.harga;
+        });
     },
-    getbarangnama(){
-      axios.get('http://127.0.0.1:8000/api/getbarangtokobyid/'+this.getidker.barang_id).then(respon=>{
-     this.namabarangker= respon.data[0].nama
-      })
+    getbarangnama() {
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/getbarangtokobyid/" +
+            this.getidker.barang_id
+        )
+        .then((respon) => {
+          this.namabarangker = respon.data[0].nama;
+        });
     },
     getidkeranjang() {
       axios
         .get("http://127.0.0.1:8000/api/keranjanguser/" + this.userid)
         .then((respon) => {
           this.getidker = respon.data;
-          this.getharga()
-          this.getbarangnama()
-
+          this.getharga();
+          this.getbarangnama();
         });
     },
 
     countplus(dataa) {
-      if(dataa.kuantitas <= this.varharga.stok){
+      if (dataa.kuantitas <= this.varharga.stok) {
         dataa.kuantitas++;
-      }else{
-
+      } else {
       }
-      this.totalprice= parseInt(dataa.kuantitas) * parseInt(this.varharga.harga)
-      this.kuan = dataa.kuantitas
+      this.totalprice =
+        parseInt(dataa.kuantitas) * parseInt(this.varharga.harga);
+      this.kuan = dataa.kuantitas;
     },
     countmin(dataa) {
-        dataa.kuantitas -=1;
-        this.kuan = dataa.kuantitas
-        this.totalprice= parseInt(this.totalprice) - parseInt(this.varharga.harga)
+      dataa.kuantitas -= 1;
+      this.kuan = dataa.kuantitas;
+      this.totalprice =
+        parseInt(this.totalprice) - parseInt(this.varharga.harga);
     },
     hapuskeranjang(item) {
       this.detaildatadialog = Object.assign({}, item);
@@ -248,13 +267,14 @@ export default {
     },
 
     nomer() {
-
       let no = this.no_admin;
       let pesan =
         "Hi!%20Saya%20ingin%20memesan%20" +
-        this.namabarangker + " dengan%20varian%20" +this.varharga.nama+
+        this.namabarangker +
+        " dengan%20varian%20" +
+        this.varharga.nama +
         "%20seharga%20Rp." +
-        this.totalprice
+        this.totalprice;
       window.open(
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );

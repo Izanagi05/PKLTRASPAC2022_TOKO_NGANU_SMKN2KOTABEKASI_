@@ -55,12 +55,12 @@
         <v-row>
           <div class="filter">
             <v-col cols="4">
-              <v-btn @click="getallbarang()"> Semua Kategori </v-btn>
+              <v-btn outlined @click="getallbarang()"> Semua Kategori </v-btn>
             </v-col>
           </div>
           <div class="filter" v-for="(ktg, index) in allkategori" :key="index">
             <v-col cols="4">
-              <v-btn @click="getkategori(ktg)"> {{ ktg.nama }} </v-btn>
+              <v-btn outlined @click="getkategori(ktg)"> {{ ktg.nama }} </v-btn>
             </v-col>
           </div>
         </v-row>
@@ -425,6 +425,11 @@ export default {
 .filter .v-btn {
   margin-top: 34px;
   border-radius: 25px;
+}
+
+.filter .v-btn:hover {
+  background: #2f432d;
+  color: white;
 }
 .recomend {
   /* font-size: 24px;
