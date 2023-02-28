@@ -114,7 +114,8 @@
           ></v-textarea
         ></v-col>
         <v-col cols="12" sm="3"
-          ><div class="gambar-produk">
+          >
+          <!-- <div class="gambar-produk">
             <v-img
               dense
               justify="center"
@@ -132,7 +133,8 @@
             height="40px"
           >
             Tambah Foto
-          </v-btn></v-col
+          </v-btn> -->
+          </v-col
         >
       </v-row>
       <v-row class="judul" justify="end">

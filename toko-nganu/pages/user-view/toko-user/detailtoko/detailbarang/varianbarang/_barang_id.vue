@@ -34,7 +34,6 @@
 </v-container>
 </v-card>
 </v-dialog>
-{{ barang }}
     <v-data-table data-app
     :headers="headers"
     :items="barang"
@@ -139,8 +138,9 @@ export default {
     konfirmtambahvarian(){
       axios.post('http://127.0.0.1:8000/api/createvarianbarang/'+this.prm.barang_id, this.detaildatadialog ).then(respon=>{
         console.log(respon)
+        // this.barang.push(this.detaildatadialog)
+        location.reload()
       })
-      this.barang.push(this.detaildatadialog)
       this.closeadd()
     },
 
@@ -159,8 +159,9 @@ export default {
     updatevarian(){
       axios.post('http://127.0.0.1:8000/api/updatevarianbarang/'+this.varid.varian_id, this.detaildatadialog).then(respon=>{
         console.log(respon.data)
+        location.reload()
       })
-      Object.assign(this.barang[this.indexnya], this.detaildatadialog)
+      // Object.assign(this.barang[this.indexnya], this.detaildatadialog)
     this.dialogedit=false
     },
 
@@ -173,6 +174,7 @@ export default {
       axios.delete('http://127.0.0.1:8000/api/deletevarianbarang/'+this.detaildatadialog.varian_id).then(respon =>{
        console.log(respon)
         alert('berhasil hapus')
+        location.reload()
         })
         this.barang.splice(this.editedIndex, 1)
         this.closeDelete()

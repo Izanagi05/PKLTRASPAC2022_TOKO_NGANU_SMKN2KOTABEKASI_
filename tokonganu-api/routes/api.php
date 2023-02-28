@@ -57,6 +57,7 @@ Route::get('/getbarang/{id}', [BarangController::class, 'getbarang']);
 Route::get('/getallbarangtoko', [BarangController::class, 'getallbarangtoko']);
 Route::get('/getbarangtokobyid/{id}', [BarangController::class, 'getbarangtokobyid']);
 Route::get('/getbarangvariantokobyid/{id}', [BarangController::class, 'getbarangvariantokobyid']);
+Route::get('/search/{search}', [BarangController::class, 'search']);
 
 
 Route::get('/getvarianbarang/{id}', [VarianBarangController::class, 'getbarangvarian']);

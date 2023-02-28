@@ -6,7 +6,7 @@
     <v-text-field v-model="databarang.alamat" placeholder="Alamat"></v-text-field>
     <v-text-field v-model="databarang.deskripsi" placeholder="Deskripsi"></v-text-field>
     <v-text-field v-model="databarang.no_telepon" placeholder="No Telepon"></v-text-field>
-    <v-text-field v-model="databarang.logo" placeholder="logo"></v-text-field>
+    <!-- <v-text-field v-model="databarang.logo" placeholder="logo"></v-text-field> -->
     <v-btn @click="buattoko()">buat</v-btn>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
         alamat: null,
         deskripsi: null,
         no_telepon: null,
-        logo: null,
+        // logo: null,
       },
     };
   },

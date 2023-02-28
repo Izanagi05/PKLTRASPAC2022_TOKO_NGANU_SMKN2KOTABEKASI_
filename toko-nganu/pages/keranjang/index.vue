@@ -40,13 +40,21 @@
             <v-row>
               <div
                 class="cart-content"
-                v-for="(user, index) in datakeranjang"
-                :key="index"
+
               >
-                <div v-for="(dataa, index) in user.user_keranjang" :key="index">
+              <!-- <div v-for="gthrg in varharga" :key="gthrg">
+
+                <div v-on="ambilharga(gthrg)">
+
+                </div>
+              </div> -->
+              <!-- <div v-on="getharga()">l</div> -->
+              <!-- <div v-on="getharga()"></div> -->
+                <div v-for="(dataa, index) in datakeranjang.user_keranjang" :key="index">
                   <v-row>
                     <!-- {{ dataa.varian_id }} -->
-                    <div class="cart-card d-flex">
+
+                    <div class="cart-card d-flex" >
                       <v-col>
                         <v-img
                           :src="require('~/assets/barang.png')"
@@ -55,22 +63,22 @@
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                          masih id barang:{{ dataa.barang_id }}
+                          barang:{{ namabarangker }}
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="font-weight-medium">Rp. {{ price }}</div>
+                        <div class="font-weight-medium">Rp. {{ varharga.harga }}</div>
                       </v-col>
                       <v-col>
                         <div class="d-flex kuantitas">
                           <div>
-                            <div v-if="dataa.kuantitas == 0">
-                              <button @click="countmin" disabled type="submit">
+                            <div v-if="dataa.kuantitas == 1">
+                              <button @click="countmin(dataa)" disabled type="submit">
                                 <v-icon color="AAAAAA">mdi-minus</v-icon>
                               </button>
                             </div>
                             <div v-else>
-                              <button @click="countmin" type="submit">
+                              <button @click="countmin(dataa)" type="submit">
                                 <v-icon color="black">mdi-minus</v-icon>
                               </button>
                             </div>
@@ -89,7 +97,7 @@
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="font-weight-medium">Rp. 10.000.000</div>
+                        <div class="font-weight-medium">Rp. {{totalprice}}</div>
                       </v-col>
                     </div>
                     <div><v-btn @click="hapuskeranjang(dataa)"><v-icon>mdi-delete</v-icon></v-btn></div>
@@ -109,18 +117,18 @@
                     Jumlah
                   </div>
                 </v-col>
-                <v-col class="f14sb"> x40 </v-col>
+                <v-col class="f14sb"> {{ kuan }} </v-col>
               </v-row>
               <v-row>
                 <v-col> Harga </v-col>
-                <v-col class="f14sb"> Rp. {{ price }} </v-col>
+                <v-col class="f14sb"> Rp. {{ varharga.harga }} </v-col>
               </v-row>
               <v-row>
                 <v-col>
                   <div class="line"></div>
                   Total Harga
                 </v-col>
-                <v-col class="f14sb"> Rp. {{ pricetotal }} </v-col>
+                <v-col class="f14sb"> Rp. {{ totalprice }} </v-col>
               </v-row>
               <div class="f24sb">
                 <button
@@ -146,7 +154,12 @@ export default {
     return {
       dialogDelete: false,
       price: 100000,
+      varharga:[],
       pricetotal: 0,
+      getidker:null,
+      kuan:1,
+      totalprice:0,
+      namabarangker:null,
       datakeranjang: {
         barang_id: "",
         kuantitas: "",
@@ -159,7 +172,7 @@ export default {
       },
       userid: null,
       no_admin: "+62-815-6315-1038",
-      tesbarang: "barang ini",
+      tesbarang: null,
     };
   },
   methods: {
@@ -170,20 +183,46 @@ export default {
           this.datakeranjang = respon.data;
         });
     },
-    countplus(dataa) {
-      dataa.kuantitas++;
-      this.pricetotal = parseInt(this.tes.kuantitas) * parseInt(this.price);
+    getharga(){
+      axios.get('http://127.0.0.1:8000/api/getvarian/'+this.getidker.varian_id).then(respon=>{
+        // if(){
+
+          this.varharga = respon.data[0]
+        // }
+        this.totalprice=this.varharga.harga
+      })
     },
-    countmin() {
-      if (this.kuantitas < 1) {
-        this.kuantitas = 0;
-      } else {
-        this.tes.kuantitas -= 1;
+    getbarangnama(){
+      axios.get('http://127.0.0.1:8000/api/getbarangtokobyid/'+this.getidker.barang_id).then(respon=>{
+     this.namabarangker= respon.data[0].nama
+      })
+    },
+    getidkeranjang() {
+      axios
+        .get("http://127.0.0.1:8000/api/keranjanguser/" + this.userid)
+        .then((respon) => {
+          this.getidker = respon.data;
+          this.getharga()
+          this.getbarangnama()
+
+        });
+    },
+
+    countplus(dataa) {
+      if(dataa.kuantitas <= this.varharga.stok){
+        dataa.kuantitas++;
+      }else{
+
       }
-      console.log("pp");
+      this.totalprice= parseInt(dataa.kuantitas) * parseInt(this.varharga.harga)
+      this.kuan = dataa.kuantitas
+    },
+    countmin(dataa) {
+        dataa.kuantitas -=1;
+        this.kuan = dataa.kuantitas
+        this.totalprice= parseInt(this.totalprice) - parseInt(this.varharga.harga)
     },
     hapuskeranjang(item) {
-      this.editedIndex = this.datakeranjang.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
       this.dialogDelete = true;
       console.log(this.editedIndex);
@@ -199,7 +238,6 @@ export default {
           location.reload();
           alert("berhasil hapus");
         });
-      // this.datakeranjang.splice(this.editedIndex, 1)
       this.closeDelete();
     },
     closeDelete() {
@@ -208,13 +246,15 @@ export default {
         this.editedIndex = -1;
       });
     },
+
     nomer() {
+
       let no = this.no_admin;
       let pesan =
         "Hi!%20Saya%20ingin%20memesan%20" +
-        this.tesbarang +
+        this.namabarangker + " dengan%20varian%20" +this.varharga.nama+
         "%20seharga%20Rp." +
-        this.price;
+        this.totalprice
       window.open(
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );
@@ -224,6 +264,7 @@ export default {
     const usid = this.$cookies.get("cookieku");
     this.userid = usid.data.id;
     this.getkeranjang();
+    this.getidkeranjang();
   },
 };
 </script>
