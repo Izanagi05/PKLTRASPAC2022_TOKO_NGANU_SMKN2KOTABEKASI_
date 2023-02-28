@@ -132,7 +132,7 @@
               </v-row>
               <div class="f24sb">
                 <button
-                  class="checkout-btn text-decoration-none white--text"
+                  class="checkout-btn b text-decoration-none white--text"
                   @click="nomer()"
                   type="submit"
                 >
