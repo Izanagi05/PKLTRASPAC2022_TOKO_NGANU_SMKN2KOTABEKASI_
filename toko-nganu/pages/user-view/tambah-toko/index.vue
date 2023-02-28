@@ -114,7 +114,14 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
-        <v-btn @click="buattoko()">buat</v-btn>
+        <v-btn
+          rounded
+          outlined
+          width="150px"
+          class="button-aksi"
+          @click="buattoko()"
+          >buat</v-btn
+        >
       </div>
     </div>
   </div>
@@ -130,11 +137,15 @@
 .dalam-container {
   padding: 50px 50px;
   border-radius: 2%;
-  color: white;
-  background: #2f432d;
+  color: rgb(0, 0, 0);
+  background: #ffffff;
 }
 .panel {
   margin-bottom: 20px;
+}
+.button-aksi {
+  color: rgb(255, 255, 255) !important;
+  background: #2f432d;
 }
 </style>
 

@@ -34,220 +34,132 @@
       </v-card>
     </v-dialog>
     <div class="home-container">
-      <div v-for="(asr, index) in alluser" :key="index">
-        {{ asr.nama }}
-      </div>
-    </div>
-    <div v-for="(atr, index) in alltoko" :key="index">
-      {{ atr.nama }} ====== <v-btn @click="hapustoko(atr)">hapus</v-btn>
-    </div>
-    <!-- <v-text-field
-            class="search"
-            rounded
-            placeholder="Search nganu"
-            append-icon="mdi-magnify"
-          ></v-text-field>           -->
-    <div class="content">
       <div class="kiri">
         <div class="sub-title ml-5" width="170px" height="30px">
           Halaman Admin
         </div>
-        <div class="produk ml-6" style="font-size: 16px">
-          <span class="mdi mdi-package-variant-closed">Produk</span>
-        </div>
-        <div class="tambah-produk ml-6" style="font-size: 16px">
-          <span class="mdi mdi-package-variant-closed-plus">Tambah Produk</span>
-        </div>
+        <v-card>
+          <v-tabs vertical>
+            <v-tab>
+              <v-card class="produk ml-6" style="font-size: 16px">
+                <span class="mdi mdi-package-variant-closed">User</span>
+              </v-card>
+            </v-tab>
+            <v-tab>
+              <v-card class="tambah-produk ml-6" style="font-size: 16px">
+                <span class="mdi mdi-package-variant-closed-plus">Toko</span>
+              </v-card>
+            </v-tab>
+            <v-tab>
+              <v-card class="tambah-produk ml-6" style="font-size: 16px">
+                <span class="mdi mdi-package-variant-closed-plus">Barang</span>
+              </v-card>
+            </v-tab>
+            <v-tab-item>
+              <v-card flat class="items">
+                <v-card
+                  d-flex
+                  max-width="344"
+                  outlined
+                  class="text-h5 mb-1 mx-auto"
+                  v-for="(asr, index) in alluser"
+                  :key="index"
+                >
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">User</div>
+                      <v-list-item-title>{{ asr.nama }} </v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+
+                  <v-card-actions>
+                    <v-btn outlined rounded text @click="hapususer(atr)">
+                      Hapus
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-tab-item>
+            <v-tab-item>
+              <v-card flat class="items">
+                <v-card
+                  d-flex
+                  max-width="344"
+                  outlined
+                  class="text-h5 mb-1 mx-auto"
+                  v-for="(atr, index) in alltoko"
+                  :key="index"
+                >
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">Toko</div>
+                      <v-list-item-title>{{ atr.nama }} </v-list-item-title>
+                      <v-list-item-subtitle
+                        >Deskripsi Toko</v-list-item-subtitle
+                      >
+                    </v-list-item-content>
+
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+
+                  <v-card-actions>
+                    <v-btn outlined rounded text @click="hapustoko(atr)">
+                      Hapus
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-tab-item>
+            <v-tab-item>
+              <v-card flat class="items">
+                <v-card
+                  class="text-h5 mb-1 mx-auto"
+                  max-width="344"
+                  outlined
+                  v-for="(brg, index) in allbarang"
+                  :key="index"
+                >
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">Barang</div>
+                      <v-list-item-title class="text-h5 mb-1">
+                        {{ brg.nama }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle
+                        >Deskripsi Barang</v-list-item-subtitle
+                      >
+                    </v-list-item-content>
+
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+
+                  <v-card-actions>
+                    <v-btn outlined rounded text @click="hapusbarang(atr)">
+                      Hapus
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+        </v-card>
+
         <div class="logout ml-6 pb-4" style="font-size: 16px">
           <span class="mdi mdi-logout mdi-35px">Logout</span>
-        </div>
-      </div>
-      <div class="pembatas mb-6"></div>
-      <div class="content">
-        <div class="barang pt-5">
-          <div>
-            <div class="product-card">
-              <v-row class="p-0">
-                <v-col class="card-col p-0" width="204px">
-                  <v-card width="204px">
-                    <v-img
-                      :src="require('~/assets/barang.png')"
-                      width="204px"
-                    ></v-img>
-                    <v-row>
-                      <v-col cols="5" class="">
-                        <div class="title-product f14sb pl-1">Mas bro</div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">
-                          Rp. 1.999.999
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          Bingung masbro
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-2 pb-3 pt-3">
-                      <v-btn
-                        class="rounded-xl edit-btn font-weight-regular"
-                        style="
-                          font-size: 12px;
-                          background: #2f432d;
-                          color: white;
-                        "
-                      >
-                        Edit
-                      </v-btn>
-                      <v-btn
-                        class="rounded-xl hapus-btn font-weight-medium pl-3"
-                        outlined
-                        style="font-size: 12px; color: red"
-                      >
-                        Hapus
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col class="card-col p-0">
-                  <v-card width="204px">
-                    <v-img
-                      :src="require('~/assets/barang.png')"
-                      width="204px"
-                    ></v-img>
-                    <v-row>
-                      <v-col cols="5" class="">
-                        <div class="title-product f14sb pl-1">Mas bro</div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">
-                          Rp. 1.999.999
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          Bingung masbro
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-2 pb-3 pt-3">
-                      <v-btn
-                        class="rounded-xl edit-btn font-weight-regular"
-                        style="
-                          font-size: 12px;
-                          background: #2f432d;
-                          color: white;
-                        "
-                      >
-                        Edit
-                      </v-btn>
-                      <v-btn
-                        class="rounded-xl hapus-btn font-weight-medium pl-3"
-                        outlined
-                        style="font-size: 12px; color: red"
-                      >
-                        Hapus
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col class="card-col p-0">
-                  <v-card width="204px">
-                    <v-img
-                      :src="require('~/assets/barang.png')"
-                      width="204px"
-                    ></v-img>
-                    <v-row>
-                      <v-col cols="5" class="">
-                        <div class="title-product f14sb pl-1">Mas bro</div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">
-                          Rp. 1.999.999
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          Bingung masbro
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-2 pb-3 pt-3">
-                      <v-btn
-                        class="rounded-xl edit-btn font-weight-regular"
-                        style="
-                          font-size: 12px;
-                          background: #2f432d;
-                          color: white;
-                        "
-                      >
-                        Edit
-                      </v-btn>
-                      <v-btn
-                        class="rounded-xl hapus-btn font-weight-medium pl-3"
-                        outlined
-                        style="font-size: 12px; color: red"
-                      >
-                        Hapus
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col class="card-col p-0">
-                  <v-card width="204px">
-                    <v-img
-                      :src="require('~/assets/barang.png')"
-                      width="204px"
-                    ></v-img>
-                    <v-row>
-                      <v-col cols="5" class="">
-                        <div class="title-product f14sb pl-1">Mas bro</div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">
-                          Rp. 1.999.999
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          Bingung masbro
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-2 pb-3 pt-3">
-                      <v-btn
-                        class="rounded-xl edit-btn font-weight-regular"
-                        style="
-                          font-size: 12px;
-                          background: #2f432d;
-                          color: white;
-                        "
-                      >
-                        Edit
-                      </v-btn>
-                      <v-btn
-                        class="rounded-xl hapus-btn font-weight-medium pl-3"
-                        outlined
-                        style="font-size: 12px; color: red"
-                      >
-                        Hapus
-                      </v-btn>
-                    </div>
-                  </v-card>
-                  <v-divider class="mx-4"></v-divider>
-                </v-col>
-              </v-row>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -271,6 +183,9 @@ export default {
       },
       detaildatadialogtoko: {
         toko_id: "",
+      },
+      allbarang: {
+        barang_id: "",
       },
     };
   },
@@ -340,31 +255,30 @@ export default {
         this.editedIndex = -1;
       });
     },
+    getallbarang() {
+      axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
+        this.allbarang = respon.data;
+      });
+    },
   },
   created() {
     this.getalluser();
     this.getalltoko();
+    this.getallbarang();
   },
 };
 </script>
 
 <style>
+.items {
+  display: flex;
+}
 .contact {
   background-color: #2f432d;
   padding: 5px 0px 7px 154px;
 }
 .home-container {
   padding: 0px 123px;
-}
-.f24sb {
-  padding-top: 15px;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-}
-.content {
-  display: flex;
-  gap: 38px;
 }
 .sub-title {
   font-family: "Poppins", sans-serif;
@@ -377,17 +291,10 @@ export default {
   font-size: 20px;
 }
 .logout {
-  margin-top: 570px;
+  margin-top: 100px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 
   font-size: 20px;
-}
-.pembatas {
-  border-left: 8px solid #d9d9d9;
-  border-radius: 20px;
-  height: 750px;
-  margin-right: 10px;
-  margin-left: 17px;
 }
 </style>
