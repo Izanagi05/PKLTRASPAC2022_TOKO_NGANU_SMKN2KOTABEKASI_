@@ -63,7 +63,7 @@
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                          barang:{{ namabarangker }}
+                          barang:{{ namabarangker.nama }}
                         </div>
                       </v-col>
                       <v-col>
@@ -104,7 +104,7 @@
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                          Rp. {{ totalprice }}
+                          Rp. {{ totalprice.harga }}
                         </div>
                       </v-col>
                     </div>
@@ -140,7 +140,7 @@
                   <div class="line"></div>
                   Total Harga
                 </v-col>
-                <v-col class="f14sb"> Rp. {{ totalprice }} </v-col>
+                <v-col class="f14sb"> Rp. {{ totalprice.harga }} </v-col>
               </v-row>
               <div class="f24sb">
                 <button
@@ -150,6 +150,7 @@
                 >
                   Checkout
                 </button>
+                <!-- <v-btn @click="transaksi">transaksi </v-btn> -->
               </div>
             </div>
           </v-col>
@@ -166,12 +167,20 @@ export default {
     return {
       dialogDelete: false,
       price: 100000,
-      varharga: [],
+      varharga: {
+        harga:0,
+        nama:"",
+        stok:0,
+      },
       pricetotal: 0,
       getidker: null,
       kuan: 1,
-      totalprice: 0,
-      namabarangker: null,
+      totalprice: {
+        harga:0,
+      },
+      namabarangker: {
+        nama:"",
+      },
       datakeranjang: {
         barang_id: "",
         kuantitas: "",
@@ -199,12 +208,10 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/getvarian/" + this.getidker.varian_id)
         .then((respon) => {
-          // if(){
-
           this.varharga = respon.data[0];
-          // }
-          this.totalprice = this.varharga.harga;
+
         });
+        this.totalprice.harga = this.varharga;
     },
     getbarangnama() {
       axios
@@ -213,7 +220,7 @@ export default {
             this.getidker.barang_id
         )
         .then((respon) => {
-          this.namabarangker = respon.data[0].nama;
+          this.namabarangker = respon.data[0];
         });
     },
     getidkeranjang() {
@@ -231,20 +238,20 @@ export default {
         dataa.kuantitas++;
       } else {
       }
-      this.totalprice =
+      this.totalprice.harga =
         parseInt(dataa.kuantitas) * parseInt(this.varharga.harga);
       this.kuan = dataa.kuantitas;
     },
     countmin(dataa) {
       dataa.kuantitas -= 1;
       this.kuan = dataa.kuantitas;
-      this.totalprice =
-        parseInt(this.totalprice) - parseInt(this.varharga.harga);
+      this.totalprice.harga =
+        parseInt(this.totalprice.harga) - parseInt(this.varharga.harga);
     },
     hapuskeranjang(item) {
       this.detaildatadialog = Object.assign({}, item);
       this.dialogDelete = true;
-      console.log(this.editedIndex);
+      // console.log(this.editedIndex);
     },
     confirmhapuskeranjang() {
       axios
@@ -270,15 +277,18 @@ export default {
       let no = this.no_admin;
       let pesan =
         "Hi!%20Saya%20ingin%20memesan%20" +
-        this.namabarangker +
+        this.namabarangker.nama +
         " dengan%20varian%20" +
         this.varharga.nama +
         "%20seharga%20Rp." +
-        this.totalprice;
+        this.totalprice.harga;
       window.open(
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );
     },
+    transaksi(){
+      console.log("tes")
+    }
   },
   created() {
     const usid = this.$cookies.get("cookieku");

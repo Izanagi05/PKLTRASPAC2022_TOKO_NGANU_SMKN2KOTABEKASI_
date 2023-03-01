@@ -90,7 +90,7 @@
                   <div class="card">
                     <v-card width="204px">
                       <v-img
-                        :src="require('~/assets/barang.png')"
+                        :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
                       <v-row>
@@ -101,14 +101,14 @@
                         </v-col>
                         <v-col>
                           <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
+                            <!-- Rp. 1.999.999 -->
                           </div>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
+                            {{brg.nama}}
                           </div>
                         </v-col>
                       </v-row>
@@ -137,7 +137,7 @@
                   <div class="card">
                     <v-card width="204px">
                       <v-img
-                        :src="require('~/assets/barang.png')"
+                        :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
                       <v-row>
@@ -155,7 +155,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
+                            {{ brg.deskripsi }}
                           </div>
                         </v-col>
                       </v-row>
@@ -188,7 +188,7 @@
                   <div class="card">
                     <v-card width="204px">
                       <v-img
-                        :src="require('~/assets/barang.png')"
+                        :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
                       <v-row>
@@ -206,7 +206,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            Bingung masbro
+                            {{barang.deskripsi}}
                           </div>
                         </v-col>
                       </v-row>

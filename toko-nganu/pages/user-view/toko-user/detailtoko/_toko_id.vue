@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-
+    <div class="pl-15  pb-5 font-weight-medium">Detail Barang</div>
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
@@ -31,7 +31,7 @@
 </v-card>
 </v-dialog>
 
-    <v-data-table
+    <v-data-table class="px-15"
     :headers="headers"
     :items="Toko"
     >
@@ -43,9 +43,9 @@
                     <v-btn class="mx-2"   small  @click="detailbarang(item)" style="margin:15px 15px 15px 0px;">
                         buat varian
                     </v-btn>
-                    <!-- <v-btn class="mx-2"   small  @click="detailfotobarang(item)" style="margin:15px 15px 15px 0px;">
+                    <v-btn class="mx-2"   small  @click="detailfotobarang(item)" style="margin:15px 15px 15px 0px;">
                         info foto barang
-                    </v-btn> -->
+                    </v-btn>
           <v-btn class="mx-2" fab small  @click="hapusbarang(item)" style="background:#FF2A30;">
                         <v-icon dark>mdi-delete</v-icon>
                     </v-btn>

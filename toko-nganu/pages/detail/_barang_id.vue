@@ -8,7 +8,13 @@
       <v-row >
         <v-col>
           <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
-            <v-img :src="require('~/assets/barang.png')" width="479px"></v-img>
+            <v-row  >
+
+              <v-col cols="6" v-for="(ft,index) in allfotobybrgid" :key="index">
+
+                <v-img v-if="'http://127.0.0.1:8000/storage/' + ft.file" :src="'http://127.0.0.1:8000/storage/' + ft.file" width="250px"></v-img>
+              </v-col>
+            </v-row>
           </div>
         </v-col>
         <v-col>
@@ -17,13 +23,12 @@
               {{dtlbrg.nama  }}
             </div>
             <div class="harga font-weight-bold pt-3" style="font-size: 40px">
-              Rp. 1.999.999
+              <!-- Rp. 1.999.999 -->
             </div>
             <div
               class="deskripsi font-weight-regular pt-3"
               style="font-size: 20px"
             >
-              Bingung Masbro
             </div>
             <div>
               nama toko: {{ dtlbrg.toko.nama }}
@@ -31,8 +36,8 @@
             pilih varian
             <v-row>
               <v-col v-for="(varian, index) in dtlbrg.barang_varian" :key="index">
-                <p>foto</p>
-                <p>stok{{ varian.stok }}</p>
+                <!-- <p>foto</p> -->
+                <p>stok: {{ varian.stok }}</p>
                 <p>harga {{varian.harga}}</p>
                 <p></p>
                 <v-btn @click="pilihanvarian(varian)">{{ varian.nama }}</v-btn>
@@ -80,17 +85,14 @@
 <script>
 import axios from 'axios';
 export default {
+  middleware: "middlewareku",
   data() {
     return {
       prm:this.$route.params,
       detailbarang:[],
       userid:null,
-      // dtlbrg:{
-      //   toko_id:'',
-      //   barang_id:'',
-      //   kuantitas:1,
-      //   varian_id:1
-      // },
+      allfotobybrgid:[],
+
       detbarker:{
         user_id:'',
         barang_id:1,
@@ -109,6 +111,11 @@ export default {
         this.detailbarang = respon.data
       })
     },
+    getfotobyidbrg(){
+      axios.get('http://127.0.0.1:8000/api/getfotobarang/'+ this.prm.barang_id).then(respon=>{
+        this.allfotobybrgid = respon.data
+      })
+    },
     pilihanvarian(varian){
       this.pilihan = varian.varian_id
       let namasetvar = varian.nama
@@ -123,6 +130,7 @@ export default {
         this.detbarker.varian_id=this.pilihan
       axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, this.detbarker).then(respon=>{
         console.log(respon)
+
       })
       console.log(this.pilihan)
     },
@@ -138,6 +146,7 @@ export default {
     const usid = this.$cookies.get('cookieku')
     this.userid =usid.data.id
     this.getbarangtokobyid()
+    this.getfotobyidbrg()
   },
 
 }

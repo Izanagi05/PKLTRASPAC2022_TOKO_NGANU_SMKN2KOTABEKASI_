@@ -75,6 +75,9 @@ Route::delete('/deletefotobarang/{id}', [FotoBarangController::class, 'deletefot
 
 Route::get('/getkategori/{id}', [KategoriController::class, 'getkategorbybarang']);
 Route::get('/getallkategori', [KategoriController::class, 'getallkategori']);
+Route::post('/createkategori', [KategoriController::class, 'createkategori']);
+Route::delete('/deletekategori/{id}', [KategoriController::class, 'deletekategori']);
+Route::post('/updatekategori/{id}', [KategoriController::class, 'updatekategori']);
 // Route::get('/user', [UserController::class, 'getuser']);
 
 

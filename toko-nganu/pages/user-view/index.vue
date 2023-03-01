@@ -92,7 +92,7 @@
               <v-row dense justify="center">
                 <v-col cols="12" sm="6">
                   <p>Nama</p>
-                  <p>Alamat</p>
+                  <!-- <p>Alamat</p> -->
                 </v-col>
                 <v-col cols="12" sm="6">
                   <p>{{ dataprofil.nama }}</p>

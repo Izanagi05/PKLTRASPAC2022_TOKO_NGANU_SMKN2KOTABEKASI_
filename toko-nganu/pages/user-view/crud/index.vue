@@ -3,7 +3,7 @@
     <Navbar />
     <div class="crud-container">
       <v-row class="judul">
-        <v-col cols="12" md="6"> Tambah Produk</v-col>
+        <v-col cols="12" md="6"> Tambah Barang</v-col>
       </v-row>
 
       <v-row dense justify="center">
@@ -115,25 +115,7 @@
         ></v-col>
         <v-col cols="12" sm="3"
           >
-          <!-- <div class="gambar-produk">
-            <v-img
-              dense
-              justify="center"
-              contain
-              max-height="200"
-              max-width="200"
-              :src="require('~/assets/barang.png')"
-            ></v-img>
-          </div>
-          <v-btn
-            rounded
-            outlined
-            class="edit-image"
-            width="200px"
-            height="40px"
-          >
-            Tambah Foto
-          </v-btn> -->
+
           </v-col
         >
       </v-row>
@@ -165,7 +147,6 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
-      // items:null,
       usertoko: [],
       userid: null,
       kategori: [],
@@ -180,7 +161,7 @@ export default {
 
   methods: {
     gettokouser() {
-      axios.get("http://127.0.0.1:8000/api/getalltoko").then((respon) => {
+      axios.get("http://127.0.0.1:8000/api/gettoko/"+this.userid).then((respon) => {
         this.usertoko = respon.data;
         //  this.items = respon.data
       });

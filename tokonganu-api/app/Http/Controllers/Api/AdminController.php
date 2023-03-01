@@ -24,7 +24,7 @@ class AdminController extends Controller
         // dd($barang);
 
         // $barang->delete();
-        $data->delete();
+        $data->delete(); 
         return response()->json($data, 200);
     }
 

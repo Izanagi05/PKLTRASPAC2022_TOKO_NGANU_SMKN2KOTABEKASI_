@@ -79,7 +79,7 @@
             <v-row>
               <v-col cols="12" sm="3">
                 <div class="nama pt-5 pb-5">Nama</div>
-                <div class="alamat pb-5">Alamat</div>
+                <!-- <div class="alamat pb-5">Alamat</div> -->
                 <div class="telepon pb-5">Telepon</div>
                 <div class="email pb-5">E-Mail</div>
               </v-col>
@@ -91,13 +91,13 @@
                     label="Masukkan Nama"
                   ></v-text-field>
                 </div>
-                <div class="text-alamat pb-5">
+                <!-- <div class="text-alamat pb-5">
                   <v-textarea
                     solo
                     v-model="editprofil.alamat"
                     label="Masukkan Alamat"
                   ></v-textarea>
-                </div>
+                </div> -->
                 <div class="text-telepon pb-5">
                   <v-text-field
                     type="number"
@@ -152,6 +152,7 @@
 <script>
 import axios from "axios";
 export default {
+  middleware: "middlewareku",
   data() {
     return {
       olddata: null,

@@ -1,10 +1,9 @@
 <template>
   <div>
     <Navbar />
-    detail varian
+    
 
-
-
+    <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div> 
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
@@ -34,7 +33,7 @@
 </v-container>
 </v-card>
 </v-dialog>
-    <v-data-table data-app
+    <v-data-table data-app class="px-15"
     :headers="headers"
     :items="barang"
     >
@@ -44,10 +43,12 @@
       v-slot:activator="{on, attrs}"
       >
 
-        <v-btn
-        v-bind="attrs"
-        v-on="on"
-        color="primary" @click=" tambahvarian()">Tambah varian barang</v-btn>
+        
+         
+        <v-btn v-bind="attrs"
+        v-on="on" class="btn-add rounded-pill white--text" color="#2f432d" @click="tambahvarian()"
+            >Tambah varian barang</v-btn
+          >
 
       </template>
     <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px blueviolet;">

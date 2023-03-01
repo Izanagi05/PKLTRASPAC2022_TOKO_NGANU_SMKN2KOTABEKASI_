@@ -61,7 +61,6 @@ class TokoUserController extends Controller
         if($request->file('logo')) {
             // dd($request->oldImage);
             if(!empty(Toko::find($id)->logo)) {
-                // unlink('storage/public/post-images'.Toko::where('id', $id)->logo);
                 Storage::delete(Toko::find($id)->logo);
             }
             $validasi['logo'] = $request->file('logo')->store('logotoko');
