@@ -91,7 +91,7 @@
                         </v-col>
                         <v-col>
                           <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
+                            <!-- Rp. 1.999.999 -->
                           </div>
                         </v-col>
                       </v-row>
