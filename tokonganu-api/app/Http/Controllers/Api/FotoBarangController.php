@@ -39,7 +39,7 @@ class FotoBarangController extends Controller
         $validasi = $request->validate($rules);
         // $validasi = $request->file;
         // if(Foto_Barang::where('foto_barang_id', $id) === null){
-
+// dd(Foto_Barang::find($id)->file);
             if(!empty(Foto_Barang::find($id)->file)) {
                 Storage::delete(Foto_Barang::find($id)->file);
             }

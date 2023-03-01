@@ -40,7 +40,7 @@
         </div>
         <v-card-text style="padding: 30px">
           <div class="preview">
-            <v-img :src="preview" v-if="preview" width="200px"></v-img>
+            <v-img  v-if="preview" :src="preview" width="200px"></v-img>
           </div>
           <input
             accept="image/*"
@@ -66,7 +66,14 @@
       </v-card>
     </v-dialog>
     <div>
-      <v-data-table data-app :headers="headers" :items="fotobarang">
+      <v-data-table data-app :headers="headers" :items="fotobarang" class="px-15">
+        <template v-slot:[`item.file`]="{item}">
+          <v-img
+            width="200"
+            :src="'http://127.0.0.1:8000/storage/' + item.file"
+          >
+          </v-img>
+        </template>
         <template v-slot:top>
           <v-dialog
             v-model="dialogadd"
@@ -74,10 +81,11 @@
             persistent
             transition="dialog-bottom-transition"
           >
+
             <template v-slot:activator="{ on, attrs }">
               <div class="btn-add pb-6 pl-4">
                 <v-btn
-                  class="btn-tambah rounded-pill"
+                  class="btn-tambah rounded-pill px-15"
                   v-bind="attrs"
                   v-on="on"
                   style="background: #2f432d; color: white"
@@ -86,6 +94,9 @@
                 >
               </div>
             </template>
+
+
+
             <v-card
               class="kartu"
               light
@@ -246,7 +257,7 @@ export default {
     ubahfoto(item) {
       this.indexnya = this.fotobarang.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
-      this.forid = Object.assign({}, item);
+      this.forid = item.foto_barang_id
       this.dialogedit = true;
     },
     closeedit() {
@@ -258,13 +269,16 @@ export default {
       this.dialogedit = false;
     },
     updatefoto() {
+      let foto = new FormData();
+      foto.append("file", this.filefoto);
       axios
         .post(
-          "http://127.0.0.1:8000/api/updatefotobarang/" + this.forid.foto_id,
-          this.detaildatadialog
-        )
-        .then((respon) => {
-          console.log(respon.data);
+          "http://127.0.0.1:8000/api/updatefotobarang/" + this.forid,
+          foto
+          )
+          .then((respon) => {
+            location.reload();
+            console.log(respon.data);
         });
       Object.assign(this.fotobarang[this.indexnya], this.detaildatadialog);
       this.dialogedit = false;
@@ -281,9 +295,9 @@ export default {
       axios
         .delete("http://127.0.0.1:8000/api/deletefotobarang/" + this.ftbrgid)
         .then((respon) => {
-          console.log(respon);
           alert("berhasil hapus");
           location.reload();
+          console.log(respon);
         });
       // this.fotobarang.splice(this.indexnya, 1)
       this.closeDelete();

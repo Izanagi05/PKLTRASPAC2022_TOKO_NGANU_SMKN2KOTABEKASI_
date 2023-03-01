@@ -8,7 +8,13 @@
       <v-row >
         <v-col>
           <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
-            <v-img :src="require('~/assets/makanan.jpg')" width="479px"></v-img>
+            <v-row  >
+
+              <v-col cols="6" v-for="(ft,index) in allfotobybrgid" :key="index">
+
+                <v-img v-if="'http://127.0.0.1:8000/storage/' + ft.file" :src="'http://127.0.0.1:8000/storage/' + ft.file" width="250px"></v-img>
+              </v-col>
+            </v-row>
           </div>
         </v-col>
         <v-col>
@@ -85,6 +91,7 @@ export default {
       prm:this.$route.params,
       detailbarang:[],
       userid:null,
+      allfotobybrgid:[],
 
       detbarker:{
         user_id:'',
@@ -102,6 +109,11 @@ export default {
     getbarangtokobyid(){
       axios.get('http://127.0.0.1:8000/api/getbarangvariantokobyid/'+this.prm.barang_id).then(respon=>{
         this.detailbarang = respon.data
+      })
+    },
+    getfotobyidbrg(){
+      axios.get('http://127.0.0.1:8000/api/getfotobarang/'+ this.prm.barang_id).then(respon=>{
+        this.allfotobybrgid = respon.data
       })
     },
     pilihanvarian(varian){
@@ -134,6 +146,7 @@ export default {
     const usid = this.$cookies.get('cookieku')
     this.userid =usid.data.id
     this.getbarangtokobyid()
+    this.getfotobyidbrg()
   },
 
 }

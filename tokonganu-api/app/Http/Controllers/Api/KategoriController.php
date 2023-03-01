@@ -23,5 +23,27 @@ class KategoriController extends Controller
         }
         return response()->json($kategori);
     }
+    public function createkategori(Request $request){
+        $validatedata= $request->validate([
+            'nama'=>'required|unique:kategori'
+        ]);
+
+        Kategori::create($validatedata);
+    }
+    public function updatekategori(Request $request, $id){
+        $rules=[
+            'nama'=>'required'
+        ];
+        $validate= $request->validate($rules);
+
+        Kategori::where('kategori_id', $id)->update($validate);
+
+
+    }
+    public function deletekategori(Request $request, $id ){
+        $data = Kategori::where('kategori_id', $id)->delete();
+        // $data="tes";
+        return response()->json($data, 200);
+    }
 
 }
