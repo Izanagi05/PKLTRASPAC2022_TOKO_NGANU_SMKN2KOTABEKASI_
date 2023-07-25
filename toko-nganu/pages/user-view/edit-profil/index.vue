@@ -186,6 +186,13 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
+            this.$toasted.show('Ini adalah pesan toast!', {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
+          // this.$toast.success("Berhasil diubah");
         });
       // axios
       //   .post(
@@ -209,6 +216,15 @@ export default {
 };
 </script>
 <style>
+.edit-toast{
+  background: green;
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}
+
+
+
 .profil-btn:hover {
   background: #2f432d;
   color: rgb(255, 255, 255);

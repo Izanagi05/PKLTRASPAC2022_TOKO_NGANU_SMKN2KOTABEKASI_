@@ -78,6 +78,8 @@ export default {
           this.$router.push("/");
           console.log(respon);
         });
+
+
     },
     getKategoriText(val) {
       const data = this.kategori.find((element) => element.kategori_id === val);

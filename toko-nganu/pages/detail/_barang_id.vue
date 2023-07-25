@@ -120,25 +120,33 @@ export default {
       this.pilihan = varian.varian_id
       let namasetvar = varian.nama
       // this.$toast.success("berhasil pilih varian "+ namasetvar);
-      alert('varian pilihan :' + namasetvar)
+
+      this.$toasted.show('varian pilihan : ' + namasetvar, {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
     },
     tambahkeranjang() {
       // console.log(dtlbrg)
-     this.detbarker.user_id=this.userid,
-        this.detbarker.barang_id=this.prm.barang_id,
-        this.detbarker.kuantitas=1,
-        this.detbarker.varian_id=this.pilihan
+      this.detbarker.user_id=this.userid,
+      this.detbarker.barang_id=this.prm.barang_id,
+      this.detbarker.kuantitas=1,
+      this.detbarker.varian_id=this.pilihan
       axios.post('http://127.0.0.1:8000/api/addkeranjangbyuser/'+this.userid, this.detbarker).then(respon=>{
         console.log(respon)
+        this.$toasted.show('Berhasil ditambah', {
+          theme: 'success',
+          position: 'top-right',
+          className: 'edit-toast2',
+          duration: 3000
+        })
 
       })
       console.log(this.pilihan)
     },
-    // getbarang(dtlbrg){
-    //   axios.get('http://127.0.0.1:8000/api/getbarang/'+dtlbrg.toko_id).then(respon=>{
-    //     this.Toko = respon.data
-    //   })
-    // },
+
 
   },
 
@@ -151,3 +159,19 @@ export default {
 
 }
 </script>
+
+<style>
+.edit-toast{
+  background: green;
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}
+.edit-toast2{
+  background: rgb(5, 141, 5);
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}
+
+</style>
