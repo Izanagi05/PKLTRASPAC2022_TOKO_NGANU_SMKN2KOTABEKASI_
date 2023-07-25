@@ -1,9 +1,9 @@
 <template>
   <div>
     <Navbar />
-    
 
-    <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div> 
+
+    <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div>
 <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
@@ -17,8 +17,8 @@
 </v-dialog>
 
 <v-dialog v-model="dialogedit"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #4caf50;">
-<div style="background:#4caf50;padding:10px 30px;color:white;">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
 <h1>Ubah data varian {{ detaildatadialog.nama }}</h1>
 </div>
 <v-container style="padding:30px;">
@@ -28,7 +28,7 @@
 <v-text-field type="number" v-model="detaildatadialog.stok"  label="stok" outline></v-text-field>
 <v-card-actions >
 <v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="updatevarian()" style="background: #4caf50;color:white;" >Ubah</v-btn>
+<v-btn @click="updatevarian()" style="background: #2f432d;color:white;" >Ubah</v-btn>
 </v-card-actions>
 </v-container>
 </v-card>
@@ -43,16 +43,16 @@
       v-slot:activator="{on, attrs}"
       >
 
-        
-         
+
+
         <v-btn v-bind="attrs"
         v-on="on" class="btn-add rounded-pill white--text" color="#2f432d" @click="tambahvarian()"
             >Tambah varian barang</v-btn
           >
 
       </template>
-    <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px blueviolet;">
-    <div style="background:blueviolet;padding:10px 30px;color:white;">
+    <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+    <div style="background:#2f432d;padding:10px 30px;color:white;">
     <h1>Tambah data varian</h1>
     </div>
     <v-container style="padding:30px;">
@@ -62,7 +62,7 @@
     <v-text-field type="number" v-model="detaildatadialog.stok"  label="stok" outline></v-text-field>
     <v-card-actions >
     <v-btn @click="closeadd()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-    <v-btn @click="konfirmtambahvarian()" style="background: blueviolet;color:white;" >tambah</v-btn>
+    <v-btn @click="konfirmtambahvarian()" style="background: #2f432d;color:white;" >tambah</v-btn>
     </v-card-actions>
     </v-container>
     </v-card>

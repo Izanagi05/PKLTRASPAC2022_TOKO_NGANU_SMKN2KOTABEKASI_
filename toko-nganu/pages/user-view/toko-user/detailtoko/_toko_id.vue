@@ -15,8 +15,8 @@
 </v-dialog>
 
 <v-dialog v-model="dialogedit"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #4caf50;">
-<div style="background:#4caf50;padding:10px 30px;color:white;">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
 <h1>Ubah data</h1>
 </div>
 <v-container style="padding:30px;">
@@ -25,7 +25,7 @@
 <v-text-field type="text" v-model="detaildatadialog.deskripsi"  label="deskripsi" outline></v-text-field>
 <v-card-actions >
 <v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="updatebarang()" style="background: #4caf50;color:white;" >Ubah</v-btn>
+<v-btn @click="updatebarang()" style="background: #2f432d;color:white;" >Ubah</v-btn>
 </v-card-actions>
 </v-container>
 </v-card>
@@ -50,11 +50,11 @@
                         <v-icon dark>mdi-delete</v-icon>
                     </v-btn>
                   </template>
-                  <template v-slot:[`item.nomor`]="{ index }">
+                  <!-- <template v-slot:[`item.nomor`]="{ index }">
                   <div >
                       {{ index+1 }}
                   </div>
-                  </template>
+                  </template> -->
 
     </v-data-table>
   </div>

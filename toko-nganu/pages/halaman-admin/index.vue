@@ -156,7 +156,7 @@
                         :key="index"
                         class="text-overline mb-4"
                       >
-                        {{ grb }}
+                        <!-- {{ grb.nama }} -->
                       </div>
                       <v-list-item-title class="text-h5 mb-1">
                         {{ brg.nama }}
@@ -205,8 +205,8 @@
 </v-dialog>
 
 <v-dialog v-model="dialogEditkategori"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #4caf50;">
-<div style="background:#4caf50;padding:10px 30px;color:white;">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
 <h1>Ubah data</h1>
 </div>
 <v-container style="padding:30px;">
@@ -214,7 +214,7 @@
 <v-text-field type="text" v-model="detaildatadialogkategori.nama"  label="Name" outline></v-text-field>
 <v-card-actions >
 <v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="updatekategori()" style="background: #4caf50;color:white;" >Ubah</v-btn>
+<v-btn @click="updatekategori()" style="background: #2f432d;color:white;" >Ubah</v-btn>
 </v-card-actions>
 </v-container>
 </v-card>
@@ -222,8 +222,8 @@
 
 
 <v-dialog v-model="dialogTambahkategori"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #4caf50;">
-<div style="background:#4caf50;padding:10px 30px;color:white;">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
 <h1>Tambah data</h1>
 </div>
 <v-container style="padding:30px;">
@@ -231,7 +231,7 @@
 <v-text-field type="text" v-model="detaildatadialogkategoritbh.nama"  label="Name" outline></v-text-field>
 <v-card-actions >
 <v-btn @click="closetambahkategori()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="confirimtambahkategori()" style="background: #4caf50;color:white;" >Simpan</v-btn>
+<v-btn @click="confirimtambahkategori()" style="background: #2f432d;color:white;" >Simpan</v-btn>
 </v-card-actions>
 </v-container>
 </v-card>
