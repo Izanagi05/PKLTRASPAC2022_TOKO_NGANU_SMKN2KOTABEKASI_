@@ -48,7 +48,7 @@
                     </v-btn>
                     <div class="buat-akun" style="padding-bottom: 20px">
                       Belum punya akun?
-                    <nuxt-link to="/register">Buat akun</nuxt-link>
+                      <nuxt-link to="/register">Buat akun</nuxt-link>
                     </div>
                   </v-form>
                 </v-sheet>
@@ -64,7 +64,7 @@
 import axios from "axios";
 import NavbarPolos from "~/components/NavbarPolos.vue";
 export default {
-  middleware: [ "middlewarelogin"],
+  middleware: ["middlewarelogin"],
   data: () => ({
     email: null,
     ket: null,
@@ -105,15 +105,14 @@ export default {
             password: this.password,
           })
           .then((respon) => {
-            this.ket = respon.data
+            this.ket = respon.data;
             this.cekketusr = respon.data.message;
 
-
             this.$store.dispatch("users/logincekuser", this.cekketusr);
-            if( this.cekketusr === "login gagal"){
+            if (this.cekketusr === "login gagal") {
               this.$store.dispatch("users/resetlogincekuser");
-              alert('Isi email atau password dengan benar')
-            }else{
+              alert("Isi email atau password dengan benar");
+            } else {
               this.$toast.success("Login berhasil");
               this.$store.dispatch("users/resetlogincekuser");
               this.$store.dispatch("users/login", this.ket);
@@ -122,7 +121,6 @@ export default {
       }
     },
   },
-
 
   components: { NavbarPolos },
 };

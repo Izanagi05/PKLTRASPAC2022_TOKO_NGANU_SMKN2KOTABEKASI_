@@ -1,65 +1,24 @@
 <template>
   <div>
-    <!-- <Navbar  /> -->
+    <!-- <Navbar /> -->
     <div class="ppp">
-    <div class="contact white--text">
-      <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak"  >
 
-          <v-icon color="white">mdi-phone</v-icon>
-          +62-815-6315-10389
-        </button>
-      </div>
-    </div>
-    <div class="nav">
-      <v-col class="d-flex">
-
-        <div class="logo">
-          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
-        </div>
-
-
-        <div class="nama_toko">
-          <div>Toko nganu</div>
-        </div>
-      </v-col>
-      <v-col class="d-flex">
-
-        <div flat class="rounded-pill search" color="#d9d9d9">
-          <v-text-field
-          class="nyari rounded-pill"
-          v-model="cari"
-          label="Cari Nganu"
-          single-line
-          hide-details
-          outlined
-          @keyup.enter="getsearchbarang()"
-          append-icon="mdi-magnify"
-          placehoder="cari"
-
-        ></v-text-field>
-      </div>
-
-      <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" class="text-decoration-none">
-          <v-btn elevation="2" fab color="d9d9d9" icon
-            ><v-icon size="29px">mdi-cart</v-icon></v-btn
-          >
-        </nuxt-link>
-        <nuxt-link to="/user-view" class="text-decoration-none">
-          <v-btn elevation="2" fab icon color="d9d9d9"
-            ><v-icon size="29px">mdi-account</v-icon></v-btn
-          >
-        </nuxt-link>
-        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
       </div>
     </v-col>
     </div>
-  </div>
     <div class="all-home">
       <div class="home">
         <div class="home-image">
-          <v-img :src="require('~/assets/home-img.png')"></v-img>
+          <v-carousel
+            cycle
+            height="400"
+            hide-delimiter-background
+            show-arrows-on-hover
+          >
+            <v-carousel-item v-for="(item, i) in items" :key="i" :src="item">
+              <img :src="require(item)" alt="lho ilank" />
+            </v-carousel-item>
+          </v-carousel>
         </div>
         <v-row>
           <div class="filter">
@@ -92,8 +51,7 @@
                         :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
-                      <v-row class="ma-0">
-                        <v-col  class="pa-0">
+
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -107,7 +65,7 @@
                       <v-row class="ma-0">
                         <v-col class="pa-0">
                           <div class="desc-product font-weight-regular pl-1">
-                            {{brg.nama}}
+                            {{ brg.nama }}
                           </div>
                         </v-col>
                       </v-row>
@@ -140,7 +98,7 @@
                         width="204px"
                       ></v-img>
                       <v-row>
-                        <v-col  class="">
+                        <v-col class="">
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -205,7 +163,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            {{barang.deskripsi}}
+                            {{ barang.deskripsi }}
                           </div>
                         </v-col>
                       </v-row>
@@ -224,9 +182,7 @@
               </v-row>
             </div>
           </div>
-          <div>
-
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
@@ -241,7 +197,7 @@ export default {
     return {
       set: 0,
       cari: null,
-      hasilcari:[],
+      hasilcari: [],
       no_admin: "6281563151038",
       nama: null,
       tokouser: null,
@@ -256,14 +212,15 @@ export default {
       hasilKategori: {
         barang_id: "",
       },
+      // items: ["~/assets/home-image.png"],
     };
   },
   methods: {
-    search(){
+    search() {
       // this.searchteks = this.$emit('emitsearch')
-      console.log("ets"+ this.searchteks)
+      console.log("ets" + this.searchteks);
     },
-    kontak(){
+    kontak() {
       let nomer = this.no_admin;
       window.open("https://wa.me/" + nomer);
     },
@@ -281,10 +238,12 @@ export default {
       this.set = 0;
     },
     getsearchbarang() {
-      axios.get("http://127.0.0.1:8000/api/search/"+this.cari).then((respon) => {
-        this.hasilcari = respon.data;
-        console.log(respon.data)
-      });
+      axios
+        .get("http://127.0.0.1:8000/api/search/" + this.cari)
+        .then((respon) => {
+          this.hasilcari = respon.data;
+          console.log(respon.data);
+        });
       this.set = 2;
     },
     getallkategori() {
@@ -324,41 +283,6 @@ export default {
 };
 </script>
 <style>
-.f24sb {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-}
-.f20sb {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 36px;
-}
-.f16sb {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f14sb {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-}
-.f16m {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f16r {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f10r {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 15px;
-}
 .ppp {
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;

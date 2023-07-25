@@ -43,7 +43,10 @@
           <v-btn color="blue-darken-1" variant="text" @click="closeDeletebarang"
             >Cancel</v-btn
           >
-          <v-btn color="blue-darken-1" variant="text" @click="confirmhapusbarang"
+          <v-btn
+            color="blue-darken-1"
+            variant="text"
+            @click="confirmhapusbarang"
             >OK</v-btn
           >
           <v-spacer></v-spacer>
@@ -181,6 +184,40 @@
                 </v-card>
               </v-card>
             </v-tab-item>
+            <v-tab-item>
+              <v-card flat class="items">
+                <v-card
+                  d-flex
+                  max-width="344"
+                  outlined
+                  class="text-h5 mb-1 mx-auto"
+                  v-for="(atr, index) in alltoko"
+                  :key="index"
+                >
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">Toko</div>
+                      <v-list-item-title>{{ atr.nama }} </v-list-item-title>
+                      <v-list-item-subtitle>{{
+                        atr.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+
+                  <v-card-actions>
+                    <v-btn outlined rounded text @click="hapustoko(atr)">
+                      Hapus
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-tab-item>
           </v-tabs>
         </v-card>
 
@@ -190,19 +227,64 @@
       </div>
     </div>
     <div>
-
-
       <v-dialog v-model="dialogDeletekategori" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
+        <v-card>
+          <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue-darken-1"
+              variant="text"
+              @click="closeDeletekategori"
+              >Cancel</v-btn
+            >
+            <v-btn
+              color="blue-darken-1"
+              variant="text"
+              @click="confirmhapuskategori"
+              >OK</v-btn
+            >
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog
+        v-model="dialogEditkategori"
+        max-width="700"
+        persistent
+        transition="dialog-bottom-transition"
+      >
+        <v-card
+          class="kartu"
+          light
+          style="padding: 0px; color: black; border: solid 3px #4caf50"
+        >
+          <div style="background: #4caf50; padding: 10px 30px; color: white">
+            <h1>Ubah data</h1>
+          </div>
+          <v-container style="padding: 30px">
+            <v-text-field
+              type="text"
+              v-model="detaildatadialogkategori.nama"
+              label="Name"
+              outline
+            ></v-text-field>
             <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDeletekategori">Cancel</v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="confirmhapuskategori">OK</v-btn>
-              <v-spacer></v-spacer>
+              <v-btn
+                @click="closeedit()"
+                style="margin-right: 20px; background: white; color: black"
+                >Close</v-btn
+              >
+              <v-btn
+                @click="updatekategori()"
+                style="background: #4caf50; color: white"
+                >Ubah</v-btn
+              >
             </v-card-actions>
-          </v-card>
-</v-dialog>
+          </v-container>
+        </v-card>
+      </v-dialog>
 
 <v-dialog v-model="dialogEditkategori"   max-width="700" persistent transition="dialog-bottom-transition">
 <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
@@ -267,7 +349,7 @@ export default {
     return {
       alluser: {},
       alltoko: {},
-      allkategori:[],
+      allkategori: [],
       allbarang: {
         toko_id: " ",
       },
@@ -291,24 +373,24 @@ export default {
       allbarang: {
         barang_id: "",
       },
-      headers:[
-        {text:"Nama Kategori", value:"nama"},
-        {text:"Aksi", value:"aksi"}
+      headers: [
+        { text: "Nama Kategori", value: "nama" },
+        { text: "Aksi", value: "aksi" },
       ],
-      detaildatadialogkategori:{
-       nama:'',
-     },
-     detaildatadialogkategoritbh:{
-       nama:'',
-     },
-     defaultItem:{
-      nama:'',
-    },
+      detaildatadialogkategori: {
+        nama: "",
+      },
+      detaildatadialogkategoritbh: {
+        nama: "",
+      },
+      defaultItem: {
+        nama: "",
+      },
     };
   },
 
   methods: {
-    getallkategori(){
+    getallkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
         console.log(respon);
         this.allkategori = respon.data;
@@ -410,8 +492,6 @@ export default {
       });
     },
 
-
-
     closetambahkategori() {
       this.dialogTambahkategori = false;
       this.$nextTick(() => {
@@ -419,58 +499,72 @@ export default {
         this.editedIndex = -1;
       });
     },
-    tambahkategori(){
-      this.dialogTambahkategori=true
+    tambahkategori() {
+      this.dialogTambahkategori = true;
     },
-    confirimtambahkategori(){
-      axios.post("http://127.0.0.1:8000/api/createkategori", this.detaildatadialogkategoritbh).then(respon=>{
-        console.log(respon.data)
-        location.reload()
-      })
-      this.dialogTambahkategori=false
+    confirimtambahkategori() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/createkategori",
+          this.detaildatadialogkategoritbh
+        )
+        .then((respon) => {
+          console.log(respon.data);
+          location.reload();
+        });
+      this.dialogTambahkategori = false;
     },
-    ubahkategori(item){
-    this.indexnya = this.allkategori.indexOf(item)
-    this.detaildatadialogkategori = Object.assign({}, item)
-     this.dialogEditkategori= true
-   },
-   closeedit(){
-    this.$nextTick(() => {
-          this.detaildatadialogkategori = Object.assign({}, this.defaultItem)
-        })
-    this.dialogEditkategori=false
-  },
-    updatekategori(){
-      axios.post('http://127.0.0.1:8000/api/updatekategori/'+this.detaildatadialogkategori.kategori_id, this.detaildatadialogkategori).then(respon=>{
-
-        console.log(respon.data)
-        location.reload()
-      })
+    ubahkategori(item) {
+      this.indexnya = this.allkategori.indexOf(item);
+      this.detaildatadialogkategori = Object.assign({}, item);
+      this.dialogEditkategori = true;
+    },
+    closeedit() {
+      this.$nextTick(() => {
+        this.detaildatadialogkategori = Object.assign({}, this.defaultItem);
+      });
+      this.dialogEditkategori = false;
+    },
+    updatekategori() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/updatekategori/" +
+            this.detaildatadialogkategori.kategori_id,
+          this.detaildatadialogkategori
+        )
+        .then((respon) => {
+          console.log(respon.data);
+          location.reload();
+        });
       // Object.assign(this.allkategori[this.indexnya], this.detaildatadialogkategori)
-    this.dialogEditkategori=false
+      this.dialogEditkategori = false;
     },
 
     hapuskategori(item) {
-        this.editedIndex = this.allkategori.indexOf(item)
-        this.detaildatadialogkategori = Object.assign({}, item)
-        this.dialogDeletekategori = true
-      },
-    confirmhapuskategori(){
-      axios.delete('http://127.0.0.1:8000/api/deletekategori/'+this.detaildatadialogkategori.kategori_id).then(respon =>{
-       console.log(respon)
-        alert('berhasil hapus')
-        location.reload()
-        })
-        this.closeDeletekategori()
-  },
-  closeDeletekategori () {
-        this.dialogDeletekategori = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
+      this.editedIndex = this.allkategori.indexOf(item);
+      this.detaildatadialogkategori = Object.assign({}, item);
+      this.dialogDeletekategori = true;
+    },
+    confirmhapuskategori() {
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/deletekategori/" +
+            this.detaildatadialogkategori.kategori_id
+        )
+        .then((respon) => {
+          console.log(respon);
+          alert("berhasil hapus");
+          location.reload();
+        });
+      this.closeDeletekategori();
+    },
+    closeDeletekategori() {
+      this.dialogDeletekategori = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
   },
 
   created() {
