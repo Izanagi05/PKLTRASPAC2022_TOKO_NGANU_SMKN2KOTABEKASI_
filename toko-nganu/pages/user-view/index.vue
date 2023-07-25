@@ -160,6 +160,9 @@ export default {
     this.getuser();
     this.cekuserrole = usid.role;
   },
+  mounted() {
+    this.getuser();
+  },
 };
 </script>
 <style>

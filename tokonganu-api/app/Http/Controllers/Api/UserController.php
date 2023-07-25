@@ -18,30 +18,48 @@ class UserController extends Controller
 
     }
     public function updateuserlogin(Request $request, $id){
-        $rules = [
-            'nama'=>'',
-            'email'=>'',
-            'no_telepon'=>'',
-            'foto_profil'=>''
-        ];
-        $validasi = $request->validate($rules);
+        $validateData= $request->validate([
+            'nama'=>'required',
+            'email'=>'required|email:dns',
+            'no_telepon'=>'required',
+            // 'kutipan'=>'required',
+            'foto_profil'=>'',
+        ]);
+        if($validateData){
+            if ($request->file('foto_profil')) {
+                if(!empty(User::find($id)->foto_profil)) {
+                    Storage::delete(User::find($id)->foto_profil);
 
-        if($request->file('foto_profil')) {
-            // dd($request->oldImage);
-            // return $request->foto_profil;
-            // $image = time().'.'.$request->foto_profil->extension();
-            if(!empty(User::find($id)->foto_profil)) {
-                // unlink('storage/public/post-images'.User::where('id', $id)->foto_profil);
-                Storage::delete(User::find($id)->foto_profil);
-                // unlink(storage_path('public/post-images'.User::find($id)->foto_profil));
-                // dd("tes");
-
+                }
+                $validateData['foto_profil'] = $request->file('foto_profil')->store('post-images');
             }
-            $validasi['foto_profil'] = $request->file('foto_profil')->store('post-images');
-        }
-        $data = User::where('id', $id)->update($validasi);
 
-        // return response()->json($data, 200);
+
+        $data = User::findOrFail($id);
+        // $data->makeHidden('id');
+        $data->update($validateData);
+
+        return response()->json($data, 200);
+
+    }
+        // $rules = [
+        //     'nama'=>'',
+        //     'email'=>'',
+        //     'no_telepon'=>'',
+        //     'foto_profil'=>''
+        // ];
+        // $validasi = $request->validate($rules);
+
+        // if($request->file('foto_profil')) {
+
+
+        //     if(!empty(User::find($id)->foto_profil)) {
+        //         Storage::delete(User::find($id)->foto_profil);
+
+        //     }
+        //     $validasi['foto_profil'] = $request->file('foto_profil')->store('post-images');
+        // }
+        // $data = User::where('id', $id)->update($validasi);
     }
 
 
