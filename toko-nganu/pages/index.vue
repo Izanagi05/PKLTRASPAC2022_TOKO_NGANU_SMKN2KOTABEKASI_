@@ -2,51 +2,9 @@
   <div>
     <!-- <Navbar /> -->
     <div class="ppp">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">
-          <button class="kontak" type="submit" @click="kontak">
-            <v-icon color="white">mdi-phone</v-icon>
-            +62-815-6315-1038
-          </button>
-        </div>
+
       </div>
-      <div class="nav">
-        <div class="logo">
-          <v-img
-            :src="require('~/assets/logo_nganu.png')"
-            width="100px"
-          ></v-img>
-        </div>
-        <div class="nama_toko">
-          <div>Toko nganu</div>
-        </div>
-        <div flat class="rounded-pill search" color="#d9d9d9">
-          <v-text-field
-            class="nyari rounded-pill"
-            v-model="cari"
-            label="Cari Nganu"
-            single-line
-            hide-details
-            outlined
-            @keyup.enter="getsearchbarang()"
-            append-icon="mdi-magnify"
-            placehoder="search"
-          ></v-text-field>
-        </div>
-        <div class="profile_icon_keranjang">
-          <nuxt-link to="/keranjang" class="text-decoration-none">
-            <v-btn elevation="2" fab color="d9d9d9" icon
-              ><v-icon size="29px">mdi-cart</v-icon></v-btn
-            >
-          </nuxt-link>
-          <nuxt-link to="/user-view" class="text-decoration-none">
-            <v-btn elevation="2" fab icon color="d9d9d9"
-              ><v-icon size="29px">mdi-account</v-icon></v-btn
-            >
-          </nuxt-link>
-          <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
-        </div>
-      </div>
+    </v-col>
     </div>
     <div class="all-home">
       <div class="home">
@@ -93,8 +51,7 @@
                         :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
-                      <v-row>
-                        <v-col class="">
+
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -105,14 +62,14 @@
                           </div>
                         </v-col>
                       </v-row>
-                      <v-row>
-                        <v-col>
+                      <v-row class="ma-0">
+                        <v-col class="pa-0">
                           <div class="desc-product font-weight-regular pl-1">
                             {{ brg.nama }}
                           </div>
                         </v-col>
                       </v-row>
-                      <div class="btn-card pl-1 pb-1">
+                      <div class="btn-card mt-2  pl-1 pb-1">
                         <button
                           class="rounded-xl view-more-btn font-weight-regular"
                           style="font-size: 12px"
@@ -159,7 +116,7 @@
                           </div>
                         </v-col>
                       </v-row>
-                      <div class="btn-card pl-1 pb-1">
+                      <div class=" mt-2 pl-1 pb-1">
                         <button
                           class="rounded-xl view-more-btn font-weight-regular"
                           style="font-size: 12px"
@@ -173,7 +130,7 @@
                 </v-col>
               </v-row>
             </div>
-            <div class="tampil2" v-else>
+            <div class="tampil2" v-if="set==1">
               <v-row
                 class="p-0"
                 v-for="(brg, index) in hasilKategori"
@@ -210,7 +167,7 @@
                           </div>
                         </v-col>
                       </v-row>
-                      <div class="btn-card pl-1 pb-1">
+                      <div class=" mt-2 pl-1 pb-1">
                         <button
                           class="rounded-xl view-more-btn font-weight-regular"
                           style="font-size: 12px"
@@ -335,7 +292,7 @@ export default {
   padding: 9px 123px 10px 123px;
 }
 .search {
-  margin-left: 500px;
+  /* margin-left: 500px; */
 }
 .round-btn {
   border-radius: 50%;
