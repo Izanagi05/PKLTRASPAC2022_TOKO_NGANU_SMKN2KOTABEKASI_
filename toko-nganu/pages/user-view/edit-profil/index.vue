@@ -35,7 +35,7 @@
                     <div class="btn-dialog pl-4 pb-4">
                       <v-row>
                         <v-col cols="6">
-                          <v-btn @click="dialog = false">Batal</v-btn>
+                          <v-btn @click="batalkonfirmfoto">Batal</v-btn>
                         </v-col>
                         <v-col cols="6">
                           <v-btn type="submit" @click="konfirmfoto">Pilih</v-btn>
@@ -153,6 +153,13 @@ export default {
       this.dialog = false;
       // this.editprofil.foto_profil = this.foto
     },
+
+    batalkonfirmfoto() {
+      this.dialog = false;
+      this.datafoto=null
+      this.preview=null
+      // this.editprofil.foto_profil = this.foto
+    },
     updateuser() {
       var formData = new FormData();
       formData.append("nama", this.editprofil.nama);
@@ -190,7 +197,7 @@ export default {
       //   )
       //   .then((respon) => {
       //     console.log(respon);
-      //   });
+      //   }); //aku punya ini
       this.$router.push("/user-view");
     },
   },
