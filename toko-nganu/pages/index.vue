@@ -108,7 +108,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            {{brg.nama}}
+                            {{ brg.nama }}
                           </div>
                         </v-col>
                       </v-row>
@@ -206,7 +206,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            {{barang.deskripsi}}
+                            {{ barang.deskripsi }}
                           </div>
                         </v-col>
                       </v-row>
@@ -255,7 +255,7 @@ export default {
       hasilKategori: {
         barang_id: "",
       },
-      items: ["~/assets/home-image.png"],
+      // items: ["~/assets/home-image.png"],
     };
   },
   methods: {

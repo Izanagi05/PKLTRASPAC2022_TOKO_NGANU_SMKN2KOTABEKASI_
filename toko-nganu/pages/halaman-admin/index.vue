@@ -184,6 +184,40 @@
                 </v-card>
               </v-card>
             </v-tab-item>
+            <v-tab-item>
+              <v-card flat class="items">
+                <v-card
+                  d-flex
+                  max-width="344"
+                  outlined
+                  class="text-h5 mb-1 mx-auto"
+                  v-for="(atr, index) in alltoko"
+                  :key="index"
+                >
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">Toko</div>
+                      <v-list-item-title>{{ atr.nama }} </v-list-item-title>
+                      <v-list-item-subtitle>{{
+                        atr.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+
+                  <v-card-actions>
+                    <v-btn outlined rounded text @click="hapustoko(atr)">
+                      Hapus
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-tab-item>
           </v-tabs>
         </v-card>
 
