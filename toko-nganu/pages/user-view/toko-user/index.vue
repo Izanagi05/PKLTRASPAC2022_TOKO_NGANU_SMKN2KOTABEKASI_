@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="pl-15 pb-5 font-weight-medium">Detail Toko</div> 
+    <div class="pl-15 pb-5 font-weight-medium">Detail Toko</div>
     <div>
       <div class="button-add pl-4 pb-6">
         <nuxt-link

@@ -214,7 +214,7 @@
                         <button
                           class="rounded-xl view-more-btn font-weight-regular"
                           style="font-size: 12px"
-                          @click="todetail(brg)"
+                          @click="todetail2(barang)"
                         >
                           Lebih lengkap
                         </button>
@@ -306,6 +306,10 @@ export default {
     todetail(brg) {
       // console.log(brg.barang_id)
       this.$router.push(`/detail/${brg.barang_id}`);
+    },
+    todetail2(barang) {
+      // console.log(brg.barang_id)
+      this.$router.push(`/detail/${barang.barang_id}`);
     },
   },
 

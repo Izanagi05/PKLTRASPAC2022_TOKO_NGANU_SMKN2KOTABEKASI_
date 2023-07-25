@@ -9,8 +9,8 @@
             <v-spacer></v-spacer>
             <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
               >Cancel</v-btn
-            >
-            <v-btn
+              >
+              <v-btn
               color="blue-darken-1"
               variant="text"
               @click="confirmhapuskeranjang"
@@ -21,6 +21,62 @@
         </v-card>
       </v-dialog>
       <div class="cart">
+        <!-- <table>
+          <thead>
+
+            <tr>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Jumlah</th>
+              <th>Total</th>
+              <th>Aksi</th>
+
+            </tr>
+          </thead>
+        </table>
+          <table>
+            <tbody>
+
+              <tr  v-for="(dataa, index) in datakeranjang.user_keranjang"
+              :key="index">
+            <td>{{ namabarangker.nama}}</td>
+            <td>{{ varharga.harga }}</td>
+            <td>  <div class="d-flex kuantitas">
+                          <div>
+                            <div v-if="dataa.kuantitas == 1">
+                              <button
+                                @click="countmin(dataa)"
+                                disabled
+                                type="submit"
+                              >
+                                <v-icon color="AAAAAA">mdi-minus</v-icon>
+                              </button>
+                            </div>
+                            <div v-else>
+                              <button @click="countmin(dataa)" type="submit">
+                                <v-icon color="black">mdi-minus</v-icon>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="font-weight-medium">
+                            {{ dataa.kuantitas }}
+                          </div>
+                          <button
+                            class="pluskuantitas"
+                            @click="countplus(dataa)"
+                            type="submit"
+                          >
+                            <v-icon color="black">mdi-plus</v-icon>
+                          </button>
+                        </div></td>
+                        <td>{{ totalprice.harga }}</td>
+                        <td> <v-btn @click="hapuskeranjang(dataa)"
+                        ><v-icon>mdi-delete</v-icon></v-btn
+                      ></td>
+        </tr>
+      </tbody>
+    </table> -->
         <v-row>
           <v-col class="">
             <v-row>
@@ -36,6 +92,9 @@
               <v-col>
                 <div class="f14sb head-title">Total</div>
               </v-col>
+              <!-- <v-col>
+                <div class="f14sb head-title">Aksi</div>
+              </v-col> -->
             </v-row>
             <v-row>
               <div class="cart-content">
@@ -58,12 +117,14 @@
                       <v-col>
                         <v-img
                           :src="require('~/assets/barang.png')"
-                          width="143px"
+                          width="60px"
                         ></v-img>
+
+
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
-                          barang:{{ namabarangker.nama }}
+                          {{ namabarangker.nama }}
                         </div>
                       </v-col>
                       <v-col>
@@ -133,7 +194,9 @@
               </v-row>
               <v-row>
                 <v-col> Harga </v-col>
-                <v-col class="f14sb"> Rp. {{ varharga.harga }} </v-col>
+
+                <v-col v-if="varharga" class="f14sb">  {{ varharga.harga }} </v-col>
+                <v-col v-else class="f14sb"> Rp. 0 </v-col>
               </v-row>
               <v-row>
                 <v-col>
@@ -211,7 +274,7 @@ export default {
           this.varharga = respon.data[0];
 
         });
-        this.totalprice.harga = this.varharga;
+        this.totalprice.harga = this.varharga.harga;
     },
     getbarangnama() {
       axios
@@ -234,7 +297,7 @@ export default {
     },
 
     countplus(dataa) {
-      if (dataa.kuantitas <= this.varharga.stok) {
+      if (dataa.kuantitas < this.varharga.stok) {
         dataa.kuantitas++;
       } else {
       }

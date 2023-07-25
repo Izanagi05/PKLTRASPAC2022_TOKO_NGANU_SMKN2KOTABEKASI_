@@ -11,7 +11,6 @@ class BarangController extends Controller
 {
     public function search($search){
         $data= Barang::where('nama', 'LIKE', '%'.$search.'%')->orWhere('deskripsi', 'LIKE', '%'.$search.'%')->get();
-
         return response()->json($data);
     }
     public function getbarang(Request $request, $id){

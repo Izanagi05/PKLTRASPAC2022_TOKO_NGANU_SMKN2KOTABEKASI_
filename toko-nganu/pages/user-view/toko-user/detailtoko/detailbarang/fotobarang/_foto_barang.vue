@@ -33,9 +33,9 @@
       <v-card
         class="kartu"
         light
-        style="padding: 0px; color: black; border: solid 2px"
+        style="padding: 0px; color: black; border: solid 2px #2f432d"
       >
-        <div style="padding: 10px 30px">
+        <div style="background:#2f432d;padding:10px 30px;color:white;">
           <h1>Ubah data foto</h1>
         </div>
         <v-card-text style="padding: 30px">
@@ -100,9 +100,9 @@
             <v-card
               class="kartu"
               light
-              style="padding: 0px; color: black; border: solid 2px"
+              style="padding: 0px; color: black; border: solid 2px #2f432d"
             >
-              <div style="padding: 10px 30px">
+              <div style="background:#2f432d;padding:10px 30px;color:white;">
                 <h1>Tambah data foto</h1>
               </div>
               <v-card-text style="padding: 30px">
