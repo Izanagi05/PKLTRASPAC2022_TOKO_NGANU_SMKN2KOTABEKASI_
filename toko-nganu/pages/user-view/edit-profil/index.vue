@@ -3,35 +3,21 @@
     <NavbarPolos2 />
     <div class="profil">
       <center>
-        <div
-          class="judul-page mt-5 mb-2 font-weight-bold"
-          style="font-size: 20px; font-family: 'Poppins', sans-serif"
-        >
+        <div class="judul-page mt-5 mb-2 font-weight-bold" style="font-size: 20px; font-family: 'Poppins', sans-serif">
           Edit Profil
         </div>
         <v-row class="isi">
           <v-col cols="6">
             <div class="foto-profil pl-5">
               <v-avatar width="270px" height="270px">
-                <img
-                  v-if="editprofil.foto_profil"
-                  :src="
-                    'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
-                  "
-                />
+                <img v-if="editprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
+                  " />
                 <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
             </div>
             <div class="btn-card pl-1 pb-1 pt-3">
-              <v-btn
-                class="profil-btn rounded-pill font-weight-medium"
-                width="310px"
-                outlined
-                rounded
-                height="40px"
-                @click="dialog = true"
-                style="font-size: 24px; font-family: 'Poppins', sans-serif"
-              >
+              <v-btn class="profil-btn rounded-pill font-weight-medium" width="310px" outlined rounded height="40px"
+                @click="dialog = true" style="font-size: 24px; font-family: 'Poppins', sans-serif">
                 Pilih Foto
               </v-btn>
             </div>
@@ -40,22 +26,10 @@
                 <v-card>
                   <v-card-text>
                     <div class="preview-foto pt-6">
-                      <v-img
-                        :src="preview"
-                        v-if="preview"
-                        width="200px"
-                      ></v-img>
+                      <v-img :src="preview" v-if="preview" width="200px"></v-img>
                     </div>
-                    <input
-                      accept="image/*"
-                      class="file-input pt-6"
-                      :rules="rules"
-                      type="file"
-                      placeholder="Pilih Foto"
-                      prepend-icon="mdi-camera"
-                      label="Pilih Foto"
-                      v-on:change="upload"
-                    />
+                    <input accept="image/*" class="file-input pt-6" :rules="rules" type="file" placeholder="Pilih Foto"
+                      prepend-icon="mdi-camera" label="Pilih Foto" v-on:change="upload" />
                   </v-card-text>
                   <v-card-actions>
                     <div class="btn-dialog pl-4 pb-4">
@@ -64,9 +38,7 @@
                           <v-btn @click="dialog = false">Batal</v-btn>
                         </v-col>
                         <v-col cols="6">
-                          <v-btn type="submit" @click="konfirmfoto"
-                            >Pilih</v-btn
-                          >
+                          <v-btn type="submit" @click="konfirmfoto">Pilih</v-btn>
                         </v-col>
                       </v-row>
                     </div>
@@ -85,11 +57,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <div class="text-nama pt-5 pb-5">
-                  <v-text-field
-                    solo
-                    v-model="editprofil.nama"
-                    label="Masukkan Nama"
-                  ></v-text-field>
+                  <v-text-field solo v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
                 </div>
                 <!-- <div class="text-alamat pb-5">
                   <v-textarea
@@ -99,19 +67,11 @@
                   ></v-textarea>
                 </div> -->
                 <div class="text-telepon pb-5">
-                  <v-text-field
-                    type="number"
-                    solo
-                    v-model="editprofil.no_telepon"
-                    label="Masukkan No.Telepon"
-                  ></v-text-field>
+                  <v-text-field type="number" solo v-model="editprofil.no_telepon"
+                    label="Masukkan No.Telepon"></v-text-field>
                 </div>
                 <div class="text-email pb-5">
-                  <v-text-field
-                    solo
-                    v-model="editprofil.email"
-                    label="Masukkan Email"
-                  ></v-text-field>
+                  <v-text-field solo v-model="editprofil.email" label="Masukkan Email"></v-text-field>
                 </div>
               </v-col>
             </v-row>
@@ -119,26 +79,13 @@
               <v-row>
                 <v-col cols="4">
                   <div class="batal">
-                    <v-btn
-                      class="rounded-pill"
-                      x-large
-                      outlined
-                      @click="backprofil"
-                      >Batal</v-btn
-                    >
+                    <v-btn class="rounded-pill" x-large outlined @click="backprofil">Batal</v-btn>
                   </div>
                 </v-col>
                 <v-col cols="6">
                   <div class="bayar">
-                    <v-btn
-                      class="rounded-pill"
-                      width="307px"
-                      x-large
-                      outlined
-                      style="background: #2f432d; color: white; size: 105px"
-                      @click="updateuser"
-                      >Simpan</v-btn
-                    >
+                    <v-btn class="rounded-pill" width="307px" x-large outlined
+                      style="background: #2f432d; color: white; size: 105px" @click="updateuser">Simpan</v-btn>
                   </div>
                 </v-col>
               </v-row>
@@ -207,8 +154,20 @@ export default {
       // this.editprofil.foto_profil = this.foto
     },
     updateuser() {
-      let formData = new FormData();
-      formData.append("foto_profil", this.datafoto);
+      var formData = new FormData();
+      formData.append("nama", this.editprofil.nama);
+      // formData.append("alamat", this.editprofil.alamat);
+      formData.append("no_telepon", this.editprofil.no_telepon);
+      if(this.datafoto){
+
+        console.log("1")
+        formData.append("foto_profil", this.datafoto);
+      }else{
+        console.log("0")
+        formData.append("foto_profil", this.editprofil.foto_profil);
+
+      }
+      formData.append("email", this.editprofil.email);
 
       axios
         .post(
@@ -221,17 +180,17 @@ export default {
         .then((respon) => {
           console.log(respon);
         });
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
-          this.editprofil,
-          {
-            "content-type": "multipart/form-data",
-          }
-        )
-        .then((respon) => {
-          console.log(respon);
-        });
+      // axios
+      //   .post(
+      //     "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
+      //     this.editprofil,
+      //     {
+      //       "content-type": "multipart/form-data",
+      //     }
+      //   )
+      //   .then((respon) => {
+      //     console.log(respon);
+      //   });
       this.$router.push("/user-view");
     },
   },
@@ -247,13 +206,16 @@ export default {
   background: #2f432d;
   color: rgb(255, 255, 255);
 }
+
 .nama {
   margin-top: 10px;
   margin-bottom: 57px;
 }
+
 .alamat {
   margin-bottom: 150px;
 }
+
 .telepon {
   margin-bottom: 57px;
 }
