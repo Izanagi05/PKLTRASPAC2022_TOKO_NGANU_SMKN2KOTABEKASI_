@@ -54,7 +54,7 @@ class TokoUserController extends Controller
             'deskripsi'=>'',
             'alamat'=>'',
             'no_telepon'=>'',
-            'logo'=>''
+            'logo'=>'image'
         ];
         $validasi = $request->validate($rules);
         if($validasi){

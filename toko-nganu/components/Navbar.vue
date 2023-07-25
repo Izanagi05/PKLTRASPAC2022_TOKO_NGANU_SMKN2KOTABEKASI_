@@ -66,7 +66,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .ppp {
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;

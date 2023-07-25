@@ -23,7 +23,7 @@ class UserController extends Controller
             'email'=>'required|email:dns',
             'no_telepon'=>'required',
             // 'kutipan'=>'required',
-            'foto_profil'=>'',
+            'foto_profil'=>'image',
         ]);
         if($validateData){
             if ($request->file('foto_profil')) {

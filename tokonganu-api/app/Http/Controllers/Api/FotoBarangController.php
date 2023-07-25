@@ -37,9 +37,8 @@ class FotoBarangController extends Controller
             'file'=>'',
         ];
         $validasi = $request->validate($rules);
-        // $validasi = $request->file;
-        // if(Foto_Barang::where('foto_barang_id', $id) === null){
-// dd(Foto_Barang::find($id)->file);
+        if($validasi){
+
             if(!empty(Foto_Barang::find($id)->file)) {
                 Storage::delete(Foto_Barang::find($id)->file);
             }
@@ -47,6 +46,7 @@ class FotoBarangController extends Controller
 
             $data = Foto_Barang::where('foto_barang_id', $id)->update($validasi);
             return response()->json($data, 200);
+        }
         // }
 
     }
