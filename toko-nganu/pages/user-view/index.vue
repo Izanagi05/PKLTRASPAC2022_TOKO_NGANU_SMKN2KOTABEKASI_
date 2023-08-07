@@ -7,39 +7,38 @@
           <div class="sub-title" style="margin-left: 27px, margin-right=36px">
             Profil Pengguna
           </div>
-          <div class="menu">
+          <div class="menu mt-2">
             <NuxtLink
               to="/user-view"
-              class="my-2 mt-5 black--text text-decoration-none"
+              class="my-4 black--text text-decoration-none"
             >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <div v-if="cekuserrole === 'Admin'">
-              <NuxtLink
+
+              <NuxtLink  v-if="cekuserrole == 'Admin'"
                 to="/halaman-admin"
-                class="my-2 black--text text-decoration-none"
+                class="my-4 black--text text-decoration-none"
               >
                 <v-icon large>mdi-account-tie</v-icon> Admin
               </NuxtLink>
-            </div>
+
             <div v-else></div>
             <NuxtLink
               to="/user-view/toko-user"
-              class="my-2 black--text text-decoration-none"
-            >
-              <v-icon large>mdi-eye</v-icon> Toko
+              class="my-4 black--text text-decoration-none">
+              <v-icon large>mdi-storefront</v-icon> Toko
             </NuxtLink>
             <NuxtLink
               to="/user-view/tambah-toko"
-              class="my-2 black--text text-decoration-none"
+              class="my-4 black--text text-decoration-none"
             >
-              <v-icon large></v-icon> Buka Toko
+            <v-icon large>mdi-store-plus</v-icon> Buka Toko
             </NuxtLink>
             <NuxtLink
               to="/user-view/crud"
-              class="my-2 black--text text-decoration-none"
+              class="my-4 black--text text-decoration-none"
             >
-              <v-icon large></v-icon> tambah barang
+              <v-icon large>mdi-package-variant-closed-plus</v-icon> tambah barang
             </NuxtLink>
           </div>
           <div class="logout" style="margin-left: 27px">
@@ -51,7 +50,7 @@
         <div class="pembatas"></div>
         <div class="profil">
           <div class="navigasi">
-            <NuxtLink to="/" class="text-decoration-none black--text">
+            <NuxtLink to="/" class="my-2 text-decoration-none black--text">
               Home </NuxtLink
             ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
@@ -59,6 +58,7 @@
             <v-col>
               <div class="foto-profil">
                 <v-avatar class="foto-profilan" width="270px" height="270px">
+                  <!-- {{ dataprofil.foto_profil }} -->
                   <img
                     v-if="dataprofil.foto_profil"
                     :src="
@@ -69,7 +69,7 @@
               </div>
               <div class="btn-card pl-1 pb-1">
                 <v-btn
-                  class="profil-btn font-weight-medium text-capitalize"
+                  class="profil-btn font-weight-medium"
                   width="310px"
                   style="font-size: 24px; font-family: Poppins, sans-serif"
                   outlined
@@ -159,9 +159,9 @@ export default {
     this.getuser();
     this.cekuserrole = usid.role;
   },
-  // mounted() {
-  //   this.getuser();
-  // },
+  mounted() {
+    this.getuser();
+  },
 };
 </script>
 <style>
@@ -214,7 +214,7 @@ export default {
 .my-link {
   text-decoration: none;
   color: #000000;
-  /* margin-bottom: 43px; */
+  margin-bottom: 43px;
 }
 .isi {
   margin-top: 26px;

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- <Navbar /> -->
     <div class="ppp">
-<<<<<<< HEAD
       <div class="contact white--text">
         <div class="contact-text font-weight-regular">
           <button class="kontak" type="submit" @click="kontak">
@@ -17,10 +15,24 @@
             :src="require('~/assets/logo_nganu.png')"
             width="100px"
           ></v-img>
+    <div class="contact white--text">
+      <div class="contact-text font-weight-regular">
+        <button class="kontak" type="submit" @click="kontak"  >
+          <v-icon color="white">mdi-phone</v-icon>
+          +62-815-6315-10389
+        </button>
+      </div>
+    </div>
+    <div class="nav d-flex">
+      <v-col class="d-flex">
+        <div class="logo">
+          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+
         </div>
         <div class="nama_toko">
           <div>Toko nganu</div>
         </div>
+
         <div flat class="rounded-pill search" color="#d9d9d9">
           <v-text-field
             class="nyari rounded-pill"
@@ -53,15 +65,55 @@
           </nuxt-link>
           <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
         </div>
-=======
 
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
+      </v-col>
+      <v-col class="d-flex">
+        <div flat class="rounded-pill  " color="#d9d9d9">
+          <v-text-field
+          class="nyari rounded-pill"
+          v-model="cari"
+          label="Cari Nganu"
+          single-line
+          hide-details
+          outlined
+          @keyup.enter="getsearchbarang()"
+          append-icon="mdi-magnify"
+          placehoder="cari"
+        ></v-text-field>
+      </div>
+
+      <div class="profile_icon_keranjang">
+        <nuxt-link to="/keranjang" class="text-decoration-none">
+          <v-btn elevation="2" fab color="d9d9d9" icon
+            ><v-icon size="29px">mdi-cart</v-icon></v-btn
+          >
+        </nuxt-link>
+        <nuxt-link to="/user-view" class="text-decoration-none">
+          <v-btn elevation="2" fab icon color="d9d9d9"
+            >
+
+            <v-avatar class="foto-profilan">
+              <img
+                :src="
+                  'http://127.0.0.1:8000/storage/' +
+                  $cookies.get(`cookieku`).data.foto_profil
+                "
+              />
+            </v-avatar>
+            </v-btn
+          >
+        </nuxt-link>
+        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
+
       </div>
     </v-col>
+
     </div>
+  </div>
     <div class="all-home">
-      <div class="home">
+      <div class="home ">
         <div class="home-image">
+
           <v-carousel
             cycle
             height="400"
@@ -76,6 +128,9 @@
               <!-- <img :src="item" alt="" />  -->
             </v-carousel-item>
           </v-carousel>
+
+          <v-img :src="require('~/assets/home-img.png')"></v-img>
+
         </div>
         <v-row>
           <div class="filter">
@@ -92,7 +147,7 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-<<<<<<< HEAD
+
         <div class="product-card">
           <div class="tampil1" v-if="set == 0">
             <v-row class="p-0">
@@ -220,24 +275,23 @@
                 </div>
               </v-col>
             </v-row>
-=======
         <div>
           <div class="product-card">
             <div class="tampil1" v-if="set == 0">
-              <v-row class="p-0">
+              <v-row class="p-0 justify-content-center">
                 <v-col
-                  class="card-col"
-                  width="204px"
+                  class="card-col mx-2 col-lg-2 col-sm-6 d-flex justify-center  "
                   v-for="(brg, index) in allbarang"
                   :key="index"
                 >
-                  <div class="card">
+
                     <v-card width="204px">
                       <v-img
                         :src="require('~/assets/makanan.jpg')"
                         width="204px"
                       ></v-img>
-
+                      <v-row class="ma-0">
+                        <v-col  class="pa-0">
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -251,7 +305,7 @@
                       <v-row class="ma-0">
                         <v-col class="pa-0">
                           <div class="desc-product font-weight-regular pl-1">
-                            {{ brg.nama }}
+                            {{brg.nama}}
                           </div>
                         </v-col>
                       </v-row>
@@ -265,7 +319,6 @@
                         </button>
                       </div>
                     </v-card>
-                  </div>
                 </v-col>
               </v-row>
             </div>
@@ -284,7 +337,7 @@
                         width="204px"
                       ></v-img>
                       <v-row>
-                        <v-col class="">
+                        <v-col  class="">
                           <div class="title-product f14sb pl-1">
                             {{ brg.nama }}
                           </div>
@@ -349,7 +402,7 @@
                       <v-row>
                         <v-col>
                           <div class="desc-product font-weight-regular pl-1">
-                            {{ barang.deskripsi }}
+                            {{barang.deskripsi}}
                           </div>
                         </v-col>
                       </v-row>
@@ -366,9 +419,11 @@
                   </div>
                 </v-col>
               </v-row>
-            </div>
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
-          </div>
+            </div> 
+          </div> 
+          <div>
+
+          </div> 
         </div>
       </div>
     </div>
@@ -400,7 +455,7 @@ export default {
       ],
       set: 0,
       cari: null,
-      hasilcari: [],
+      hasilcari:[],
       no_admin: "6281563151038",
       nama: null,
       tokouser: null,
@@ -418,11 +473,11 @@ export default {
     };
   },
   methods: {
-    search() {
+    search(){
       // this.searchteks = this.$emit('emitsearch')
-      console.log("ets" + this.searchteks);
+      console.log("ets"+ this.searchteks)
     },
-    kontak() {
+    kontak(){
       let nomer = this.no_admin;
       window.open("https://wa.me/" + nomer);
     },
@@ -440,12 +495,10 @@ export default {
       this.set = 0;
     },
     getsearchbarang() {
-      axios
-        .get("http://127.0.0.1:8000/api/search/" + this.cari)
-        .then((respon) => {
-          this.hasilcari = respon.data;
-          console.log(respon.data);
-        });
+      axios.get("http://127.0.0.1:8000/api/search/"+this.cari).then((respon) => {
+        this.hasilcari = respon.data;
+        console.log(respon.data)
+      });
       this.set = 2;
     },
     getallkategori() {
@@ -485,6 +538,41 @@ export default {
 };
 </script>
 <style>
+.f24sb {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+}
+.f20sb {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 36px;
+}
+.f16sb {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+.f14sb {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+.f16m {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.f16r {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.f10r {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+}
 .ppp {
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;
@@ -493,12 +581,10 @@ export default {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
-.search {
-<<<<<<< HEAD
+.search { 
   margin-left: 900px;
 =======
-  /* margin-left: 500px; */
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
+  /* margin-left: 500px; */ 
 }
 .round-btn {
   border-radius: 50%;
@@ -551,9 +637,9 @@ export default {
   margin-left: 5px;
 }
 
-.home {
+/* .home {
   padding: 0px 123px 66px 123px;
-}
+} */
 .contact-text {
   font-size: 16px;
   line-height: 24px;
@@ -578,14 +664,14 @@ export default {
   /* font-size: 24px;
   font-weight: 600; */
   margin-top: 13px;
-}
+} 
 .card-col {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 0;
   margin-top: 15px;
   /* max-width: 16.66%; */
-}
+} 
 
 /* .title-product {
   padding-left: 3px;
