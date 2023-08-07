@@ -19,7 +19,7 @@
         </div>
       </v-col>
       <v-col class="d-flex">
-        <div flat class="rounded-pill  " color="#d9d9d9">
+        <div flat class="rounded-pill  justi" color="#d9d9d9">
           <v-text-field
           class="nyari rounded-pill"
           v-model="cari"
