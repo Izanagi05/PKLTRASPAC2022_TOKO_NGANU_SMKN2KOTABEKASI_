@@ -2,23 +2,23 @@
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak"  >
-
+        <button class="kontak" type="submit" @click="kontak">
           <v-icon color="white">mdi-phone</v-icon>
           +62-815-6315-1038
         </button>
       </div>
     </div>
-    <div class="nav">
-      <div class="logo">
-        <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
-      </div>
-      <div class="nama_toko">
-        <div>Toko nganu</div>
-      </div>
-      <div flat class="rounded-pill search" color="#d9d9d9">
+    <div class="nav d-flex justify-space-between">
+      <div class="d-flex">
 
+        <div class="logo">
+          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+        </div>
+        <div class="nama_toko">
+          <div>Toko nganu</div>
+        </div>
       </div>
+      <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
       <div class="profile_icon_keranjang">
         <nuxt-link to="/keranjang" class="text-decoration-none">
           <v-btn elevation="2" fab color="d9d9d9" icon
@@ -26,22 +26,38 @@
           >
         </nuxt-link>
         <nuxt-link to="/user-view" class="text-decoration-none">
-          <v-btn elevation="2" fab icon color="d9d9d9"
-            >  <v-icon>mdi-account</v-icon> </v-btn>
-
+          <v-btn elevation="1" fab icon color="d9d9d9">
+            <v-avatar class="foto-profilan">
+              <img
+                :src="
+                  'http://127.0.0.1:8000/storage/' +
+                  $cookies.get(`cookieku`).data.foto_profil
+                "
+              />
+            </v-avatar>
+          </v-btn>
         </nuxt-link>
-        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
+        <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
-      editprofil:[],
+      dataprofil: {
+        nama: null,
+        no_telepon: null,
+        email: null,
+        foto_profil: "",
+      },
+      // foto_profil: "",
+      cekuserrole: null,
+      userid: null,
+      editprofil: [],
       cari: null,
       nama: "tes",
       no_admin: "6281563151038",
@@ -59,9 +75,12 @@ export default {
           this.editprofil = respon.data;
         });
     },
+    pushprofil() {
+      this.$router.push("/user-view/edit-profil");
+    },
   },
   created() {
-    this.getuserlogin()
+    this.getuserlogin();
   },
 };
 </script>
@@ -76,7 +95,7 @@ export default {
   padding: 9px 123px 10px 123px;
 }
 .search {
-  margin-left: 500px;
+  margin-left: 900px;
 }
 .round-btn {
   border-radius: 50%;
