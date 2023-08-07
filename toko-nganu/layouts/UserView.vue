@@ -1,8 +1,8 @@
-<!-- <template>
+<template>
   <div>
     <Navbar />
     <v-row>
-      <v-col sm="3">
+      <v-col sm="3" class="mt-5">
         <div class="sub-title" style="margin-left: 27px, margin-right=36px">
           Profil Pengguna
         </div>
@@ -33,24 +33,16 @@
         </div>
       </v-col>
       <v-col sm="9">
-        <ProfileUser v-if="$route.path === 'profile-user'" />
-        <TokoUser v-else-if="$route.path === 'toko-user'" />
+        <nuxt />
       </v-col>
     </v-row>
   </div>
 </template>
-
-<script>
+  
+  <script>
 import axios from "axios";
 
-import ProfileUser from "~/pages/profile-user";
-import TokoUser from "~/pages/toko-user";
-
 export default {
-  components: {
-    ProfileUser,
-    TokoUser,
-  },
   middleware: "middlewareku",
   data() {
     return {
@@ -108,4 +100,74 @@ export default {
     this.getuser();
   },
 };
-</script> -->
+</script>
+
+<style>
+.contact {
+  background-color: #2f432d;
+  padding: 5px 0px 7px 154px;
+}
+.home-container {
+  padding: 0px 123px;
+}
+.content {
+  display: flex;
+  gap: 38px;
+}
+.sub-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+.menu {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  /* margin-top: 69px; */
+}
+.logout {
+  margin-top: 120px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+.pembatas {
+  border-left: 8px solid #d9d9d9;
+  border-radius: 20px;
+  height: 450px;
+  margin-right: 10px;
+}
+.profil-btn {
+  height: 30px;
+  width: 114px;
+}
+.profil-btn:hover {
+  background: #2f432d;
+  color: rgb(255, 255, 255);
+}
+.kiri {
+  margin-top: 19px;
+}
+.my-link {
+  text-decoration: none;
+  color: #000000;
+  margin-bottom: 43px;
+}
+.isi {
+  margin-top: 26px;
+}
+.btn-card {
+  margin-top: 30px;
+}
+.informasi-judul {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+}
+.foto-profilan {
+  background: #d9d9d9;
+}
+</style>
+
+  

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="crud-container">
       <v-row class="judul">
         <v-col cols="12" md="6"> Tambah Barang</v-col>
@@ -113,11 +112,7 @@
             v-model="databarang.deskripsi"
           ></v-textarea
         ></v-col>
-        <v-col cols="12" sm="3"
-          >
-
-          </v-col
-        >
+        <v-col cols="12" sm="3"> </v-col>
       </v-row>
       <v-row class="judul" justify="end">
         <v-col cols="12" md="2"
@@ -144,6 +139,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
@@ -161,10 +157,12 @@ export default {
 
   methods: {
     gettokouser() {
-      axios.get("http://127.0.0.1:8000/api/gettoko/"+this.userid).then((respon) => {
-        this.usertoko = respon.data;
-        //  this.items = respon.data
-      });
+      axios
+        .get("http://127.0.0.1:8000/api/gettoko/" + this.userid)
+        .then((respon) => {
+          this.usertoko = respon.data;
+          //  this.items = respon.data
+        });
     },
     getkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {

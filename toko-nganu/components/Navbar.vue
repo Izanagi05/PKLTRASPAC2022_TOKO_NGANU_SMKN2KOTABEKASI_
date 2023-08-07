@@ -10,9 +10,11 @@
     </div>
     <div class="nav d-flex justify-space-between">
       <div class="d-flex">
-
         <div class="logo">
-          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+          <v-img
+            :src="require('~/assets/logo_nganu.png')"
+            width="100px"
+          ></v-img>
         </div>
         <div class="nama_toko">
           <div>Toko nganu</div>
@@ -29,11 +31,12 @@
           <v-btn elevation="1" fab icon color="d9d9d9">
             <v-avatar class="foto-profilan">
               <img
+                v-if="fotoProfil"
                 :src="
                   'http://127.0.0.1:8000/storage/' +
                   $cookies.get(`cookieku`).data.foto_profil
                 "
-              />
+              /><v-icon v-else>mdi-account</v-icon>
             </v-avatar>
           </v-btn>
         </nuxt-link>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavbarPolos />
     <v-dialog v-model="dialogDeleteuser" max-width="500px">
       <v-card>
         <v-card-title class="text-h5">Yakin ingin menghapus user?</v-card-title>
@@ -286,57 +285,109 @@
         </v-card>
       </v-dialog>
 
-<v-dialog v-model="dialogEditkategori"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
-<div style="background:#2f432d;padding:10px 30px;color:white;">
-<h1>Ubah data</h1>
-</div>
-<v-container style="padding:30px;">
+      <v-dialog
+        v-model="dialogEditkategori"
+        max-width="700"
+        persistent
+        transition="dialog-bottom-transition"
+      >
+        <v-card
+          class="kartu"
+          light
+          style="padding: 0px; color: black; border: solid 3px #2f432d"
+        >
+          <div style="background: #2f432d; padding: 10px 30px; color: white">
+            <h1>Ubah data</h1>
+          </div>
+          <v-container style="padding: 30px">
+            <v-text-field
+              type="text"
+              v-model="detaildatadialogkategori.nama"
+              label="Name"
+              outline
+            ></v-text-field>
+            <v-card-actions>
+              <v-btn
+                @click="closeedit()"
+                style="margin-right: 20px; background: white; color: black"
+                >Close</v-btn
+              >
+              <v-btn
+                @click="updatekategori()"
+                style="background: #2f432d; color: white"
+                >Ubah</v-btn
+              >
+            </v-card-actions>
+          </v-container>
+        </v-card>
+      </v-dialog>
 
-<v-text-field type="text" v-model="detaildatadialogkategori.nama"  label="Name" outline></v-text-field>
-<v-card-actions >
-<v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="updatekategori()" style="background: #2f432d;color:white;" >Ubah</v-btn>
-</v-card-actions>
-</v-container>
-</v-card>
-</v-dialog>
+      <v-dialog
+        v-model="dialogTambahkategori"
+        max-width="700"
+        persistent
+        transition="dialog-bottom-transition"
+      >
+        <v-card
+          class="kartu"
+          light
+          style="padding: 0px; color: black; border: solid 3px #2f432d"
+        >
+          <div style="background: #2f432d; padding: 10px 30px; color: white">
+            <h1>Tambah data</h1>
+          </div>
+          <v-container style="padding: 30px">
+            <v-text-field
+              type="text"
+              v-model="detaildatadialogkategoritbh.nama"
+              label="Name"
+              outline
+            ></v-text-field>
+            <v-card-actions>
+              <v-btn
+                @click="closetambahkategori()"
+                style="margin-right: 20px; background: white; color: black"
+                >Close</v-btn
+              >
+              <v-btn
+                @click="confirimtambahkategori()"
+                style="background: #2f432d; color: white"
+                >Simpan</v-btn
+              >
+            </v-card-actions>
+          </v-container>
+        </v-card>
+      </v-dialog>
 
-
-<v-dialog v-model="dialogTambahkategori"   max-width="700" persistent transition="dialog-bottom-transition">
-<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
-<div style="background:#2f432d;padding:10px 30px;color:white;">
-<h1>Tambah data</h1>
-</div>
-<v-container style="padding:30px;">
-
-<v-text-field type="text" v-model="detaildatadialogkategoritbh.nama"  label="Name" outline></v-text-field>
-<v-card-actions >
-<v-btn @click="closetambahkategori()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-<v-btn @click="confirimtambahkategori()" style="background: #2f432d;color:white;" >Simpan</v-btn>
-</v-card-actions>
-</v-container>
-</v-card>
-</v-dialog>
-
-<div style="padding:0px 123px;"  class=" py-8">
-  <v-btn @click="tambahkategori">Tambah Kategori</v-btn>
-</div>
-    <v-data-table style="padding:30px 123px;"
-    :headers="headers"
-    :items="allkategori"
-    >
-
-
-    <template v-slot:[`item.aksi`]="{ item }">
-                    <v-btn class="mx-2"  fab small  @click="ubahkategori(item)" style="margin:15px 15px 15px 0px;">
-                        <v-icon dark >mdi-pencil</v-icon>
-                    </v-btn>
-          <v-btn class="mx-2" fab small  @click="hapuskategori(item)" style="background:#FF2A30;">
-                        <v-icon dark>mdi-delete</v-icon>
-                    </v-btn>
-                  </template>
-    </v-data-table>
+      <div style="padding: 0px 123px" class="py-8">
+        <v-btn @click="tambahkategori">Tambah Kategori</v-btn>
+      </div>
+      <v-data-table
+        style="padding: 30px 123px"
+        :headers="headers"
+        :items="allkategori"
+      >
+        <template v-slot:[`item.aksi`]="{ item }">
+          <v-btn
+            class="mx-2"
+            fab
+            small
+            @click="ubahkategori(item)"
+            style="margin: 15px 15px 15px 0px"
+          >
+            <v-icon dark>mdi-pencil</v-icon>
+          </v-btn>
+          <v-btn
+            class="mx-2"
+            fab
+            small
+            @click="hapuskategori(item)"
+            style="background: #ff2a30"
+          >
+            <v-icon dark>mdi-delete</v-icon>
+          </v-btn>
+        </template>
+      </v-data-table>
     </div>
   </div>
 </template>
@@ -344,6 +395,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: "UserView",
   middleware: ["middlewareku", "middlewarerole"],
   data() {
     return {

@@ -1,12 +1,9 @@
 <template>
   <div>
-    <Navbar />
     <div class="pl-15 pb-5 font-weight-medium">Detail Toko</div>
     <div>
       <div class="button-add pl-4 pb-6">
-        <nuxt-link
-          class="text-decoration-none px-15"
-          to="/user-view/crud"
+        <nuxt-link class="text-decoration-none px-15" to="/user-view/crud"
           ><v-btn class="btn-add rounded-pill white--text" color="#2f432d"
             >Tambah barang</v-btn
           ></nuxt-link
@@ -168,7 +165,6 @@
           </v-btn> -->
           <v-btn
             class="mx-2"
-
             small
             @click="detailbarang(item)"
             style="margin: 15px 15px 15px 0px"
@@ -208,6 +204,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
@@ -301,26 +298,27 @@ export default {
       formData.append("alamat", this.detaildatadialog.alamat);
       formData.append("no_telepon", this.detaildatadialog.no_telepon);
       formData.append("deskripsi", this.detaildatadialog.deskripsi);
-      if(this.datafoto){
-
+      if (this.datafoto) {
         formData.append("logo", this.datafoto);
-      }else{
-
+      } else {
         formData.append("logo", this.detaildatadialog.logo);
       }
-      axios.post(
-        "http://127.0.0.1:8000/api/updatetoko/" + this.detaildatadialog.toko_id,
-        formData,
-        {
-          "content-type": "multipart/form-data",
-        }
-      ) .then((respon) => {
-          this.$toasted.show('Berhasil ubah toko', {
-        theme: 'success',
-        position: 'top-right',
-        className: 'edit-toast',
-        duration: 3000
-      })
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/updatetoko/" +
+            this.detaildatadialog.toko_id,
+          formData,
+          {
+            "content-type": "multipart/form-data",
+          }
+        )
+        .then((respon) => {
+          this.$toasted.show("Berhasil ubah toko", {
+            theme: "success",
+            position: "top-right",
+            className: "edit-toast",
+            duration: 3000,
+          });
           console.log(respon.data);
         });
       // axios
@@ -346,12 +344,12 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          this.$toasted.show('Berhasil hapus toko', {
-        theme: 'success',
-        position: 'top-right',
-        className: 'edit-toast',
-        duration: 3000
-      })
+          this.$toasted.show("Berhasil hapus toko", {
+            theme: "success",
+            position: "top-right",
+            className: "edit-toast",
+            duration: 3000,
+          });
         });
       this.Toko.splice(this.editedIndex, 1);
       this.closeDelete();
@@ -366,23 +364,22 @@ export default {
   },
 
   mounted() {
-     this.gettoko();
+    this.gettoko();
     //  this.gettoko();
-    },
+  },
 
   created() {
     const userid = this.$cookies.get("cookieku");
     this.tokouser = userid.data.id;
     this.gettoko();
   },
-
 };
 </script>
 <style>
-
-.edit-toast{
+.edit-toast {
   background: green;
-  color:white;
-  padding: 10px ;
+  color: white;
+  padding: 10px;
   border-radius: 20px;
-}</style>
+}
+</style>
