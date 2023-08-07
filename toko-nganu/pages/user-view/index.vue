@@ -1,27 +1,26 @@
 <template>
   <div>
     <Navbar />
-    <div class="home-container">
-      <div class="content">
-        <div class="kiri">
-          <div class="sub-title" style="margin-left: 27px, margin-right=36px">
-            Profil Penggun
-          </div>
-          <div class="menu mt-2">
+    <div class="container">
+      <v-row class="">
+        <v-col cols="12 " lg="4" md="4" sm="12" xs="12" order="1" class="kiri d-flex justify-space-between py-0 order-lg-1 order-md-1 order-sm-2 order-xs-2">
+          <div>
+            <div class="sub-title" style="margin-left: 27px, margin-right=36px">
+              Profil Pengguna
+            </div>
+            <div class="menu mt-2">
             <NuxtLink
               to="/user-view"
               class="my-4 black--text text-decoration-none"
             >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-
               <NuxtLink  v-if="cekuserrole == 'Admin'"
                 to="/halaman-admin"
                 class="my-4 black--text text-decoration-none"
               >
                 <v-icon large>mdi-account-tie</v-icon> Admin
               </NuxtLink>
-
             <div v-else></div>
             <NuxtLink
               to="/user-view/toko-user"
@@ -43,24 +42,29 @@
           </div>
           <div class="logout" style="margin-left: 27px">
             <v-btn text @click="logout()" class="mdi-35px"
-              ><v-icon>mdi-logout</v-icon>Logout</v-btn
+            ><v-icon>mdi-logout</v-icon>Logout</v-btn
             >
           </div>
         </div>
-        <div class="pembatas"></div>
-        <div class="profil">
-          <div class="navigasi">
-            <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+      </v-col>
+
+      <v-col cols="12" lg="8" md="8" sm="12" xs="12"  order="2" class="profil d-flex my-0 order-lg-2 order-md-2 order-sm-1 order-xs-1">
+          <div class="pembatas mr-8"></div>
+          <div class="">
+
+            <div class="navigasi">
+              <NuxtLink to="/" class="my-2 text-decoration-none black--text">
               Home </NuxtLink
             ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
           <v-row class="isi">
             <v-col>
               <div class="foto-profil">
-                <v-avatar class="foto-profilan" width="270px" height="270px">
+                <v-avatar class="foto-profilan"  style="width:20vw;height: 20vw;">
                   <!-- {{ dataprofil.foto_profil }} -->
                   <img
                     v-if="dataprofil.foto_profil"
+                    class="img-fluid"
                     :src="
                       'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
                     "
@@ -69,10 +73,10 @@
               </div>
               <div class="btn-card pl-1 pb-1">
                 <v-btn
-                  class="profil-btn font-weight-medium"
-                  width="310px"
+                class="profil-btn  font-weight-medium"
                   style="font-size: 24px; font-family: Poppins, sans-serif"
                   outlined
+                  block
                   rounded
                   height="40px"
                   @click="pushprofil"
@@ -116,7 +120,8 @@
             </v-col>
           </v-row>
         </div>
-      </div>
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>
@@ -172,10 +177,10 @@ export default {
 .home-container {
   padding: 0px 123px;
 }
-.content {
+/* .content {
   display: flex;
   gap: 38px;
-}
+} */
 .sub-title {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -199,10 +204,6 @@ export default {
   border-radius: 20px;
   height: 450px;
   margin-right: 10px;
-}
-.profil-btn {
-  height: 30px;
-  width: 114px;
 }
 .profil-btn:hover {
   background: #2f432d;

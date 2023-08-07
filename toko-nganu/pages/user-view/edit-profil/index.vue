@@ -1,25 +1,25 @@
 <template>
   <div>
     <NavbarPolos2 />
-    <div class="profil">
+    <div class="container">
       <center>
         <div class="judul-page mt-5 mb-2 font-weight-bold" style="font-size: 20px; font-family: 'Poppins', sans-serif">
           Edit Profil
         </div>
         <v-row class="isi">
-          <v-col cols="6">
-            <div class="foto-profil pl-5">
-              <v-avatar width="270px" height="270px">
+          <v-col cols="12" lg="6" md="6" sm="12" xs="12">
+            <div class="foto-profil pl-5  ">
+              <v-avatar style="width:20vw;height: 20vw;">
                 <img v-if="editprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
                   " />
                 <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
-            </div>
-            <div class="btn-card pl-1 pb-1 pt-3">
-              <v-btn class="profil-btn rounded-pill font-weight-medium" width="310px" outlined rounded height="40px"
+              <div class="btn-card  pb-1 pt-3 d-flex justify-center">
+              <v-btn class="profil-btn d-flex rounded-pill font-weight-medium "  outlined rounded height="40px"
                 @click="dialog = true" style="font-size: 24px; font-family: 'Poppins', sans-serif">
                 Pilih Foto
               </v-btn>
+            </div>
             </div>
             <div class="dialog">
               <v-dialog v-model="dialog" width="500px" height="700px">
@@ -47,25 +47,17 @@
               </v-dialog>
             </div>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12" lg="6" md="6" sm="12" xs="12">
             <v-row>
-              <v-col cols="12" sm="3">
+              <v-col cols="2" lg="3" md="3" sm="2" >
                 <div class="nama pt-5 pb-5">Nama</div>
-                <!-- <div class="alamat pb-5">Alamat</div> -->
                 <div class="telepon pb-5">Telepon</div>
                 <div class="email pb-5">E-Mail</div>
               </v-col>
-              <v-col cols="12" sm="6">
+              <v-col cols="10" lg="9" md="3" sm="10" class="">
                 <div class="text-nama pt-5 pb-5">
                   <v-text-field solo v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
                 </div>
-                <!-- <div class="text-alamat pb-5">
-                  <v-textarea
-                    solo
-                    v-model="editprofil.alamat"
-                    label="Masukkan Alamat"
-                  ></v-textarea>
-                </div> -->
                 <div class="text-telepon pb-5">
                   <v-text-field type="number" solo v-model="editprofil.no_telepon"
                     label="Masukkan No.Telepon"></v-text-field>
@@ -76,15 +68,15 @@
               </v-col>
             </v-row>
             <div class="button pb-6 pt-5">
-              <v-row>
-                <v-col cols="4">
-                  <div class="batal">
-                    <v-btn class="rounded-pill" x-large outlined @click="backprofil">Batal</v-btn>
+              <v-row class="justify-center">
+                <v-col class="mr-" cols="12"  lg="4" md="4" sm="4" xs="4">
+                  <div class="batal ">
+                    <v-btn class="rounded-pill mx-2" block x-large outlined @click="backprofil">Batal</v-btn>
                   </div>
                 </v-col>
-                <v-col cols="6">
-                  <div class="bayar">
-                    <v-btn class="rounded-pill" width="307px" x-large outlined
+                <v-col cols="12" lg="6" md="6" sm="4" xs="4">
+                  <div class="bayar ">
+                    <v-btn class="rounded-pill " block  x-large outlined
                       style="background: #2f432d; color: white; size: 105px" @click="updateuser">Simpan</v-btn>
                   </div>
                 </v-col>
@@ -194,17 +186,6 @@ export default {
       })
           // this.$toast.success("Berhasil diubah");
         });
-      // axios
-      //   .post(
-      //     "http://127.0.0.1:8000/api/updateuserlogin/" + this.userid,
-      //     this.editprofil,
-      //     {
-      //       "content-type": "multipart/form-data",
-      //     }
-      //   )
-      //   .then((respon) => {
-      //     console.log(respon);
-      //   }); //aku punya ini
       this.$router.push("/user-view");
     },
   },
@@ -215,7 +196,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .edit-toast{
   background: green;
   color:white;
@@ -223,7 +204,9 @@ export default {
   border-radius: 20px;
 }
 
-
+/* .btn-card{
+  margin:0px 200px;
+} */
 
 .profil-btn:hover {
   background: #2f432d;
