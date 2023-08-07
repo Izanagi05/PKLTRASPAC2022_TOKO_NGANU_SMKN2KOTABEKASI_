@@ -1,4 +1,4 @@
-  <template>
+<template>
   <div class="ppp">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
@@ -8,14 +8,17 @@
         </button>
       </div>
     </div>
-    <div class="nav">
-      <div class="logo">
-        <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+    <div class="nav d-flex justify-space-between">
+      <div class="d-flex">
+
+        <div class="logo">
+          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+        </div>
+        <div class="nama_toko">
+          <div>Toko nganu</div>
+        </div>
       </div>
-      <div class="nama_toko">
-        <div>Toko nganu</div>
-      </div>
-      <div flat class="rounded-pill search" color="#d9d9d9"></div>
+      <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
       <div class="profile_icon_keranjang">
         <nuxt-link to="/keranjang" class="text-decoration-none">
           <v-btn elevation="2" fab color="d9d9d9" icon
@@ -26,10 +29,11 @@
           <v-btn elevation="1" fab icon color="d9d9d9">
             <v-avatar class="foto-profilan">
               <img
-                v-if="fotoProfil"
-                :src="'http://127.0.0.1:8000/storage/' + fotoProfil"
+                :src="
+                  'http://127.0.0.1:8000/storage/' +
+                  $cookies.get(`cookieku`).data.foto_profil
+                "
               />
-              <v-icon v-else>mdi-account</v-icon>
             </v-avatar>
           </v-btn>
         </nuxt-link>
@@ -39,7 +43,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 import axios from "axios";
 export default {
   data() {
@@ -81,7 +85,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .ppp {
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;
@@ -91,7 +95,7 @@ export default {
   padding: 9px 123px 10px 123px;
 }
 .search {
-  margin-left: 500px;
+  margin-left: 900px;
 }
 .round-btn {
   border-radius: 50%;
