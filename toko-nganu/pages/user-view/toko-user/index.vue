@@ -60,7 +60,7 @@
               outline
             ></v-text-field>
             <v-text-field
-              type="text"
+              type="number"
               v-model="detaildatadialog.no_telepon"
               label="no telepon"
               outline
@@ -297,23 +297,39 @@ export default {
     },
     updatetoko() {
       let formData = new FormData();
-      formData.append("logo", this.datafoto);
+      formData.append("nama", this.detaildatadialog.nama);
+      formData.append("alamat", this.detaildatadialog.alamat);
+      formData.append("no_telepon", this.detaildatadialog.no_telepon);
+      formData.append("deskripsi", this.detaildatadialog.deskripsi);
+      if(this.datafoto){
+
+        formData.append("logo", this.datafoto);
+      }else{
+
+        formData.append("logo", this.detaildatadialog.logo);
+      }
       axios.post(
         "http://127.0.0.1:8000/api/updatetoko/" + this.detaildatadialog.toko_id,
         formData,
         {
           "content-type": "multipart/form-data",
         }
-      );
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/updatetoko/" +
-            this.detaildatadialog.toko_id,
-          this.detaildatadialog
-        )
-        .then((respon) => {
+      ) .then((respon) => {
+          this.$toasted.show('Berhasil ubah toko', {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
           console.log(respon.data);
         });
+      // axios
+      //   .post(
+      //     "http://127.0.0.1:8000/api/updatetoko/" +
+      //       this.detaildatadialog.toko_id,
+      //     this.detaildatadialog
+      //   )
+
       Object.assign(this.Toko[this.indexnya], this.detaildatadialog);
       this.dialogedit = false;
     },
@@ -330,7 +346,12 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          alert("berhasil hapus");
+          this.$toasted.show('Berhasil hapus toko', {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
         });
       this.Toko.splice(this.editedIndex, 1);
       this.closeDelete();
@@ -344,10 +365,24 @@ export default {
     },
   },
 
+  mounted() {
+     this.gettoko();
+    //  this.gettoko();
+    },
+
   created() {
     const userid = this.$cookies.get("cookieku");
     this.tokouser = userid.data.id;
     this.gettoko();
   },
+
 };
 </script>
+<style>
+
+.edit-toast{
+  background: green;
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}</style>

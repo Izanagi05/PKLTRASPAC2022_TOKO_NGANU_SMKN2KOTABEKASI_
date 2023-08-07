@@ -82,6 +82,7 @@
   };
   </script>
 
+<<<<<<< HEAD
   <style>
   .ppp {
     margin-bottom: 51px;
@@ -145,3 +146,68 @@
     margin-left: 5px;
   }
   </style>
+=======
+<style scoped>
+.ppp {
+  margin-bottom: 51px;
+  font-family: "Poppins", sans-serif;
+}
+.contact {
+  background: #2f432d;
+  padding: 9px 123px 10px 123px;
+}
+.search {
+  margin-left: 500px;
+}
+.round-btn {
+  border-radius: 50%;
+  width: 49px;
+  height: 49px;
+  background-color: #d9d9d9;
+}
+.contact-text {
+  display: flex;
+  font-size: 16px;
+  line-height: 24px;
+}
+.contact-text .icon_telepon {
+  margin-right: 11px;
+  margin-top: 3px;
+}
+.nav {
+  padding: 39px 123px 10px 123px;
+  display: flex;
+}
+.logo {
+  width: 43px;
+  height: auto;
+}
+.nama_toko {
+  margin-top: 4px;
+  margin-left: 33px;
+  font-size: 24px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.namanya {
+  display: inline-block;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 14px;
+  margin-left: 12px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.profile_icon_keranjang {
+  display: flex;
+  gap: 11px;
+  margin-left: 32px;
+}
+.keranjang {
+  margin-left: 5px;
+}
+</style>
+>>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2

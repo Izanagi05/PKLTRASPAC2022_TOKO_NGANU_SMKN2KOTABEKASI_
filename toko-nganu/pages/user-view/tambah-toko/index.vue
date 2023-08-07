@@ -128,6 +128,14 @@
 </template>
 
 <style>
+.edit-toast{
+  background: green;
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}
+
+
 .foto-profil {
   margin-bottom: 20px;
 }
@@ -174,6 +182,12 @@ export default {
           this.databarang
         )
         .then((respon) => {
+          this.$toasted.show('Berhasil hapus keranjang', {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
           this.$router.push("/user-view/toko-user");
           console.log(respon);
         });

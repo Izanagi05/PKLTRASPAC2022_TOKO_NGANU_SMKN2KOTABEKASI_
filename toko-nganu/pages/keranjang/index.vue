@@ -324,7 +324,13 @@ export default {
         .then((respon) => {
           console.log(respon);
           location.reload();
-          alert("berhasil hapus");
+          // alert("berhasil hapus");
+          this.$toasted.show('Berhasil hapus keranjang', {
+        theme: 'success',
+        position: 'top-right',
+        className: 'edit-toast',
+        duration: 3000
+      })
         });
       this.closeDelete();
     },
@@ -361,6 +367,14 @@ export default {
 };
 </script>
 <style>
+.edit-toast{
+  background: green;
+  color:white;
+  padding: 10px ;
+  border-radius: 20px;
+}
+
+
 .f24sb {
   font-weight: 600;
   font-size: 24px;

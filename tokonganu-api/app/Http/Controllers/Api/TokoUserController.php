@@ -57,17 +57,19 @@ class TokoUserController extends Controller
             'logo'=>''
         ];
         $validasi = $request->validate($rules);
+        if($validasi){
 
-        if($request->file('logo')) {
-            // dd($request->oldImage);
-            if(!empty(Toko::find($id)->logo)) {
-                Storage::delete(Toko::find($id)->logo);
+            if($request->file('logo')) {
+                // dd($request->oldImage);
+                if(!empty(Toko::find($id)->logo)) {
+                    Storage::delete(Toko::find($id)->logo);
+                }
+                $validasi['logo'] = $request->file('logo')->store('logotoko');
             }
-            $validasi['logo'] = $request->file('logo')->store('logotoko');
-        }
-        $data = Toko::where('toko_id', $id)->update($validasi);
+            $data = Toko::where('toko_id', $id)->update($validasi);
 
-        return response()->json($data, 200);
+            return response()->json($data, 200);
+        }
     }
         public function deletetoko($id ){
             // $data = Toko::find($id);
