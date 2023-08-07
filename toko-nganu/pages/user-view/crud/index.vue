@@ -1,25 +1,21 @@
 <template>
   <div>
     <Navbar />
-    <div class="crud-container">
-      <v-row class="judul">
-        <v-col cols="12" md="6"> Tambah Barang</v-col>
-      </v-row>
+    <div class="container px-15">
 
-      <v-row dense justify="center">
-        <v-col cols="12" sm="3"
-          ><div class="list">Nama Barang</div>
+      <v-row justify="center">
+        <v-col cols="9" class="judul">
+          Tambah Barang
+        </v-col>
+        <v-col cols="12" lg="3" md="8" sm="4">
+          <div class="list">Nama Barang</div>
           <div class="list">Kategori</div>
           <div class="list">Toko</div>
-          <div class="list">Deskripsi</div></v-col
-        >
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="Nama Barang"
-            placeholder="Masukan Nama Barang"
-            solo
-            v-model="databarang.nama"
-          ></v-text-field>
+          <div class="list">Deskripsi</div>
+        </v-col>
+        <v-col cols="12" lg="6" md="8" sm="8">
+          <v-text-field label="Nama Barang" placeholder="Masukan Nama Barang" solo
+            v-model="databarang.nama"></v-text-field>
           <v-expansion-panels class="panel">
             <v-expansion-panel class="panel-kategori">
               <v-expansion-panel-header v-slot="{ open }">
@@ -42,15 +38,8 @@
                   <v-spacer></v-spacer>
                   <v-col cols="5">
                     <div>
-                      <v-select
-                        v-model="databarang.kategori_id"
-                        :items="kategori"
-                        item-text="nama"
-                        item-value="kategori_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
+                      <v-select v-model="databarang.kategori_id" :items="kategori" item-text="nama"
+                        item-value="kategori_id" chips flat solo></v-select>
                     </div>
                   </v-col>
                 </v-row>
@@ -84,15 +73,8 @@
                   <v-spacer></v-spacer>
                   <v-col cols="5">
                     <div>
-                      <v-select
-                        v-model="databarang.toko_id"
-                        :items="usertoko"
-                        item-text="nama"
-                        item-value="toko_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
+                      <v-select v-model="databarang.toko_id" :items="usertoko" item-text="nama" item-value="toko_id" chips
+                        flat solo></v-select>
                     </div>
                   </v-col>
                 </v-row>
@@ -106,36 +88,19 @@
             </v-expansion-panel>
           </v-expansion-panels>
 
-          <v-textarea
-            solo
-            name="input-7-4"
-            label="Deskripsi Barang"
-            v-model="databarang.deskripsi"
-          ></v-textarea
-        ></v-col>
-        <v-col cols="12" sm="3"
-          >
-
-          </v-col
-        >
-      </v-row>
-      <v-row class="judul" justify="end">
-        <v-col cols="12" md="2"
-          ><nuxt-link to="/user-view"
-            ><v-btn rounded outlined width="150px" class="button-aksi"
-              >Batal</v-btn
-            ></nuxt-link
-          ></v-col
-        ><v-col cols="12" md="2"
-          ><v-btn
-            outlined
-            rounded
-            width="150px"
-            class="button-aksi-jual"
-            @click="tbhbarang()"
-            >Jual</v-btn
-          ></v-col
-        >
+          <v-textarea solo name="input-7-4" label="Deskripsi Barang" v-model="databarang.deskripsi"></v-textarea>
+          <v-row class="" justify="end">
+            <v-col cols="12" lg="6" md="6" sm="6" xs="6" >
+              <nuxt-link to="/user-view">
+                <v-btn rounded outlined width="150px" class="button-aksi">
+                  Batal
+                </v-btn>
+              </nuxt-link>
+            </v-col>
+            <v-col cols="12" lg="6" md="6" sm="6" xs="6">
+              <v-btn outlined rounded width="150px" class="button-aksi-jual" @click="tbhbarang()">Jual</v-btn></v-col>
+          </v-row>
+        </v-col>
       </v-row>
     </div>
   </div>
@@ -161,7 +126,7 @@ export default {
 
   methods: {
     gettokouser() {
-      axios.get("http://127.0.0.1:8000/api/gettoko/"+this.userid).then((respon) => {
+      axios.get("http://127.0.0.1:8000/api/gettoko/" + this.userid).then((respon) => {
         this.usertoko = respon.data;
         //  this.items = respon.data
       });
@@ -212,6 +177,7 @@ export default {
 .crud-container {
   padding: 0px 281px;
 }
+
 .judul {
   font-family: Poppins;
   font-weight: 600;
@@ -219,42 +185,55 @@ export default {
   gap: 20px;
   margin-right: 20px;
 }
+
 .list {
   margin-bottom: 50px;
   font-family: Poppins;
   font-weight: 400;
   font-size: 20px;
 }
+
 .edit-image {
   margin-top: 20px;
   margin-left: 20px;
   height: 30px;
   width: 114px;
 }
+
 .edit-image:hover {
   background: #2f432d;
   color: rgb(255, 255, 255);
 }
+
 .button-aksi-jual {
   color: rgb(255, 255, 255) !important;
   background-color: #2f432d;
 }
+
 .button-aksi-jual:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0) !important;
+  background-color: #273826;
+  /* background-color: #ffffff; */
+  color: rgb(255, 255, 255) !important;
 }
+
 .gambar-produk {
   width: 200px;
   height: 200px;
   margin-left: 20px;
 }
-.button-aksi:hover {
-  background: #2f432d;
-  color: white;
+
+.button-aksi {
+  background: white;
 }
+
+/* .button-aksi:hover {
+  background: white;
+  color: white;
+} */
 .panel {
   margin-bottom: 30px;
 }
+
 .panel-kategori {
   margin-bottom: 30px;
 }
