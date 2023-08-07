@@ -5,7 +5,7 @@
       <div class="content">
         <div class="kiri">
           <div class="sub-title" style="margin-left: 27px, margin-right=36px">
-            Profil Pengguna
+            Profil Penggun
           </div>
           <div class="menu mt-2">
             <NuxtLink
