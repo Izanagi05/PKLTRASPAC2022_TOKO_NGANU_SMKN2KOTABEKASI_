@@ -55,7 +55,7 @@
             </v-btn
           >
         </nuxt-link>
-        <div class="display-5 my-auto ml-2">{{ $cookies.get('cookieku').data.nama }}</div>
+        <div class="display-5 my-auto ml-2 font-weight-bold  text-truncate">{{ $cookies.get('cookieku').data.nama }}</div>
       <!-- </div> -->
     </v-col>
 
@@ -143,9 +143,9 @@
               </v-row>
             </div>
             <div class="tampil3" v-if="set == 2">
-              <v-row class="p-0">
+              <v-row class="p-0 justify-center">
                 <v-col
-                  class="card-col"
+                  class="card-col col-6  mt-4 col-lg-3  col-md-4  col-sm-6 col-xs-6 d-flex justify-center  gx-2"
                   width="204px"
                   v-for="(brg, index) in hasilcari"
                   :key="index"
@@ -190,13 +190,11 @@
               </v-row>
             </div>
             <div class="tampil2" v-if="set==1">
-              <v-row
-                class="p-0"
+                    <v-row class="p-0 justify-center"
                 v-for="(brg, index) in hasilKategori"
-                :key="index"
-              >
+                :key="index">
                 <v-col
-                  class="card-col p-0"
+                  class="card-col col-6  mt-4 col-lg-3  col-md-4  col-sm-6 col-xs-6 d-flex justify-center  gx-2"
                   width="204px"
                   v-for="(barang, index) in brg.barang"
                   :key="index"

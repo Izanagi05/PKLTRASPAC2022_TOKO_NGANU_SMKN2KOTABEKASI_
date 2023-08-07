@@ -8,23 +8,25 @@
         </button>
       </div>
     </div>
-    <div class="nav d-flex justify-space-between">
-      <div class="d-flex">
-        <div class="logo">
-          <v-img
-            :src="require('~/assets/logo_nganu.png')"
-            width="100px"
-          ></v-img>
-        </div>
-        <div class="nama_toko">
-          <div>Toko nganu</div>
-        </div>
-      </div>
-      <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
-      <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" class="text-decoration-none">
-          <v-btn elevation="2" fab color="d9d9d9" icon
-            ><v-icon size="29px">mdi-cart</v-icon></v-btn
+
+    <div class="container">
+      <v-row>
+        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12">
+
+          <div class="logo">
+            <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+          </div>
+          <div class="nama_toko">
+            <div>Toko nganu</div>
+          </div>
+        </v-col>
+
+        <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
+        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-end justify-lg-end justify-md-end justify-sm-start">
+          <div class="profile_icon_keranjang">
+            <nuxt-link to="/keranjang" class="text-decoration-none">
+              <v-btn elevation="2" fab color="d9d9d9" icon
+              ><v-icon size="29px">mdi-cart</v-icon></v-btn
           >
         </nuxt-link>
         <nuxt-link to="/user-view" class="text-decoration-none">
@@ -40,8 +42,10 @@
             </v-avatar>
           </v-btn>
         </nuxt-link>
-        <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
+        <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">{{ $cookies.get("cookieku").data.nama }}</div>
       </div>
+    </v-col>
+    </v-row>
     </div>
   </div>
 </template>
