@@ -1,20 +1,6 @@
 <template>
   <div>
     <div class="ppp">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">
-          <button class="kontak" type="submit" @click="kontak">
-            <v-icon color="white">mdi-phone</v-icon>
-            +62-815-6315-1038
-          </button>
-        </div>
-      </div>
-      <div class="nav">
-        <div class="logo">
-          <v-img
-            :src="require('~/assets/logo_nganu.png')"
-            width="100px"
-          ></v-img>
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
         <button class="kontak" type="submit" @click="kontak"  >
@@ -23,52 +9,18 @@
         </button>
       </div>
     </div>
-    <div class="nav d-flex">
-      <v-col class="d-flex">
+    <div class="container">
+      <v-row>
+      <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12">
         <div class="logo">
-          <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
-
+          <v-img :src="require('~/assets/logo_nganu.png')" width="100"></v-img>
         </div>
         <div class="nama_toko">
-          <div>Toko nganu</div>
+          <div class="">Toko nganu</div>
         </div>
-
-        <div flat class="rounded-pill search" color="#d9d9d9">
-          <v-text-field
-            class="nyari rounded-pill"
-            v-model="cari"
-            label="Cari Nganu"
-            single-line
-            hide-details
-            outlined
-            @keyup.enter="getsearchbarang()"
-            append-icon="mdi-magnify"
-            placehoder="search"
-          ></v-text-field>
-        </div>
-        <div class="profile_icon_keranjang">
-          <nuxt-link to="/keranjang" class="text-decoration-none">
-            <v-btn elevation="2" fab color="d9d9d9" icon
-              ><v-icon size="29px">mdi-cart</v-icon></v-btn
-            >
-          </nuxt-link>
-          <nuxt-link to="/user-view" class="text-decoration-none">
-            <v-btn elevation="2" fab icon color="d9d9d9"
-              ><v-avatar class="foto-profilan">
-                <img
-                  :src="
-                    'http://127.0.0.1:8000/storage/' +
-                    $cookies.get(`cookieku`).data.foto_profil
-                  "
-                /> </v-avatar
-            ></v-btn>
-          </nuxt-link>
-          <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
-        </div>
-
       </v-col>
-      <v-col class="d-flex">
-        <div flat class="rounded-pill  justi" color="#d9d9d9">
+      <v-col class="d-flex col-12 col-lg-6 col-md-8 col-sm-12 col-xs-12 justify-end">
+        <div flat class="rounded-pill  " color="#d9d9d9">
           <v-text-field
           class="nyari rounded-pill"
           v-model="cari"
@@ -82,13 +34,13 @@
         ></v-text-field>
       </div>
 
-      <div class="profile_icon_keranjang">
-        <nuxt-link to="/keranjang" class="text-decoration-none">
+      <!-- <div class="profile_icon_keranjang"> -->
+        <nuxt-link to="/keranjang" class="text-decoration-none ml-2">
           <v-btn elevation="2" fab color="d9d9d9" icon
             ><v-icon size="29px">mdi-cart</v-icon></v-btn
           >
         </nuxt-link>
-        <nuxt-link to="/user-view" class="text-decoration-none">
+        <nuxt-link to="/user-view" class="text-decoration-none ml-2">
           <v-btn elevation="2" fab icon color="d9d9d9"
             >
 
@@ -103,22 +55,23 @@
             </v-btn
           >
         </nuxt-link>
-        <div class="namanya">{{ $cookies.get('cookieku').data.nama }}</div>
-
-      </div>
+        <div class="display-5 my-auto ml-2">{{ $cookies.get('cookieku').data.nama }}</div>
+      <!-- </div> -->
     </v-col>
 
+  </v-row>
     </div>
   </div>
     <div class="all-home">
-      <div class="home ">
-        <div class="home-image">
-
+      <!-- <div :class="$vuetify.breakpoint.name == 'sm' ? 'container' : 'home' "> -->
+        <div class="container">
+          <div class="home-image">
           <v-carousel
             cycle
-            height="400"
+            height="auto"
             hide-delimiter-background
             show-arrows-on-hover
+            class="object-fit-cover"
           >
             <v-carousel-item
               v-for="(item, i) in items"
@@ -128,164 +81,31 @@
               <!-- <img :src="item" alt="" />  -->
             </v-carousel-item>
           </v-carousel>
-
-          <v-img :src="require('~/assets/home-img.png')"></v-img>
-
         </div>
-        <v-row>
-          <div class="filter">
-            <v-col cols="4">
-              <v-btn outlined @click="getallbarang()"> Semua Kategori </v-btn>
+        <v-row class="filter mt-8">
+          <!-- <div class="filter"> -->
+            <v-col  class="pa-1 px-3">
+              <v-btn outlined @click="getallbarang()" class="my-auto"> Semua Kategori </v-btn>
             </v-col>
-          </div>
-          <div class="filter" v-for="(ktg, index) in allkategori" :key="index">
-            <v-col cols="4">
-              <v-btn outlined @click="getkategori(ktg)"> {{ ktg.nama }} </v-btn>
+            <v-col  class="pa-1 px-3" v-for="(ktg, index) in allkategori" :key="index">
+              <v-btn outlined @click="getkategori(ktg)" class="my-auto"> {{ ktg.nama }} </v-btn>
             </v-col>
-          </div>
+          <!-- </div>  -->
         </v-row>
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-
-        <div class="product-card">
-          <div class="tampil1" v-if="set == 0">
-            <v-row class="p-0">
-              <v-col
-                class="card-col"
-                v-for="(brg, index) in allbarang"
-                :key="index"
-              >
-                <div class="card-barang">
-                  <v-card width="250px">
-                    <v-img :src="require('~/assets/makanan.jpg')"></v-img>
-                    <v-row>
-                      <v-col class="">
-                        <div class="title-product f14sb pl-1">
-                          {{ brg.nama }}
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">Rp1.999.999</div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          {{ brg.nama }}
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-1 pb-1">
-                      <button
-                        class="rounded-xl view-more-btn font-weight-regular"
-                        style="font-size: 12px"
-                        @click="todetail(brg)"
-                      >
-                        Lebih lengkap
-                      </button>
-                    </div>
-                  </v-card>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-          <div class="tampil3" v-if="set == 2">
-            <v-row class="p-0">
-              <v-col
-                class="card-col"
-                v-for="(brg, index) in hasilcari"
-                :key="index"
-              >
-                <div class="card">
-                  <v-card width="250px">
-                    <v-img :src="require('~/assets/makanan.jpg')"></v-img>
-                    <v-row>
-                      <v-col>
-                        <div class="title-product f14sb pl-1">
-                          {{ brg.nama }}
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">Rp2.000</div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          {{ brg.deskripsi }}
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-1 pb-1">
-                      <button
-                        class="rounded-xl view-more-btn font-weight-regular"
-                        style="font-size: 12px"
-                        @click="todetail(brg)"
-                      >
-                        Lebih lengkap
-                      </button>
-                    </div>
-                  </v-card>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-          <div class="tampil2" v-if="set == 1">
-            <v-row
-              class="p-0"
-              v-for="(brg, index) in hasilKategori"
-              :key="index"
-            >
-              <v-col
-                class="card-col"
-                v-for="(barang, index) in brg.barang"
-                :key="index"
-              >
-                <div class="card">
-                  <v-card width="250px">
-                    <v-img :src="require('~/assets/makanan.jpg')"></v-img>
-                    <v-row>
-                      <v-col cols="3" class="">
-                        <div class="title-product f14sb pl-1">
-                          {{ barang.nama }}
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="price-product f14sb pr-1">Rp1.999.999</div>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <div class="desc-product font-weight-regular pl-1">
-                          {{ barang.deskripsi }}
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card pl-1 pb-1">
-                      <button
-                        class="rounded-xl view-more-btn font-weight-regular"
-                        style="font-size: 12px"
-                        @click="todetail2(barang)"
-                      >
-                        Lebih lengkap
-                      </button>
-                    </div>
-                  </v-card>
-                </div>
-              </v-col>
-            </v-row>
         <div>
           <div class="product-card">
             <div class="tampil1" v-if="set == 0">
-              <v-row class="p-0 justify-content-center">
+              <v-row class="p-0 justify-center">
                 <v-col
-                  class="card-col mx-2 col-lg-2 col-sm-6 d-flex justify-center  "
+                  class="card-col col-6  mt-4 col-lg-3  col-md-4  col-sm-6 col-xs-6 d-flex justify-center  gx-2"
                   v-for="(brg, index) in allbarang"
                   :key="index"
                 >
 
-                    <v-card width="204px">
+                    <v-card >
                       <v-img
                         :src="require('~/assets/makanan.jpg')"
                         width="204px"
@@ -419,11 +239,11 @@
                   </div>
                 </v-col>
               </v-row>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div>
 
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -436,23 +256,6 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
-      dataprofil: {
-        nama: null,
-        no_telepon: null,
-        email: null,
-        foto_profil: "",
-      },
-      items: [
-        {
-          src: "home-img.png",
-        },
-        {
-          src: "logo_nganu.png",
-        },
-        {
-          src: "makanan.jpg",
-        },
-      ],
       set: 0,
       cari: null,
       hasilcari:[],
@@ -470,6 +273,17 @@ export default {
       hasilKategori: {
         barang_id: "",
       },
+      items: [
+        {
+          src: "home-img.png",
+        },
+        {
+          src: "home-img.png",
+        },
+        {
+          src: "home-img.png",
+        },
+      ],
     };
   },
   methods: {
@@ -581,10 +395,8 @@ export default {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
-.search { 
-  margin-left: 900px;
-=======
-  /* margin-left: 500px; */ 
+.search {
+  /* margin-left: 500px; */
 }
 .round-btn {
   border-radius: 50%;
@@ -629,17 +441,13 @@ export default {
   font-weight: 600;
 }
 .profile_icon_keranjang {
-  display: flex;
-  gap: 11px;
-  margin-left: 32px;
+  /* display: flex; */
 }
 .keranjang {
   margin-left: 5px;
 }
 
-/* .home {
-  padding: 0px 123px 66px 123px;
-} */
+
 .contact-text {
   font-size: 16px;
   line-height: 24px;
@@ -664,21 +472,14 @@ export default {
   /* font-size: 24px;
   font-weight: 600; */
   margin-top: 13px;
-} 
-.card-col {
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 0;
-  margin-top: 15px;
-  /* max-width: 16.66%; */
-} 
+}
 
 /* .title-product {
   padding-left: 3px;
 } */
-.price-product {
-  color: #ee4d2d;
-}
+/* .price-product {
+  padding-right: 4px;
+} */
 .desc-product {
   font-size: 10px;
 }
