@@ -19,7 +19,7 @@
                 to="/halaman-admin"
                 class="my-2 black--text text-decoration-none"
               >
-                <v-icon large>mdi-account-tie</v-icon> Admin
+                <v-icon large>mdi-database</v-icon> Admin
               </NuxtLink>
             </div>
             <div v-else></div>
@@ -27,7 +27,7 @@
               to="/user-view/toko-user"
               class="my-2 black--text text-decoration-none"
             >
-              <v-icon large>mdi-eye</v-icon> Toko
+              <v-icon large>mdi-shopping</v-icon> Toko
             </NuxtLink>
             <NuxtLink
               to="/user-view/tambah-toko"
@@ -39,7 +39,7 @@
               to="/user-view/crud"
               class="my-2 black--text text-decoration-none"
             >
-              <v-icon large></v-icon> tambah barang
+              <v-icon large>mdi-clipboard-plus</v-icon> Tambah barang
             </NuxtLink>
           </div>
           <div class="logout" style="margin-left: 27px">
@@ -60,11 +60,10 @@
               <div class="foto-profil">
                 <v-avatar class="foto-profilan" width="270px" height="270px">
                   <img
-                    v-if="dataprofil.foto_profil"
-                    :src="
-                      'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
-                    "
+                    v-if="fotoProfil"
+                    :src="'http://127.0.0.1:8000/storage/' + fotoProfil"
                   />
+                  <v-icon v-else>mdi-account</v-icon>
                 </v-avatar>
               </div>
               <div class="btn-card pl-1 pb-1">

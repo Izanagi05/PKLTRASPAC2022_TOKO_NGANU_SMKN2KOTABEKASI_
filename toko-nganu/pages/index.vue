@@ -2,7 +2,6 @@
   <div>
     <!-- <Navbar /> -->
     <div class="ppp">
-<<<<<<< HEAD
       <div class="contact white--text">
         <div class="contact-text font-weight-regular">
           <button class="kontak" type="submit" @click="kontak">
@@ -44,18 +43,14 @@
             <v-btn elevation="2" fab icon color="d9d9d9"
               ><v-avatar class="foto-profilan">
                 <img
-                  :src="
-                    'http://127.0.0.1:8000/storage/' +
-                    $cookies.get(`cookieku`).data.foto_profil
-                  "
-                /> </v-avatar
+        v-if="fotoProfil"
+        :src="'http://127.0.0.1:8000/storage/' + fotoProfil"
+      />
+      <v-icon v-else>mdi-account</v-icon> </v-avatar
             ></v-btn>
           </nuxt-link>
           <div class="namanya">{{ $cookies.get("cookieku").data.nama }}</div>
         </div>
-=======
-
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
       </div>
     </v-col>
     </div>
@@ -64,7 +59,7 @@
         <div class="home-image">
           <v-carousel
             cycle
-            height="400"
+            height="auto"
             hide-delimiter-background
             show-arrows-on-hover
           >
@@ -92,7 +87,6 @@
 
         <div class="recomend f24sb">Rekomendasi untuk anda</div>
         <!-- {{ Toko }} -->
-<<<<<<< HEAD
         <div class="product-card">
           <div class="tampil1" v-if="set == 0">
             <v-row class="p-0">
@@ -220,154 +214,6 @@
                 </div>
               </v-col>
             </v-row>
-=======
-        <div>
-          <div class="product-card">
-            <div class="tampil1" v-if="set == 0">
-              <v-row class="p-0">
-                <v-col
-                  class="card-col"
-                  width="204px"
-                  v-for="(brg, index) in allbarang"
-                  :key="index"
-                >
-                  <div class="card">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/makanan.jpg')"
-                        width="204px"
-                      ></v-img>
-
-                          <div class="title-product f14sb pl-1">
-                            {{ brg.nama }}
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            <!-- Rp. 1.999.999 -->
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row class="ma-0">
-                        <v-col class="pa-0">
-                          <div class="desc-product font-weight-regular pl-1">
-                            {{ brg.nama }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="btn-card mt-2  pl-1 pb-1">
-                        <button
-                          class="rounded-xl view-more-btn font-weight-regular"
-                          style="font-size: 12px"
-                          @click="todetail(brg)"
-                        >
-                          Lebih lengkap
-                        </button>
-                      </div>
-                    </v-card>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
-            <div class="tampil3" v-if="set == 2">
-              <v-row class="p-0">
-                <v-col
-                  class="card-col"
-                  width="204px"
-                  v-for="(brg, index) in hasilcari"
-                  :key="index"
-                >
-                  <div class="card">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/makanan.jpg')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col class="">
-                          <div class="title-product f14sb pl-1">
-                            {{ brg.nama }}
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            {{ brg.deskripsi }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class=" mt-2 pl-1 pb-1">
-                        <button
-                          class="rounded-xl view-more-btn font-weight-regular"
-                          style="font-size: 12px"
-                          @click="todetail(brg)"
-                        >
-                          Lebih lengkap
-                        </button>
-                      </div>
-                    </v-card>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
-            <div class="tampil2" v-if="set==1">
-              <v-row
-                class="p-0"
-                v-for="(brg, index) in hasilKategori"
-                :key="index"
-              >
-                <v-col
-                  class="card-col p-0"
-                  width="204px"
-                  v-for="(barang, index) in brg.barang"
-                  :key="index"
-                >
-                  <div class="card">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/makanan.jpg')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="3" class="">
-                          <div class="title-product f14sb pl-1">
-                            {{ barang.nama }}
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            {{ barang.deskripsi }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class=" mt-2 pl-1 pb-1">
-                        <button
-                          class="rounded-xl view-more-btn font-weight-regular"
-                          style="font-size: 12px"
-                          @click="todetail2(barang)"
-                        >
-                          Lebih lengkap
-                        </button>
-                      </div>
-                    </v-card>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
           </div>
         </div>
       </div>
@@ -385,17 +231,17 @@ export default {
         nama: null,
         no_telepon: null,
         email: null,
-        foto_profil: "",
+        foto_profil: null,
       },
       items: [
         {
           src: "home-img.png",
         },
         {
-          src: "logo_nganu.png",
+          src: "home-img.png",
         },
         {
-          src: "makanan.jpg",
+          src: "home-img.png",
         },
       ],
       set: 0,
@@ -494,11 +340,7 @@ export default {
   padding: 9px 123px 10px 123px;
 }
 .search {
-<<<<<<< HEAD
-  margin-left: 900px;
-=======
   /* margin-left: 500px; */
->>>>>>> 5bef42382b233409b833231be82fd46b2b037fe2
 }
 .round-btn {
   border-radius: 50%;
