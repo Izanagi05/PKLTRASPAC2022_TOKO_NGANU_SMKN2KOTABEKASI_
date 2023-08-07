@@ -9,8 +9,8 @@
             <v-spacer></v-spacer>
             <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
               >Cancel</v-btn
-              >
-              <v-btn
+            >
+            <v-btn
               color="blue-darken-1"
               variant="text"
               @click="confirmhapuskeranjang"
@@ -119,8 +119,6 @@
                           :src="require('~/assets/barang.png')"
                           width="60px"
                         ></v-img>
-
-
                       </v-col>
                       <v-col>
                         <div class="font-weight-medium">
@@ -195,7 +193,9 @@
               <v-row>
                 <v-col> Harga </v-col>
 
-                <v-col v-if="varharga" class="f14sb">  {{ varharga.harga }} </v-col>
+                <v-col v-if="varharga" class="f14sb">
+                  {{ varharga.harga }}
+                </v-col>
                 <v-col v-else class="f14sb"> Rp. 0 </v-col>
               </v-row>
               <v-row>
@@ -231,18 +231,18 @@ export default {
       dialogDelete: false,
       price: 100000,
       varharga: {
-        harga:0,
-        nama:"",
-        stok:0,
+        harga: 0,
+        nama: "",
+        stok: 0,
       },
       pricetotal: 0,
       getidker: null,
       kuan: 1,
       totalprice: {
-        harga:0,
+        harga: 0,
       },
       namabarangker: {
-        nama:"",
+        nama: "",
       },
       datakeranjang: {
         barang_id: "",
@@ -272,9 +272,8 @@ export default {
         .get("http://127.0.0.1:8000/api/getvarian/" + this.getidker.varian_id)
         .then((respon) => {
           this.varharga = respon.data[0];
-
         });
-        this.totalprice.harga = this.varharga.harga;
+      this.totalprice.harga = this.varharga.harga;
     },
     getbarangnama() {
       axios
@@ -349,9 +348,9 @@ export default {
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );
     },
-    transaksi(){
-      console.log("tes")
-    }
+    transaksi() {
+      console.log("tes");
+    },
   },
   created() {
     const usid = this.$cookies.get("cookieku");

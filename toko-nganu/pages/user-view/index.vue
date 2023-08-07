@@ -10,14 +10,14 @@
           <div class="menu">
             <NuxtLink
               to="/user-view"
-              class="my-link black--text text-decoration-none"
+              class="my-2 mt-5 black--text text-decoration-none"
             >
               <v-icon large>mdi-account</v-icon> Info User
             </NuxtLink>
-            <div v-if="cekuserrole == 'Admin'">
+            <div v-if="cekuserrole === 'Admin'">
               <NuxtLink
                 to="/halaman-admin"
-                class="my-link black--text text-decoration-none pt-6 pb-6"
+                class="my-2 black--text text-decoration-none"
               >
                 <v-icon large>mdi-account-tie</v-icon> Admin
               </NuxtLink>
@@ -25,19 +25,19 @@
             <div v-else></div>
             <NuxtLink
               to="/user-view/toko-user"
-              class="my-link black--text text-decoration-none pt-6"
+              class="my-2 black--text text-decoration-none"
             >
               <v-icon large>mdi-eye</v-icon> Toko
             </NuxtLink>
             <NuxtLink
               to="/user-view/tambah-toko"
-              class="my-link black--text text-decoration-none"
+              class="my-2 black--text text-decoration-none"
             >
               <v-icon large></v-icon> Buka Toko
             </NuxtLink>
             <NuxtLink
               to="/user-view/crud"
-              class="my-link black--text text-decoration-none"
+              class="my-2 black--text text-decoration-none"
             >
               <v-icon large></v-icon> tambah barang
             </NuxtLink>
@@ -51,7 +51,7 @@
         <div class="pembatas"></div>
         <div class="profil">
           <div class="navigasi">
-            <NuxtLink to="/" class="my-link text-decoration-none black--text">
+            <NuxtLink to="/" class="text-decoration-none black--text">
               Home </NuxtLink
             ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
           </div>
@@ -59,7 +59,6 @@
             <v-col>
               <div class="foto-profil">
                 <v-avatar class="foto-profilan" width="270px" height="270px">
-                  <!-- {{ dataprofil.foto_profil }} -->
                   <img
                     v-if="dataprofil.foto_profil"
                     :src="
@@ -70,7 +69,7 @@
               </div>
               <div class="btn-card pl-1 pb-1">
                 <v-btn
-                  class="profil-btn font-weight-medium"
+                  class="profil-btn font-weight-medium text-capitalize"
                   width="310px"
                   style="font-size: 24px; font-family: Poppins, sans-serif"
                   outlined
@@ -160,9 +159,9 @@ export default {
     this.getuser();
     this.cekuserrole = usid.role;
   },
-  mounted() {
-    this.getuser();
-  },
+  // mounted() {
+  //   this.getuser();
+  // },
 };
 </script>
 <style>
@@ -187,7 +186,7 @@ export default {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 20px;
-  margin-top: 69px;
+  /* margin-top: 69px; */
 }
 .logout {
   margin-top: 120px;
@@ -215,7 +214,7 @@ export default {
 .my-link {
   text-decoration: none;
   color: #000000;
-  margin-bottom: 43px;
+  /* margin-bottom: 43px; */
 }
 .isi {
   margin-top: 26px;
