@@ -160,7 +160,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .edit-toast{
   background: green;
   color:white;

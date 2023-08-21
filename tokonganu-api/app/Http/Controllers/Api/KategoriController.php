@@ -20,6 +20,11 @@ class KategoriController extends Controller
         $kategori= Kategori::where('kategori_id', $id)->get();
         foreach ($kategori as $key => $ktgr) {
             $kategori[$key]['barang']=$ktgr->Barang;
+            foreach (  $kategori[$key]['barang'] as $key => $dt) {
+                $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
+                $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
+                # code...
+            }
         }
         return response()->json($kategori);
     }

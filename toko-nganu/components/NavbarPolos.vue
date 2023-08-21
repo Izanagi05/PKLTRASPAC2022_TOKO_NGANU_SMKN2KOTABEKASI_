@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;
@@ -48,6 +48,7 @@ export default {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
+/*
 .contact-text {
   display: flex;
   font-size: 16px;
@@ -64,12 +65,5 @@ export default {
 .logo {
   width: 43px;
   height: auto;
-}
-.nama_toko {
-  margin-top: 4px;
-  margin-left: 33px;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
+} */
 </style>

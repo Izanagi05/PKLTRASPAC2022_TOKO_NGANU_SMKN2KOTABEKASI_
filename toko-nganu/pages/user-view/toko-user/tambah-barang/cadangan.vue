@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<style>
+<style  scoped>
 .toko-container {
   padding: 0px 123px;
 }

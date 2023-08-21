@@ -127,7 +127,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .edit-toast{
   background: green;
   color:white;

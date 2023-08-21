@@ -60,7 +60,6 @@
               <v-col>
                 <div class="foto-profil d-flex justify-center">
                   <v-avatar class="foto-profilan" style="width:20vw;height: 20vw;">
-                    <!-- {{ dataprofil.foto_profil }} -->
                     <img v-if="dataprofil.foto_profil" class="img-fluid" :src="'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
                       " />
                   </v-avatar>
@@ -156,7 +155,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .contact {
   background-color: #2f432d;
   padding: 5px 0px 7px 154px;

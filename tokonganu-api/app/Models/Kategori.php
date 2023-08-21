@@ -18,4 +18,7 @@ class Kategori extends Model
     public function Barang(){
         return $this->hasMany(Barang::class, 'kategori_id');
     }
+    // public function barangVarianiFirst(){
+    //     return Barang()->hasMany(Varian::class, 'barang_id')->limit(1);;
+    // }
 }

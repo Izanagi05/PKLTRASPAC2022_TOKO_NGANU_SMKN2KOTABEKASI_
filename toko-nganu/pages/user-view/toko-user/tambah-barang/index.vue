@@ -128,7 +128,7 @@ export default {
 // };
 </script>
 
-<style>
+<style scoped>
 .crud-container {
   padding: 0px 281px;
 }

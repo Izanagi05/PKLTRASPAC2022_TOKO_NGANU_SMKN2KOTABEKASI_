@@ -120,6 +120,7 @@ export default {
       })
       Object.assign(this.Toko[this.indexnya], this.detaildatadialog)
     this.dialogedit=false
+    this.$toast.success("Berhasil update");
     },
 
     hapusbarang (item) {
@@ -130,7 +131,7 @@ export default {
     confirmhapusbarang(){
       axios.delete('http://127.0.0.1:8000/api/deletebarang/'+this.detaildatadialog.barang_id).then(respon =>{
        console.log(respon)
-        alert('berhasil hapus')
+       this.$toast.success("Berhasil hapus");
         })
         this.Toko.splice(this.editedIndex, 1)
         this.closeDelete()

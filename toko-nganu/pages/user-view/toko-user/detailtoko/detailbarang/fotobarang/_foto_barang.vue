@@ -178,13 +178,12 @@ export default {
         .then((respon) => {
           console.log(respon);
 
-          location.reload();
-          this.$toasted.show('Berhasil tambah foto barang', {
-        theme: 'success',
-        position: 'top-right',
-        className: 'edit-toast',
-        duration: 3000
-      })
+          this.$toasted.success('Berhasil tambah foto barang', {
+            position: 'top-right',
+            className: 'edit-toast',
+            duration: 3000
+          })
+          this.getfoto()
         });
       this.fotobarang.push(this.detaildatadialog);
       this.closeadd();
@@ -208,7 +207,6 @@ export default {
     updatefoto() {
       let foto = new FormData();
       if(this.filefoto){
-
         console.log("0")
         foto.append("file", this.filefoto);
       }else{
@@ -222,16 +220,15 @@ export default {
           foto
         )
         .then((respon) => {
-          location.reload();
           console.log(respon.data);
-          this.$toasted.show('Berhasil ubah foto barang', {
-        theme: 'success',
+          this.$toasted.success('Berhasil ubah foto barang', {
         position: 'top-right',
         className: 'edit-toast',
         duration: 3000
       })
         });
       Object.assign(this.fotobarang[this.indexnya], this.detaildatadialog);
+      this.getfoto()
       this.dialogedit = false;
     },
 
@@ -246,18 +243,17 @@ export default {
       axios
         .delete("http://127.0.0.1:8000/api/deletefotobarang/" + this.ftbrgid)
         .then((respon) => {
-          alert("berhasil hapus");
-          location.reload();
           console.log(respon);
-          this.$toasted.show('Berhasil hapus foto barang', {
-        theme: 'success',
+          this.$toasted.success('Berhasil hapus foto barang', {
         position: 'top-right',
         className: 'edit-toast',
         duration: 3000
       })
         });
       // this.fotobarang.splice(this.indexnya, 1)
+      this.getfoto()
       this.closeDelete();
+
     },
     closeDelete() {
       this.dialogDelete = false;
@@ -275,7 +271,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .edit-toast{
   background: green;
   color:white;

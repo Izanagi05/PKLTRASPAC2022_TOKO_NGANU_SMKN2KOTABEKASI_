@@ -25,8 +25,7 @@ class FotoBarangController extends Controller
         ]);
 
         $validatedData['barang_id'] = $tk;
-        $validatedData['file'] =  $request->file('file')->store('fotobarang');;
-        // dd($validatedData['user_id']);
+        $validatedData['file'] =  $request->file('file')->store('fotobarang');
         Foto_Barang::create($validatedData);
 
     }

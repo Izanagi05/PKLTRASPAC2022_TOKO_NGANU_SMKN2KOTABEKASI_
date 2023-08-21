@@ -11,17 +11,10 @@
 
     <div class="container">
       <v-row>
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12">
-
-          <div class="logo">
-            <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
-          </div>
-          <div class="nama_toko">
-            <div>Toko nganu</div>
-          </div>
-        </v-col>
-
-        <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
+        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 d-flex align-center">
+              <v-img :src="require('~/assets/logo_nganu.png')" max-width="40"></v-img>
+              <div class="font-weight-bold text-h5 ml-4">Toko nganu</div>
+          </v-col>
         <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-start justify-lg-end justify-md-end justify-sm-start">
           <div class="profile_icon_keranjang">
             <nuxt-link to="/keranjang" class="text-decoration-none">
@@ -60,7 +53,6 @@ export default {
         email: null,
         foto_profil: "",
       },
-      // foto_profil: "",
       cekuserrole: null,
       userid: null,
       editprofil: [],
@@ -100,6 +92,7 @@ export default {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
+/*
 .search {
   margin-left: 900px;
 }
@@ -126,13 +119,7 @@ export default {
   width: 43px;
   height: auto;
 }
-.nama_toko {
-  margin-top: 4px;
-  margin-left: 33px;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
+
 .namanya {
   display: inline-block;
   width: 100px;
@@ -144,7 +131,7 @@ export default {
   font-size: 20px;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-}
+} */
 .profile_icon_keranjang {
   display: flex;
   gap: 11px;
