@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div>
     <Navbar />
     <v-row>
@@ -32,10 +32,10 @@
           >
         </div>
       </v-col>
-      <v-col sm="9">
+      <!-- <v-col sm="9">
         <ProfileUser v-if="$route.path === 'profile-user'" />
         <TokoUser v-else-if="$route.path === 'toko-user'" />
-      </v-col>
+      </v-col> -->
     </v-row>
   </div>
 </template>
@@ -43,14 +43,14 @@
 <script>
 import axios from "axios";
 
-import ProfileUser from "~/pages/profile-user";
-import TokoUser from "~/pages/toko-user";
+// import ProfileUser from "~/pages/profile-user";
+// import TokoUser from "~/pages/toko-user";
 
 export default {
-  components: {
-    ProfileUser,
-    TokoUser,
-  },
+  // components: {
+  //   ProfileUser,
+  //   TokoUser,
+  // },
   middleware: "middlewareku",
   data() {
     return {
@@ -108,4 +108,4 @@ export default {
     this.getuser();
   },
 };
-</script> -->
+</script>

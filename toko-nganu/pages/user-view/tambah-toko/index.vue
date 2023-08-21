@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <div class="text-center justify-center tambah-container">
       <div class="dalam-container">
         <div class="foto-profil">
@@ -158,7 +159,7 @@
 <script>
 import axios from "axios";
 export default {
-  layout: "UserView",
+  // layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <div class="home-container">
       <div class="content">
         <div class="profil">
@@ -78,7 +79,7 @@
 import axios from "axios";
 
 export default {
-  layout: "UserView",
+  // layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {

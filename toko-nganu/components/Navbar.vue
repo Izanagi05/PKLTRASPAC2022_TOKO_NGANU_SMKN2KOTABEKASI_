@@ -11,10 +11,12 @@
 
     <div class="container">
       <v-row>
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12">
-
+        <v-col class="d-flex col-12 col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="logo">
-            <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
+            <v-img
+              :src="require('~/assets/logo_nganu.png')"
+              width="100px"
+            ></v-img>
           </div>
           <div class="nama_toko">
             <div>Toko nganu</div>
@@ -22,30 +24,34 @@
         </v-col>
 
         <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-end justify-lg-end justify-md-end justify-sm-start">
+        <v-col
+          class="d-flex col-12 col-lg-6 col-md-4 col-sm-12 col-xs-12 justify-end justify-lg-end justify-md-end justify-sm-start"
+        >
           <div class="profile_icon_keranjang">
             <nuxt-link to="/keranjang" class="text-decoration-none">
               <v-btn elevation="2" fab color="d9d9d9" icon
-              ><v-icon size="29px">mdi-cart</v-icon></v-btn
-          >
-        </nuxt-link>
-        <nuxt-link to="/user-view" class="text-decoration-none">
-          <v-btn elevation="1" fab icon color="d9d9d9">
-            <v-avatar class="foto-profilan">
-              <img
-                v-if="fotoProfil"
-                :src="
-                  'http://127.0.0.1:8000/storage/' +
-                  $cookies.get(`cookieku`).data.foto_profil
-                "
-              /><v-icon v-else>mdi-account</v-icon>
-            </v-avatar>
-          </v-btn>
-        </nuxt-link>
-        <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">{{ $cookies.get("cookieku").data.nama }}</div>
-      </div>
-    </v-col>
-    </v-row>
+                ><v-icon size="29px">mdi-cart</v-icon></v-btn
+              >
+            </nuxt-link>
+            <nuxt-link to="/user-view" class="text-decoration-none">
+              <v-btn elevation="0" fab icon color="d9d9d9">
+                <v-avatar class="foto-profilan">
+                  <img
+                    v-if="fotoProfil"
+                    :src="
+                      'http://127.0.0.1:8000/storage/' +
+                      $cookies.get(`cookieku`).data.foto_profil
+                    "
+                  /><v-icon v-else>mdi-account</v-icon>
+                </v-avatar>
+              </v-btn>
+            </nuxt-link>
+            <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
+              {{ $cookies.get("cookieku").data.nama }}
+            </div>
+          </div>
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>

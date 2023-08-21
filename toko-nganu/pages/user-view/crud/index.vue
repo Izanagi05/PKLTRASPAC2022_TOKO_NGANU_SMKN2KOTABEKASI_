@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <div class="crud-container">
       <v-row class="judul">
         <v-col cols="12" md="6"> Tambah Barang</v-col>
@@ -139,7 +140,7 @@
 <script>
 import axios from "axios";
 export default {
-  layout: "UserView",
+  // layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
