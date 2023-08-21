@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;
@@ -48,12 +48,5 @@ export default {
 .contact-text .icon_telepon {
   margin-right: 11px;
   margin-top: 3px;
-}
-.nama_toko {
-  margin-top: 4px;
-  margin-left: 33px;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
 }
 </style>

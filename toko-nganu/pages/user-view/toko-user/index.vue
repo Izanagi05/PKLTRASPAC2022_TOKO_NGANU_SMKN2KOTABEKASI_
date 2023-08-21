@@ -86,73 +86,16 @@
           </v-container>
         </v-card>
       </v-dialog>
-      <!-- <v-dialog
-        v-model="dialogdetail"
-        max-width="700"
-        persistent
-        transition="dialog-bottom-transition"
-      >
-        <v-card
-          class="kartu"
-          light
-          style="padding: 0px; color: black; border: #fb8c00 solid 3px"
-        >
-          <div style="background: #fb8c00; padding: 10px 30px; color: white">
-            <h1>Detail</h1>
-          </div>
-          <v-container style="padding: 30px">
-            <div style="margin: 20px">
-              <v-row>
-                <v-col cols="5">
-                  <h3>Nama: {{ detaildatadialog.nama }}</h3>
-                </v-col>
-                <v-col>
-                  <h3>Alamat: {{ detaildatadialog.alamat }}</h3>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="5">
-                  <h3>No Telepon: {{ detaildatadialog.no_telepon }}</h3>
-                </v-col>
-                <v-col>
-                  <h3>Deskripsi: {{ detaildatadialog.deskripsi }}</h3>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <h3>Logo: {{ detaildatadialog.logo }}</h3>
-                </v-col>
-                <v-col>
-                  <p>Barang</p>
-                  <div
-                    v-for="(brgtoko, index) in detaildatadialog.barang"
-                    :key="index"
-                  >
-                    <h3>Barang: {{ brgtoko.nama }}</h3>
-                    <h3>deskripsi: {{ brgtoko.deskripsi }}</h3>
-                    <v-spacer></v-spacer>
-                  </div>
-                </v-col>
-              </v-row>
-
-            </div>
-            <v-card-actions>
-              <v-btn
-                @click="closedetail()"
-                style="background: #fb8c00; color: black"
-                >Close</v-btn
-              >
-            </v-card-actions>
-          </v-container>
-        </v-card>
-      </v-dialog> -->
       <v-data-table data-app :headers="headers" :items="Toko" class="px-15">
         <template v-slot:[`item.logo`]="{ item }">
-          <v-img
-            width="200"
+          <div
+                      class="image-container3 d-flex justify-center align-center">
+
+            <img
+          object-fit="cover" width="100%" height="100%"
             :src="'http://127.0.0.1:8000/storage/' + item.logo"
-          >
-          </v-img>
+          />
+        </div>
         </template>
         <template v-slot:[`item.aksi`]="{ item }">
           <!-- <v-btn
@@ -304,30 +247,17 @@ export default {
       } else {
         formData.append("logo", this.detaildatadialog.logo);
       }
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/updatetoko/" +
-            this.detaildatadialog.toko_id,
-          formData,
-          {
-            "content-type": "multipart/form-data",
-          }
-        )
-        .then((respon) => {
-          this.$toasted.show("Berhasil ubah toko", {
-            theme: "success",
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
+      axios.post(
+        "http://127.0.0.1:8000/api/updatetoko/" + this.detaildatadialog.toko_id,
+        formData,
+        {
+          "content-type": "multipart/form-data",
+        }
+      ) .then((respon) => {
+        this.$toast.success("Berhasil update");
+        this.gettoko()
           console.log(respon.data);
         });
-      // axios
-      //   .post(
-      //     "http://127.0.0.1:8000/api/updatetoko/" +
-      //       this.detaildatadialog.toko_id,
-      //     this.detaildatadialog
-      //   )
 
       Object.assign(this.Toko[this.indexnya], this.detaildatadialog);
       this.dialogedit = false;
@@ -345,14 +275,10 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          this.$toasted.show("Berhasil hapus toko", {
-            theme: "success",
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
+          this.$toast.success("Berhasil update");
         });
       this.Toko.splice(this.editedIndex, 1);
+      this.gettoko()
       this.closeDelete();
     },
     closeDelete() {
@@ -377,7 +303,17 @@ export default {
 };
 </script>
 <style>
-.edit-toast {
+.image-container3 {
+  width:200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image-container3 img {
+  object-fit: cover;
+  object-position: center;
+}
+.edit-toast{
   background: green;
   color: white;
   padding: 10px;

@@ -32,4 +32,10 @@ class Barang extends Model
     public function barangVarian(){
         return $this->hasMany(Varian::class, 'barang_id');
     }
+    public function barangVarianFirst(){
+        return $this->hasMany(Varian::class, 'barang_id')->limit(1);;
+    }
+    public function barangFotoFirst(){
+        return $this->hasMany(Foto_Barang::class, 'barang_id')->limit(1);;
+    }
 }

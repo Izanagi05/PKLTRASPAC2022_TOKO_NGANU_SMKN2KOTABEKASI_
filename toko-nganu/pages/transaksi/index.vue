@@ -141,7 +141,7 @@ export default {
   }),
 };
 </script>
-<style>
+<style scoped>
 .pembatas {
   border-left: 5px solid #000;
   height: 750px;

@@ -107,7 +107,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .contact {
   background-color: #2f432d;
   padding: 5px 0px 7px 154px;

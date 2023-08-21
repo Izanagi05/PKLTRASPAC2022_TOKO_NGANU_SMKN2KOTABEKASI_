@@ -1,119 +1,122 @@
 <template>
   <div>
     <Navbar />
-    <div class="crud-container">
-      <v-row class="judul">
-        <v-col cols="12" md="6"> Tambah Barang</v-col>
-      </v-row>
+    <div class="container">
 
-      <v-row dense justify="center">
-        <v-col cols="12" sm="3"
-          ><div class="list">Nama Barang</div>
-          <div class="list">Kategori</div>
-          <div class="list">Toko</div>
-          <div class="list">Deskripsi</div></v-col
-        >
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="Nama Barang"
-            placeholder="Masukan Nama Barang"
-            solo
-            v-model="databarang.nama"
-          ></v-text-field>
-          <v-expansion-panels class="panel">
-            <v-expansion-panel class="panel-kategori">
-              <v-expansion-panel-header v-slot="{ open }">
-                <v-row no-gutters>
-                  <v-col> Kategori </v-col>
-                  <v-col cols="8" class="text--secondary">
-                    <v-fade-transition leave-absolute>
-                      <span v-if="open" key="0"> Pilih Kategori </span>
-                      <span v-else>
+      <v-row justify="center">
+        <v-col cols="9" class="judul pa-0">
+          Tambah Barang
+        </v-col>
+        <v-col cols="12" lg="9" class="px-4">
+          <v-row>
+            <v-col cols="3" class="px-0">
+              <div class="list">Nama Barang</div>
+            </v-col>
+            <v-col cols="9"  >
+              <v-text-field label="Nama Barang" placeholder="Masukan Nama Barang" solo
+                v-model="databarang.nama"></v-text-field>
+
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3" class="px-0">
+              <div class="list">Kategori</div>
+
+            </v-col>
+            <v-col cols="9">
+              <v-expansion-panels class="panel">
+                <v-expansion-panel class="panel-kategori">
+                  <v-expansion-panel-header v-slot="{ open }">
+                    <v-row no-gutters>
+                      <v-col> Kategori </v-col>
+                      <v-col cols="8" class="text--secondary">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="open" key="0"> Pilih Kategori </span>
+                          <span v-else>
+                            <div>
+                              {{ getKategoriText(databarang.kategori_id) }}
+                            </div>
+                          </span>
+                        </v-fade-transition>
+                      </v-col>
+                    </v-row>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <v-row no-gutters>
+                      <v-spacer></v-spacer>
+                      <v-col cols="5">
                         <div>
-                          {{ getKategoriText(databarang.kategori_id) }}
+                          <v-select v-model="databarang.kategori_id" :items="kategori" item-text="nama"
+                            item-value="kategori_id" chips flat solo></v-select>
                         </div>
-                      </span>
-                    </v-fade-transition>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-row no-gutters>
-                  <v-spacer></v-spacer>
-                  <v-col cols="5">
-                    <div>
-                      <v-select
-                        v-model="databarang.kategori_id"
-                        :items="kategori"
-                        item-text="nama"
-                        item-value="kategori_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
-                    </div>
-                  </v-col>
-                </v-row>
+                      </v-col>
+                    </v-row>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="secondary"> Cancel </v-btn>
-                  <v-btn text color="primary"> Save </v-btn>
-                </v-card-actions>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="secondary"> Cancel </v-btn>
+                      <v-btn text color="primary"> Save </v-btn>
+                    </v-card-actions>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
 
-            <v-expansion-panel>
-              <v-expansion-panel-header v-slot="{ open }">
-                <v-row no-gutters>
-                  <v-col> Toko </v-col>
-                  <v-col cols="8" class="text--secondary">
-                    <v-fade-transition leave-absolute>
-                      <span v-if="open" key="0"> Pilih Toko </span>
-                      <span v-else>
+              </v-expansion-panels>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3" class="px-0">
+              <div class="list">Toko</div>
+            </v-col>
+            <v-col cols="9">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header v-slot="{ open }">
+                    <v-row no-gutters>
+                      <v-col> Toko </v-col>
+                      <v-col cols="8" class="text--secondary">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="open" key="0"> Pilih Toko </span>
+                          <span v-else>
+                            <div>
+                              {{ getTokoText(databarang.toko_id) }}
+                            </div>
+                          </span>
+                        </v-fade-transition>
+                      </v-col>
+                    </v-row>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <v-row no-gutters>
+                      <v-spacer></v-spacer>
+                      <v-col cols="5">
                         <div>
-                          {{ getTokoText(databarang.toko_id) }}
+                          <v-select v-model="databarang.toko_id" :items="usertoko" item-text="nama" item-value="toko_id"
+                            chips flat solo></v-select>
                         </div>
-                      </span>
-                    </v-fade-transition>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-row no-gutters>
-                  <v-spacer></v-spacer>
-                  <v-col cols="5">
-                    <div>
-                      <v-select
-                        v-model="databarang.toko_id"
-                        :items="usertoko"
-                        item-text="nama"
-                        item-value="toko_id"
-                        chips
-                        flat
-                        solo
-                      ></v-select>
-                    </div>
-                  </v-col>
-                </v-row>
+                      </v-col>
+                    </v-row>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="secondary"> Cancel </v-btn>
-                  <v-btn text color="primary"> Save </v-btn>
-                </v-card-actions>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="secondary"> Cancel </v-btn>
+                      <v-btn text color="primary"> Save </v-btn>
+                    </v-card-actions>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
 
-          <v-textarea
-            solo
-            name="input-7-4"
-            label="Deskripsi Barang"
-            v-model="databarang.deskripsi"
-          ></v-textarea
-        ></v-col>
-        <v-col cols="12" sm="3"> </v-col>
+              </v-expansion-panels>
+            </v-col>
+          </v-row>
+          <v-row>
+
+            <v-col cols="3" class="px-0">
+              <div class="list">Deskripsi</div>
+            </v-col>
+            <v-col cols="9">
+              <v-textarea solo name="input-7-4" label="Deskripsi Barang" v-model="databarang.deskripsi"></v-textarea>
+            </v-col>
+          </v-row>
+        </v-col>
       </v-row>
       <v-row class="judul" justify="end">
         <v-col cols="12" md="2"
@@ -158,12 +161,10 @@ export default {
 
   methods: {
     gettokouser() {
-      axios
-        .get("http://127.0.0.1:8000/api/gettoko/" + this.userid)
-        .then((respon) => {
-          this.usertoko = respon.data;
-          //  this.items = respon.data
-        });
+      axios.get("http://127.0.0.1:8000/api/gettoko/" + this.userid).then((respon) => {
+        this.usertoko = respon.data;
+        //  this.items = respon.data
+      });
     },
     getkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
@@ -207,10 +208,11 @@ export default {
 };
 </script>
 
-<style>
+<style  scoped>
 .crud-container {
   padding: 0px 281px;
 }
+
 .judul {
   font-family: Poppins;
   font-weight: 600;
@@ -218,42 +220,55 @@ export default {
   gap: 20px;
   margin-right: 20px;
 }
+
 .list {
   margin-bottom: 50px;
   font-family: Poppins;
   font-weight: 400;
   font-size: 20px;
 }
+
 .edit-image {
   margin-top: 20px;
   margin-left: 20px;
   height: 30px;
   width: 114px;
 }
+
 .edit-image:hover {
   background: #2f432d;
   color: rgb(255, 255, 255);
 }
+
 .button-aksi-jual {
   color: rgb(255, 255, 255) !important;
   background-color: #2f432d;
 }
+
 .button-aksi-jual:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0) !important;
+  background-color: #273826;
+  /* background-color: #ffffff; */
+  color: rgb(255, 255, 255) !important;
 }
+
 .gambar-produk {
   width: 200px;
   height: 200px;
   margin-left: 20px;
 }
-.button-aksi:hover {
-  background: #2f432d;
-  color: white;
+
+.button-aksi {
+  background: white;
 }
+
+/* .button-aksi:hover {
+  background: white;
+  color: white;
+} */
 .panel {
   margin-bottom: 30px;
 }
+
 .panel-kategori {
   margin-bottom: 30px;
 }

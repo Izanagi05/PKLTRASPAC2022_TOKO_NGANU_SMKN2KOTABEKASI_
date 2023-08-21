@@ -5,88 +5,188 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Toko;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Foto_Barang;
 
 class BarangController extends Controller
 {
-    public function search($search){
-        $data= Barang::where('nama', 'LIKE', '%'.$search.'%')->orWhere('deskripsi', 'LIKE', '%'.$search.'%')->get();
-        return response()->json($data);
-    }
-    public function getbarang(Request $request, $id){
-        $data = Barang::where('toko_id', $id)->get();
+    public function search($search)
+    {
+        try {
+            $data = Barang::where('nama', 'LIKE', '%' . $search . '%')->orWhere('deskripsi', 'LIKE', '%' . $search . '%')->get();
+            foreach ($data as $key => $dtv) {
 
-        return response()->json($data);
-
-    }
-    public function getallbarangtoko(){
-        $data = Barang::get();
-
-        foreach ($data as $key => $dt) {
-
-            $data[$key]['toko'] =$dt->Toko;
+            $data[$key]['barang_foto_first'] = $dtv->barangFotoFirst;
+                $data[$key]['barang_varian_first'] = $dtv->barangVarianFirst;
+            }
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil cari',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
         }
-        return response()->json($data);
-
     }
-    // public function getbarangkeranjangid(){
-    //     $data = Barang::get();
-
-
-    //     return response()->json($data);
-
-    // }
-    public function getbarangtokobyid($id){
-        $data = Barang::where('barang_id', $id)->get();
-
-        foreach ($data as $key => $dt) {
-
-            $data[$key]['toko'] =$dt->Toko;
+    public function getbarang($id)
+    {
+        try {
+            $data = Barang::where('toko_id', $id)->get();
+            return response()->json($data);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
         }
-        return response()->json($data);
-
     }
-    public function getbarangvariantokobyid($id){
-        $data = Barang::where('barang_id', $id)->get();
-        $data = Barang::where('barang_id', $id)->get();
-
-        foreach ($data as $key => $dtv) {
-
-            $data[$key]['toko'] =$dtv->Toko;
-                $data[$key]['barang_varian'] =$dtv->BarangVarian;
+    public function getallbarangtoko()
+    {
+        try {
+            $data = Barang::get();
+            foreach ($data as $key => $dt) {
+                $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
+                $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
+            }
+            return response()->json($data);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
         }
-        return response()->json($data);
+    }
+    public function getbarangtokobyid($id)
+    {
+        try {
+            $data = Barang::where('barang_id', $id)->get();
 
+            foreach ($data as $key => $dt) {
+
+                $data[$key]['toko'] = $dt->Toko;
+            }
+            return response()->json($data);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
+    public function getbarangvariantokobyid($id)
+    {
+        try {
+            $data = Barang::where('barang_id', $id)->get();
+            $data = Barang::where('barang_id', $id)->get();
+
+            foreach ($data as $key => $dtv) {
+
+                $data[$key]['toko'] = $dtv->Toko;
+                $data[$key]['barang_varian'] = $dtv->BarangVarian;
+            }
+            return response()->json($data);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
     }
 
 
-    public function createbarang(Request $request, $id){
-        $tk = $id;
-        $validatedData = $request->validate([
-            'toko_id'=>'',
-            'nama'=> 'required',
-            'deskripsi' => 'required',
-            'kategori_id' => 'required',
-        ]);
+    public function createbarang(Request $request, $id)
+    {
+        try {
+            $tk = $id;
+            $validatedData = $request->validate([
+                'toko_id' => '',
+                'nama' => 'required',
+                'deskripsi' => 'required',
+                'kategori_id' => 'required',
+            ]);
 
-        $validatedData['toko_id'] = $tk;
-        // dd($validatedData['user_id']);
-        Barang::create($validatedData);
-    }
-    public function updatebarang(Request $request, $id ){
-        $data = Barang::where('barang_id', $id)->update([
-            // "id" => $request->id,
-            "nama" => $request->nama,
-            "deskripsi" => $request->deskripsi,
-            "kategori_id" => $request->kategori_id,
-        ]);
+            $validatedData['toko_id'] = $tk;
+            // dd($validatedData['user_id']);
+           $barangg= Barang::create($validatedData);
+            // $bid = $barangg->barang_id;
+            // $imgdefault=public_path('makanan.jpg');
+            // $validatedDataFt = [
+            //     'barang_id' => $bid,
+            //     'file' => $imgdefault,
+            // ];
+            // // Storage::disk('public')->copy($imgdefault, 'fotobarang/' . $bid . '_makanan.jpg');
+            // $validatedDataFt['file'] =  $imgdefault->file('file')->store('fotobarang');
+            // $validatedDataFt['file']->file('file')->store('fotobarang');
+            // Foto_Barang::create($validatedDataFt);
+            // $bid = $barangg->barang_id;
+            // $validatedDataFt = $request->validate([
+            //     'file'=>'',
+            // ]);
 
-        // dd($id);
-        return response()->json($data, 200);
+            // $validatedDataFt['barang_id'] = $bid;
+            // $validatedDataFt['file'] =  $request->file('file')->store('fotobarang');
+            // Foto_Barang::create($validatedDataFt);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
     }
-    public function deletebarang(Request $request, $id ){
-        $data = Barang::where('barang_id', $id)->delete();
-        // $data="tes";
-        return response()->json($data, 200);
+    public function updatebarang(Request $request, $id)
+    {
+        try {
+            $data = Barang::where('barang_id', $id)->update([
+                // "id" => $request->id,
+                "nama" => $request->nama,
+                "deskripsi" => $request->deskripsi,
+                "kategori_id" => $request->kategori_id,
+            ]);
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil update',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
+    public function deletebarang($id)
+    {
+        try {
+            $data = Barang::where('barang_id', $id)->delete();
+            // $data="tes";
+            return response()->json($data, 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
     }
 }

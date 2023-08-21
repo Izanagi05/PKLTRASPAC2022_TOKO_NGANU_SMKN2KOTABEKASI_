@@ -71,7 +71,7 @@
               <v-row class="justify-center">
                 <v-col class="mr-" cols="12"  lg="4" md="4" sm="4" xs="4">
                   <div class="batal ">
-                    <v-btn class="rounded-pill mx-2" block x-large outlined @click="backprofil">Batal</v-btn>
+                    <v-btn class="rounded-pill " block x-large outlined @click="backprofil">Batal</v-btn>
                   </div>
                 </v-col>
                 <v-col cols="12" lg="6" md="6" sm="4" xs="4">

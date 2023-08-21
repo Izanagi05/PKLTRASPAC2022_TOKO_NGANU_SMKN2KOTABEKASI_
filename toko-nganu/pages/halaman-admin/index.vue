@@ -5,49 +5,30 @@
         <v-card-title class="text-h5">Yakin ingin menghapus user?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="closeDeleteuser"
-            >Cancel</v-btn
-          >
-          <v-btn color="blue-darken-1" variant="text" @click="confirmhapususer"
-            >OK</v-btn
-          >
+          <v-btn color="blue-darken-1" variant="text" @click="closeDeleteuser">Cancel</v-btn>
+          <v-btn color="blue-darken-1" variant="text" @click="confirmhapususer">OK</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialogDeletetoko" max-width="500px">
       <v-card>
-        <v-card-title class="text-h5"
-          >Yakin ingin menghapus Toko ini?</v-card-title
-        >
+        <v-card-title class="text-h5">Yakin ingin menghapus Toko ini?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="closeDeletetoko"
-            >Cancel</v-btn
-          >
-          <v-btn color="blue-darken-1" variant="text" @click="confirmhapustoko"
-            >OK</v-btn
-          >
+          <v-btn color="blue-darken-1" variant="text" @click="closeDeletetoko">Cancel</v-btn>
+          <v-btn color="blue-darken-1" variant="text" @click="confirmhapustoko">OK</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialogDeletebarang" max-width="500px">
       <v-card>
-        <v-card-title class="text-h5"
-          >Yakin ingin menghapus Barang ini?</v-card-title
-        >
+        <v-card-title class="text-h5">Yakin ingin menghapus Barang ini?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="closeDeletebarang"
-            >Cancel</v-btn
-          >
-          <v-btn
-            color="blue-darken-1"
-            variant="text"
-            @click="confirmhapusbarang"
-            >OK</v-btn
-          >
+          <v-btn color="blue-darken-1" variant="text" @click="closeDeletebarang">Cancel</v-btn>
+          <v-btn color="blue-darken-1" variant="text" @click="confirmhapusbarang">OK</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -76,14 +57,8 @@
             </v-tab>
             <v-tab-item>
               <v-card flat class="items">
-                <v-card
-                  d-flex
-                  max-width="344"
-                  outlined
-                  class="text-h5 mb-1 mx-auto"
-                  v-for="(asr, index) in alluser"
-                  :key="index"
-                >
+                <v-card d-flex max-width="344" outlined class="text-h5 mb-1 mx-auto" v-for="(asr, index) in alluser"
+                  :key="index">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="text-overline mb-4">User</div>
@@ -93,11 +68,7 @@
                       }}</v-list-item-subtitle>
                     </v-list-item-content>
 
-                    <v-list-item-avatar
-                      tile
-                      size="80"
-                      color="grey"
-                    ></v-list-item-avatar>
+                    <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                   </v-list-item>
 
                   <v-card-actions>
@@ -110,14 +81,8 @@
             </v-tab-item>
             <v-tab-item>
               <v-card flat class="items">
-                <v-card
-                  d-flex
-                  max-width="344"
-                  outlined
-                  class="text-h5 mb-1 mx-auto"
-                  v-for="(atr, index) in alltoko"
-                  :key="index"
-                >
+                <v-card d-flex max-width="344" outlined class="text-h5 mb-1 mx-auto" v-for="(atr, index) in alltoko"
+                  :key="index">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="text-overline mb-4">Toko</div>
@@ -127,11 +92,7 @@
                       }}</v-list-item-subtitle>
                     </v-list-item-content>
 
-                    <v-list-item-avatar
-                      tile
-                      size="80"
-                      color="grey"
-                    ></v-list-item-avatar>
+                    <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                   </v-list-item>
 
                   <v-card-actions>
@@ -144,20 +105,11 @@
             </v-tab-item>
             <v-tab-item>
               <v-card flat class="items">
-                <v-card
-                  class="text-h5 mb-1 mx-auto"
-                  max-width="344"
-                  outlined
-                  v-for="(brg, index) in allbarang"
-                  :key="index"
-                >
+                <v-card class="text-h5 mb-1 mx-auto" max-width="344" outlined v-for="(brg, index) in allbarang"
+                  :key="index">
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div
-                        v-for="(grb, index) in brg.toko"
-                        :key="index"
-                        class="text-overline mb-4"
-                      >
+                      <div v-for="(grb, index) in brg.toko" :key="index" class="text-overline mb-4">
                         <!-- {{ grb.nama }} -->
                       </div>
                       <v-list-item-title class="text-h5 mb-1">
@@ -168,11 +120,7 @@
                       }}</v-list-item-subtitle>
                     </v-list-item-content>
 
-                    <v-list-item-avatar
-                      tile
-                      size="80"
-                      color="grey"
-                    ></v-list-item-avatar>
+                    <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                   </v-list-item>
 
                   <v-card-actions>
@@ -185,14 +133,8 @@
             </v-tab-item>
             <v-tab-item>
               <v-card flat class="items">
-                <v-card
-                  d-flex
-                  max-width="344"
-                  outlined
-                  class="text-h5 mb-1 mx-auto"
-                  v-for="(atr, index) in alltoko"
-                  :key="index"
-                >
+                <v-card d-flex max-width="344" outlined class="text-h5 mb-1 mx-auto" v-for="(atr, index) in alltoko"
+                  :key="index">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="text-overline mb-4">Toko</div>
@@ -202,11 +144,7 @@
                       }}</v-list-item-subtitle>
                     </v-list-item-content>
 
-                    <v-list-item-avatar
-                      tile
-                      size="80"
-                      color="grey"
-                    ></v-list-item-avatar>
+                    <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                   </v-list-item>
 
                   <v-card-actions>
@@ -231,163 +169,79 @@
           <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="blue-darken-1"
-              variant="text"
-              @click="closeDeletekategori"
-              >Cancel</v-btn
-            >
-            <v-btn
-              color="blue-darken-1"
-              variant="text"
-              @click="confirmhapuskategori"
-              >OK</v-btn
-            >
+            <v-btn color="blue-darken-1" variant="text" @click="closeDeletekategori">Cancel</v-btn>
+            <v-btn color="blue-darken-1" variant="text" @click="confirmhapuskategori">OK</v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
       </v-dialog>
 
-      <v-dialog
-        v-model="dialogEditkategori"
-        max-width="700"
-        persistent
-        transition="dialog-bottom-transition"
-      >
-        <v-card
-          class="kartu"
-          light
-          style="padding: 0px; color: black; border: solid 3px #4caf50"
-        >
+      <v-dialog v-model="dialogEditkategori" max-width="700" persistent transition="dialog-bottom-transition">
+        <v-card class="kartu" light style="padding: 0px; color: black; border: solid 3px #4caf50">
           <div style="background: #4caf50; padding: 10px 30px; color: white">
             <h1>Ubah data</h1>
           </div>
           <v-container style="padding: 30px">
-            <v-text-field
-              type="text"
-              v-model="detaildatadialogkategori.nama"
-              label="Name"
-              outline
-            ></v-text-field>
+            <v-text-field type="text" v-model="detaildatadialogkategori.nama" label="Name" outline></v-text-field>
             <v-card-actions>
-              <v-btn
-                @click="closeedit()"
-                style="margin-right: 20px; background: white; color: black"
-                >Close</v-btn
-              >
-              <v-btn
-                @click="updatekategori()"
-                style="background: #4caf50; color: white"
-                >Ubah</v-btn
-              >
+              <v-btn @click="closeedit()" style="margin-right: 20px; background: white; color: black">Close</v-btn>
+              <v-btn @click="updatekategori()" style="background: #4caf50; color: white">Ubah</v-btn>
             </v-card-actions>
           </v-container>
         </v-card>
       </v-dialog>
 
-      <v-dialog
-        v-model="dialogEditkategori"
-        max-width="700"
-        persistent
-        transition="dialog-bottom-transition"
-      >
-        <v-card
-          class="kartu"
-          light
-          style="padding: 0px; color: black; border: solid 3px #2f432d"
-        >
-          <div style="background: #2f432d; padding: 10px 30px; color: white">
-            <h1>Ubah data</h1>
-          </div>
-          <v-container style="padding: 30px">
-            <v-text-field
-              type="text"
-              v-model="detaildatadialogkategori.nama"
-              label="Name"
-              outline
-            ></v-text-field>
-            <v-card-actions>
-              <v-btn
-                @click="closeedit()"
-                style="margin-right: 20px; background: white; color: black"
-                >Close</v-btn
-              >
-              <v-btn
-                @click="updatekategori()"
-                style="background: #2f432d; color: white"
-                >Ubah</v-btn
-              >
-            </v-card-actions>
-          </v-container>
-        </v-card>
-      </v-dialog>
+<v-dialog v-model="dialogEditkategori"   max-width="700" persistent transition="dialog-bottom-transition">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
+<h1>Ubah data</h1>
+</div>
+<v-container style="padding:30px;">
 
-      <v-dialog
-        v-model="dialogTambahkategori"
-        max-width="700"
-        persistent
-        transition="dialog-bottom-transition"
-      >
-        <v-card
-          class="kartu"
-          light
-          style="padding: 0px; color: black; border: solid 3px #2f432d"
-        >
-          <div style="background: #2f432d; padding: 10px 30px; color: white">
-            <h1>Tambah data</h1>
-          </div>
-          <v-container style="padding: 30px">
-            <v-text-field
-              type="text"
-              v-model="detaildatadialogkategoritbh.nama"
-              label="Name"
-              outline
-            ></v-text-field>
-            <v-card-actions>
-              <v-btn
-                @click="closetambahkategori()"
-                style="margin-right: 20px; background: white; color: black"
-                >Close</v-btn
-              >
-              <v-btn
-                @click="confirimtambahkategori()"
-                style="background: #2f432d; color: white"
-                >Simpan</v-btn
-              >
-            </v-card-actions>
-          </v-container>
-        </v-card>
-      </v-dialog>
+<v-text-field type="text" v-model="detaildatadialogkategori.nama"  label="Name" outline></v-text-field>
+<v-card-actions >
+<v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
+<v-btn @click="updatekategori()" style="background: #2f432d;color:white;" >Ubah</v-btn>
+</v-card-actions>
+</v-container>
+</v-card>
+</v-dialog>
 
-      <div style="padding: 0px 123px" class="py-8">
-        <v-btn @click="tambahkategori">Tambah Kategori</v-btn>
-      </div>
-      <v-data-table
-        style="padding: 30px 123px"
-        :headers="headers"
-        :items="allkategori"
-      >
-        <template v-slot:[`item.aksi`]="{ item }">
-          <v-btn
-            class="mx-2"
-            fab
-            small
-            @click="ubahkategori(item)"
-            style="margin: 15px 15px 15px 0px"
-          >
-            <v-icon dark>mdi-pencil</v-icon>
-          </v-btn>
-          <v-btn
-            class="mx-2"
-            fab
-            small
-            @click="hapuskategori(item)"
-            style="background: #ff2a30"
-          >
-            <v-icon dark>mdi-delete</v-icon>
-          </v-btn>
-        </template>
-      </v-data-table>
+
+<v-dialog v-model="dialogTambahkategori"   max-width="700" persistent transition="dialog-bottom-transition">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
+<h1>Tambah data</h1>
+</div>
+<v-container style="padding:30px;">
+
+<v-text-field type="text" v-model="detaildatadialogkategoritbh.nama"  label="Name" outline></v-text-field>
+<v-card-actions >
+<v-btn @click="closetambahkategori()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
+<v-btn @click="confirimtambahkategori()" style="background: #2f432d;color:white;" >Simpan</v-btn>
+</v-card-actions>
+</v-container>
+</v-card>
+</v-dialog>
+
+<div style="padding:0px 123px;"  class=" py-8">
+  <v-btn @click="tambahkategori">Tambah Kategori</v-btn>
+</div>
+    <v-data-table style="padding:30px 123px;"
+    :headers="headers"
+    :items="allkategori"
+    >
+
+
+    <template v-slot:[`item.aksi`]="{ item }">
+                    <v-btn class="mx-2"  fab small  @click="ubahkategori(item)" style="margin:15px 15px 15px 0px;">
+                        <v-icon dark >mdi-pencil</v-icon>
+                    </v-btn>
+          <v-btn class="mx-2" fab small  @click="hapuskategori(item)" style="background:#FF2A30;">
+                        <v-icon dark>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+    </v-data-table>
     </div>
   </div>
 </template>
@@ -496,7 +350,7 @@ export default {
       axios
         .delete(
           "http://127.0.0.1:8000/api/hapustoko/" +
-            this.detaildatadialogtoko.toko_id
+          this.detaildatadialogtoko.toko_id
         )
         .then((respon) => {
           console.log(respon);
@@ -522,7 +376,7 @@ export default {
       axios
         .delete(
           "http://127.0.0.1:8000/api/deletebarang/" +
-            this.detaildatadialogbarang.barang_id
+          this.detaildatadialogbarang.barang_id
         )
         .then((respon) => {
           console.log(respon);
@@ -581,7 +435,7 @@ export default {
       axios
         .post(
           "http://127.0.0.1:8000/api/updatekategori/" +
-            this.detaildatadialogkategori.kategori_id,
+          this.detaildatadialogkategori.kategori_id,
           this.detaildatadialogkategori
         )
         .then((respon) => {
@@ -601,7 +455,7 @@ export default {
       axios
         .delete(
           "http://127.0.0.1:8000/api/deletekategori/" +
-            this.detaildatadialogkategori.kategori_id
+          this.detaildatadialogkategori.kategori_id
         )
         .then((respon) => {
           console.log(respon);
@@ -628,27 +482,32 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .items {
   display: flex;
 }
+
 .contact {
   background-color: #2f432d;
   padding: 5px 0px 7px 154px;
 }
+
 .home-container {
   padding: 0px 123px;
 }
+
 .sub-title {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 24px;
 }
+
 .menu {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 20px;
 }
+
 .logout {
   margin-top: 100px;
   font-family: "Poppins", sans-serif;

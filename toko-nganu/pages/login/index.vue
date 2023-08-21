@@ -125,7 +125,7 @@ export default {
   components: { NavbarPolos },
 };
 </script>
-<style>
+<style scoped>
 .contact {
   background-color: #2f432d;
   padding: 5px 0px 7px 154px;
@@ -135,11 +135,5 @@ export default {
 }
 .card {
   font-family: "Poppins", sans-serif;
-}
-.f24sb {
-  padding-top: 15px;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
 }
 </style>
