@@ -8,8 +8,6 @@
         v-model="databarang.deskripsi"
         placeholder="Deskripsi"
       ></v-text-field>
-      <!-- <v-text-field v-model="databarang.kategori_id" placeholder="Kategori"></v-text-field> -->
-      <!-- {{ usertoko }} -->
       <select v-model="databarang.kategori_id" label="Pilih">
         <option disabled>Pilih Toko</option>
         <option

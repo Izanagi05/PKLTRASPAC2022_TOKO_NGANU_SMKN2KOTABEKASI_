@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ppp">
+    <div class="ppp ">
     <div class="contact white--text">
       <div class="contact-text font-weight-regular">
         <button class="kontak" type="submit" @click="kontak"  >
@@ -9,7 +9,7 @@
         </button>
       </div>
     </div>
-    <div class="container">
+    <div class="container pb-4">
       <v-row>
       <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12">
         <div class="logo">
@@ -150,7 +150,6 @@
                   v-for="(brg, index) in hasilcari"
                   :key="index"
                 >
-                  <div class="card">
                     <v-card width="204px">
                       <v-img
                         :src="require('~/assets/makanan.jpg')"
@@ -185,7 +184,6 @@
                         </button>
                       </div>
                     </v-card>
-                  </div>
                 </v-col>
               </v-row>
             </div>
@@ -199,7 +197,6 @@
                   v-for="(barang, index) in brg.barang"
                   :key="index"
                 >
-                  <div class="card">
                     <v-card width="204px">
                       <v-img
                         :src="require('~/assets/makanan.jpg')"
@@ -234,7 +231,6 @@
                         </button>
                       </div>
                     </v-card>
-                  </div>
                 </v-col>
               </v-row>
             </div>
@@ -386,7 +382,7 @@ export default {
   line-height: 15px;
 }
 .ppp {
-  margin-bottom: 51px;
+  /* margin-bottom: 51px; */
   font-family: "Poppins", sans-serif;
 }
 .contact {

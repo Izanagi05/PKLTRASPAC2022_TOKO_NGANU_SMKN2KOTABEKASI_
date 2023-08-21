@@ -22,7 +22,7 @@
         </v-col>
 
         <!-- <div flat class="rounded-pill search" color="#d9d9d9"></div> -->
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-end justify-lg-end justify-md-end justify-sm-start">
+        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-start justify-lg-end justify-md-end justify-sm-start">
           <div class="profile_icon_keranjang">
             <nuxt-link to="/keranjang" class="text-decoration-none">
               <v-btn elevation="2" fab color="d9d9d9" icon
