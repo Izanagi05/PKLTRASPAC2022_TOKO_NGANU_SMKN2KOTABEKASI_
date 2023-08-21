@@ -9,7 +9,7 @@
           </button>
         </div>
       </div>
-      <div class="container">
+      <div class="container pb-4">
         <v-row>
           <v-col class="d-flex col-12 col-lg-6 col-md-4 col-sm-12 col-xs-12">
             <div class="logo">
@@ -46,15 +46,14 @@
               >
             </nuxt-link>
             <nuxt-link to="/user-view" class="text-decoration-none ml-2">
-              <v-btn elevation="0" fab icon color="d9d9d9">
+              <v-btn elevation="2" fab icon color="d9d9d9">
                 <v-avatar class="foto-profilan">
                   <img
-                    v-if="fotoProfil"
                     :src="
                       'http://127.0.0.1:8000/storage/' +
                       $cookies.get(`cookieku`).data.foto_profil
                     "
-                  /><v-icon v-else>mdi-account</v-icon>
+                  />
                 </v-avatar>
               </v-btn>
             </nuxt-link>
@@ -67,10 +66,17 @@
       </div>
     </div>
     <div class="all-home">
-      <!-- <div :class="$vuetify.breakpoint.name == 'sm' ? 'container' : 'home' "> -->
       <div class="container">
         <div class="home-image">
+          <v-skeleton-loader
+            v-if="firstLoad"
+            :loading="loading"
+            type="image : ~/assets/home-img.png"
+            max-width="100%"
+            max-height="auto"
+          ></v-skeleton-loader>
           <v-carousel
+            v-else
             cycle
             height="auto"
             hide-delimiter-background
@@ -82,65 +88,188 @@
               :key="i"
               :src="item.src"
             >
-              <!-- <img :src="item" alt="" />  -->
             </v-carousel-item>
           </v-carousel>
         </div>
-        <v-row class="filter mt-8">
-          <!-- <div class="filter"> -->
-          <v-col class="pa-1 px-3">
-            <v-btn outlined @click="getallbarang()" class="my-auto">
+        <div>
+          <div v-if="firstLoad" class="d-flex mt-8">
+            <v-skeleton-loader
+              class="ma-2"
+              :loading="loading"
+              max-width="120"
+              type="button"
+            ></v-skeleton-loader>
+            <v-skeleton-loader
+              class="ma-2"
+              :loading="loading"
+              type="button"
+            ></v-skeleton-loader>
+            <v-skeleton-loader
+              class="ma-2"
+              :loading="loading"
+              type="button"
+            ></v-skeleton-loader>
+          </div>
+
+          <div v-else class="d-flex mt-8">
+            <v-btn outlined @click="getallbarang()" class="ma-2">
               Semua Kategori
             </v-btn>
-          </v-col>
-          <v-col
-            class="pa-1 px-3"
-            v-for="(ktg, index) in allkategori"
-            :key="index"
-          >
-            <v-btn outlined @click="getkategori(ktg)" class="my-auto">
+
+            <v-btn
+              outlined
+              v-for="(ktg, index) in allkategori"
+              :key="index"
+              @click="getkategori(ktg)"
+              class="ma-2"
+            >
               {{ ktg.nama }}
             </v-btn>
-          </v-col>
-          <!-- </div>  -->
-        </v-row>
+          </div>
+        </div>
+        <div class="recomend f24sb">
+          <div v-if="firstLoad">
+            <v-skeleton-loader
+              :loading="loading"
+              type="list-item"
+            ></v-skeleton-loader>
+          </div>
 
-        <div class="recomend f24sb">Rekomendasi untuk anda</div>
-        <!-- {{ Toko }} -->
+          <div v-else>
+            <span>Rekomendasi untuk anda</span>
+          </div>
+        </div>
         <div>
           <div class="product-card">
             <div class="tampil1" v-if="set == 0">
-              <v-row class="p-0 justify-center">
+              <v-row class="p-0">
                 <v-col
-                  class="card-col col-6 mt-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-center gx-2"
+                  cols="5"
+                  class="mt-4 col-md-4 col-sm-6 col-xs-6 d-flex justify-center"
                   v-for="(brg, index) in allbarang"
                   :key="index"
                 >
-                  <v-card>
+                  <v-card color="#ffffff" class="rounded-lg" elevation="1">
+                    <v-skeleton-loader
+                      v-if="firstLoad"
+                      type="card"
+                      width="100%"
+                      height="200px"
+                    ></v-skeleton-loader>
+                    <div v-else>
+                      <v-img
+                        v-if="brg.nama"
+                        :src="require(`~/assets/makanan.jpg`)"
+                      ></v-img>
+                      <v-skeleton-loader
+                        v-else
+                        type="card"
+                        width="100%"
+                        height="200px"
+                      ></v-skeleton-loader>
+                      <div class="pa-4">
+                        <div
+                          v-if="brg.nama"
+                          class="font-weight-medium text-capitalize"
+                        >
+                          {{ brg.nama }}
+                        </div>
+                        <v-skeleton-loader
+                          v-else
+                          :loading="loading"
+                          type="text"
+                          width="70%"
+                        ></v-skeleton-loader>
+                        <div>
+                          <div class="font-weight-medium">Rp. 2000</div>
+                        </div>
+                        <v-row align="center">
+                          <v-col cols="auto">
+                            <div
+                              v-if="brg.toko?.nama"
+                              class="d-flex align-center"
+                            >
+                              <v-img
+                                :src="
+                                  require('~/assets/pajamas_tanuki-verified.png')
+                                "
+                                max-width="16"
+                              ></v-img>
+                              <span class="ml-2">{{ brg.toko?.nama }}</span>
+                            </div>
+                            <v-skeleton-loader
+                              v-else
+                              :loading="loading"
+                              type="circle"
+                              width="20px"
+                              height="20px"
+                            ></v-skeleton-loader>
+                            <!-- <v-skeleton-loader
+                              :loading="loading"
+                              type="text"
+                              width="30%"
+                            ></v-skeleton-loader> -->
+                          </v-col>
+                        </v-row>
+                        <div class="btn-card mt-2 pb-1">
+                          <div v-if="rating">
+                            <v-icon color="orange">mdi-star</v-icon>
+                            <v-icon color="orange">mdi-star</v-icon>
+                            <v-icon color="orange">mdi-star</v-icon>
+                            <v-icon color="orange">mdi-star</v-icon>
+                            <v-icon color="orange">mdi-star</v-icon>
+                            <span>I</span>
+                            <span>{{ rating }}</span>
+                          </div>
+                          <v-skeleton-loader
+                            v-else
+                            :loading="loading"
+                            type="text"
+                            width="50px"
+                          ></v-skeleton-loader>
+                        </div>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+            <!-- <div class="tampil3" v-if="set == 2">
+              <v-row class="p-0 justify-center">
+                <v-col
+                  class="col-6 mt-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-center gx-2"
+                  width="204px"
+                  v-for="(brg, index) in hasilcari"
+                  :key="index"
+                >
+                  <v-card width="204px">
                     <v-img
                       :src="require('~/assets/makanan.jpg')"
                       width="204px"
                     ></v-img>
-                    <v-row class="ma-0">
-                      <v-col class="pa-0">
-                        <div class="title-product f14sb pl-1">
+                    <v-row>
+                      <v-col class="">
+                        <div class="f14sb pl-1">
                           {{ brg.nama }}
                         </div>
                       </v-col>
                       <v-col>
-                        <div class="price-product f14sb pr-1">
-                          <!-- Rp. 1.999.999 -->
+                        <div class="f14sb pr-1">Rp. 1.999.999</div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="font-weight-regular pl-1">
+                          <v-img
+                            :src="
+                              require('~/assets/pajamas_tanuki-verified.png')
+                            "
+                          ></v-img
+                          >{{ brg.deskripsi }}
                         </div>
                       </v-col>
                     </v-row>
-                    <v-row class="ma-0">
-                      <v-col class="pa-0">
-                        <div class="desc-product font-weight-regular pl-1">
-                          {{ brg.nama }}
-                        </div>
-                      </v-col>
-                    </v-row>
-                    <div class="btn-card mt-2 pl-1 pb-1">
+                    <div class="mt-2 pl-1 pb-1">
                       <button
                         class="rounded-xl view-more-btn font-weight-regular"
                         style="font-size: 12px"
@@ -152,107 +281,53 @@
                   </v-card>
                 </v-col>
               </v-row>
-            </div>
-            <div class="tampil3" v-if="set == 2">
-              <v-row class="p-0 justify-center">
-                <v-col
-                  class="card-col col-6 mt-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-center gx-2"
-                  width="204px"
-                  v-for="(brg, index) in hasilcari"
-                  :key="index"
-                >
-                  <div class="card">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/makanan.jpg')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col class="">
-                          <div class="title-product f14sb pl-1">
-                            {{ brg.nama }}
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            {{ brg.deskripsi }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="mt-2 pl-1 pb-1">
-                        <button
-                          class="rounded-xl view-more-btn font-weight-regular"
-                          style="font-size: 12px"
-                          @click="todetail(brg)"
-                        >
-                          Lebih lengkap
-                        </button>
-                      </div>
-                    </v-card>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
-            <div class="tampil2" v-if="set == 1">
+            </div> -->
+            <!-- <div class="tampil2" v-if="set == 1">
               <v-row
                 class="p-0 justify-center"
                 v-for="(brg, index) in hasilKategori"
                 :key="index"
               >
                 <v-col
-                  class="card-col col-6 mt-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-center gx-2"
+                  cols="5"
+                  class="mt-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-center gx-2"
                   width="204px"
                   v-for="(barang, index) in brg.barang"
                   :key="index"
                 >
-                  <div class="card">
-                    <v-card width="204px">
-                      <v-img
-                        :src="require('~/assets/makanan.jpg')"
-                        width="204px"
-                      ></v-img>
-                      <v-row>
-                        <v-col cols="3" class="">
-                          <div class="title-product f14sb pl-1">
-                            {{ barang.nama }}
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="price-product f14sb pr-1">
-                            Rp. 1.999.999
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                          <div class="desc-product font-weight-regular pl-1">
-                            {{ barang.deskripsi }}
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <div class="mt-2 pl-1 pb-1">
-                        <button
-                          class="rounded-xl view-more-btn font-weight-regular"
-                          style="font-size: 12px"
-                          @click="todetail2(barang)"
-                        >
-                          Lebih lengkap
-                        </button>
-                      </div>
-                    </v-card>
-                  </div>
+                  <v-card>
+                    <v-img :src="require('~/assets/makanan.jpg')"></v-img>
+                    <v-row>
+                      <v-col cols="3" class="">
+                        <div class="font-weight-medium pl-1">
+                          {{ barang.nama }}
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <div class="font-weight-medium pr-1">Rp. 1.999.999</div>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col>
+                        <div class="font-weight-regular pl-1">
+                          {{ barang.deskripsi }}
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="mt-2 pl-1 pb-1">
+                      <button
+                        class="rounded-xl view-more-btn font-weight-regular"
+                        style="font-size: 12px"
+                        @click="todetail2(barang)"
+                      >
+                        Lebih lengkap
+                      </button>
+                    </div>
+                  </v-card>
                 </v-col>
               </v-row>
-            </div>
+            </div> -->
           </div>
-          <div></div>
         </div>
       </div>
     </div>
@@ -265,6 +340,8 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      rating: "4.9",
+      firstLoad: true,
       set: 0,
       cari: null,
       hasilcari: [],
@@ -360,223 +437,43 @@ export default {
     this.getsearchbarang();
     this.getallbarang();
   },
+  mounted() {
+    // Simulate loading delay
+    setTimeout(() => {
+      this.firstLoad = false;
+      this.loading = false;
+    }, 3000);
+  },
 };
 </script>
 <style>
-.f24sb {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
+.col-5 {
+  flex: 0 0 20%;
+  max-width: 20%;
 }
-.f20sb {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 36px;
-}
-.f16sb {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f14sb {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-}
-.f16m {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f16r {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f10r {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 15px;
-}
+
 .ppp {
-  margin-bottom: 51px;
+  /* margin-bottom: 51px; */
   font-family: "Poppins", sans-serif;
 }
+
 .contact {
   background: #2f432d;
   padding: 9px 123px 10px 123px;
 }
 
-.round-btn {
-  border-radius: 50%;
-  width: 49px;
-  height: 49px;
-  background-color: #d9d9d9;
-}
-.contact-text {
-  display: flex;
-  font-size: 16px;
-  line-height: 24px;
-}
-.contact-text .icon_telepon {
-  margin-right: 11px;
-  margin-top: 3px;
-}
-.nav {
-  padding: 39px 123px 10px 123px;
-  display: flex;
-}
-.logo {
-  width: 43px;
-  height: auto;
-}
-.nama_toko {
-  margin-top: 4px;
-  margin-left: 33px;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-.namanya {
-  display: inline-block;
-  width: 100px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-top: 14px;
-  margin-left: 12px;
-  font-size: 20px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-.keranjang {
-  margin-left: 5px;
-}
-
-.contact-text {
-  font-size: 16px;
-  line-height: 24px;
-}
 .home-container {
   padding: 0px 123px;
 }
-.search {
-  background: #d9d9d9;
-  border-radius: 100px;
-}
-.filter .v-btn {
-  margin-top: 34px;
-  border-radius: 25px;
-}
-
-.filter .v-btn:hover {
-  background: #2f432d;
-  color: white;
-}
-.recomend {
-  /* font-size: 24px;
-  font-weight: 600; */
-  margin-top: 13px;
-}
-
-/* .title-product {
-  padding-left: 3px;
-} */
-/* .price-product {
-  padding-right: 4px;
-} */
-.desc-product {
-  font-size: 10px;
-}
-.view-more-btn {
-  height: 30px;
-  width: 114px;
-  border: 1px black solid;
-}
-.view-more-btn:hover {
-  background: #2f432d;
-  color: white;
-}
-
-.view-more-btn2 {
-  margin-top: 54px;
-}
-/* .home_image {
-}
- */
 
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;
   font-family: "Poppins", sans-serif;
 }
-.contact {
-  background: #2f432d;
-  padding: 9px 123px 10px 123px;
-}
-.search-class {
-  display: flex;
-  border-radius: 24px;
-  width: 268px;
-  height: 49px;
-  background-color: #d9d9d9;
-  margin-left: 447px;
-}
-.search-class .nyari {
-  width: 183px;
-}
-.search-class .icon_search {
-  width: 38px;
-  height: 38px;
-}
-.round-btn {
-  border-radius: 50%;
-  width: 49px;
-  height: 49px;
-  background-color: #d9d9d9;
-}
-.contact-text {
-  display: flex;
-  font-size: 16px;
-  line-height: 24px;
-}
-.contact-text .icon_telepon {
-  margin-right: 11px;
-  margin-top: 3px;
-}
+
 .nav {
   padding: 39px 123px 10px 123px;
   display: flex;
-}
-.logo {
-  width: 43px;
-  height: auto;
-}
-.nama_toko {
-  margin-top: 4px;
-  margin-left: 33px;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-.namanya {
-  display: inline-block;
-  width: 100px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-top: 11px;
-  margin-left: 12px;
-  font-size: 20px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-.profile_icon_keranjang {
-  display: flex;
-  gap: 11px;
-  margin-left: 32px;
-}
-.keranjang {
-  margin-left: 5px;
 }
 </style>
