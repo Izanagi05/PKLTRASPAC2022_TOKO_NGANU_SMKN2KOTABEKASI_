@@ -50,7 +50,7 @@ export default {
         nama: null,
         no_telepon: null,
         email: null,
-        foto_profil: "",
+        foto_profil: null,
       },
       cekuserrole: null,
       userid: null,
