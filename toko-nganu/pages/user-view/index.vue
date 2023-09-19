@@ -8,7 +8,7 @@
                   Profil Pengguna
                 </div>
       <v-row class="">
-        <v-col cols="12 " lg="4" md="4" sm="12" xs="12" order="1" class="kiri d-flex justify-space-between py-0 order-lg-1 order-md-1 order-sm-2 order-xs-2">
+
         <v-col
           cols="12 "
           lg="3"
