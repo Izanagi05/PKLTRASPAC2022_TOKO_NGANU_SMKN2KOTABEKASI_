@@ -11,13 +11,18 @@ use Illuminate\Support\Facades\Storage;
 class TokoUserController extends Controller
 {
 
-    public function getbarangbytokouser(Request $request, $id){
+    public function getbarangbytokouser($id){
         $data= Toko::where('user_id', $id)->get();
         foreach ($data as $key=> $dt) {
             $data[$key]['barang']=$dt->Barang;
 
        }
-        return response()->json($data);
+       return response()->json([
+        'data' => $data,
+        'message' => 'Berhasil ambil data toko barang',
+        'success' => true,
+        'status' => 201,
+    ], 201);
     }
 
     public function createtoko(Request $request, $id){
@@ -32,11 +37,6 @@ class TokoUserController extends Controller
         ]);
 
         $validatedData['user_id'] = $user;
-        // if($request->file('logo')){
-
-        //     $validatedData['logo'] =  $request->file('logo')->store('logotoko');
-        // }
-        // dd($validatedData['user_id']);
         Toko::create($validatedData);
     }
 

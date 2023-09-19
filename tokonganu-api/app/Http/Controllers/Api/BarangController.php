@@ -17,7 +17,7 @@ class BarangController extends Controller
             $data = Barang::where('nama', 'LIKE', '%' . $search . '%')->orWhere('deskripsi', 'LIKE', '%' . $search . '%')->get();
             foreach ($data as $key => $dtv) {
 
-            $data[$key]['barang_foto_first'] = $dtv->barangFotoFirst;
+                $data[$key]['barang_foto_first'] = $dtv->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dtv->barangVarianFirst;
             }
             return response()->json([
@@ -39,7 +39,13 @@ class BarangController extends Controller
     {
         try {
             $data = Barang::where('toko_id', $id)->get();
-            return response()->json($data);
+            // return response()->json($data);
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data barang berdasarkan toko',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         } catch (\Throwable $e) {
             return response()->json([
                 'data' => null,
@@ -57,7 +63,12 @@ class BarangController extends Controller
                 $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
             }
-            return response()->json($data);
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data barang',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         } catch (\Throwable $e) {
             return response()->json([
                 'data' => null,
@@ -76,7 +87,12 @@ class BarangController extends Controller
 
                 $data[$key]['toko'] = $dt->Toko;
             }
-            return response()->json($data);
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         } catch (\Throwable $e) {
             return response()->json([
                 'data' => null,
@@ -90,14 +106,16 @@ class BarangController extends Controller
     {
         try {
             $data = Barang::where('barang_id', $id)->get();
-            $data = Barang::where('barang_id', $id)->get();
-
             foreach ($data as $key => $dtv) {
-
                 $data[$key]['toko'] = $dtv->Toko;
                 $data[$key]['barang_varian'] = $dtv->BarangVarian;
             }
-            return response()->json($data);
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data varian',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         } catch (\Throwable $e) {
             return response()->json([
                 'data' => null,
@@ -122,7 +140,7 @@ class BarangController extends Controller
 
             $validatedData['toko_id'] = $tk;
             // dd($validatedData['user_id']);
-           $barangg= Barang::create($validatedData);
+            $barangg = Barang::create($validatedData);
             // $bid = $barangg->barang_id;
             // $imgdefault=public_path('makanan.jpg');
             // $validatedDataFt = [

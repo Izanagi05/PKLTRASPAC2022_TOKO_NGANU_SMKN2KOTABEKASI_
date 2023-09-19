@@ -125,7 +125,7 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
         .then((respon) => {
-          this.editprofil = respon.data;
+          this.editprofil = respon.data?.data;
         });
     },
     upload(foto) {
@@ -163,7 +163,8 @@ export default {
         formData.append("foto_profil", this.datafoto);
       }else{
         console.log("0")
-        formData.append("foto_profil", this.editprofil.foto_profil);
+        console.log(this.editprofil.foto_profil)
+        // formData.append("foto_profil", this.editprofil.foto_profil);
 
       }
       formData.append("email", this.editprofil.email);
@@ -178,12 +179,12 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-            this.$toasted.show('Ini adalah pesan toast!', {
-        theme: 'success',
+          this.$toasted.success('Berhasil update', {
         position: 'top-right',
         className: 'edit-toast',
         duration: 3000
       })
+              this.cookie.update('cookieku', respon.data);
           // this.$toast.success("Berhasil diubah");
         });
       this.$router.push("/user-view");

@@ -40,7 +40,7 @@
 
 
 
-            <v-btn v-bind="attrs" v-on="on" class="btn-add rounded-pill white--text" color="#2f432d"
+            <v-btn v-bind="attrs" v-on="on" class="text-capitalize px-8  mb-6 text-body-1 font-weight-medium rounded-pill white--text" color="#2f432d"
               @click="tambahvarian()">Tambah varian barang</v-btn>
 
           </template>
@@ -49,7 +49,6 @@
               <h1>Tambah data varian</h1>
             </div>
             <v-container style="padding:30px;">
-
               <v-text-field type="text" v-model="detaildatadialog.nama" label="Name" outline></v-text-field>
               <v-text-field type="number" v-model="detaildatadialog.harga" label="harga" outline></v-text-field>
               <v-text-field type="number" v-model="detaildatadialog.stok" label="stok" outline></v-text-field>
@@ -63,11 +62,11 @@
       </template>
 
       <template v-slot:[`item.aksi`]="{ item }">
-        <v-btn class="mx-2" fab small @click="ubahvarian(item)" style="margin:15px 15px 15px 0px;">
-          <v-icon dark>mdi-pencil</v-icon>
+        <v-btn class="mx-2 white--text btn-crkuup"   fab small @click="ubahvarian(item)" >
+          <v-icon >mdi-pencil</v-icon>
         </v-btn>
-        <v-btn class="mx-2" fab small @click="hapusvarian(item)" style="background:#FF2A30;">
-          <v-icon dark>mdi-delete</v-icon>
+        <v-btn class="mx-2 white--text btn-crkuhap"   fab small @click="hapusvarian(item)" >
+          <v-icon >mdi-delete</v-icon>
         </v-btn>
       </template>
       <template v-slot:[`item.nomor`]="{ index }">
@@ -93,7 +92,6 @@ export default {
       barang: [],
       varianbarang: null,
       headers: [
-
         { text: 'Nama varian', value: 'nama' },
         { text: 'harga', value: 'harga' },
         { text: 'stok', value: 'stok' },
@@ -117,7 +115,7 @@ export default {
   methods: {
     getvarian() {
       axios.get('http://127.0.0.1:8000/api/getvarianbarang/' + this.prm.barang_id).then(respon => {
-        this.barang = respon.data
+        this.barang = respon.data?.data
       })
     },
     closeadd() {

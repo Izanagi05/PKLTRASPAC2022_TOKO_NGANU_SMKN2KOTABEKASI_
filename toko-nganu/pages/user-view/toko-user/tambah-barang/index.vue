@@ -55,15 +55,16 @@ export default {
   methods: {
     gettokouser() {
       axios
-        .get("http://127.0.0.1:8000/api/gettoko/" + this.userid)
-        .then((respon) => {
-          this.usertoko = respon.data;
-          //  this.items = respon.data
-        });
+      .get("http://127.0.0.1:8000/api/gettoko/" + this.userid)
+      .then((respon) => {
+        this.usertoko = respon.data?.data;
+        //  this.items = respon.data
+      });
+      console.log(this.userid)
     },
     getkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
-        this.kategori = respon.data;
+        this.kategori = respon.data?.data;
       });
     },
     tbhbarang() {
@@ -88,6 +89,7 @@ export default {
       }
     },
     getTokoText(val) {
+      console.log(this.usertoko)
       const data = this.usertoko.find((element) => element.toko_id === val);
       console.log(data.nama);
       if (data) {

@@ -162,13 +162,13 @@ export default {
   methods: {
     gettokouser() {
       axios.get("http://127.0.0.1:8000/api/gettoko/" + this.userid).then((respon) => {
-        this.usertoko = respon.data;
-        //  this.items = respon.data
+        this.usertoko = respon.data?.data;
+        //  this.items = respon.data?.data
       });
     },
     getkategori() {
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
-        this.kategori = respon.data;
+        this.kategori = respon.data?.data;
       });
     },
     tbhbarang() {

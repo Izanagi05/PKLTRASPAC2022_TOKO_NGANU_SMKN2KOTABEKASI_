@@ -2,124 +2,114 @@
   <div>
     <Navbar />
     <div class="container">
-      <v-row class="">
-        <v-col cols="12 " lg="4" md="4" sm="12" xs="12" order="1" class="kiri d-flex justify-space-between py-0 order-lg-1 order-md-1 order-sm-2 order-xs-2">
-          <div>
-            <div class="sub-title" style="margin-left: 27px, margin-right=36px">
-              Profil Pengguna
-            </div>
-            <div class="menu mt-2">
-            <NuxtLink
-              to="/user-view"
-              class="my-4 black--text text-decoration-none"
-            >
-              <v-icon large>mdi-account</v-icon> Info User
-            </NuxtLink>
-              <NuxtLink  v-if="cekuserrole == 'Admin'"
-                to="/halaman-admin"
-                class="my-4 black--text text-decoration-none"
-              >
-                <v-icon large>mdi-account-tie</v-icon> Admin
-              </NuxtLink>
-            <div v-else></div>
-            <NuxtLink
-              to="/user-view/toko-user"
-              class="my-4 black--text text-decoration-none">
-              <v-icon large>mdi-storefront</v-icon> Toko
-            </NuxtLink>
-            <NuxtLink
-              to="/user-view/tambah-toko"
-              class="my-4 black--text text-decoration-none"
-            >
-            <v-icon large>mdi-store-plus</v-icon> Buka Toko
-            </NuxtLink>
-            <NuxtLink
-              to="/user-view/crud"
-              class="my-4 black--text text-decoration-none"
-            >
-              <v-icon large>mdi-package-variant-closed-plus</v-icon> tambah barang
-            </NuxtLink>
-          </div>
-          <div class="logout" style="margin-left: 27px">
-            <v-btn text @click="logout()" class="mdi-35px"
-            ><v-icon>mdi-logout</v-icon>Logout</v-btn
-            >
-          </div>
-        </div>
-      </v-col>
-
-      <v-col cols="12" lg="8" md="8" sm="12" xs="12"  order="2" class="profil d-flex my-0 order-lg-2 order-md-2 order-sm-1 order-xs-1">
-          <div class="pembatas mr-8"></div>
-          <div class="">
-
-            <div class="navigasi">
-              <NuxtLink to="/" class="my-2 text-decoration-none black--text">
-              Home </NuxtLink
-            ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
-          </div>
-          <v-row class="isi">
-            <v-col>
-              <div class="foto-profil">
-                <v-avatar class="foto-profilan"  style="width:20vw;height: 20vw;">
-                  <!-- {{ dataprofil.foto_profil }} -->
-                  <img
-                    v-if="dataprofil.foto_profil"
-                    class="img-fluid"
-                    :src="
-                      'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
-                    "
-                  />
-                </v-avatar>
-              </div>
-              <div class="btn-card pl-1 pb-1">
-                <v-btn
-                class="profil-btn  font-weight-medium"
-                  style="font-size: 24px; font-family: Poppins, sans-serif"
-                  outlined
-                  block
-                  rounded
-                  height="40px"
-                  @click="pushprofil"
+      <div
+                  :class="['font-weight-bold  mb-2', $vuetify.breakpoint.smAndDown?'text-h6':'text-h5']"
                 >
-                  Edit Profil
-                </v-btn>
+                  Profil Pengguna
+                </div>
+      <v-row class="">
+
+        <v-col
+          cols="12 "
+          lg="3"
+          md="3"
+          sm="12"
+          xs="12"
+          order="2"
+          class="kiri  justify-space-between  order-lg-1 order-md-1 order-sm-2 order-xs-2"
+        >
+          <div>
+            <div class=" align-center align-space-between">
+              <div>
+
+                <v-row  class="ma-0 ">
+                  <v-col
+                    cols="12"
+                    lg="12"
+                    sm="6"
+                    class="pa-0 "
+                    md="12"
+                    v-for="(rute, i) in routersdata"
+                    :key="i"
+                  >
+                  <v-btn text depressed @click="$router.push(rute.rt)" width="100%"  class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
+                >
+                      <v-icon large color="#616161" class="mr-2">{{ rute.icon }}</v-icon> {{ rute.nama }}
+                  </v-btn>
+                  </v-col>
+                </v-row>
               </div>
+            </div>
+            <v-col cols="4" lg="12" sm="4" class="pa-0 my-4" md="12">
+              <v-btn text depressed @click="logout()"  width="100%"  class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
+                ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon>Logout</v-btn
+              >
             </v-col>
-            <v-col>
-              <v-row dense justify="center">
-                <v-col cols="12">
-                  <div class="informasi-judul">Info Pengguna</div>
-                </v-col>
-              </v-row>
+          </div>
+        </v-col>
+        <v-col
+          cols="12"
+          lg="9"
+          md="9"
+          sm="12"
+          xs="12"
+          order="1"
+          class=" d-flex my-0 order-lg-2 order-md-2 order-sm-1 order-xs-1"
+        >
+          <div v-if="$vuetify.breakpoint.mdAndUp" class="pembatas mr-8"></div>
+          <div >
+            <div  class="mb-2">
+              <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+                Home </NuxtLink><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
+            </div>
+            <v-row class="isi">
+              <v-col>
+                <div class="foto-profil d-flex justify-center">
+                  <v-avatar class="foto-profilan" style="width:20vw;height: 20vw;">
+                    <img v-if="dataprofil.foto_profil" class="img-fluid" :src="'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
+                      " />
+                  </v-avatar>
+                </div>
+                <div class="btn-card pl-1 pb-1">
+                  <v-btn class="profil-btn  font-weight-medium" style="font-size: 24px; font-family: Poppins, sans-serif"
+                    outlined block rounded height="40px" @click="pushprofil">
+                    Edit Profil
+                  </v-btn>
+                </div>
+              </v-col>
+              <v-col>
+                <v-row dense justify="center">
+                  <v-col cols="12">
+                    <div class="informasi-judul">Info Pengguna</div>
+                  </v-col>
+                </v-row>
 
-              <v-row dense justify="center">
-                <v-col cols="12" sm="6">
-                  <p>Nama</p>
-                  <!-- <p>Alamat</p> -->
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <p>{{ dataprofil.nama }}</p>
-                </v-col>
-              </v-row>
-              <v-row dense justify="center">
-                <v-col cols="12">
-                  <div class="informasi-judul">Info Kontak</div>
-                </v-col>
-              </v-row>
-
-              <v-row dense justify="center">
-                <v-col cols="12" sm="6">
-                  <p>Telepon</p>
-                  <p>Email</p>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <p>{{ dataprofil.no_telepon }}</p>
-                  <p>{{ dataprofil.email }}</p>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </div>
+                <v-row dense justify="center">
+                  <v-col cols="6" lg="6" md="6" sm="4">
+                    <p>Nama</p>
+                  </v-col>
+                  <v-col cols="6" lg="6" md="6" sm="8">
+                    <p>{{ dataprofil.nama }}</p>
+                  </v-col>
+                </v-row>
+                <v-row dense justify="center">
+                  <v-col cols="12">
+                    <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'':'text-h6']">Info Kontak</div>
+                  </v-col>
+                </v-row>
+                <v-row dense justify="center">
+                  <v-col cols="6" lg="6" md="6" sm="4">
+                    <p>Telepon</p>
+                    <p>Email</p>
+                  </v-col>
+                  <v-col cols="6" lg="6" md="6" sm="8">
+                    <p>{{ dataprofil.no_telepon }}</p>
+                    <p>{{ dataprofil.email }}</p>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -140,6 +130,8 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      routersdata: [],
+      avatarResp:250,
       dataprofil: {
         nama: null,
         no_telepon: null,
@@ -169,11 +161,34 @@ export default {
   },
 
   methods: {
+    responsAv(){
+      if(this.$vuetify.breakpoint.mdAndUp){
+        this.avatarResp=250
+      }else if(this.$vuetify.breakpoint.smAndUp){
+        this.avatarResp=10
+      }
+    },
+    rutess() {
+      var rutes = [
+        { show: true, nama: "Info User", rt: "/user-view", icon: "mdi-account" },
+        { show: this.cekuserrole === 'Admin',nama: "Admin", rt: "/halaman-admin", icon: "mdi-account-tie" },
+        { show: true, nama: "Toko", rt: "/user-view/toko-user", icon: "mdi-storefront" },
+        { show: true, nama: "Buka Toko", rt: "/user-view/tambah-toko", icon: "mdi-store-plus" },
+        {
+          show: true, nama: "Tambah Barang",
+          rt: "/user-view/tambah-barang",
+          icon: "mdi-package-variant-closed-plus",
+        },
+      ];
+      this.routersdata= rutes.filter(function (link) {
+        return link.show;
+      });
+    },
     getuser() {
       axios
         .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
         .then((respon) => {
-          this.dataprofil = respon.data;
+          this.dataprofil = respon.data?.data;
         });
     },
     logout() {
@@ -185,10 +200,12 @@ export default {
   },
 
   created() {
+    this.responsAv();
     const usid = this.$cookies.get("cookieku");
     this.userid = usid.data.id;
-    this.getuser();
     this.cekuserrole = usid.role;
+    this.rutess();
+    this.getuser();
   },
   mounted() {
     this.getuser();
@@ -196,39 +213,6 @@ export default {
 };
 </script>
 <style scoped>
-.contact {
-  background-color: #2f432d;
-  padding: 5px 0px 7px 154px;
-}
-
-.home-container {
-  padding: 0px 123px;
-}
-
-/* .content {
-  display: flex;
-  gap: 38px;
-} */
-.sub-title {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.menu {
-  display: grid;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  /* margin-top: 69px; */
-}
-
-.logout {
-  /* margin-top: 120px; */
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-}
 
 .pembatas {
   border-left: 8px solid #d9d9d9;
@@ -237,36 +221,5 @@ export default {
   margin-right: 10px;
 }
 
-.profil-btn:hover {
-  background: #2f432d;
-  color: rgb(255, 255, 255);
-}
 
-.kiri {
-  margin-top: 19px;
-}
-
-.my-link {
-  text-decoration: none;
-  color: #000000;
-  margin-bottom: 43px;
-}
-
-.isi {
-  margin-top: 26px;
-}
-
-.btn-card {
-  margin-top: 30px;
-}
-
-.informasi-judul {
-  font-family: Poppins;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.foto-profilan {
-  background: #d9d9d9;
-}
 </style>

@@ -1,6 +1,66 @@
-.warnaku{
+.btn-warnaku{
   background-color: #2f432d;
+}
+.bg-update{
+  background-color: #4caf50;
+}
+.list-none{
+  list-style-type: none;
 }
 .color{
   color: #2f432d;
 }
+.btn-crkuhap{
+  transition: 0.2s ease-in-out !important;
+    background: #9e9e9e !important;
+}
+.btn-crkuup{
+  transition: 0.2s ease-in-out !important;
+    background: #9e9e9e !important;
+}
+.btn-crkuhap:hover{
+    background: #ff5252 !important;
+}
+.btn-crkuup:hover{
+    background: #fb8c00 !important;
+}
+.bg-greyku{
+
+  background: #d9d9d9;
+}
+.hover-btnku{
+ transition: 0.2s ease-in-out !important;
+}
+.hover-btnku:hover {
+  background: #2f432d !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+
+  /* background:  rgb(3, 0, 20);; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 3px;
+}
+
+
+.custom-file-upload{
+  background-color: #4caf50;
+  transition: 0.3s;
+}
+.custom-file-upload:hover{
+  background-color: #3e8f41;
+}
+.inputfileku{
+  display:none;
+}
+

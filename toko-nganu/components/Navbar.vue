@@ -1,46 +1,42 @@
 <template>
-  <div class="ppp">
-    <div class="contact white--text">
-      <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak">
-          <v-icon color="white">mdi-phone</v-icon>
-          +62-815-6315-1038
-        </button>
+  <div :class="[$vuetify.breakpoint.mdAndUp?'mb-10':'']">
+    <div class="btn-warnaku white--text">
+        <div class="py-1 font-weight-regular">
+          <button class=" ml-4" type="submit" @click="kontak">
+            <v-icon color="white">mdi-phone</v-icon>
+            +62-815-6315-10389
+          </button>
+        </div>
       </div>
-    </div>
-
     <div class="container">
       <v-row>
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 d-flex align-center">
-              <v-img :src="require('~/assets/logo_nganu.png')" max-width="40"></v-img>
-              <div class="font-weight-bold text-h5 ml-4">Toko nganu</div>
+        <v-col cols="6" lg="6" md="6" class="d-flex d-flex align-center">
+              <v-img :src="require('~/assets/logo_nganu.png')" :max-width="$vuetify.breakpoint.smAndDown?'20':'30'"></v-img>
+              <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'ml-2':'ml-4 text-h6']">Toko nganu</div>
           </v-col>
-        <v-col class="d-flex col-12 col-lg-6 col-md-4  col-sm-12 col-xs-12 justify-start justify-lg-end justify-md-end justify-sm-start">
-          <div class="profile_icon_keranjang">
-            <nuxt-link to="/keranjang" class="text-decoration-none">
-              <v-btn elevation="2" fab color="d9d9d9" icon
-                ><v-icon size="29px">mdi-cart</v-icon></v-btn
-              >
-            </nuxt-link>
-            <nuxt-link to="/user-view" class="text-decoration-none">
-              <v-btn elevation="0" fab icon color="d9d9d9">
-                <v-avatar class="foto-profilan">
-                  <img
-                    v-if="fotoProfil"
-                    :src="
-                      'http://127.0.0.1:8000/storage/' +
-                      $cookies.get(`cookieku`).data.foto_profil
-                    "
-                  /><v-icon v-else>mdi-account</v-icon>
-                </v-avatar>
-              </v-btn>
-            </nuxt-link>
-            <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
-              {{ $cookies.get("cookieku").data.nama }}
-            </div>
-          </div>
-        </v-col>
-      </v-row>
+        <v-col cols="6" lg="6" md="6" class="d-flex justify-end justify-lg-end justify-md-end justify-sm-end">
+          <div class="d-flex ">
+            <nuxt-link to="/keranjang" class="text-decoration-none  ">
+              <v-btn elevation="2" fab color="#ffffff" :small="$vuetify.breakpoint.smAndDown?true:false"
+              ><v-icon   :small="$vuetify.breakpoint.smAndDown?true:false" color="#d9d9d9">mdi-cart</v-icon></v-btn
+          >
+        </nuxt-link>
+        <nuxt-link to="/user-view" class="text-decoration-none ml-2" >
+          <v-btn elevation="2" fab  color="#ffffff"   :small="$vuetify.breakpoint.smAndDown?true:false" >
+            <v-avatar class="foto-profilan bg-greyku"  :size="$vuetify.breakpoint.smAndDown ? '35' : '50'" >
+              <v-img
+                :src="
+                  'http://127.0.0.1:8000/storage/' +
+                  $cookies.get(`cookieku`).data.foto_profil
+                "
+              />
+            </v-avatar>
+          </v-btn>
+        </nuxt-link>
+        <!-- <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">{{ $cookies.get("cookieku").data.nama }}</div> -->
+      </div>
+    </v-col>
+    </v-row>
     </div>
   </div>
 </template>
@@ -87,14 +83,6 @@ export default {
 </script>
 
 <style>
-.ppp {
-  margin-bottom: 51px;
-  font-family: "Poppins", sans-serif;
-}
-.contact {
-  background: #2f432d;
-  padding: 9px 123px 10px 123px;
-}
 /*
 .search {
   margin-left: 900px;
@@ -135,12 +123,12 @@ export default {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
 } */
-.profile_icon_keranjang {
+/* .profile_icon_keranjang {
   display: flex;
   gap: 11px;
   margin-left: 32px;
 }
 .keranjang {
   margin-left: 5px;
-}
+} */
 </style>

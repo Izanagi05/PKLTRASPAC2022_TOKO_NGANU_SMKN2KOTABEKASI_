@@ -4,35 +4,51 @@
     <div class="judul pb-4 pt-2 font-weight-bold" style="font-family: 'Poppins', sans-serif; font-size: 30px">
       <center>Detail Foto Barang</center>
     </div>
-
-    <v-dialog v-model="dialogDelete" max-width="500px">
-      <v-card>
-        <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" fotot="text" @click="closeDelete">Kembali</v-btn>
-          <v-btn color="blue-darken-1" fotot="text" @click="confirmhapusfoto">Ya</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-dialog v-model="dialogedit" max-width="700" persistent transition="dialog-bottom-transition">
-      <v-card class="kartu" light style="padding: 0px; color: black; border: solid 2px #2f432d">
-        <div style="background:#2f432d;padding:10px 30px;color:white;">
-          <h1>Ubah data foto</h1>
-        </div>
+    <v-dialog v-model="dialogDelete" max-width="800px" color="ffffff">
+        <v-card class="pt-15 px-8 pb-8 rounded-xl">
+          <div class="text-h6 pl-4">
+            Apakah kamu yakin ingin menghapus item ini?
+          </div>
+          <div class="grey--text text-body-2 pl-4 mt-4">
+            Item yang sudah dihapus tidak bisa dikembalikan lagi
+          </div>
+          <div class="d-flex justify-end mt-15">
+            <v-btn class="rounded-xl px-8" outlined @click="closeDelete"
+              >Batal</v-btn
+            >
+            <v-btn
+              class="rounded-xl px-8 ml-8 white--text"
+              color="#FF3548"
+              @click="confirmhapusfoto"
+              >Hapus</v-btn
+            >
+          </div>
+        </v-card>
+      </v-dialog>
+    <v-dialog v-model="dialogedit"  max-width="800px"
+        persistent
+        class="rounded-xl"
+        transition="dialog-bottom-transition"
+      >
+        <v-card class="rounded-xl">
+          <div class="text-h6 px-8 mb-6 py-6 white--text bg-update">Ubah data Foto Barang</div>
+          <div class="pt-0 px-8 pb-8">
         <v-card-text style="padding: 30px">
           <div class="preview">
             <v-img v-if="preview" :src="preview" width="200px"></v-img>
           </div>
-          <input accept="image/*" class="file-input pt-6" :rules="rules" type="file" placeholder="Pilih Foto"
+           <label for="fileInput" class="custom-file-upload mt-4 rounded-lg py-2 px-4 white--text ">
+    <span>Choose File</span>
+</label>
+          <input accept="image/*" class="inputfileku" id="fileInput"  :rules="rules" type="file" placeholder="Pilih Foto"
             prepend-icon="mdi-camera" label="Pilih Foto" v-on:change="upload" />
         </v-card-text>
-        <v-card-actions>
-          <v-btn @click="closeedit()" style="margin-right: 20px; background: white; color: black">Kembali</v-btn>
-          <v-btn @click="updatefoto()" style="background: #2f432d; color: white">Ubah</v-btn>
-        </v-card-actions>
+        <div class="d-flex justify-end mt-8">
+          <v-btn class="rounded-xl px-8" outlined @click="closeedit()" >Kembali</v-btn>
+          <v-btn class="rounded-xl ml-8 px-8 white--text"
+                color="#4caf50" @click="updatefoto()">Ubah</v-btn>
+        </div>
+      </div>
       </v-card>
     </v-dialog>
     <div>
@@ -43,16 +59,12 @@
         </template>
         <template v-slot:top>
           <v-dialog v-model="dialogadd" max-width="700" persistent transition="dialog-bottom-transition">
-
             <template v-slot:activator="{ on, attrs }">
               <div class="btn-add pb-6 pl-4">
-                <v-btn class="btn-tambah rounded-pill px-15" v-bind="attrs" v-on="on"
-                  style="background: #2f432d; color: white" @click="tambahfoto()">Tambah foto barang</v-btn>
+                <v-btn cclass="text-capitalize px-8  mb-6 text-body-1 font-weight-medium rounded-pill white--text" color="#2f432d" v-bind="attrs" v-on="on"
+                   @click="tambahfoto()">Tambah foto barang</v-btn>
               </div>
             </template>
-
-
-
             <v-card class="kartu" light style="padding: 0px; color: black; border: solid 2px #2f432d">
               <div style="background:#2f432d;padding:10px 30px;color:white;">
                 <h1>Tambah data foto</h1>
@@ -73,10 +85,10 @@
         </template>
 
         <template v-slot:[`item.aksi`]="{ item }">
-          <v-btn class="mx-2" fab small @click="ubahfoto(item)" style="margin: 15px 15px 15px 0px">
+          <v-btn class="mx-2 white--text btn-crkuup" fab small @click="ubahfoto(item)" >
             <v-icon dark>mdi-pencil</v-icon>
           </v-btn>
-          <v-btn class="mx-2" fab small @click="hapusfoto(item)" style="background: #ff2a30">
+          <v-btn class="mx-2 white--text btn-crkuhap" fab small @click="hapusfoto(item)" >
             <v-icon dark>mdi-delete</v-icon>
           </v-btn>
         </template>
@@ -143,7 +155,7 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/getfotobarang/" + this.prm.foto_barang)
         .then((respon) => {
-          this.fotobarang = respon.data;
+          this.fotobarang = respon.data?.data;
         });
     },
     closeadd() {
@@ -279,8 +291,4 @@ export default {
   border-radius: 20px;
 }
 
-
-.file-input {
-  padding-bottom: 30px;
-}
 </style>

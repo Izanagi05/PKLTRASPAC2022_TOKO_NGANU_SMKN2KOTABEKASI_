@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100vh;">
     <Navbar />
     <div>
       <v-dialog v-model="dialogDelete" max-width="500px">
@@ -20,205 +20,148 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <div class="cart">
-        <!-- <table>
-          <thead>
-
-            <tr>
-              <th>Produk</th>
-              <th>Harga</th>
-              <th>Jumlah</th>
-              <th>Total</th>
-              <th>Aksi</th>
-
-            </tr>
-          </thead>
-        </table>
-          <table>
-            <tbody>
-
-              <tr  v-for="(dataa, index) in datakeranjang.user_keranjang"
-              :key="index">
-            <td>{{ namabarangker.nama}}</td>
-            <td>{{ varharga.harga }}</td>
-            <td>  <div class="d-flex kuantitas">
-                          <div>
-                            <div v-if="dataa.kuantitas == 1">
-                              <button
-                                @click="countmin(dataa)"
-                                disabled
-                                type="submit"
-                              >
-                                <v-icon color="AAAAAA">mdi-minus</v-icon>
-                              </button>
-                            </div>
-                            <div v-else>
-                              <button @click="countmin(dataa)" type="submit">
-                                <v-icon color="black">mdi-minus</v-icon>
-                              </button>
-                            </div>
-                          </div>
-
-                          <div class="font-weight-medium">
-                            {{ dataa.kuantitas }}
-                          </div>
-                          <button
-                            class="pluskuantitas"
-                            @click="countplus(dataa)"
-                            type="submit"
-                          >
-                            <v-icon color="black">mdi-plus</v-icon>
-                          </button>
-                        </div></td>
-                        <td>{{ totalprice.harga }}</td>
-                        <td> <v-btn @click="hapuskeranjang(dataa)"
-                        ><v-icon>mdi-delete</v-icon></v-btn
-                      ></td>
-        </tr>
-      </tbody>
-    </table> -->
+      <v-container class="cart">
         <v-row>
-          <v-col class="">
-            <v-row>
-              <v-col>
-                <div class="f14sb head-title">Produk</div>
-              </v-col>
-              <v-col>
-                <div class="f14sb head-title">Harga</div>
-              </v-col>
-              <v-col>
-                <div class="f14sb head-title">Jumlah</div>
-              </v-col>
-              <v-col>
-                <div class="f14sb head-title">Total</div>
-              </v-col>
-              <!-- <v-col>
-                <div class="f14sb head-title">Aksi</div>
-              </v-col> -->
-            </v-row>
-            <v-row>
-              <div class="cart-content">
-                <!-- <div v-for="gthrg in varharga" :key="gthrg">
-
-                <div v-on="ambilharga(gthrg)">
-
-                </div>
-              </div> -->
-                <!-- <div v-on="getharga()">l</div> -->
-                <!-- <div v-on="getharga()"></div> -->
-                <div
-                  v-for="(dataa, index) in datakeranjang.user_keranjang"
-                  :key="index"
-                >
-                  <v-row>
-                    <!-- {{ dataa.varian_id }} -->
-
-                    <div class="cart-card d-flex">
-                      <v-col>
-                        <v-img
-                          :src="require('~/assets/barang.png')"
-                          width="60px"
-                        ></v-img>
-                      </v-col>
-                      <v-col>
-                        <div class="font-weight-medium">
-                          {{ namabarangker.nama }}
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="font-weight-medium">
-                          Rp. {{ varharga.harga }}
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="d-flex kuantitas">
-                          <div>
-                            <div v-if="dataa.kuantitas == 1">
-                              <button
-                                @click="countmin(dataa)"
-                                disabled
-                                type="submit"
-                              >
-                                <v-icon color="AAAAAA">mdi-minus</v-icon>
-                              </button>
-                            </div>
-                            <div v-else>
-                              <button @click="countmin(dataa)" type="submit">
-                                <v-icon color="black">mdi-minus</v-icon>
-                              </button>
-                            </div>
-                          </div>
-
-                          <div class="font-weight-medium">
-                            {{ dataa.kuantitas }}
-                          </div>
-                          <button
-                            class="pluskuantitas"
-                            @click="countplus(dataa)"
-                            type="submit"
-                          >
-                            <v-icon color="black">mdi-plus</v-icon>
-                          </button>
-                        </div>
-                      </v-col>
-                      <v-col>
-                        <div class="font-weight-medium">
-                          Rp. {{ totalprice.harga }}
-                        </div>
-                      </v-col>
-                    </div>
-                    <div>
-                      <v-btn @click="hapuskeranjang(dataa)"
-                        ><v-icon>mdi-delete</v-icon></v-btn
-                      >
-                    </div>
-                  </v-row>
-                </div>
-              </div>
-            </v-row>
-          </v-col>
-
-          <v-col class="">
-            <div class="total-detail">
-              <div class="rincian-title">Rincian Order</div>
+          <v-col cols="12" lg="8" md="8">
+            <div class="">
               <v-row>
                 <v-col>
-                  <div>
-                    <div class="line"></div>
-                    Jumlah
+                  <div class="grey--text">Produk</div>
+                </v-col>
+                <v-col>
+                  <div class="grey--text">Harga</div>
+                </v-col>
+                <v-col>
+                  <div class="grey--text">Jumlah</div>
+                </v-col>
+                <v-col>
+                  <div class="grey--text">Total</div>
+                </v-col>
+              </v-row>
+              <v-row
+                v-for="(dataa, index) in datakeranjang.user_keranjang"
+                :key="index"
+              >
+                <v-col
+                  cols="5"
+                  lg="3"
+                  md="3"
+                  sm="4"
+                  xs="4"
+                  class="d-flex align-center"
+                >
+                  <v-img
+                    :src="require('~/assets/barang.png')"
+
+                  ></v-img>
+                  <div class="ml-2 font-weight-medium">
+                    {{ namabarangker?.nama }}
                   </div>
                 </v-col>
-                <v-col class="f14sb"> {{ kuan }} </v-col>
-              </v-row>
-              <v-row>
-                <v-col> Harga </v-col>
+                <v-col cols="7"  lg="9"
+                  md="9"
+                  sm="8"
+                  xs="8">
+                  <v-row class="ma-0">
+                  <v-col cols="6" lg="2" md="3" sm="6" xs="6" class="  order-1 order-lg-1">
+                    <div class="font-weight-medium">
+                      Rp. {{ varharga.harga }}
+                    </div>
+                  </v-col>
+                  <v-col cols="6" lg="3" md="3" sm="6" xs="6" class="d-flex justify-end  order-4 order-lg-2 order-md-2">
+                    <div
+                      class="d-flex justify-center bg-greyku rounded-pill"
+                      style="width: 60px"
+                    >
+                      <div v-if="dataa.kuantitas == 1">
+                        <button @click="countmin(dataa)" disabled type="submit">
+                          <v-icon color="AAAAAA">mdi-minus</v-icon>
+                        </button>
+                      </div>
+                      <div v-else>
+                        <button @click="countmin(dataa)" type="submit">
+                          <v-icon color="black">mdi-minus</v-icon>
+                        </button>
+                      </div>
 
-                <v-col v-if="varharga" class="f14sb">
+                      <div class="font-weight-medium">
+                        {{ dataa.kuantitas }}
+                      </div>
+                      <button
+                        class="pluskuantitas"
+                        @click="countplus(dataa)"
+                        type="submit"
+                      >
+                        <v-icon color="black">mdi-plus</v-icon>
+                      </button>
+                    </div>
+                  </v-col>
+                  <v-col cols="6" lg="2" md="2" sm="6" xs="6" class="  order-3 order-lg-3">
+                    <div class="font-weight-medium">
+                      Rp. {{ totalprice.harga }}
+                    </div>
+                  </v-col>
+                  <!-- </div> -->
+                  <v-col cols="6" lg="1" md="1" sm="6" xs="6" class="d-flex justify-end  order-2 order-lg-4 order-md-4">
+                    <div>
+                      <!-- <v-btn fab color="#ffffff" small text depressed -->
+                        <v-icon color="#bdbdbd" @click="hapuskeranjang(dataa)">mdi-delete</v-icon>
+                        <!-- </v-btn> -->
+                    </div>
+                  </v-col>
+
+                </v-row>
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
+          <v-col cols="12" lg="4" md="4" class="d-flex justify-center">
+            <v-col cols="10" class="total-detail ">
+              <v-card  :class="['grey lighten-3 rounded-xl pa-4',$vuetify.breakpoint.xs?'smCheckoutBox':'']">
+
+                <div class="text-h6 font-weight-bold">Rincian Order</div>
+                <div class="line grey mb-2"></div>
+              <div
+                class="d-flex grey--text font-weight-medium justify-space-between"
+              >
+                Jumlah
+                <div class="font-weight-medium black--text">
+                  {{ kuan }}
+                </div>
+              </div>
+              <div
+                class="d-flex grey--text justify-space-between grey--text font-weight-medium"
+              >
+                Harga
+                <div class="font-weight-medium black--text" v-if="varharga">
                   {{ varharga.harga }}
-                </v-col>
-                <v-col v-else class="f14sb"> Rp. 0 </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <div class="line"></div>
-                  Total Harga
-                </v-col>
-                <v-col class="f14sb"> Rp. {{ totalprice.harga }} </v-col>
-              </v-row>
-              <div class="f24sb">
-                <button
-                  class="checkout-btn b text-decoration-none white--text"
+                </div>
+              </div>
+              <div class="line grey my-2"></div>
+              <div
+                class="d-flex grey--text font-weight-medium justify-space-between"
+              >
+                Total Harga
+                <div class="font-weight-medium black--text">
+                  Rp. {{ totalprice.harga }}
+                </div>
+              </div>
+              <div class="d-flex justify-center mt-8 px-8">
+                <v-btn
+                  width="100%"
+                  class="text-capitalize px-8 text-body-1 font-weight-medium rounded-pill white--text"
                   @click="nomer()"
+                  color="#2f432d"
                   type="submit"
                 >
                   Checkout
-                </button>
-                <!-- <v-btn @click="transaksi">transaksi </v-btn> -->
+                </v-btn>
               </div>
-            </div>
+            </v-card>
+            </v-col>
           </v-col>
         </v-row>
-      </div>
+      </v-container>
     </div>
   </div>
 </template>
@@ -230,6 +173,13 @@ export default {
     return {
       dialogDelete: false,
       price: 100000,
+      datakeranjangtb: [],
+      headerkeranjang: [
+        { text: "Produk", value: "" },
+        { text: "Harga", value: "datakategori" },
+        { text: "Jumlah", value: "datakategori" },
+        { text: "Total", value: "datakategori" },
+      ],
       varharga: {
         harga: 0,
         nama: "",
@@ -260,6 +210,24 @@ export default {
     };
   },
   methods: {
+    inisialisasidataker() {
+      //   this.datakeranjangtb= [
+      //     {keranjang: namabarangker?.nama},
+      //     {keranjang: varharga.harga},
+      //     {keranjang: namabarangker?.nama},
+      //     {keranjang: namabarangker?.nama},
+      // ]
+
+      this.datakeranjangtb = [
+        { prd: "Produk", hrg: "Harga", jml: "Jumlah", ttl: "Total" },
+        {
+          prd: this.namabarangker?.nama,
+          hrg: this.varharga.harga,
+          jml: this.data?.kuantitas,
+          ttl: this.totalprice.harga,
+        },
+      ];
+    },
     getkeranjang() {
       axios
         .get("http://127.0.0.1:8000/api/keranjangbyuser/" + this.userid)
@@ -271,7 +239,7 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/getvarian/" + this.getidker.varian_id)
         .then((respon) => {
-          this.varharga = respon.data[0];
+          this.varharga = respon.data?.data[0];
         });
       this.totalprice.harga = this.varharga.harga;
     },
@@ -325,12 +293,12 @@ export default {
           console.log(respon);
           location.reload();
           // alert("berhasil hapus");
-          this.$toasted.show('Berhasil hapus keranjang', {
-        theme: 'success',
-        position: 'top-right',
-        className: 'edit-toast',
-        duration: 3000
-      })
+          this.$toasted.show("Berhasil hapus keranjang", {
+            theme: "success",
+            position: "top-right",
+            className: "edit-toast",
+            duration: 3000,
+          });
         });
       this.closeDelete();
     },
@@ -345,11 +313,11 @@ export default {
       let no = this.no_admin;
       let pesan =
         "Hi!%20Saya%20ingin%20memesan%20" +
-        this.namabarangker.nama +
+        this.namabarangker?.nama +
         " dengan%20varian%20" +
-        this.varharga.nama +
+        this.varharga?.nama +
         "%20seharga%20Rp." +
-        this.totalprice.harga;
+        this.totalprice?.harga;
       window.open(
         "https://api.whatsapp.com/send?phone=" + no + "&text=" + pesan
       );
@@ -363,90 +331,26 @@ export default {
     this.userid = usid.data.id;
     this.getkeranjang();
     this.getidkeranjang();
+    this.inisialisasidataker();
   },
 };
 </script>
 <style scoped>
-.edit-toast{
+.edit-toast {
   background: green;
-  color:white;
-  padding: 10px ;
+  color: white;
+  padding: 10px;
   border-radius: 20px;
 }
-
-
-.f24sb {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-}
-.f20sb {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 36px;
-}
-.f16sb {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f14sb {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-}
-.f16m {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f16r {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-}
-.f10r {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 15px;
-}
-
 .line {
-  width: 287px;
+  width: 100%;
   height: 1px;
-  background: black;
 }
-.cart {
-  padding-left: 123px;
-  padding-bottom: 35px;
-}
-.cart-content {
-  padding-right: 52px;
-  height: 764px;
-}
-.head-title {
-  color: #7a7a7a;
-}
-.kuantitas {
-  background: #d9d9d9;
-  border-radius: 15px;
-}
-
-.total-detail {
-  background: #d9d9d9;
-  padding: 18px 40px 20px 40px;
-  border-radius: 50px;
-  width: 367px;
-}
-.rincian-title {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 30px;
-}
-.checkout-btn {
-  padding: 6px 83px;
-  background: #2f432d;
-  color: white;
-  border-radius: 50px;
+.smCheckoutBox{
+    z-index: 100;
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
 }
 </style>
