@@ -210,7 +210,7 @@
             </div>
             <div class="tampil3" v-if="set == 2">
               <v-row class="p-0 justify-center">
-                <v-col cols="5" class="    mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  "
+                <v-col cols="5" class="p    mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  "
                   v-for="(brg, index) in hasilcari.data" :key="index">
                   <v-card>
                     <div v-for="(ft, i) in  brg.barang_foto_first" :key="i" max-width="100"
