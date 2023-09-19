@@ -211,21 +211,21 @@
         </v-card>
       </v-dialog>
 
-      <v-dialog v-model="dialogEditkategori" max-width="700" persistent transition="dialog-bottom-transition">
-        <v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
-          <div style="background:#2f432d;padding:10px 30px;color:white;">
-            <h1>Ubah data</h1>
-          </div>
-          <v-container style="padding:30px;">
+<v-dialog v-model="dialogEditkategori"   max-width="700" persistent transition="dialog-bottom-transition">
+<v-card class="kartu " light style="padding:0px;color:black;border:solid 3px #2f432d;">
+<div style="background:#2f432d;padding:10px 30px;color:white;">
+<h1>Ubah data</h1>
+</div>
+<v-container style="padding:30px;">
 
-            <v-text-field type="text" v-model="detaildatadialogkategori.nama" label="Name" outline></v-text-field>
-            <v-card-actions>
-              <v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
-              <v-btn @click="updatekategori()" style="background: #2f432d;color:white;">Ubah</v-btn>
-            </v-card-actions>
-          </v-container>
-        </v-card>
-      </v-dialog>
+<v-text-field type="text" v-model="detaildatadialogkategori.nama"  label="Name" outline></v-text-field>
+<v-card-actions >
+<v-btn @click="closeedit()" style="margin-right:20px;background:white;color:black;">Close</v-btn>
+<v-btn @click="updatekategori()" style="background: #2f432d;color:white;" >Ubah</v-btn>
+</v-card-actions>
+</v-container>
+</v-card>
+</v-dialog>
 
 
       <v-dialog v-model="dialogTambahkategori" max-width="700" persistent transition="dialog-bottom-transition">
@@ -251,6 +251,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: "UserView",
   middleware: ["middlewareku", "middlewarerole"],
   data() {
     return {

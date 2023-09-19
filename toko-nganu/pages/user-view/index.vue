@@ -8,6 +8,7 @@
                   Profil Pengguna
                 </div>
       <v-row class="">
+        <v-col cols="12 " lg="4" md="4" sm="12" xs="12" order="1" class="kiri d-flex justify-space-between py-0 order-lg-1 order-md-1 order-sm-2 order-xs-2">
         <v-col
           cols="12 "
           lg="3"
@@ -59,37 +60,27 @@
           <div >
             <div  class="mb-2">
               <NuxtLink to="/" class="my-2 text-decoration-none black--text">
-                Home </NuxtLink
-              ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
+                Home </NuxtLink><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
             </div>
-            <v-row class="">
-              <v-col cols="12" lg="6" md="6" sm="12" xs="12">
+            <v-row class="isi">
+              <v-col>
                 <div class="foto-profil d-flex justify-center">
-                  <v-avatar class="bg-greyku" :size="[$vuetify.breakpoint.mdAndUp?'250':'100']">
-                    <img
-                      v-if="dataprofil.foto_profil"
-                      class="img-fluid"
-                      :src="
-                        'http://127.0.0.1:8000/storage/' +
-                        dataprofil.foto_profil
-                      "
-                    />
+                  <v-avatar class="foto-profilan" style="width:20vw;height: 20vw;">
+                    <img v-if="dataprofil.foto_profil" class="img-fluid" :src="'http://127.0.0.1:8000/storage/' + dataprofil.foto_profil
+                      " />
                   </v-avatar>
                 </div>
-                  <v-btn
-                    class="hover-btnku mt-8 transisiku font-weight-medium py-4 text-body-1  text-capitalize"
-                    outlined
-                    block
-                    rounded
-                    @click="pushprofil"
-                  >
+                <div class="btn-card pl-1 pb-1">
+                  <v-btn class="profil-btn  font-weight-medium" style="font-size: 24px; font-family: Poppins, sans-serif"
+                    outlined block rounded height="40px" @click="pushprofil">
                     Edit Profil
                   </v-btn>
+                </div>
               </v-col>
-              <v-col cols="12" lg="6" md="6" sm="12" xs="12">
+              <v-col>
                 <v-row dense justify="center">
                   <v-col cols="12">
-                    <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'':'text-h6']">Info Pengguna</div>
+                    <div class="informasi-judul">Info Pengguna</div>
                   </v-col>
                 </v-row>
 
@@ -124,10 +115,18 @@
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 
+// import ProfileUser from "~/pages/profile-user";
+// import TokoUser from "~/pages/toko-user";
+
 export default {
+  // components: {
+  //   ProfileUser,
+  //   TokoUser,
+  // },
   middleware: "middlewareku",
   data() {
     return {
@@ -140,6 +139,24 @@ export default {
       },
       cekuserrole: null,
       userid: null,
+      menus: [
+        {
+          title: "User Profile",
+          link: "/user-view/profile-user",
+          icon: "mdi-account",
+        },
+        { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
+        {
+          title: "Tambah Toko",
+          link: "/user-view/tambah-toko",
+          icon: "mdi-store-plus",
+        },
+        {
+          title: "Tambah Barang",
+          link: "/user-view/crud",
+          icon: "mdi-package-variant-closed-plus",
+        },
+      ],
     };
   },
 

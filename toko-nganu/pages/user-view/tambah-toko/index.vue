@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavbarPolos />
+    <Navbar />
     <div class="text-center justify-center tambah-container">
       <div class="dalam-container">
         <div class="foto-profil">
@@ -130,11 +130,10 @@
 <style scoped>
 .edit-toast{
   background: green;
-  color:white;
-  padding: 10px ;
+  color: white;
+  padding: 10px;
   border-radius: 20px;
 }
-
 
 .foto-profil {
   margin-bottom: 20px;
@@ -160,6 +159,7 @@
 <script>
 import axios from "axios";
 export default {
+  // layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
@@ -182,12 +182,12 @@ export default {
           this.databarang
         )
         .then((respon) => {
-          this.$toasted.show('Berhasil hapus keranjang', {
-        theme: 'success',
-        position: 'top-right',
-        className: 'edit-toast',
-        duration: 3000
-      })
+          this.$toasted.show("Berhasil hapus keranjang", {
+            theme: "success",
+            position: "top-right",
+            className: "edit-toast",
+            duration: 3000,
+          });
           this.$router.push("/user-view/toko-user");
           console.log(respon);
         });

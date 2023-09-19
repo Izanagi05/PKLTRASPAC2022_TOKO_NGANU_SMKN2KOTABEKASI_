@@ -9,6 +9,6 @@ export default function({store, redirect}){
     // console.log('sedang login')
     // return redirect('/')
 
-  }
+  } 
 
 }
