@@ -577,8 +577,9 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          alert("berhasil hapus");
-          location.reload();
+          // alert("berhasil hapus");
+          // location.reload();
+          this.getallkategori()
         });
       this.closeDeletekategori();
     },
