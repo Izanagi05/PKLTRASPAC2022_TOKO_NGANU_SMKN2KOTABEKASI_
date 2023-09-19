@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-    <Footer />
+
   </div>
 </template>
 
@@ -160,14 +160,11 @@ export default {
         });
       },
     getsearchbarang() {
-
       this.set = 2;
     },
     getallkategori() {
-
       axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
         this.allkategori = respon.data?.data;
-
       });
     },
     getkategori(ktg) {
