@@ -111,7 +111,9 @@ export default {
             this.$store.dispatch("users/logincekuser", this.cekketusr);
             if (this.cekketusr === "login gagal") {
               this.$store.dispatch("users/resetlogincekuser");
-              alert("Isi email atau password dengan benar");
+              // alert("Isi email atau password dengan benar");
+              this.$toast.error("Isi email atau password dengan benar");
+
             } else {
               this.$toast.success("Login berhasil");
               this.$store.dispatch("users/resetlogincekuser");

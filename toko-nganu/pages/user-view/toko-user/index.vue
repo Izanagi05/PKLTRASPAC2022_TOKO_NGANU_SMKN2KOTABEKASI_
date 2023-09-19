@@ -6,47 +6,49 @@
       <div class="button-add pl-4 pb-6">
         <nuxt-link
           class="text-decoration-none px-15"
-          to="/user-view/crud"
-          ><v-btn class="btn-add rounded-pill white--text" color="#2f432d"
+          to="/user-view/tambah-barang"
+          ><v-btn
+            class="text-capitalize px-8 text-body-1 font-weight-medium rounded-pill white--text"
+            color="#2f432d"
             >Tambah barang</v-btn
           ></nuxt-link
         >
       </div>
 
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="text-h5">Yakin ingin menghapus?</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
-              >Cancel</v-btn
+      <v-dialog v-model="dialogDelete" max-width="800px" color="ffffff">
+        <v-card class="pt-15 px-8 pb-8 rounded-xl">
+          <div class="text-h6 pl-4">
+            Apakah kamu yakin ingin menghapus item ini?
+          </div>
+          <div class="grey--text text-body-2 pl-4 mt-4">
+            Item yang sudah dihapus tidak bisa dikembalikan lagi
+          </div>
+          <div class="d-flex justify-end mt-15">
+            <v-btn class="rounded-xl px-8" outlined @click="closeDelete"
+              >Batal</v-btn
             >
             <v-btn
-              color="blue-darken-1"
-              variant="text"
+              class="rounded-xl px-8 ml-8 white--text"
+              color="#FF3548"
               @click="confirmhapustoko"
-              >OK</v-btn
+              >Hapus</v-btn
             >
-            <v-spacer></v-spacer>
-          </v-card-actions>
+          </div>
         </v-card>
       </v-dialog>
 
       <v-dialog
         v-model="dialogedit"
-        max-width="700"
+        max-width="800px"
         persistent
+        class="rounded-xl"
         transition="dialog-bottom-transition"
       >
-        <v-card
-          class="kartu"
-          light
-          style="padding: 0px; color: black; border: solid 3px #4caf50"
-        >
-          <div style="background: #4caf50; padding: 10px 30px; color: white">
-            <h1>Ubah data</h1>
+        <v-card class="rounded-xl">
+          <div class="text-h6 px-8 mb-6 py-6 white--text bg-update">
+            Ubah data Toko
           </div>
-          <v-container style="padding: 30px">
+          <div class="pt-0 px-8 pb-8">
             <v-text-field
               type="text"
               v-model="detaildatadialog.nama"
@@ -71,47 +73,46 @@
               label="deskripsi"
               outline
             ></v-text-field>
-            <input type="file" v-on:change="upload" label="logo" />
-            <!-- <div></div> -->
-            <v-card-actions>
-              <v-btn
-                @click="closeedit()"
-                style="margin-right: 20px; background: white; color: black"
+            <label
+              for="fileInput"
+              class="custom-file-upload rounded-lg py-2 px-4 white--text"
+            >
+              <span>Choose File</span>
+            </label>
+            <input
+              class="inputfileku"
+              id="fileInput"
+              type="file"
+              v-on:change="upload"
+            />
+            <div class="d-flex justify-end mt-8">
+              <v-btn class="rounded-xl px-8" outlined @click="closeedit()"
                 >Close</v-btn
               >
               <v-btn
+                class="rounded-xl ml-8 px-8 white--text"
+                color="#4caf50"
                 @click="updatetoko()"
-                style="background: #4caf50; color: white"
                 >Ubah</v-btn
               >
-            </v-card-actions>
-          </v-container>
+            </div>
+          </div>
         </v-card>
       </v-dialog>
       <v-data-table data-app :headers="headers" :items="Toko" class="px-15">
         <template v-slot:[`item.logo`]="{ item }">
-          <div
-                      class="image-container3 d-flex justify-center align-center">
-
+          <div class="image-container3 d-flex justify-center align-center">
             <img
-          object-fit="cover" width="100%" height="100%"
-            :src="'http://127.0.0.1:8000/storage/' + item.logo"
-          />
-        </div>
+              object-fit="cover"
+              width="100%"
+              height="100%"
+              :src="'http://127.0.0.1:8000/storage/' + item.logo"
+            />
+          </div>
         </template>
         <template v-slot:[`item.aksi`]="{ item }">
-          <!-- <v-btn
-            class="mx-2"
-            fab
-            small
-            @click="klikdetail(item)"
-            style="margin: 15px 15px 15px 0px"
-          >
-            <v-icon dark>mdi-eye</v-icon>
-          </v-btn> -->
           <v-btn
-            class="mx-2"
-
+            class="mx-2 rounded-xl"
             small
             @click="detailbarang(item)"
             style="margin: 15px 15px 15px 0px"
@@ -119,20 +120,18 @@
             Detail barang
           </v-btn>
           <v-btn
-            class="mx-2"
+            class="mx-2 white--text btn-crkuup"
             fab
             small
             @click="ubahdata(item)"
-            style="margin: 15px 15px 15px 0px"
           >
             <v-icon dark>mdi-pencil</v-icon>
           </v-btn>
           <v-btn
-            class="mx-2"
+            class="mx-2 white--text btn-crkuhap"
             fab
             small
             @click="hapustoko(item)"
-            style="background: #ff2a30"
           >
             <v-icon dark>mdi-delete</v-icon>
           </v-btn>
@@ -143,7 +142,6 @@
           </div>
         </template>
       </v-data-table>
-      <v-container> </v-container>
     </div>
   </div>
 </template>
@@ -155,7 +153,7 @@ export default {
   data() {
     return {
       dialogDelete: false,
-      dialogedit: false,
+      dialogedit: true,
       datafoto: null,
       cari: null,
       nama: null,
@@ -204,8 +202,8 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
         .then((respon) => {
-          this.Toko = respon.data;
-          this.edittokoid = respon.data.toko_id;
+          this.Toko = respon.data?.data;
+          this.edittokoid = respon.data?.data.toko_id;
         });
     },
     klikdetail(item) {
@@ -244,22 +242,23 @@ export default {
       formData.append("alamat", this.detaildatadialog.alamat);
       formData.append("no_telepon", this.detaildatadialog.no_telepon);
       formData.append("deskripsi", this.detaildatadialog.deskripsi);
-      if(this.datafoto){
-
+      if (this.datafoto) {
         formData.append("logo", this.datafoto);
-      }else{
-
+      } else {
         formData.append("logo", this.detaildatadialog.logo);
       }
-      axios.post(
-        "http://127.0.0.1:8000/api/updatetoko/" + this.detaildatadialog.toko_id,
-        formData,
-        {
-          "content-type": "multipart/form-data",
-        }
-      ) .then((respon) => {
-        this.$toast.success("Berhasil update");
-        this.gettoko()
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/updatetoko/" +
+            this.detaildatadialog.toko_id,
+          formData,
+          {
+            "content-type": "multipart/form-data",
+          }
+        )
+        .then((respon) => {
+          this.$toast.success("Berhasil update");
+          this.gettoko();
           console.log(respon.data);
         });
 
@@ -282,7 +281,7 @@ export default {
           this.$toast.success("Berhasil update");
         });
       this.Toko.splice(this.editedIndex, 1);
-      this.gettoko()
+      this.gettoko();
       this.closeDelete();
     },
     closeDelete() {
@@ -295,21 +294,20 @@ export default {
   },
 
   mounted() {
-     this.gettoko();
+    this.gettoko();
     //  this.gettoko();
-    },
+  },
 
   created() {
     const userid = this.$cookies.get("cookieku");
     this.tokouser = userid.data.id;
     this.gettoko();
   },
-
 };
 </script>
 <style>
 .image-container3 {
-  width:200px;
+  width: 200px;
   height: 200px;
   overflow: hidden;
 }
@@ -318,9 +316,10 @@ export default {
   object-fit: cover;
   object-position: center;
 }
-.edit-toast{
+.edit-toast {
   background: green;
-  color:white;
-  padding: 10px ;
+  color: white;
+  padding: 10px;
   border-radius: 20px;
-}</style>
+}
+</style>

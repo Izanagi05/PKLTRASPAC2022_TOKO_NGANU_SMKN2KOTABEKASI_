@@ -1,13 +1,13 @@
 <template>
-  <div class="ppp">
-    <div class="contact white--text">
-      <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak">
-          <v-icon color="white">mdi-phone</v-icon>
-          +62-815-6315-1038
-        </button>
+  <div class="">
+    <div class="btn-warnaku white--text">
+        <div class="py-1 font-weight-regular">
+          <button class=" ml-4" type="submit" @click="kontak">
+            <v-icon color="white">mdi-phone</v-icon>
+            +62-815-6315-10389
+          </button>
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.ppp {
+/* .ppp {
   overflow: hidden;
   margin-bottom: 51px;
 }
@@ -48,5 +48,5 @@ export default {
 .contact-text .icon_telepon {
   margin-right: 11px;
   margin-top: 3px;
-}
+} */
 </style>

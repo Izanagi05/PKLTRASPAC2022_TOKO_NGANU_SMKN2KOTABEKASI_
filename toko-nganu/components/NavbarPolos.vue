@@ -1,20 +1,20 @@
 <template>
-  <div class="ppp">
-    <div class="contact white--text">
-      <div class="contact-text font-weight-regular">
-        <button class="kontak" type="submit" @click="kontak">
-          <v-icon color="white">mdi-phone</v-icon>
-          +62-815-6315-1038
-        </button>
+  <div class="mb-10 ">
+    <div class="btn-warnaku white--text">
+      <div class="btn-warnaku white--text">
+        <div class="py-1 font-weight-regular">
+          <button class=" ml-4" type="submit" @click="kontak">
+            <v-icon color="white">mdi-phone</v-icon>
+            +62-815-6315-10389
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="nav">
-      <div class="logo">
-        <v-img :src="require('~/assets/logo_nganu.png')" width="100px"></v-img>
       </div>
-      <div class="nama_toko">
-        <div>Toko Nganu</div>
-      </div>
+    <div class="container">
+     <div class="d-flex ">
+      <v-img :src="require('~/assets/logo_nganu.png')" max-width="30"></v-img>
+              <div class="font-weight-bold text-h5 ml-4">Toko nganu</div>
+     </div>
     </div>
   </div>
 </template>
@@ -36,17 +36,9 @@ export default {
 </script>
 
 <style scoped>
-.ppp {
-  overflow: hidden;
-  margin-bottom: 51px;
-}
 .html {
   background-color: #fff;
   overflow: hidden;
-}
-.contact {
-  background: #2f432d;
-  padding: 9px 123px 10px 123px;
 }
 /*
 .contact-text {

@@ -20,7 +20,7 @@
               <v-text-field class="nyari rounded-pill" v-model="cari" label="Cari Nganu" single-line hide-details outlined
                 @keyup.enter="getsearchbarang()" append-icon="mdi-magnify" placehoder="cari"></v-text-field>
             </div>
-            <nuxt-link to="/keranjang" class="text-decoration-none ml-2">
+            <nuxt-link to="/keranjang" class="text-decoration-none ">
               <v-btn elevation="2" fab color="d9d9d9" icon><v-icon size="29px">mdi-cart</v-icon></v-btn>
             </nuxt-link>
             <nuxt-link to="/user-view" class="text-decoration-none ml-2">
@@ -35,9 +35,7 @@
             </nuxt-link>
             <div class="display-5 my-auto ml-2 font-weight-bold  text-truncate">{{ $cookies.get('cookieku').data.nama }}
             </div>
-            <!-- </div> -->
           </v-col>
-
         </v-row>
       </div>
     </div>
@@ -51,9 +49,9 @@
         </div>
         <div class="d-flex mt-8">
           <v-btn outlined @click="getallbarang()"
-            :class="fcek === true ? 'ma-2  rounded-xl warnaku white--text' : 'ma-2  rounded-xl'"> Semua Kategori </v-btn>
+            :class="['ma-2  rounded-xl text-capitalize',fcek === true ? 'btn-warnaku white--text' : '']"> Semua Kategori </v-btn>
           <v-btn outlined v-for="(ktg, index) in allkategori"
-            :class="ktg === fcek ? 'ma-2  rounded-xl warnaku white--text' : 'ma-2  rounded-xl'" :key="index"
+            :class="['ma-2  rounded-xl text-capitalize',ktg === fcek ? 'btn-warnaku white--text' : '']" :key="index"
             @click="getkategori(ktg)" class="ma-2 rounded-xl"> {{
               ktg.nama }} </v-btn>
         </div>
@@ -62,9 +60,9 @@
           <div class="product-card">
             <div class="tampil1" v-if="set == 0">
               <v-row class="p-0  ">
-                <v-col cols="5" class="    mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  "
+                <v-col cols="6" :class="[ '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ', $vuetify.breakpoint.lgAndUp?'col-lg-5':'']"
                   v-for="(brg, index) in allbarang" :key="index">
-                  <v-card color="#ffffff" class="rounded-lg ">
+                  <v-card color="#ffffff" class="rounded-lg " width="300">
                     <div v-for="(ft, i) in  brg.barang_foto_first" :key="i" max-width="100"
                       class="image-container3 d-flex justify-center align-center">
                       <img :src="'http://127.0.0.1:8000/storage/' + ft.file" object-fit="cover" width="100%"
@@ -236,11 +234,12 @@ export default {
         .then((respon) => {
           this.Toko = respon.data;
         });
-    },
+      },
     getallbarang() {
       axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
         this.allbarang = respon.data;
       });
+      console.log(this.$vuetify.breakpoint.width)
       this.set = 0;
       this.fcek = true
     },
@@ -276,6 +275,10 @@ export default {
       this.$router.push(`/detail/${barang.barang_id}`);
     },
   },
+  mounted () {
+
+    },
+
 
   created() {
     const userid = this.$cookies.get("cookieku");
@@ -290,26 +293,16 @@ export default {
 };
 </script>
 <style scoped>
-.col-5 {
+.col-lg-5 {
   flex: 0 0 20%;
   max-width: 20%;
 }
 
-.ppp {
-  font-family: "Poppins", sans-serif;
-}
 
-.contact {
-  background: #2f432d;
-  padding: 9px 123px 10px 123px;
-}
 
 .home-container {
   padding: 0px 123px;
 }
-
-
-
 .ppp {
   overflow: hidden;
   margin-bottom: 51px;

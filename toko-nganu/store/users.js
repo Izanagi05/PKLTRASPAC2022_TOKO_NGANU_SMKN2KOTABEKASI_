@@ -43,7 +43,7 @@ export const actions = {
   logout({commit}){
     window.location.replace('/login')
     this.$cookies.remove('cookieku')
-    alert('berhasil logout')
+    this.$toast.success("Berhasil logout");
     commit('msetcookie')
     // this.$router.push('/login')
   }

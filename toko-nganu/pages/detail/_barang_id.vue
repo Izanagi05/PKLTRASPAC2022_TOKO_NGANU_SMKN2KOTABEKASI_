@@ -108,12 +108,12 @@ export default {
   methods: {
     getbarangtokobyid(){
       axios.get('http://127.0.0.1:8000/api/getbarangvariantokobyid/'+this.prm.barang_id).then(respon=>{
-        this.detailbarang = respon.data
+        this.detailbarang = respon.data?.data
       })
     },
     getfotobyidbrg(){
       axios.get('http://127.0.0.1:8000/api/getfotobarang/'+ this.prm.barang_id).then(respon=>{
-        this.allfotobybrgid = respon.data
+        this.allfotobybrgid = respon.data?.data
       })
     },
     pilihanvarian(varian){
@@ -121,8 +121,7 @@ export default {
       let namasetvar = varian.nama
       // this.$toast.success("berhasil pilih varian "+ namasetvar);
 
-      this.$toasted.show('varian pilihan : ' + namasetvar, {
-        theme: 'success',
+      this.$toasted.success('varian pilihan : ' + namasetvar, {
         position: 'top-right',
         className: 'edit-toast',
         duration: 3000
