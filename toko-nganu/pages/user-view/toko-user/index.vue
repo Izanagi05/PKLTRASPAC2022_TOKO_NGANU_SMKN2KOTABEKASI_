@@ -15,29 +15,9 @@
         >
       </div>
 
-      <v-dialog v-model="dialogDelete" max-width="800px" color="ffffff">
-        <v-card class="pt-15 px-8 pb-8 rounded-xl">
-          <div class="text-h6 pl-4">
-            Apakah kamu yakin ingin menghapus item ini?
-          </div>
-          <div class="grey--text text-body-2 pl-4 mt-4">
-            Item yang sudah dihapus tidak bisa dikembalikan lagi
-          </div>
-          <div class="d-flex justify-end mt-15">
-            <v-btn class="rounded-xl px-8" outlined @click="closeDelete"
-              >Batal</v-btn
-            >
-            <v-btn
-              class="rounded-xl px-8 ml-8 white--text"
-              color="#FF3548"
-              @click="confirmhapustoko"
-              >Hapus</v-btn
-            >
-          </div>
-        </v-card>
-      </v-dialog>
-
-      <v-dialog
+      <DialogDelete :dialogDelete="dialogDelete" :confirmhapus="confirmhapustoko" :closeDelete="closeDelete"/>
+      <DialogUpdate :dialogedit="dialogedit" item="Toko"  :detaildatadialog="detaildatadialog" :upload="upload" :closeedit="closeedit" :updateedit="updatetoko"/>
+      <!-- <v-dialog
         v-model="dialogedit"
         max-width="800px"
         persistent
@@ -98,7 +78,9 @@
             </div>
           </div>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
+
+
       <v-data-table data-app :headers="headers" :items="Toko" class="px-15">
         <template v-slot:[`item.logo`]="{ item }">
           <div class="image-container3 d-flex justify-center align-center">
@@ -143,7 +125,7 @@
         </template>
       </v-data-table>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -245,8 +227,10 @@ export default {
       formData.append("deskripsi", this.detaildatadialog.deskripsi);
       if (this.datafoto) {
         formData.append("logo", this.datafoto);
+        console.log('s')
       } else {
         formData.append("logo", this.detaildatadialog.logo);
+        console.log('2')
       }
       axios
         .post(
@@ -259,9 +243,9 @@ export default {
         )
         .then((respon) => {
           this.$toast.success("Berhasil update");
-          this.gettoko();
           console.log(respon.data);
         });
+        this.gettoko();
 
       Object.assign(this.Toko[this.indexnya], this.detaildatadialog);
       this.dialogedit = false;
@@ -279,7 +263,7 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          this.$toast.success("Berhasil update");
+          this.$toast.success("Berhasil hapus");
         });
       this.Toko.splice(this.editedIndex, 1);
       this.gettoko();

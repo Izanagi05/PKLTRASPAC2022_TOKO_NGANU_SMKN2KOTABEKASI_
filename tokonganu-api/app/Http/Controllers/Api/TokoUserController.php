@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Toko;
-use App\Models\User;
+use App\Models\Barang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,11 +50,11 @@ class TokoUserController extends Controller
         //     "logo" => $request->logo
         // ]);
         $rules = [
-            'nama'=>'',
-            'deskripsi'=>'',
-            'alamat'=>'',
-            'no_telepon'=>'',
-            'logo'=>'image'
+            'nama'=>'required',
+            'deskripsi'=>'required',
+            'alamat'=>'required',
+            'no_telepon'=>'required',
+            'logo'=>'required'
         ];
         $validasi = $request->validate($rules);
         if($validasi){
@@ -73,14 +73,30 @@ class TokoUserController extends Controller
     }
         public function deletetoko($id ){
             // $data = Toko::find($id);
+            try{
             if(!empty(Toko::find($id)->logo)) {
                 Storage::delete(Toko::find($id)->logo);
             }
             $data = Toko::where('toko_id', $id);
-
-            // $data->Barang()->delete();
+            $data->Barang()->delete();
+            $dataBarang = Barang::where('toko_id', $id);
+            $dataBarang->BarangFoto()->delete();
+            $dataBarang->barangVarian()->delete();
             $data->delete();
 
-            return response()->json($data, 200);
+            return response()->json([
+                'data' => 'sukses',
+                'message' => 'Berhasil hapus data toko',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
         }
 }

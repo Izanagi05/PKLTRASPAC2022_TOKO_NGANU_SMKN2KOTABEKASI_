@@ -1,44 +1,63 @@
 <template>
   <div>
-    <Navbar />
-    <v-row>
-      <v-col sm="3" class="mt-5">
-        <div class="sub-title" style="margin-left: 27px, margin-right=36px">
-          Profil Pengguna
-        </div>
-        <div class="menu mt-2">
-          <NuxtLink
-            v-for="(menu, i) in menus"
-            :key="i"
-            :to="menu.link"
-            class="my-4 black--text text-decoration-none"
-          >
-            <v-icon large>{{ menu.icon }}</v-icon> {{ menu.title }}
-          </NuxtLink>
+    <v-app>
 
-          <NuxtLink
-            v-if="cekuserrole === 'Admin'"
-            to="/halaman-admin"
-            class="my-4 black--text text-decoration-none"
-          >
-            <v-icon large>mdi-database</v-icon> Admin
-          </NuxtLink>
+      <Navbar />
+      <div class="container">
 
-          <div v-else></div>
-        </div>
-        <div class="logout" style="margin-left: 27px">
-          <v-btn text @click="logout()" class="mdi-35px"
-            ><v-icon>mdi-logout</v-icon>Logout</v-btn
-          >
-        </div>
-      </v-col>
-      <v-col sm="9">
-        <nuxt />
+        <v-row>
+          <v-col
+          cols="12 "
+          lg="3"
+          md="3"
+          sm="12"
+          xs="12"
+          order="2"
+          class="kiri justify-space-between order-lg-1 order-md-1 order-sm-2 order-xs-2"
+        >
+          <div>
+            <div v-for="(rute, i) in routersdata" :key="i">
+              <v-btn
+                text
+                depressed
+                @click="$router.push(rute.rt)"
+                width="100%"
+                class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
+              >
+                <v-icon large color="#616161" class="mr-2">{{
+                  rute.icon
+                }}</v-icon>
+                {{ rute.nama }}
+              </v-btn>
+            </div>
+            <div>
+              <v-btn
+                text
+                depressed
+                @click="logout()"
+                width="100%"
+                class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
+                ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
+                >Logout</v-btn
+              >
+            </div>
+          </div>
+        </v-col>
+      <v-col  cols="12"
+          lg="9"
+          md="9"
+          sm="12"
+          xs="12"
+          order="1"
+          class="d-flex my-0 order-lg-2 order-md-2 order-sm-1 order-xs-1">
+          <nuxt />
       </v-col>
     </v-row>
   </div>
+  </v-app>
+  </div>
 </template>
-  
+
   <script>
 import axios from "axios";
 
@@ -53,28 +72,65 @@ export default {
       },
       cekuserrole: null,
       userid: null,
-      menus: [
-        {
-          title: "User Profile",
-          link: "/user-view/profile-user",
-          icon: "mdi-account",
-        },
-        { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
-        {
-          title: "Tambah Toko",
-          link: "/user-view/tambah-toko",
-          icon: "mdi-store-plus",
-        },
-        {
-          title: "Tambah Barang",
-          link: "/user-view/crud",
-          icon: "mdi-package-variant-closed-plus",
-        },
-      ],
+      // menus: [
+      //   {
+      //     title: "User Profile",
+      //     link: "/user-view/profile-user",
+      //     icon: "mdi-account",
+      //   },
+      //   { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
+      //   {
+      //     title: "Tambah Toko",
+      //     link: "/user-view/tambah-toko",
+      //     icon: "mdi-store-plus",
+      //   },
+      //   {
+      //     title: "Tambah Barang",
+      //     link: "/user-view/crud",
+      //     icon: "mdi-package-variant-closed-plus",
+      //   },
+      // ],
     };
   },
 
   methods: {
+    rutess() {
+      var rutes = [
+        {
+          show: true,
+          nama: "Info User",
+          rt: "/user-view",
+          icon: "mdi-account",
+        },
+        {
+          show: this.cekuserrole === "Admin",
+          nama: "Admin",
+          rt: "/halaman-admin",
+          icon: "mdi-account-tie",
+        },
+        {
+          show: true,
+          nama: "Toko",
+          rt: "/user-view/toko-user",
+          icon: "mdi-storefront",
+        },
+        {
+          show: true,
+          nama: "Buka Toko",
+          rt: "/user-view/tambah-toko",
+          icon: "mdi-store-plus",
+        },
+        {
+          show: true,
+          nama: "Tambah Barang",
+          rt: "/user-view/tambah-barang",
+          icon: "mdi-package-variant-closed-plus",
+        },
+      ];
+      this.routersdata = rutes.filter(function (link) {
+        return link.show;
+      });
+    },
     getuser() {
       axios
         .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
@@ -93,8 +149,9 @@ export default {
   created() {
     const usid = this.$cookies.get("cookieku");
     this.userid = usid.data.id;
-    this.getuser();
     this.cekuserrole = usid.role;
+    this.getuser();
+    this.rutess();
   },
   mounted() {
     this.getuser();
@@ -170,4 +227,3 @@ export default {
 }
 </style>
 
-  
