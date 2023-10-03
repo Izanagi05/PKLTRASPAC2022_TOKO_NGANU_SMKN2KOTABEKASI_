@@ -1,22 +1,33 @@
 <template>
   <div>
-    <NavbarPolos2 />
     <div class="container">
-      <center>
-        <div class="judul-page mt-5 mb-2 font-weight-bold" style="font-size: 20px; font-family: 'Poppins', sans-serif">
+      <div class="mb-2">
+          <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+            Home </NuxtLink
+          ><span class="mdi mdi-chevron-right "><b>Profil Pengguna</b></span>
+        </div>
+        <div
+          :class="[
+            'font-weight-bold  mb-2',
+            $vuetify.breakpoint.smAndDown ? 'text-subtitle-1' : 'text-h6',
+          ]"
+        >
           Edit Profil
         </div>
-        <v-row class="isi">
-          <v-col cols="12" lg="6" md="6" sm="12" xs="12">
-            <div class="foto-profil pl-5  ">
-              <v-avatar style="width:20vw;height: 20vw;">
+      <v-row class="isi my-0 ">
+        <v-col cols="12" lg="4" md="4" sm="12" xs="12">
+
+            <div class="  ">
+
+              <div class="d-flex justify-center">
+              <v-avatar style="width:14vw;height: 14vw;">
                 <img v-if="editprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
                   " />
-                <!-- {{ editprofil.foto_profil }} -->
               </v-avatar>
-              <div class="btn-card  pb-1 pt-3 d-flex justify-center">
-              <v-btn class="profil-btn d-flex rounded-pill font-weight-medium "  outlined rounded height="40px"
-                @click="dialog = true" style="font-size: 24px; font-family: 'Poppins', sans-serif">
+              </div>
+              <div class="btn-card  pb-1 pt-3 d-flex justify-center mt-2 ">
+              <v-btn class=" rounded-pill font-weight-medium " style="width: 80%;"  outlined rounded
+                @click="dialog = true">
                 Pilih Foto
               </v-btn>
             </div>
@@ -47,44 +58,46 @@
               </v-dialog>
             </div>
           </v-col>
-          <v-col cols="12" lg="6" md="6" sm="12" xs="12">
+          <v-col cols="12" lg="8" md="8" sm="12" xs="12">
             <v-row>
-              <v-col cols="2" lg="3" md="3" sm="2" >
-                <div class="nama pt-5 pb-5">Nama</div>
-                <div class="telepon pb-5">Telepon</div>
-                <div class="email pb-5">E-Mail</div>
+              <v-col cols="12" class="text-h6 font-weight-bold">
+                Info Pengguna
               </v-col>
-              <v-col cols="10" lg="9" md="3" sm="10" class="">
-                <div class="text-nama pt-5 pb-5">
-                  <v-text-field solo v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
-                </div>
-                <div class="text-telepon pb-5">
-                  <v-text-field type="number" solo v-model="editprofil.no_telepon"
-                    label="Masukkan No.Telepon"></v-text-field>
-                </div>
-                <div class="text-email pb-5">
-                  <v-text-field solo v-model="editprofil.email" label="Masukkan Email"></v-text-field>
-                </div>
+              <v-col cols="12"  class="">
+                <v-row class="text-nama pt-5 ">
+                  <v-col cols="2" class="py-0">Nama</v-col>
+                  <v-col cols="10" class="py-0">
+                    <v-text-field class="rounded-lg "  filled v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row class="text-nama  ">
+                  <v-col cols="2" class="py-0">Telepon</v-col>
+                  <v-col cols="10" class="py-0">
+                  <v-text-field class="rounded-lg "  type="number" filled v-model="editprofil.no_telepon"
+                  label="Masukkan No.Telepon"></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row class="text-nama  ">
+                  <v-col cols="2" class="py-0">Email</v-col>
+                  <v-col cols="10" class="py-0">
+                  <v-text-field class="rounded-lg "  filled v-model="editprofil.email" label="Masukkan Email"></v-text-field>
+                </v-col>
+              </v-row>
               </v-col>
             </v-row>
             <div class="button pb-6 pt-5">
-              <v-row class="justify-center">
-                <v-col class="mr-" cols="12"  lg="4" md="4" sm="4" xs="4">
-                  <div class="batal ">
-                    <v-btn class="rounded-pill " block x-large outlined @click="backprofil">Batal</v-btn>
-                  </div>
+              <v-row class="justify-end">
+                <v-col class="" cols="12"  lg="4"  md="4" sm="4" xs="4">
+                    <v-btn class="rounded-pill " block  outlined @click="backprofil">Batal</v-btn>
                 </v-col>
-                <v-col cols="12" lg="6" md="6" sm="4" xs="4">
-                  <div class="bayar ">
-                    <v-btn class="rounded-pill " block  x-large outlined
-                      style="background: #2f432d; color: white; size: 105px" @click="updateuser">Simpan</v-btn>
-                  </div>
+                <v-col class="" cols="12" lg="6"  md="6" sm="4" xs="4">
+                    <v-btn class="rounded-pill white--text" block  color="#2f432d"
+                      @click="updateuser">Simpan</v-btn>
                 </v-col>
               </v-row>
             </div>
           </v-col>
         </v-row>
-      </center>
     </div>
   </div>
 </template>
@@ -92,6 +105,7 @@
 import axios from "axios";
 export default {
   middleware: "middlewareku",
+  layout:'UserView',
   data() {
     return {
       olddata: null,
@@ -198,6 +212,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .edit-toast{
   background: green;
   color:white;
@@ -214,16 +229,5 @@ export default {
   color: rgb(255, 255, 255);
 }
 
-.nama {
-  margin-top: 10px;
-  margin-bottom: 57px;
-}
 
-.alamat {
-  margin-bottom: 150px;
-}
-
-.telepon {
-  margin-bottom: 57px;
-}
 </style>

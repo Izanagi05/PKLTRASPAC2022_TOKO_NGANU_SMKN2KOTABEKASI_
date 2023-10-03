@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="container">
 
       <v-row justify="center">
@@ -143,7 +142,7 @@
 <script>
 import axios from "axios";
 export default {
-  // layout: "UserView",
+  layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {

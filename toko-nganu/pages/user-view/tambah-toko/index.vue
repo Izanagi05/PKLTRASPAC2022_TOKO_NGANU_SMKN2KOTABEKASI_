@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="text-center justify-center tambah-container">
       <div class="dalam-container">
         <div class="foto-profil">
@@ -9,7 +8,7 @@
           </v-avatar>
           <h2>Tambah Toko</h2>
         </div>
-        <v-expansion-panels popout>
+        <v-expansion-panels accordion>
           <v-expansion-panel class="panel rounded-xl">
             <v-expansion-panel-header>
               <template v-slot:default="{ open }">
@@ -138,9 +137,9 @@
 .foto-profil {
   margin-bottom: 20px;
 }
-.tambah-container {
+/* .tambah-container {
   padding: 0px 400px;
-}
+} */
 .dalam-container {
   padding: 50px 50px;
   border-radius: 2%;
@@ -159,7 +158,7 @@
 <script>
 import axios from "axios";
 export default {
-  // layout: "UserView",
+  layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {

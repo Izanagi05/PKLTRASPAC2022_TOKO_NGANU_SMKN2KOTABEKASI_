@@ -195,8 +195,14 @@ class BarangController extends Controller
     public function deletebarang($id)
     {
         try {
-            $data = Barang::where('barang_id', $id)->delete();
-            // $data="tes";
+            $data = Barang::find($id);
+            $data->BarangFoto()->delete();
+            $data->barangVarian()->delete();
+            foreach ($data->BarangFoto as $foto) {
+                if (!empty($foto->file)) {
+                    Storage::delete($foto->file);
+                }
+            }
             return response()->json($data, 200);
         } catch (\Throwable $e) {
             return response()->json([

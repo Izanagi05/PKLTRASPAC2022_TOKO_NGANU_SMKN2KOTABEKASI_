@@ -4,6 +4,9 @@
 .bg-update{
   background-color: #4caf50;
 }
+.bg-tambah{
+  background-color: #4c60af;
+}
 .list-none{
   list-style-type: none;
 }
@@ -32,7 +35,12 @@
  transition: 0.2s ease-in-out !important;
 }
 .hover-btnku:hover {
-  background: #2f432d !important;
+transition: 0.2s ease-in-out !important;
+background: #2f432d !important;
+color: rgb(255, 255, 255) !important;
+}
+.hover-btnku:hover i {
+  transition: 0.2s ease-in-out !important;
   color: rgb(255, 255, 255) !important;
 }
 
@@ -51,6 +59,12 @@
   background: grey;
   border-radius: 3px;
 }
+.sidebar-profil{
+  background: #f3f3f3 !important;
+}
+.border-left{
+border-left: 4px #616161 solid;
+}
 
 
 .custom-file-upload{
@@ -59,6 +73,13 @@
 }
 .custom-file-upload:hover{
   background-color: #3e8f41;
+}
+.custom-file-upload-create{
+  background-color: #4c60af;
+  transition: 0.3s;
+}
+.custom-file-upload-create:hover{
+  background-color: #3f5092;
 }
 .inputfileku{
   display:none;

@@ -32,9 +32,8 @@ class FotoBarangController extends Controller
     try {
         $tk = $id;
         $validatedData = $request->validate([
-            'file'=>'',
+            'file'=>'required|image',
         ]);
-
         $validatedData['barang_id'] = $tk;
         $validatedData['file'] =  $request->file('file')->store('fotobarang');
         Foto_Barang::create($validatedData);
@@ -52,7 +51,6 @@ class FotoBarangController extends Controller
             'status' => 500,
         ], 500);
     }
-
     }
     public function updatefotobarang(Request $request, $id){
     try {

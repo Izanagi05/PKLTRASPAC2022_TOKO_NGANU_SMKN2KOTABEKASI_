@@ -1,8 +1,7 @@
 <template>
   <div>
-    <Navbar />
     <div class="pl-15 pb-5 font-weight-medium">Detail Barang</div>
-    <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-xl">
+    <!-- <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-xl">
         <v-card class="pt-15 px-8 pb-8 rounded-xl">
           <div class="text-h6 pl-4">Apakah kamu yakin ingin menghapus item ini?</div>
           <div class="grey--text text-body-2 pl-4 mt-4">
@@ -20,51 +19,10 @@
           >
           </div>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
 
-    <v-dialog
-      v-model="dialogedit"
-      max-width="700"
-      persistent
-      transition="dialog-bottom-transition"
-    >
-      <v-card
-        class="kartu"
-        light
-        style="padding: 0px; color: black; border: solid 3px #2f432d"
-      >
-        <div style="background: #2f432d; padding: 10px 30px; color: white">
-          <h1>Ubah data</h1>
-        </div>
-        <v-container style="padding: 30px">
-          <v-text-field
-            type="text"
-            v-model="detaildatadialog.nama"
-            label="Name"
-            outline
-          ></v-text-field>
-          <v-text-field
-            type="text"
-            v-model="detaildatadialog.deskripsi"
-            label="deskripsi"
-            outline
-          ></v-text-field>
-          <v-card-actions>
-            <v-btn
-              @click="closeedit()"
-              style="margin-right: 20px; background: white; color: black"
-              >Close</v-btn
-            >
-            <v-btn
-              @click="updatebarang()"
-              style="background: #2f432d; color: white"
-              >Ubah</v-btn
-            >
-          </v-card-actions>
-        </v-container>
-      </v-card>
-    </v-dialog>
-
+    <DialogDelete :dialogDelete="dialogDelete" :confirmhapus="confirmhapusbarang" :closeDelete="closeDelete"/>
+    <DialogUpdate :dialogedit="dialogedit" item="Barang"  :detaildatadialog="detaildatadialog" :closeedit="closeedit" :updateedit="updatebarang"/>
     <v-data-table class="px-15" :headers="headers" :items="Toko">
       <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
@@ -108,6 +66,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: 'UserView',
   middleware: "middlewareku",
   data() {
     return {
