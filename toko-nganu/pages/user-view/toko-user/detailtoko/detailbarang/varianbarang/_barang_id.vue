@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
 
     <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div>
     <DialogTambah
@@ -60,6 +59,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: 'UserView',
   middleware: "middlewareku",
   data() {
     return {

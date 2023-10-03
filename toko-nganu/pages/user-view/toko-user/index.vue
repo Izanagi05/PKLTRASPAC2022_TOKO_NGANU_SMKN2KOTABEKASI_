@@ -1,11 +1,10 @@
 <template>
   <div>
-    <Navbar />
-    <div class="pl-15 pb-5 font-weight-medium">Detail Toko</div>
+    <div class=" pb-5 font-weight-medium">Detail Toko</div>
     <div>
       <div class="button-add pl-4 pb-6">
         <nuxt-link
-          class="text-decoration-none px-15"
+          class="text-decoration-none"
           to="/user-view/tambah-barang"
           ><v-btn
             class="text-capitalize px-8 text-body-1 font-weight-medium rounded-pill white--text"
@@ -17,91 +16,35 @@
 
       <DialogDelete :dialogDelete="dialogDelete" :confirmhapus="confirmhapustoko" :closeDelete="closeDelete"/>
       <DialogUpdate :dialogedit="dialogedit" item="Toko"  :detaildatadialog="detaildatadialog" :upload="upload" :closeedit="closeedit" :updateedit="updatetoko"/>
-      <!-- <v-dialog
-        v-model="dialogedit"
-        max-width="800px"
-        persistent
-        class="rounded-xl"
-        transition="dialog-bottom-transition"
-      >
-        <v-card class="rounded-xl">
-          <div class="text-h6 px-8 mb-6 py-6 white--text bg-update">
-            Ubah data Toko
-          </div>
-          <div class="pt-0 px-8 pb-8">
-            <v-text-field
-              type="text"
-              v-model="detaildatadialog.nama"
-              label="Name"
-              outline
-            ></v-text-field>
-            <v-text-field
-              type="text"
-              v-model="detaildatadialog.alamat"
-              label="alamat"
-              outline
-            ></v-text-field>
-            <v-text-field
-              type="number"
-              v-model="detaildatadialog.no_telepon"
-              label="no telepon"
-              outline
-            ></v-text-field>
-            <v-text-field
-              type="text"
-              v-model="detaildatadialog.deskripsi"
-              label="deskripsi"
-              outline
-            ></v-text-field>
-            <label
-              for="fileInput"
-              class="custom-file-upload rounded-lg py-2 px-4 white--text"
-            >
-              <span>Choose File</span>
-            </label>
-            <input
-              class="inputfileku"
-              id="fileInput"
-              type="file"
-              v-on:change="upload"
-            />
-            <div class="d-flex justify-end mt-8">
-              <v-btn class="rounded-xl px-8" outlined @click="closeedit()"
-                >Close</v-btn
-              >
-              <v-btn
-                class="rounded-xl ml-8 px-8 white--text"
-                color="#4caf50"
-                @click="updatetoko()"
-                >Ubah</v-btn
-              >
-            </div>
-          </div>
-        </v-card>
-      </v-dialog> -->
 
 
-      <v-data-table data-app :headers="headers" :items="Toko" class="px-15">
+
+      <v-data-table data-app :headers="headers" :items="Toko" class="">
         <template v-slot:[`item.logo`]="{ item }">
-          <div class="image-container3 d-flex justify-center align-center">
+          <div class="image-container3 d-flex justify-center  align-center">
             <img
               object-fit="cover"
-              width="100%"
-              height="100%"
+              class="rounded-lg"
+              width="80%"
+              height="80%"
               :src="'http://127.0.0.1:8000/storage/' + item.logo"
             />
           </div>
         </template>
-        <template v-slot:[`item.aksi`]="{ item }">
+        <template v-slot:[`item.detail`]="{ item }">
           <v-btn
-            class="mx-2 rounded-xl"
-            small
+          class="mx-2 rounded-xl"
+          small
             @click="detailbarang(item)"
             style="margin: 15px 15px 15px 0px"
           >
             Detail barang
           </v-btn>
-          <v-btn
+          </template>
+        <template v-slot:[`item.aksi`]="{ item }">
+          <div class="d-flex">
+
+            <v-btn
             class="mx-2 white--text btn-crkuup"
             fab
             small
@@ -117,6 +60,7 @@
           >
             <v-icon dark>mdi-delete</v-icon>
           </v-btn>
+        </div>
         </template>
         <template v-slot:[`item.nomor`]="{ index }">
           <div>
@@ -132,6 +76,7 @@
 import axios from "axios";
 export default {
   // layout: "UserView",
+  layout: 'UserView',
   middleware: "middlewareku",
   data() {
     return {
@@ -152,12 +97,13 @@ export default {
       indexnya: null,
       headers: [
         //  {text: 'Id Toko', align: 'start', value: 'toko_id'},
+        { text: "Logo", align: "start", value: "logo" },
         { text: "Nama Toko", align: "start", value: "nama" },
         { text: "Alamat", align: "start", value: "alamat" },
         { text: "NO Telepon", align: "start", value: "no_telepon" },
         { text: "Deskripsi", align: "start", value: "deskripsi" },
-        { text: "Logo", align: "start", value: "logo" },
-        { text: "Aksi", align: "start", value: "aksi", width: "300px" },
+        { text: "Detail", align: "start", value: "detail" },
+        { text: "Aksi", align: "start", value: "aksi" },
       ],
       dialoghapus: false,
 
@@ -292,8 +238,8 @@ export default {
 </script>
 <style>
 .image-container3 {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
 }
 

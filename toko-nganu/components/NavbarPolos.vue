@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10 ">
-    <div class="btn-warnaku white--text">
+    <!-- <div class="btn-warnaku white--text">
       <div class="btn-warnaku white--text">
         <div class="py-1 font-weight-regular">
           <button class=" ml-4" type="submit" @click="kontak">
@@ -9,11 +9,13 @@
           </button>
         </div>
       </div>
-      </div>
+      </div> -->
     <div class="container">
      <div class="d-flex ">
-      <v-img :src="require('~/assets/logo_nganu.png')" max-width="30"></v-img>
-              <div class="font-weight-bold text-h5 ml-4">Toko nganu</div>
+      <div class="d-flex">
+            <v-img :src="require('~/assets/logo_nganu.png')" :max-width="$vuetify.breakpoint.smAndDown?'20':'30'"></v-img>
+            <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'ml-2':'ml-4 text-h6']">Toko nganu</div>
+          </div>
      </div>
     </div>
   </div>

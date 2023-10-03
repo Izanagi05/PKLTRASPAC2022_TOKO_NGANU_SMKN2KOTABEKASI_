@@ -35,7 +35,12 @@
  transition: 0.2s ease-in-out !important;
 }
 .hover-btnku:hover {
-  background: #2f432d !important;
+transition: 0.2s ease-in-out !important;
+background: #2f432d !important;
+color: rgb(255, 255, 255) !important;
+}
+.hover-btnku:hover i {
+  transition: 0.2s ease-in-out !important;
   color: rgb(255, 255, 255) !important;
 }
 
@@ -53,6 +58,12 @@
 ::-webkit-scrollbar-thumb {
   background: grey;
   border-radius: 3px;
+}
+.sidebar-profil{
+  background: #f3f3f3 !important;
+}
+.border-left{
+border-left: 4px #616161 solid;
 }
 
 

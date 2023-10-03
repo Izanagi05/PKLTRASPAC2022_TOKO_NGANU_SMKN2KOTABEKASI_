@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\Toko;
 use App\Models\Barang;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,7 +57,7 @@ class TokoUserController extends Controller
             'deskripsi' => 'required',
             'alamat' => 'required',
             'no_telepon' => 'required',
-            'logo' => 'required'
+            'logo' => ''
         ];
         $validasi = $request->validate($rules);
         if ($validasi) {

@@ -228,8 +228,8 @@
           <div class="py-8">
             <v-btn
               @click="tambahkategori"
-              class="text-capitalize px-8 text-body-1 font-weight-medium rounded-pill mb-6 white--text"
-              color="#2f432d"
+              class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-pill white--text"
+          color="#4c60af"
               >Tambah Kategori</v-btn
             >
           </div>

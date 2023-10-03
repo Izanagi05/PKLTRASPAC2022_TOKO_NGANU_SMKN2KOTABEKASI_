@@ -1,60 +1,73 @@
 <template>
   <div>
     <v-app>
-
       <Navbar />
       <div class="container">
-
         <v-row>
           <v-col
-          cols="12 "
-          lg="3"
-          md="3"
-          sm="12"
-          xs="12"
-          order="2"
-          class="kiri justify-space-between order-lg-1 order-md-1 order-sm-2 order-xs-2"
-        >
-          <div>
-            <div v-for="(rute, i) in routersdata" :key="i">
-              <v-btn
-                text
-                depressed
-                @click="$router.push(rute.rt)"
-                width="100%"
-                class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
+            cols="12 "
+            lg="3"
+            md="3"
+            sm="12"
+            xs="12"
+            order="2"
+            class="kiri py-0 justify-space-between order-lg-1 order-md-1 order-sm-2 order-xs-2"
+          >
+            <v-card class="sidebar-profil pa-5 pt-8 rounded-lg" style="height:100%;">
+              <div
+                :class="[
+                  'font-weight-bold  mb-4',
+                  $vuetify.breakpoint.smAndDown ? 'text-subtitle-6' : 'text-h5',
+                ]"
               >
-                <v-icon large color="#616161" class="mr-2">{{
-                  rute.icon
-                }}</v-icon>
-                {{ rute.nama }}
-              </v-btn>
+                Profil Pengguna
+              </div>
+              <div v-for="(rute, i) in routersdata" :key="i">
+                <v-btn
+                  text
+                  depressed
+                  @click="$router.push(rute.rt)"
+                  width="100%"
+                  :class="['font-weight-medium d-flex align-items my-4 justify-start py-6 text-capitalize', isaktif(rute.rt)?'border-left':'']"
+                >
+                  <v-icon large color="#616161" class="mr-2">{{
+                    rute.icon
+                  }}</v-icon>
+                  <div :class="[isaktif(rute.rt)?'font-weight-medium black--text':'font-weight-regular grey--text text--lighten-1']">
+                   {{ rute.nama }}
+                  </div>
+                </v-btn>
+              </div>
+              <div>
+                <v-btn
+                  text
+                  depressed
+                  @click="logout()"
+                  width="100%"
+                  class="font-weight-medium d-flex mt-15 align-items justify-start py-8 text-capitalize"
+                  ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
+                  >Logout</v-btn
+                >
+              </div>
+            </v-card>
+          </v-col>
+          <v-col
+            cols="12"
+            lg="9"
+            md="9"
+            sm="12"
+            xs="12"
+            order="1"
+            class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex align-center"
+            style="height: 85vh; overflow-x:scroll;"
+          >
+            <div style="width: 100%;">
+              <nuxt />
             </div>
-            <div>
-              <v-btn
-                text
-                depressed
-                @click="logout()"
-                width="100%"
-                class="font-weight-medium d-flex align-items justify-start py-8 text-capitalize"
-                ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
-                >Logout</v-btn
-              >
-            </div>
-          </div>
-        </v-col>
-      <v-col  cols="12"
-          lg="9"
-          md="9"
-          sm="12"
-          xs="12"
-          order="1"
-          class="d-flex my-0 order-lg-2 order-md-2 order-sm-1 order-xs-1">
-          <nuxt />
-      </v-col>
-    </v-row>
-  </div>
-  </v-app>
+          </v-col>
+        </v-row>
+      </div>
+    </v-app>
   </div>
 </template>
 
@@ -72,28 +85,11 @@ export default {
       },
       cekuserrole: null,
       userid: null,
-      // menus: [
-      //   {
-      //     title: "User Profile",
-      //     link: "/user-view/profile-user",
-      //     icon: "mdi-account",
-      //   },
-      //   { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
-      //   {
-      //     title: "Tambah Toko",
-      //     link: "/user-view/tambah-toko",
-      //     icon: "mdi-store-plus",
-      //   },
-      //   {
-      //     title: "Tambah Barang",
-      //     link: "/user-view/crud",
-      //     icon: "mdi-package-variant-closed-plus",
-      //   },
-      // ],
     };
   },
 
   methods: {
+
     rutess() {
       var rutes = [
         {
@@ -131,6 +127,9 @@ export default {
         return link.show;
       });
     },
+       isaktif (pathh) {
+      return this.$route.path === pathh
+    },
     getuser() {
       axios
         .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
@@ -160,70 +159,5 @@ export default {
 </script>
 
 <style>
-.contact {
-  background-color: #2f432d;
-  padding: 5px 0px 7px 154px;
-}
-.home-container {
-  padding: 0px 123px;
-}
-.content {
-  display: flex;
-  gap: 38px;
-}
-.sub-title {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-}
-.menu {
-  display: grid;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  /* margin-top: 69px; */
-}
-.logout {
-  margin-top: 120px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-}
-.pembatas {
-  border-left: 8px solid #d9d9d9;
-  border-radius: 20px;
-  height: 450px;
-  margin-right: 10px;
-}
-.profil-btn {
-  height: 30px;
-  width: 114px;
-}
-.profil-btn:hover {
-  background: #2f432d;
-  color: rgb(255, 255, 255);
-}
-.kiri {
-  margin-top: 19px;
-}
-.my-link {
-  text-decoration: none;
-  color: #000000;
-  margin-bottom: 43px;
-}
-.isi {
-  margin-top: 26px;
-}
-.btn-card {
-  margin-top: 30px;
-}
-.informasi-judul {
-  font-family: Poppins;
-  font-weight: 700;
-  font-size: 20px;
-}
-.foto-profilan {
-  background: #d9d9d9;
-}
 </style>
 

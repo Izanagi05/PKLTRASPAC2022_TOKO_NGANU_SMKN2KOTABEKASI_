@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div
       class="judul pb-4 pt-2 font-weight-bold"
       style="font-family: 'Poppins', sans-serif; font-size: 30px"
@@ -79,6 +78,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: 'UserView',
   middleware: "middlewareku",
   data() {
     return {

@@ -226,7 +226,7 @@
                 <v-col
                   cols="5"
                   :class="[
-                    '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                    'mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
                     $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
                   ]"
                   v-for="(brg, index) in hasilcari.data"
