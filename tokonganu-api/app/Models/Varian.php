@@ -16,6 +16,7 @@ class Varian extends Model
         'nama',
         'harga',
         'stok',
+        'foto_barang_varian',
     ];
     public function VarianBarang(){
         return $this->belongsTo(Barang::class, 'barang_id');

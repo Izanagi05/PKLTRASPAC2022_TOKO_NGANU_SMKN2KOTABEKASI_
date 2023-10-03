@@ -77,7 +77,6 @@ class BarangController extends Controller
 
                 $ratings = $dt->BarangRating;
                 $countRating=count($ratings);
-
                 $totalRating=0;
                 foreach ( $ratings as $rating) {
                     $totalRating += $rating->rating;
@@ -225,6 +224,12 @@ class BarangController extends Controller
             foreach ($data->BarangFoto as $foto) {
                 if (!empty($foto->file)) {
                     Storage::delete($foto->file);
+                }
+            }
+            foreach ($data->barangVarian as $foto) {
+                // Hapus foto dari storage
+                if (!empty($foto->foto_barang_varian)) {
+                    Storage::delete($foto->foto_barang_varian);
                 }
             }
             return response()->json($data, 200);

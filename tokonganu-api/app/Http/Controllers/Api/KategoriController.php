@@ -107,6 +107,12 @@ class KategoriController extends Controller
                         Storage::delete($foto->file);
                     }
                 }
+                foreach ($brg->barangVarian as $foto) {
+                    // Hapus foto dari storage
+                    if (!empty($foto->foto_barang_varian)) {
+                        Storage::delete($foto->foto_barang_varian);
+                    }
+                }
                 $brg->BarangFoto()->delete();
                 $brg->barangVarian()->delete();
                 // $brg->delete();

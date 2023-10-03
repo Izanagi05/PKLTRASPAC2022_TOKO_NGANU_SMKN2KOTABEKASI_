@@ -39,6 +39,21 @@
               label="stok"
               outline
             ></v-text-field>
+             <div class="preview mb-4">
+              <v-img :src="prev" v-if="prev" width="200px"></v-img>
+            </div>
+            <label
+              for="fileInput"
+              class="custom-file-upload-create rounded-lg py-2 px-4 white--text"
+            >
+              <span>Choose File</span>
+            </label>
+            <input
+              class="inputfileku"
+              id="fileInput"
+              type="file"
+              v-on:change="upload"
+            />
           </div>
 
           <div v-if="$route.path.includes('/fotobarang/')">

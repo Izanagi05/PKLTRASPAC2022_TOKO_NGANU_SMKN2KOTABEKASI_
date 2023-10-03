@@ -5,7 +5,9 @@
     <DialogTambah
       :dialogtambah="dialogadd"
       item="Varian"
+      :prev="prev"
       :closetambah="closeadd"
+      :upload="uploadTambah"
       :detaildatadialog="detaildatadialog"
       :konfirmtambah="konfirmtambahvarian"
     />
@@ -30,6 +32,16 @@
       >
     </div>
     <v-data-table data-app class="px-15" :headers="headers" :items="barang">
+      <template v-slot:[`item.foto_barang_varian`]="{ item }">
+        <div class="image-container3 d-flex justify-center  align-center">
+          <v-img
+            width="80%"
+            height="80%"
+            :src="'http://127.0.0.1:8000/storage/' + item.foto_barang_varian"
+          >
+          </v-img>
+          </div>
+        </template>
       <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
           class="mx-2 white--text btn-crkuup"
@@ -73,6 +85,7 @@ export default {
         { text: "Nama varian", value: "nama" },
         { text: "harga", value: "harga" },
         { text: "stok", value: "stok" },
+        { text: "foto", value: "foto_barang_varian" },
         { text: "Aksi", value: "aksi" },
       ],
       varid: {
@@ -82,12 +95,15 @@ export default {
         nama: "",
         harga: "",
         stok: "",
+        foto_barang_varian:""
       },
       defaultItem: {
         nama: "",
         harga: "",
         stok: "",
       },
+      prev: null,
+      preview: null,
     };
   },
   methods: {
@@ -107,11 +123,25 @@ export default {
     tambahvarian() {
       this.dialogadd = true;
     },
+    uploadTambah(foto) {
+      let prv = foto.target.files[0];
+      this.prev = URL.createObjectURL(prv);
+      this.fotoTambah = prv;
+      this.detaildatadialog.foto_barang_varian=prv
+    },
     konfirmtambahvarian() {
+      const formData = new FormData()
+      formData.append('nama', this.detaildatadialog.nama)
+      formData.append('harga', this.detaildatadialog.harga)
+      formData.append('stok', this.detaildatadialog.stok)
+      formData.append('foto_barang_varian', this.detaildatadialog.foto_barang_varian)
       axios
         .post(
           "http://127.0.0.1:8000/api/createvarianbarang/" + this.prm.barang_id,
-          this.detaildatadialog
+          formData,
+          {
+            "content-type": "multipart/form-data",
+          }
         )
         .then((respon) => {
           console.log(respon);
@@ -184,4 +214,17 @@ export default {
     this.getvarian();
   },
 };
-</script>
+</script >
+
+<style scoped>
+.image-container3 {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.image-container3 img {
+  object-fit: cover;
+  object-position: center;
+}
+</style>

@@ -65,7 +65,7 @@ class VarianBarangController extends Controller
         if($validatedData){
 
             if($request->file('foto_barang_varian')){
-                $validateData['foto_barang_varian']= $request->file('foto_barang_varian')->store('foto_barang_varian_toko');
+                $validatedData['foto_barang_varian']= $request->file('foto_barang_varian')->store('foto_barang_varian_toko');
 
             }
         $validatedData['barang_id'] = $id;

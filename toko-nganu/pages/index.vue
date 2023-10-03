@@ -200,7 +200,7 @@
                   </v-row>
                   <div class="btn-card mt-2 pb-1">
                     <v-rating
-                      v-model="rating"
+                      v-model="brg.average_rating"
                       background-color="white"
                       color="yellow accent-4"
                       dense
