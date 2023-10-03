@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\VarianBarangController;
 use App\Http\Controllers\Api\FotoBarangController;
+use App\Http\Controllers\Api\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,10 @@ Route::delete('/deletekategori/{id}', [KategoriController::class, 'deletekategor
 Route::post('/updatekategori/{id}', [KategoriController::class, 'updatekategori']);
 // Route::get('/user', [UserController::class, 'getuser']);
 
+Route::get('/getratingbybarang/{id}', [RatingController::class, 'getratingbybarang']);
+Route::post('/createrating', [RatingController::class, 'createrating']);
+Route::post('/updaterating/{id}', [RatingController::class, 'updaterating']);
+Route::delete('/deleterating/{id}', [RatingController::class, 'deleterating']);
 
 
 

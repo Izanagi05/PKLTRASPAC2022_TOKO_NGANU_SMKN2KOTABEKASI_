@@ -39,7 +39,15 @@ class KategoriController extends Controller
                     $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                     $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
                     $data[$key]['toko'] = $dt->Toko;
-                    # code...
+                    $ratings = $dt->BarangRating;
+                    $countRating = count($ratings);
+
+                    $totalRating = 0;
+                    foreach ($ratings as $rating) {
+                        $totalRating += $rating->rating;
+                    }
+                    $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
+                    $data[$key]['average_rating'] = $averageRating;
                 }
             }
             return response()->json([

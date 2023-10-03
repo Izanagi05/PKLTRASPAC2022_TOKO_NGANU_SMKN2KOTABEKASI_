@@ -8,6 +8,7 @@ use App\Models\Toko;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Foto_Barang;
+use App\Models\Rating;
 
 class BarangController extends Controller
 {
@@ -20,6 +21,15 @@ class BarangController extends Controller
                 $data[$key]['barang_foto_first'] = $dtv->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dtv->barangVarianFirst;
                 $data[$key]['toko'] = $dtv->Toko;
+                $ratings = $dtv->BarangRating;
+                $countRating=count($ratings);
+
+                $totalRating=0;
+                foreach ( $ratings as $rating) {
+                    $totalRating += $rating->rating;
+                }
+                $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
+                $data[$key]['average_rating'] = $averageRating;
             }
             return response()->json([
                 'data' => $data,
@@ -64,6 +74,17 @@ class BarangController extends Controller
                 $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
                 $data[$key]['toko'] = $dt->Toko;
+
+                $ratings = $dt->BarangRating;
+                $countRating=count($ratings);
+
+                $totalRating=0;
+                foreach ( $ratings as $rating) {
+                    $totalRating += $rating->rating;
+                }
+                $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
+                $data[$key]['average_rating'] = $averageRating;
+                // dd($averageRating);
             }
             // $data->Toko()->get();
             return response()->json([
