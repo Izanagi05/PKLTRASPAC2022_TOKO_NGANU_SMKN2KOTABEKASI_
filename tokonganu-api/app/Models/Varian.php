@@ -20,4 +20,7 @@ class Varian extends Model
     public function VarianBarang(){
         return $this->belongsTo(Barang::class, 'barang_id');
     }
+    // public function VarianFoto(){
+    //     return $this->hasOne(Foto_Barang::class, 'foto_barang_id');
+    // }
 }
