@@ -38,6 +38,7 @@ class KategoriController extends Controller
                 foreach ($kategori[$key]['barang'] as $key => $dt) {
                     $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                     $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
+                    $data[$key]['toko'] = $dt->Toko;
                     # code...
                 }
             }

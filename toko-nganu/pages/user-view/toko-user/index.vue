@@ -38,7 +38,7 @@
             @click="detailbarang(item)"
             style="margin: 15px 15px 15px 0px"
           >
-            Detail barang
+            Detail  bbarang
           </v-btn>
           </template>
         <template v-slot:[`item.aksi`]="{ item }">

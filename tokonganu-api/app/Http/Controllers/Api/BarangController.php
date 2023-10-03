@@ -19,6 +19,7 @@ class BarangController extends Controller
 
                 $data[$key]['barang_foto_first'] = $dtv->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dtv->barangVarianFirst;
+                $data[$key]['toko'] = $dtv->Toko;
             }
             return response()->json([
                 'data' => $data,
@@ -62,7 +63,9 @@ class BarangController extends Controller
             foreach ($data as $key => $dt) {
                 $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                 $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
+                $data[$key]['toko'] = $dt->Toko;
             }
+            // $data->Toko()->get();
             return response()->json([
                 'data' => $data,
                 'message' => 'Berhasil ambil data barang',
