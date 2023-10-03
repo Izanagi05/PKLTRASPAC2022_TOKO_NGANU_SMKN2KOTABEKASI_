@@ -56,7 +56,6 @@
             <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
               {{ $cookies.get("cookieku").data.nama }}
             </div>
-            <!-- </div> -->
           </v-col>
         </v-row>
       </div>
@@ -74,7 +73,7 @@
           </div>
           <v-carousel
             v-else
-            cycle
+            no-autoplay
             height="auto"
             hide-delimiter-background
             show-arrows-on-hover
@@ -103,27 +102,37 @@
           <div v-else class="d-flex mt-8">
             <v-btn
               v-if="!loading"
-              outlined
+              outlined 
               @click="getallbarang()"
               :class="
                 fcek === true
                   ? 'ma-2 rounded-xl warnaku white--text'
                   : 'ma-2 rounded-xl'
-              "
+              " 
+              @click="getkategori(-1)"
+              :class="[
+                'ma-2  rounded-xl text-capitalize',
+                fcek === true ? 'btn-warnaku white--text' : '',
+              ]" 
             >
               Semua Kategori
             </v-btn>
-
             <v-btn
               outlined
               v-for="(ktg, index) in allkategori"
-              :key="index"
+              :class="[
+                'ma-2  rounded-xl text-capitalize',
+                ktg.kategori_id === fcek ? 'btn-warnaku white--text' : '',
+              ]"
+              :key="index" 
               @click="getkategori(ktg)"
               :class="
                 ktg === fcek
                   ? 'ma-2 rounded-xl warnaku white--text'
                   : 'ma-2 rounded-xl'
-              "
+              " 
+              @click="getkategori(ktg.kategori_id)"
+              class="ma-2 rounded-xl" 
             >
               {{ ktg.nama }}
             </v-btn>
@@ -142,6 +151,7 @@
             <div class="font-weight-bold text-h6">Rekomendasi Untuk Kamu</div>
           </div>
         </div>
+ 
         <div>
           <div class="product-card">
             <div v-if="set == 0">
@@ -379,7 +389,83 @@
                 </v-col>
               </v-row>
             </div>
-          </div>
+          </div> 
+        <div class="product-card">
+          <v-row class="p-0">
+            <v-col
+              cols="5"
+              :class="[
+                '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
+              ]"
+              v-for="(brg, index) in getdataall"
+              :key="index"
+            >
+              <v-skeleton-loader
+                v-if="firstLoad"
+                width="300"
+                type="card, list-item-three-line"
+              />
+              <v-card
+                v-else
+                color="#ffffff"
+                class="rounded-lg"
+                elevation="1"
+                width="300"
+                @click="todetail(brg)"
+              >
+                <div
+                  v-for="(ft, i) in brg.barang_foto_first"
+                  :key="i"
+                  max-width="100"
+                  class="image-cont d-flex justify-center align-center"
+                >
+                  <img
+                    :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                    object-fit="cover"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                <div class="pa-4">
+                  <div class="font-weight-medium text-capitalize">
+                    {{ brg.nama }}
+                  </div>
+                  <div
+                    class="font-weight-medium d-flex"
+                    v-for="(vrn, i) in brg.barang_varian_first"
+                    :key="i"
+                  >
+                    <div v-if="brg" class="mr-1">Rp</div>
+                    {{ vrn.harga | currency("id-ID", "IDR") }}
+                  </div>
+                  <v-row align="center">
+                    <v-col cols="auto">
+                      <div class="d-flex align-center">
+                        <v-img
+                          :src="require('~/assets/pajamas_tanuki-verified.png')"
+                          max-width="16"
+                        ></v-img>
+                        <span class="ml-2">{{ brg.toko?.nama }}</span>
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <div class="btn-card mt-2 pb-1">
+                    <v-rating
+                      v-model="rating"
+                      background-color="white"
+                      color="yellow accent-4"
+                      dense
+                      half-increments
+                      hover
+                      size="18"
+                    ></v-rating>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+ 
         </div>
       </div>
     </div>
@@ -388,15 +474,23 @@
 
 <script>
 import axios from "axios";
+import Footer from "~/components/Footer.vue";
 export default {
   middleware: "middlewareku",
   data() {
-    return {
+    return { 
       rating: 3.5,
       firstLoad: true,
       set: 0,
       cari: null,
+      fcek: null, 
+      set: 0,
+      cari: null,
       fcek: null,
+      rating: 3.5,
+      currentRating: 0,
+      firstLoad: true,
+      loading: true, 
 
       hasilcari: [],
       no_admin: "6281563151038",
@@ -410,9 +504,8 @@ export default {
       allkategori: {
         kategori_id: "",
       },
-      hasilKategori: {
-        barang_id: "",
-      },
+      getdataallcheck: -1,
+      getdataall: [],
       items: [
         {
           src: "home-img.png",
@@ -428,7 +521,7 @@ export default {
   },
   methods: {
     search() {
-      // this.searchteks = this.$emit('emitsearch')
+ 
       console.log("ets" + this.searchteks);
     },
     kontak() {
@@ -441,6 +534,7 @@ export default {
         .then((respon) => {
           this.Toko = respon.data?.data;
         });
+ 
     },
     getallbarang() {
       axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
@@ -455,7 +549,10 @@ export default {
         .then((respon) => {
           this.hasilcari = respon.data?.data;
           console.log(respon.data?.data);
-        });
+        }); 
+    },
+    getsearchbarang() {
+ 
       this.set = 2;
     },
     getallkategori() {
@@ -464,6 +561,7 @@ export default {
       });
     },
     getkategori(ktg) {
+ 
       axios
         .get(`http://127.0.0.1:8000/api/getkategori/${ktg.kategori_id}`)
         .then((respon) => {
@@ -472,6 +570,32 @@ export default {
         });
       this.set = 1;
       this.fcek = ktg;
+ 
+      this.getdataallcheck = ktg;
+      if (this.getdataallcheck == -1) {
+        axios
+          .get("http://127.0.0.1:8000/api/getallbarangtoko")
+          .then((respon) => {
+            this.getdataall = respon.data?.data;
+            console.log(this.getdataall);
+          });
+        this.fcek = true;
+      } else if (this.getdataallcheck >= 0) {
+        axios
+          .get(`http://127.0.0.1:8000/api/getkategori/${ktg}`)
+          .then((respon) => {
+            this.getdataall = respon.data?.data[0]?.barang;
+          });
+        this.fcek = ktg;
+      } else if (this.getdataallcheck == -2) {
+        axios
+          .get("http://127.0.0.1:8000/api/search/" + this.cari)
+          .then((respon) => {
+            this.getdataall = respon.data?.data;
+            console.log(this.getdataall);
+          });
+      }
+ 
     },
     todetail(brg) {
       // console.log(brg.barang_id)
@@ -482,6 +606,14 @@ export default {
       this.$router.push(`/detail/${barang.barang_id}`);
     },
   },
+ 
+  mounted() {
+    setTimeout(() => {
+      this.firstLoad = false;
+      this.loading = false;
+    }, 3000);
+  },
+ 
 
   created() {
     const userid = this.$cookies.get("cookieku");
@@ -490,7 +622,9 @@ export default {
     this.tokouser = userid.data.id;
     this.gettoko();
     this.getallkategori();
+    this.getkategori(-1);
     this.getsearchbarang();
+ 
     this.getallbarang();
   },
   mounted() {
@@ -498,6 +632,9 @@ export default {
       this.firstLoad = false;
       this.loading = false;
     }, 3000);
+ 
+    // this.getallbarang();
+ 
   },
 };
 </script>
