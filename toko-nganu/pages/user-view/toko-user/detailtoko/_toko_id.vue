@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pl-15 pb-5 font-weight-medium">Detail Barang</div>
+    <div class="pl-15s pb-5 font-weight-medium">Detail Barang</div>
     <!-- <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-xl">
         <v-card class="pt-15 px-8 pb-8 rounded-xl">
           <div class="text-h6 pl-4">Apakah kamu yakin ingin menghapus item ini?</div>
