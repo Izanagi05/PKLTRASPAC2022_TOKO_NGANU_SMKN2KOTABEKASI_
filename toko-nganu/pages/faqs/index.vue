@@ -13,31 +13,30 @@
               Pertanyaan lain
             </p>
             <div v-for="(tagpert, i) in tagpertanyaan" :key="i">
-              <nuxt-link  :to="'/faqs#'+tagpert.jdlpert"  :class="['text-body-1 text-decoration-none black--text']">{{ tagpert.jdlpert }}</nuxt-link>
-
+              <a  :href="'/faqs#'+tagpert.jdlpert" id="scrollButton"  :class="['text-body-1 text-decoration-none black--text']">{{ tagpert.jdlpert }}</a>
               <div v-if="$vuetify.breakpoint.smAndDown"  class="rounded-xl mt-4" style="border-bottom: black 2px solid;"></div>
             </div>
           </div>
         </v-col>
-        <v-col cols="12" lg="9" md="9" sm="12" xs="12" style="height:80vh;overflow-y: scroll;" >
-          <div v-for="(dttag, i) in tagpertanyaan" :key="i">
-            <div :id="dttag.jdlpert" :ref="dttag.jdlpert" class="my-8">
-              <p class="font-weight-medium text-h6 my-4">{{ dttag.jdlpert }}</p>
+        <v-col cols="12" lg="9" md="9" sm="12" xs="12" style="height:80vh;overflow-y: scroll;transition: 2s ease-in-out;" >
+          <div id="tujuanGulir" v-for="(dttag, i) in tagpertanyaan" :key="i">
+            <div :id="dttag.jdlpert" :ref="dttag.jdlpert" class="mb-8">
+              <p class="font-weight-medium text-h6 mb-4">{{ dttag.jdlpert }}</p>
               <v-expansion-panels v-model="panel" flat>
                 <v-expansion-panel v-for="(dt, i) in dttag.pertanyaanjawaban" :key="i" v-model="panel">
                   <v-expansion-panel-header>
                     <div class="font-weight-medium text-body-1">
                       {{ dt.pert }}
-                      <div  class="rounded-xl mt-4" style="border-bottom: black 2px solid;"></div>
+                      <div  class="rounded-xl mt-4" style="border-bottom: black 1px solid;"></div>
                   </div>
                 </v-expansion-panel-header>
                   <v-expansion-panel-content>
               <p>
                 {{ dt.jwbn }}
               </p>
-              <p class="text-caption amber--text text-darken-4 ">
+              <!-- <p class="text-caption amber--text text-darken-4 ">
                 Selengkapnya...
-              </p>
+              </p> -->
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -183,6 +182,12 @@ export default {
       panel:false,
     };
   },
+  mounted() {
+  //   document.getElementById("scrollButton").addEventListener("click", function() {
+  //   document.getElementById("tujuanGulir").scrollIntoView({ behavior: "smooth" });
+  // });
+
+  },
 
   methods: {
     scrollToElement(id) {
@@ -199,3 +204,9 @@ export default {
 }
 }
 </script>
+
+<style scoped>
+html {
+  scroll-behavior: smooth;
+}
+</style>

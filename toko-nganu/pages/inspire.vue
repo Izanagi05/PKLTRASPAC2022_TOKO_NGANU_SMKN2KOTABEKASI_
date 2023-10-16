@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="mb-10">
-      <div class="btn-warnaku white--text">
+      <!-- <div class="btn-warnaku white--text">
         <div class="py-2 font-weight-regular">
           <button class="ml-4" type="submit" @click="kontak">
             <v-icon color="white">mdi-phone</v-icon>
             +62-815-6315-10389
           </button>
         </div>
-      </div>
+      </div> -->
       <div class="container pb-4">
         <v-row>
           <v-col
@@ -53,9 +53,9 @@
                 </v-avatar>
               </v-btn>
             </nuxt-link>
-            <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
+            <!-- <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
               {{ $cookies.get("cookieku").data.nama }}
-            </div>
+            </div> -->
           </v-col>
         </v-row>
       </div>
@@ -118,12 +118,16 @@
                 v-for="(brg, index) in getdataall"
                 :key="index"
               >
-                <v-card color="#ffffff" class="rounded-lg" width="300">
+                <v-card   color="#ffffff"
+                class="rounded-lg"
+                elevation="1"
+                width="300"
+                @click="todetail(brg)">
                   <div
                     v-for="(ft, i) in brg.barang_foto_first"
                     :key="i"
                     max-width="100"
-                    class="image-container3 d-flex justify-center align-center"
+                    class="image-container2 d-flex justify-center align-center"
                   >
                     <img
                       :src="'http://127.0.0.1:8000/storage/' + ft.file"
@@ -137,32 +141,36 @@
                       {{ brg.nama }}
                     </div>
                     <div
-                      class="font-weight-medium d-flex"
-                      v-for="(vrn, i) in brg.barang_varian_first"
-                      :key="i"
-                    >
-                      <div v-if="brg">Rp.</div>
-                      {{ vrn.harga }}
-                    </div>
-                    <div class="font-weight-regular">
-                      {{ brg.deskripsi }}
-                    </div>
-                    <div class="btn-card mt-2 pb-1">
-                      <v-btn
-                        class="rounded-xl text-capitalize font-weight-regular"
-                        outlined
-                        color="#000"
-                        small
-                        @click="todetail(brg)"
-                      >
-                        Lebih lengkap
-                      </v-btn>
-                    </div>
+                    class="font-weight-medium d-flex"
+                    v-for="(vrn, i) in brg.barang_varian_first"
+                    :key="i"
+                  >
+                    <div v-if="brg" class="mr-1">Rp</div>
+                    {{ vrn.harga | currency("id-ID", "IDR") }}
+                  </div>
+                  <v-row align="center">
+                    <v-col cols="auto">
+                      <div class="d-flex align-center">
+                        <v-img
+                          :src="require('~/assets/pajamas_tanuki-verified.png')"
+                          max-width="16"
+                        ></v-img>
+                        <span class="ml-2">{{ brg.toko?.nama }}</span>
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <div class="btn-card mt-2 pb-1 d-flex align-center">
                     <v-rating
-                      color="yellow-darken-3"
-                      v-model="rating"
-                      length="5"
+                      v-model="brg.average_rating"
+                      background-color="white"
+                      color="yellow accent-4"
+                      dense
+                      half-increments
+                      hover
+                      size="18"
                     ></v-rating>
+                    <p class="ma-0">{{ brg.average_rating }}</p>
+                  </div>
                   </div>
                 </v-card>
               </v-col>
@@ -172,7 +180,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -293,12 +300,12 @@ export default {
 };
 </script>
 <style scoped>
-.image-container3 {
+.image-container2 {
   height: 200px;
   overflow: hidden;
 }
 
-.image-container3 img {
+.image-container2 img {
   object-fit: cover;
   object-position: center;
 }

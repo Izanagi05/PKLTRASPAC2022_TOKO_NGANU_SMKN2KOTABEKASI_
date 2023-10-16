@@ -2,6 +2,7 @@
   <div>
     <v-app>
       <Navbar />
+
       <div class="container">
         <v-row>
           <v-col
@@ -13,10 +14,7 @@
             order="2"
             class="kiri py-0 justify-space-between order-lg-1 order-md-1 order-sm-2 order-xs-2"
           >
-            <v-card
-              class="sidebar-profil pa-5 pt-8 rounded-lg"
-              style="height: 100%"
-            >
+            <v-card v-if="!$vuetify.breakpoint.smAndDown" class="sidebar-profil pa-5 pt-8 rounded-lg" style="height:100%;">
               <div
                 :class="[
                   'font-weight-bold  mb-4',
@@ -31,11 +29,7 @@
                   depressed
                   @click="$router.push(rute.rt)"
                   width="100%"
-                  :class="[
-                    'font-weight-medium d-flex align-items my-4 justify-start py-6 text-capitalize',
-                    isaktif(rute.rt) ? 'border-left' : '',
-                    rute.class ? rute.class : '',
-                  ]"
+                  :class="['font-weight-medium d-flex align-items my-4 justify-start py-6 text-capitalize', 'sidebtn-'+i, isaktif(rute.rt)?'border-left':'']"
                 >
                   <v-icon large color="#616161" class="mr-2">{{
                     rute.icon
@@ -71,8 +65,7 @@
             sm="12"
             xs="12"
             order="1"
-            class="d-flex my-0 py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex align-center"
-            style="height: 85vh; overflow-x: scroll"
+            class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex align-center"
           >
             <div style="width: 100%">
               <nuxt />
@@ -80,6 +73,7 @@
           </v-col>
         </v-row>
       </div>
+      <Footer />
     </v-app>
   </div>
 </template>
@@ -91,6 +85,7 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      drawer:null,
       dataprofil: {
         nama: null,
         no_telepon: null,
@@ -102,7 +97,8 @@ export default {
   },
 
   methods: {
-    rutess() {
+
+    route() {
       var rutes = [
         {
           show: true,
@@ -139,6 +135,12 @@ export default {
           rt: "/user-view/tambah-barang",
           icon: "mdi-package-variant-closed-plus",
         },
+        {
+          show: true,
+          nama: "Manajemen Toko",
+          rt: "/user-view/manajemen-toko",
+          icon: "mdi-package-variant-closed-plus",
+        },
       ];
       this.routersdata = rutes.filter(function (link) {
         return link.show;
@@ -167,7 +169,7 @@ export default {
     this.userid = usid.data.id;
     this.cekuserrole = usid.role;
     this.getuser();
-    this.rutess();
+    this.route();
   },
   mounted() {
     this.getuser();

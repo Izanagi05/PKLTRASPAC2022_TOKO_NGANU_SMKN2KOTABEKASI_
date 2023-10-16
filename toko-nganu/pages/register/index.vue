@@ -40,7 +40,8 @@
                     <v-btn
                       type="submit"
                       block
-                      class="mt-2 white--text"
+                      id="buttonregisku"
+                      class="mt-2 white--text regist-btn"
                       style="
                         border-radius: 50px;
                         margin-top: 30px;

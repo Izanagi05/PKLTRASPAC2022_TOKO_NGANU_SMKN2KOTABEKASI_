@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container">
-      <div class="mb-2">
+    <div class=" ">
+      <div class="mb-4">
         <NuxtLink to="/" class="my-2 text-decoration-none black--text">
           Home </NuxtLink
         ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
@@ -16,7 +16,7 @@
       </div>
       <div>
         <div class="d-flex mt-4">
-          <v-avatar class="foto-profilan" style="width: 14vw; height: 14vw">
+          <v-avatar class="foto-profilan" :size="$vuetify.breakpoint.smAndDown?'100':'200'">
             <v-img
               v-if="dataprofil.foto_profil"
               class="img-fluid"
@@ -26,48 +26,75 @@
 
           <div class="d-flex ml-8 align-center">
             <div class="">
-              <div class="text-h4 font-weight-medium">
+              <div class="text-lg-h4 text-md-h4 text-sm-h6 text-h6 font-weight-medium">
                 {{ dataprofil.nama }}
               </div>
-              <div class="grey--text text-subtitle-1">
+              <div :class="['grey--text ',$vuetify.breakpoint.smAndDown?'text-body-1':'text-body-1']">
                 {{ dataprofil.email }}
               </div>
+              <v-btn  v-if="$vuetify.breakpoint.smAndDown"
+              class="text-capitalize font-weight-medium text-body-1 mx-auto mt-2" width="80%"
+              outlined
+              small
+              rounded-lg
+              @click="pushprofil"
+            >
+              Edit Profil
+            </v-btn>
             </div>
           </div>
         </div>
-        <v-row class="mt-4">
+          <div class="d-flex justify-end">
+
+        </div>
+        <v-row class=" mt-4">
           <v-col cols="12" class="">
-            <div class="font-weight-bold text-h6">Info pengguna</div>
+            <div  :class="[
+          'font-weight-bold  mb-2',
+          $vuetify.breakpoint.smAndDown ? 'text-subtitle-1' : 'text-h6',
+        ]">Info pengguna</div>
           </v-col>
           <v-col cols="12" lg="12" md="12">
             <v-row>
-              <v-col cols="2">
-                <div class="grey--text text-body-1 mb-4">Telepon:</div>
-                <div class="grey--text text-body-1">Email:</div>
-              </v-col>
-              <v-col cols="4">
-                <div class="black--text font-weight-medium mb-4">
-                  {{ dataprofil.no_telepon }}
+              <v-col cols="12" lg="6" class="pb-0">
+                <div :class="['grey--text text-body-1 mb-4',$vuetify.breakpoint.smAndDown?'d-block mb-4 ':'d-flex']">
+                  <p class="ma-0 mr-2">
+                    Nama:
+                  </p>
+                  <p class="ma-0  black--text">
+                    {{ dataprofil.nama }}
+                  </p>
                 </div>
-                <div class="black--text font-weight-medium">
-                  {{ dataprofil.email }}
+                <div :class="['grey--text text-body-1 mb-4',$vuetify.breakpoint.smAndDown?'d-block mb-4':'d-flex']">
+                  <p class="ma-0 mr-2">
+                    Email:
+                  </p>
+                  <p class="ma-0  black--text">
+                    {{ dataprofil.email }}
+                  </p>
                 </div>
+
               </v-col>
-              <v-col cols="2" class="d-flex justify-content-end">
-                <div class="grey--text text-body-1">Nama:</div>
-              </v-col>
-              <v-col cols="4" class="d-flex justify-content-end">
-                <span class="black--text font-weight-medium">{{
-                  dataprofil.nama
-                }}</span>
+              <v-col cols="12" lg="6" class="pt-0">
+                <div :class="['grey--text text-body-1 mb-4',$vuetify.breakpoint.smAndDown?'d-block mb-4':'d-flex']">
+                  <p class="ma-0 mr-2">
+                    Telepon:
+                  </p>
+                  <p class="ma-0  black--text">
+                    {{ dataprofil.no_telepon }}
+                  </p>
+                </div>
+
+
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="12" class="mt-4 d-flex justify-center">
+          <v-col cols="12" v-if="$vuetify.breakpoint.mdAndUp" class="mt-4 d-flex justify-center">
             <v-btn
               class="font-weight-medium px-15"
               outlined
-              rounded
+
+              rounded-lg
               @click="pushprofil"
             >
               Edit Profil
@@ -75,49 +102,6 @@
           </v-col>
         </v-row>
       </div>
-
-      <!-- <v-row dense justify="center">
-              <v-col cols="6" lg="6" md="6" sm="4">
-                <p>Nama</p>
-              </v-col>
-              <v-col cols="6" lg="6" md="6" sm="8">
-                <p>{{ dataprofil.nama }}</p>
-              </v-col>
-            </v-row>
-            <v-row dense justify="center">
-              <v-col cols="12">
-                <div
-                  :class="[
-                    'font-weight-bold',
-                    $vuetify.breakpoint.smAndDown ? '' : 'text-h6',
-                  ]"
-                >
-                  Info Kontak
-                </div>
-              </v-col>
-            </v-row>
-            <v-row dense justify="center">
-              <v-col cols="6" lg="6" md="6" sm="4">
-                <p>Telepon</p>
-                <p>Email</p>
-              </v-col>
-              <v-col cols="6" lg="6" md="6" sm="8">
-                <p>{{ dataprofil.no_telepon }}</p>
-                <p>{{ dataprofil.email }}</p>
-              </v-col>
-            </v-row>
-            <v-btn
-                class="profil-btn font-weight-medium"
-                style="font-size: 24px; font-family: Poppins, sans-serif"
-                outlined
-                block
-                rounded
-                height="40px"
-                @click="pushprofil"
-              >
-                Edit Profil
-              </v-btn>
-           -->
     </div>
   </div>
 </template>

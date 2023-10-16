@@ -29,17 +29,18 @@
     <div>
       <div class="btn-add pb-6 pl-4">
         <v-btn
-          class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-pill white--text"
-          color="#4c60af"
+          class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-lg white--text"
+          color="#2f432d"
           @click="tambahfoto()"
           >Tambah foto barang</v-btn
         >
       </div>
+      <div  style="height: 80vh; overflow-y: scroll;" class="rounded-lg">
       <v-data-table
         data-app
         :headers="headers"
         :items="fotobarang"
-        class="px-15"
+        class=""
       >
         <template v-slot:[`item.file`]="{ item }">
           <v-img
@@ -72,6 +73,7 @@
           </div>
         </template>
       </v-data-table>
+      </div>
     </div>
   </div>
 </template>
@@ -86,7 +88,7 @@ export default {
       dialogadd: false,
       dialogedit: false,
       dialogDelete: false,
-      fotobarang: [],
+      // fotobarang: [],
       editedIndex: 0,
       idfotobarang: null,
       filefoto: null,
@@ -105,11 +107,18 @@ export default {
       detaildatadialog: {
         foto_barang_id: "",
         file: "",
+        fotolama: "",
       },
       defaultItem: {
+        foto_barang_id: "",
         file: "",
+        fotolama: "",
       },
-      fotoTambah: null,
+      fotoTambah: {
+        barang_id:"",
+        file:"",
+        fotolama:""
+      },
       prev: null,
       preview: null,
       rules: [
@@ -124,94 +133,104 @@ export default {
       ],
     };
   },
+  computed:{
+    fotobarang(){
+      return this.$store.state.foto_barang.alldatafotobarang
+    }
+  },
   methods: {
     getfoto() {
-      axios
-        .get("http://127.0.0.1:8000/api/getfotobarang/" + this.prm.foto_barang)
-        .then((respon) => {
-          this.fotobarang = respon.data?.data;
-        });
+        this.$store.dispatch('foto_barang/getdatafotobarang',  this.prm.foto_barang)
     },
     closeadd() {
       this.$nextTick(() => {
         this.detaildatadialog = Object.assign({}, this.defaultItem);
       });
-      this.fotoTambah = null;
+      this.fotoTambah = Object.assign({}, this.defaultItem);
+      this.fotoTambah.file = null;
+      this.fotoTambah.barang_id = null;
       this.prev = null;
       this.dialogadd = false;
-    },
-    upload(foto) {
-      let prv = foto.target.files[0];
-      this.preview = URL.createObjectURL(prv);
-      this.filefoto = prv;
     },
     uploadTambah(foto) {
       let prv = foto.target.files[0];
       this.prev = URL.createObjectURL(prv);
-      this.fotoTambah = prv;
+      this.fotoTambah.file = prv;
     },
     tambahfoto() {
       this.dialogadd = true;
     },
     konfirmtambahfoto() {
-      let foto = new FormData();
-      foto.append("file", this.fotoTambah);
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/createfotobarang/" + this.prm.foto_barang,
-          foto
-        )
-        .then((respon) => {
-          console.log(respon);
+      this.fotoTambah.barang_id = this.prm.foto_barang
+      // let foto = new FormData();
+      // foto.append("file", this.fotoTambah.file);
+      // axios
+      //   .post(
+      //     "http://127.0.0.1:8000/api/createfotobarang/" +this.fotoTambah,
+      //     foto
+      //   )
+      //   .then((respon) => {
+      //     console.log(respon);
 
-          this.$toasted.success("Berhasil tambah foto barang", {
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
-        });
-      this.getfoto();
-      this.fotobarang.push(this.detaildatadialog);
-      this.closeadd();
+      //     this.$toasted.success("Berhasil tambah foto barang", {
+      //       position: "top-right",
+      //       className: "edit-toast",
+      //       duration: 3000,
+      //     });
+        // });
+        this.$store.dispatch('foto_barang/tambahdata',  this.fotoTambah)
+        // this.getfoto();
+        console.log(this.fotoTambah)
+        // this.fotobarang.push(this.detaildatadialog);
+      // this.closeadd();
     },
 
+    upload(foto) {
+      let prv = foto.target.files[0];
+      this.preview = URL.createObjectURL(prv);
+      this.detaildatadialog.file = prv;
+    },
     ubahfoto(item) {
       this.indexnya = this.fotobarang.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
-      this.forid = item.foto_barang_id;
+      this.detaildatadialog.foto_barang_id = item.foto_barang_id;
       this.dialogedit = true;
-      this.editdatafoto = Object.assign({}, item);
+      // this.editdatafoto = ;
+      // this.detaildatadialog.fotolama=Object.assign({}, item.file)
     },
     closeedit() {
       this.$nextTick(() => {
         this.detaildatadialog = Object.assign({}, this.defaultItem);
+        this.fot = Object.assign({}, this.defaultItem);
       });
       this.filefoto = null;
       this.preview = null;
       this.dialogedit = false;
     },
     updatefoto() {
-      let foto = new FormData();
-      if (this.filefoto) {
-        console.log("0");
-        foto.append("file", this.filefoto);
-      } else {
-        console.log("1");
-        foto.append("file", this.editdatafoto.file);
-      }
-      axios
-        .post("http://127.0.0.1:8000/api/updatefotobarang/" + this.forid, foto)
-        .then((respon) => {
-          console.log(respon.data);
-          this.$toasted.success("Berhasil ubah foto barang", {
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
-        });
-      Object.assign(this.fotobarang[this.indexnya], this.detaildatadialog);
-      this.getfoto();
-      this.dialogedit = false;
+      // let foto = new FormData();
+      // if (this.filefoto.file) {
+      //   console.log("0");
+      //   foto.append("file", this.filefoto.file);
+      // } else {
+      //   console.log("1");
+      //   foto.append("file", this.filefoto.fotolama);
+      // }
+      // axios
+      //   .post("http://127.0.0.1:8000/api/updatefotobarang/" + this.forid, foto)
+      //   .then((respon) => {
+      //     console.log(respon.data);
+      //     this.$toasted.success("Berhasil ubah foto barang", {
+      //       position: "top-right",
+      //       className: "edit-toast",
+      //       duration: 3000,
+      //     });
+      //   });
+      // Object.assign(this.fotobarang[this.indexnya], this.detaildatadialog);
+      // this.getfoto();
+      this.$store.dispatch('foto_barang/ubahdata',  this.detaildatadialog)
+      console.log(this.detaildatadialog)
+      this.closeedit()
     },
 
     hapusfoto(ftbrg) {
@@ -222,18 +241,7 @@ export default {
       this.dialogDelete = true;
     },
     confirmhapusfoto() {
-      axios
-        .delete("http://127.0.0.1:8000/api/deletefotobarang/" + this.ftbrgid)
-        .then((respon) => {
-          console.log(respon);
-          this.$toasted.success("Berhasil hapus foto barang", {
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
-        });
-      // this.fotobarang.splice(this.indexnya, 1)
-      this.getfoto();
+        this.$store.dispatch('foto_barang/hapusdata',  this.ftbrgid)
       this.closeDelete();
     },
     closeDelete() {

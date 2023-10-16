@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-10 ">
+  <div class="mb-6 ">
     <!-- <div class="btn-warnaku white--text">
       <div class="btn-warnaku white--text">
         <div class="py-1 font-weight-regular">
@@ -11,11 +11,17 @@
       </div>
       </div> -->
     <div class="container">
-     <div class="d-flex ">
+     <div class="d-flex align-center justify-space-between">
       <div class="d-flex">
             <v-img :src="require('~/assets/logo_nganu.png')" :max-width="$vuetify.breakpoint.smAndDown?'20':'30'"></v-img>
             <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'ml-2':'ml-4 text-h6']">Toko nganu</div>
           </div>
+          <v-btn v-if="!$store.state.users.authenticated && $route.path !=='/login'"
+          class="text-capitalize px-8 text-body-1 font-weight-medium rounded-lg white--text"
+          color="#2f432d"
+          to="/login"
+          >Login</v-btn
+        >
      </div>
     </div>
   </div>

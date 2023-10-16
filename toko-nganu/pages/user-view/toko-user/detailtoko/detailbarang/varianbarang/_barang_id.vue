@@ -1,11 +1,12 @@
 <template>
   <div>
-
     <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div>
     <DialogTambah
       :dialogtambah="dialogadd"
       item="Varian"
+      :prev="prev"
       :closetambah="closeadd"
+      :upload="uploadTambah"
       :detaildatadialog="detaildatadialog"
       :konfirmtambah="konfirmtambahvarian"
     />
@@ -19,17 +20,30 @@
       item="Varian "
       :detaildatadialog="detaildatadialog"
       :closeedit="closeedit"
+      :upload="uploadupdate"
       :updateedit="updatevarian"
     />
-    <div class=" pb-6 pl-4">
+    <div class="pb-6 pl-4">
       <v-btn
-        class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-pill white--text"
-        color="#4c60af"
+        class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-lg white--text"
+        color="#2f432d"
         @click="tambahvarian()"
         >Tambah varian barang</v-btn
       >
     </div>
-    <v-data-table data-app class="px-15" :headers="headers" :items="barang">
+     <div  style="height: 80vh; overflow-y: scroll;" class="rounded-lg">
+
+    <v-data-table data-app class="" :headers="headers" :items="barang">
+      <template v-slot:[`item.foto_barang_varian`]="{ item }">
+        <div class="image-container3 d-flex justify-center align-center">
+          <v-img
+            width="80%"
+            height="80%"
+            :src="'http://127.0.0.1:8000/storage/' + item.foto_barang_varian"
+          >
+          </v-img>
+        </div>
+      </template>
       <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
           class="mx-2 white--text btn-crkuup"
@@ -55,11 +69,13 @@
       </template>
     </v-data-table>
   </div>
+  </div>
 </template>
 <script>
 import axios from "axios";
+import { mapActions, mapState, mapGetters } from 'vuex';
 export default {
-  layout: 'UserView',
+  layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
@@ -67,37 +83,54 @@ export default {
       dialogadd: false,
       dialogedit: false,
       dialogDelete: false,
-      barang: [],
+      // barang: [],
       varianbarang: null,
       headers: [
         { text: "Nama varian", value: "nama" },
         { text: "harga", value: "harga" },
         { text: "stok", value: "stok" },
+        { text: "foto", value: "foto_barang_varian" },
         { text: "Aksi", value: "aksi" },
       ],
       varid: {
         varian_id: "",
       },
       detaildatadialog: {
-        nama: "",
-        harga: "",
-        stok: "",
+        varian_id: null,
+        fotosementara: null,
+        idbrg: null,
+        nama: null,
+        harga: null,
+        stok: null,
+        foto_barang_varian: null,
       },
       defaultItem: {
-        nama: "",
-        harga: "",
-        stok: "",
+        varian_id: null,
+        fotosementara: null,
+        idbrg: null,
+        nama: null,
+        harga: null,
+        stok: null,
+        foto_barang_varian: null,
       },
+      prev: null,
+      preview: null,
+      filefoto: null,
     };
   },
-  methods: {
-    getvarian() {
-      axios
-        .get("http://127.0.0.1:8000/api/getvarianbarang/" + this.prm.barang_id)
-        .then((respon) => {
-          this.barang = respon.data?.data;
-        });
+  computed:{
+    barang(){
+      return this.$store.state.varian.alldatabarang
     },
+    ...mapGetters('varian', ['getdata','getresp']),
+  },
+  methods: {
+    ...mapActions(['getdatavarian', 'tambahdata', 'hapusdata']),
+    // getvarian() {
+
+    // //   this.$store.dispatch('varian/getdatavarian', this.prm.barang_id )
+    // // this.barang=  this.getdata
+    // },
     closeadd() {
       this.$nextTick(() => {
         this.detaildatadialog = Object.assign({}, this.defaultItem);
@@ -107,21 +140,26 @@ export default {
     tambahvarian() {
       this.dialogadd = true;
     },
+    uploadTambah(foto) {
+      let prv = foto.target.files[0];
+      this.prev = URL.createObjectURL(prv);
+      this.fotoTambah = prv;
+      this.detaildatadialog.foto_barang_varian = prv;
+    },
     konfirmtambahvarian() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/createvarianbarang/" + this.prm.barang_id,
-          this.detaildatadialog
-        )
-        .then((respon) => {
-          console.log(respon);
-          // this.barang.push(this.detaildatadialog)
-          this.getvarian();
-        });
+
+      this.detaildatadialog.idbrg=this.prm.barang_id;
+      this.$store.dispatch('varian/tambahdata', this.detaildatadialog )
+      console.log(this.getresp)
       this.$toast.success("Berhasil tambah");
+      this.barang
       this.closeadd();
     },
-
+    uploadupdate(foto) {
+      let prv = foto.target.files[0];
+      this.preview = URL.createObjectURL(prv);
+      this.detaildatadialog.fotosementara = prv;
+    },
     ubahvarian(item) {
       this.indexnya = this.barang.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
@@ -135,19 +173,10 @@ export default {
       this.dialogedit = false;
     },
     updatevarian() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/updatevarianbarang/" +
-            this.varid.varian_id,
-          this.detaildatadialog
-        )
-        .then((respon) => {
-          console.log(respon.data);
-          this.getvarian();
-          // Object.assign(this.barang[this.indexnya], this.detaildatadialog)
-          this.$toast.success("Berhasil update");
-        });
+      this.detaildatadialog.varian_id=this.varid.varian_id
+      this.$store.dispatch('varian/ubahdata', this.detaildatadialog )
       this.dialogedit = false;
+      this.detaildatadialog = Object.assign({}, this.defaultItem);
     },
 
     hapusvarian(item) {
@@ -156,17 +185,10 @@ export default {
       this.dialogDelete = true;
     },
     confirmhapusvarian() {
-      axios
-        .delete(
-          "http://127.0.0.1:8000/api/deletevarianbarang/" +
-            this.detaildatadialog.varian_id
-        )
-        .then((respon) => {
-          console.log(respon);
-          this.getvarian();
-          this.$toast.success("Berhasil hapus");
-        });
-      this.barang.splice(this.editedIndex, 1);
+
+      // this.barang.splice(this.editedIndex, 1);
+      this.$store.dispatch('varian/hapusdata', this.detaildatadialog.varian_id )
+      this.$store.dispatch('varian/getdatavarian', this.prm.barang_id )
       this.closeDelete();
     },
     closeDelete() {
@@ -181,7 +203,22 @@ export default {
   created() {
     const barangid = this.$cookies.get("cookieku");
     this.varianbarang = barangid.data.id;
-    this.getvarian();
+    // this.getvarian();
+    this.$store.dispatch('varian/getdatavarian', this.prm.barang_id )
+    this.barang
   },
 };
-</script>
+</script >
+
+<style scoped>
+.image-container3 {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.image-container3 img {
+  object-fit: cover;
+  object-position: center;
+}
+</style>

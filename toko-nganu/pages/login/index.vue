@@ -36,13 +36,9 @@
                     <v-btn
                       type="submit"
                       block
-                      class="mt-2 white--text"
-                      style="
-                        border-radius: 50px;
-                        margin-top: 30px;
-                        margin-bottom: 20px;
-                        background-color: #2f432d;
-                      "
+                      class="mt-2 white--text rounded-lg"
+                      color="#2f432d"
+
                     >
                       Login
                     </v-btn>

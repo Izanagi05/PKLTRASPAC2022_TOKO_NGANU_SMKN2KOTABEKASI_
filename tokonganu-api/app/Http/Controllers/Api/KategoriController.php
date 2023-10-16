@@ -38,7 +38,16 @@ class KategoriController extends Controller
                 foreach ($kategori[$key]['barang'] as $key => $dt) {
                     $data[$key]['barang_foto_first'] = $dt->barangFotoFirst;
                     $data[$key]['barang_varian_first'] = $dt->barangVarianFirst;
-                    # code...
+                    $data[$key]['toko'] = $dt->Toko;
+                    $ratings = $dt->BarangRating;
+                    $countRating = count($ratings);
+
+                    $totalRating = 0;
+                    foreach ($ratings as $rating) {
+                        $totalRating += $rating->rating;
+                    }
+                    $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
+                    $data[$key]['average_rating'] = $averageRating;
                 }
             }
             return response()->json([
@@ -96,6 +105,12 @@ class KategoriController extends Controller
                     // Hapus foto dari storage
                     if (!empty($foto->file)) {
                         Storage::delete($foto->file);
+                    }
+                }
+                foreach ($brg->barangVarian as $foto) {
+                    // Hapus foto dari storage
+                    if (!empty($foto->foto_barang_varian)) {
+                        Storage::delete($foto->foto_barang_varian);
                     }
                 }
                 $brg->BarangFoto()->delete();

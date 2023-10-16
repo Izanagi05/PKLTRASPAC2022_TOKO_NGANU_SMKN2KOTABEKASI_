@@ -38,7 +38,7 @@ class FotoBarangController extends Controller
         $validatedData['file'] =  $request->file('file')->store('fotobarang');
         Foto_Barang::create($validatedData);
         return response()->json([
-            'data' => 'sukses',
+            'data' => $validatedData,
             'message' => 'Berhasil tambah data foto',
             'success' => true,
             'status' => 201,
@@ -67,8 +67,9 @@ class FotoBarangController extends Controller
             $validasi['file'] = $request->file('file')->store('fotobarang');
 
             $data = Foto_Barang::where('foto_barang_id', $id)->update($validasi);
+            $validasi['foto_barang_id']=$id;
             return response()->json([
-            'data' => 'sukses',
+            'data' => $validasi,
             'message' => 'Berhasil ubah data foto',
             'success' => true,
             'status' => 201,

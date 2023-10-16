@@ -3,6 +3,7 @@
     <v-app>
       <Nuxt />
       <!-- <Footer /> -->
+      <Footer />
     </v-app>
   </div>
 </template>
