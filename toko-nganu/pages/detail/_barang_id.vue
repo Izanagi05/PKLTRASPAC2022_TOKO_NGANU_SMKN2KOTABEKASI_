@@ -3,7 +3,11 @@
     <Navbar />
 
     <v-container
-      ><div class="mb-2" v-for="(dtlbrg, index) in detailbarang" :key="index">
+      ><div
+        class="mb-2 tes"
+        v-for="(dtlbrg, index) in detailbarang"
+        :key="index"
+      >
         <NuxtLink to="/" class="my-2 text-decoration-none black--text">
           Home </NuxtLink
         ><span class="mdi mdi-chevron-right"
