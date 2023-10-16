@@ -13,11 +13,17 @@ class KeranjangUserController extends Controller
 {
     public function keranjangbyuser($id){
         $keranjang = User::where('id', $id)->first();
-
-
         $keranjang['user_keranjang']=$keranjang->UserKeranjang;
-        // foreach ($keranjang as $key => $krnjng) {
-        // }
+        // // $keranjang['varian']=$keranjang->UserKeranjang;
+        foreach ($keranjang['user_keranjang'] as $key => $item) {
+            $item['harga'] = $item->keranjangVarian->harga; // Akses model Varian yang terkait.
+            $item['stok'] = $item->keranjangVarian->stok; // Akses model Varian yang terkait.
+            $item['nama_varian'] = $item->keranjangVarian->nama; // Akses model Varian yang terkait.
+            $item['foto_barang_varian'] = $item->keranjangVarian->foto_barang_varian; // Akses model Varian yang terkait.
+            $item['nama_barang']= $item->KeranjangBarang->nama;
+            unset($item->keranjangVarian);
+            unset($item->KeranjangBarang);
+        }
         return response()->json($keranjang);
     }
     public function keranjanguser($id){
@@ -36,9 +42,6 @@ class KeranjangUserController extends Controller
         })->get();
         return response()->json([$keranjang]);
     }
-
-
-
 
     public function barangvariankeranjang($id){
         $keranjang = User::where('id', $id)->get();
@@ -69,7 +72,9 @@ class KeranjangUserController extends Controller
         $user = $id;
         $validatedData = $request->validate([
             'user_id'=>'',
+            'toko_id'=> 'required',
             'barang_id'=> 'required',
+            'kategori_id'=> 'required',
             'kuantitas' => '',
             'varian_id' => 'unique:keranjang_user',
         ]);

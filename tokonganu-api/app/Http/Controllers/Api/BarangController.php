@@ -182,6 +182,12 @@ class BarangController extends Controller
             // $validatedDataFt['barang_id'] = $bid;
             // $validatedDataFt['file'] =  $request->file('file')->store('fotobarang');
             // Foto_Barang::create($validatedDataFt);
+            return response()->json([
+                'data' => $validatedData,
+                'message' => 'Berhasil tambah barang',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         } catch (\Throwable $e) {
             return response()->json([
                 'data' => null,
@@ -194,14 +200,16 @@ class BarangController extends Controller
     public function updatebarang(Request $request, $id)
     {
         try {
-            $data = Barang::where('barang_id', $id)->update([
-                // "id" => $request->id,
-                "nama" => $request->nama,
-                "deskripsi" => $request->deskripsi,
-                "kategori_id" => $request->kategori_id,
-            ]);
+            $rules=[
+                 "nama" => 'required|string',
+                 "deskripsi" => 'required|string',
+                 "kategori_id" => 'required|numeric',
+            ];
+            $validasi = $request->validate($rules);
+            $data = Barang::where('barang_id', $id)->update($validasi);
+            $validasi['barang_id']=$id;
             return response()->json([
-                'data' => $data,
+                'data' => $validasi,
                 'message' => 'Berhasil update',
                 'success' => true,
                 'status' => 201,
@@ -232,6 +240,7 @@ class BarangController extends Controller
                     Storage::delete($foto->foto_barang_varian);
                 }
             }
+            $data->delete();
             return response()->json($data, 200);
         } catch (\Throwable $e) {
             return response()->json([

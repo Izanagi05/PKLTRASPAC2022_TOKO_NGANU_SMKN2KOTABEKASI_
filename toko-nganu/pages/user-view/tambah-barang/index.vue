@@ -12,7 +12,7 @@
               <div class="list">Nama Barang</div>
             </v-col>
             <v-col cols="9"  >
-              <v-text-field label="Nama Barang" placeholder="Masukan Nama Barang" solo
+              <v-text-field label="Masukan Nama Barang" placeholder="Masukan Nama Barang" solo class="rounded-lg"
                 v-model="databarang.nama"></v-text-field>
 
             </v-col>
@@ -24,10 +24,10 @@
             </v-col>
             <v-col cols="9">
               <v-expansion-panels class="panel">
-                <v-expansion-panel class="panel-kategori">
+                <v-expansion-panel solo class="panel-kategori grey lighten-4">
                   <v-expansion-panel-header v-slot="{ open }">
                     <v-row no-gutters>
-                      <v-col> Kategori </v-col>
+                      <v-col>Masukan Kategori </v-col>
                       <v-col cols="8" class="text--secondary">
                         <v-fade-transition leave-absolute>
                           <span v-if="open" key="0"> Pilih Kategori </span>
@@ -45,7 +45,7 @@
                       <v-spacer></v-spacer>
                       <v-col cols="5">
                         <div>
-                          <v-select v-model="databarang.kategori_id" :items="kategori" item-text="nama"
+                          <v-select class="grey kategori-select lighten-4" v-model="databarang.kategori_id" :items="kategori" item-text="nama"
                             item-value="kategori_id" chips flat solo></v-select>
                         </div>
                       </v-col>
@@ -67,14 +67,14 @@
               <div class="list">Toko</div>
             </v-col>
             <v-col cols="9">
-              <v-expansion-panels>
-                <v-expansion-panel>
+              <v-expansion-panels solo class="grey lighten-4">
+                <v-expansion-panel solo class="grey lighten-4">
                   <v-expansion-panel-header v-slot="{ open }">
                     <v-row no-gutters>
-                      <v-col> Toko </v-col>
+                      <v-col> Masukan Toko </v-col>
                       <v-col cols="8" class="text--secondary">
                         <v-fade-transition leave-absolute>
-                          <span v-if="open" key="0"> Pilih Toko </span>
+                          <span v-if="open" key="0">Pilih Toko</span>
                           <span v-else>
                             <div>
                               {{ getTokoText(databarang.toko_id) }}
@@ -89,7 +89,7 @@
                       <v-spacer></v-spacer>
                       <v-col cols="5">
                         <div>
-                          <v-select v-model="databarang.toko_id" :items="usertoko" item-text="nama" item-value="toko_id"
+                          <v-select class="grey lighten-4 toko-select" v-model="databarang.toko_id" :items="usertoko" item-text="nama" item-value="toko_id"
                             chips flat solo></v-select>
                         </div>
                       </v-col>
@@ -112,7 +112,7 @@
               <div class="list">Deskripsi</div>
             </v-col>
             <v-col cols="9">
-              <v-textarea solo name="input-7-4" label="Deskripsi Barang" v-model="databarang.deskripsi"></v-textarea>
+              <v-textarea solo class="rounded-lg" name="input-7-4" label="Masukan Deskripsi Barang" v-model="databarang.deskripsi"></v-textarea>
             </v-col>
           </v-row>
         </v-col>
@@ -146,9 +146,9 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
-      usertoko: [],
+      // usertoko: [],
       userid: null,
-      kategori: [],
+      // kategori: [],
       databarang: {
         toko_id: null,
         nama: null,
@@ -157,29 +157,40 @@ export default {
       },
     };
   },
+  computed:{
+    usertoko(){
+      return this.$store.state.toko.alldatatoko
+    },
+    kategori(){
+      return this.$store.state.kategori.alldatakategori
+    },
 
+  },
   methods: {
     gettokouser() {
-      axios.get("http://127.0.0.1:8000/api/gettoko/" + this.userid).then((respon) => {
-        this.usertoko = respon.data?.data;
-        //  this.items = respon.data?.data
-      });
+      // axios.get("http://127.0.0.1:8000/api/gettoko/" + this.userid).then((respon) => {
+      //   this.usertoko = respon.data?.data;
+      //   //  this.items = respon.data?.data
+      // });
+       this.$store.dispatch('toko/getdatatoko', this.userid )
     },
     getkategori() {
-      axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
-        this.kategori = respon.data?.data;
-      });
+      // axios.get("http://127.0.0.1:8000/api/getallkategori").then((respon) => {
+      //   this.kategori = respon.data?.data;
+      // });
+       this.$store.dispatch('kategori/getdatakategori')
     },
     tbhbarang() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/createbarang/" + this.databarang.toko_id,
-          this.databarang
-        )
-        .then((respon) => {
-          this.$router.push("/");
-          console.log(respon);
-        });
+      // axios
+      //   .post(
+      //     "http://127.0.0.1:8000/api/createbarang/" + this.databarang.toko_id,
+      //     this.databarang
+      //   )
+      //   .then((respon) => {
+      //     this.$router.push("/");
+      //     console.log(respon);
+      //   });
+          this.$store.dispatch('barang/tambahdata', this.databarang)
     },
     getKategoriText(val) {
       const data = this.kategori.find((element) => element.kategori_id === val);

@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\VarianBarangController;
 use App\Http\Controllers\Api\FotoBarangController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\DetailTransakasiController;
+use App\Http\Controllers\Api\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +89,15 @@ Route::post('/updaterating/{id}', [RatingController::class, 'updaterating']);
 Route::delete('/deleterating/{id}', [RatingController::class, 'deleterating']);
 
 
+Route::get('/getdatatransakasibytoko/{id}', [TransaksiController::class, 'getdatatransakasibytoko']);
+Route::post('/createtransaksi', [TransaksiController::class, 'createtransaksi']);
+Route::post('/updatetransaksi/{id}', [TransaksiController::class, 'updatetransaksi']);
+Route::delete('/deletetransaksi/{id}', [TransaksiController::class, 'deletetransaksi']);
 
+Route::get('/getdatadetailtransakasibyuser/{id}', [DetailTransakasiController::class, 'getdatadetailtransakasibyuser']);
+Route::post('/createdetail_transaksi', [DetailTransakasiController::class, 'createdetail_transaksi']);
+Route::post('/updatedetail_transaksi/{id}', [DetailTransakasiController::class, 'updatedetail_transaksi']);
+Route::delete('/deletedetail_transaksi/{id}', [DetailTransakasiController::class, 'deletedetail_transaksi']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

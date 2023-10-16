@@ -8,7 +8,7 @@
           </v-avatar>
           <h2>Tambah Toko</h2>
         </div>
-        <v-expansion-panels accordion>
+        <v-expansion-panels >
           <v-expansion-panel class="panel rounded-xl">
             <v-expansion-panel-header>
               <template v-slot:default="{ open }">
@@ -34,8 +34,7 @@
               ></v-text-field>
             </v-expansion-panel-content>
           </v-expansion-panel>
-
-          <v-expansion-panel class="panel rounded-xl">
+          <v-expansion-panel class="panel rounded-xl" >
             <v-expansion-panel-header>
               <template v-slot:default="{ open }">
                 <v-row no-gutters>
@@ -60,7 +59,6 @@
               ></v-text-field>
             </v-expansion-panel-content>
           </v-expansion-panel>
-
           <v-expansion-panel class="panel rounded-xl">
             <v-expansion-panel-header>
               <template v-slot:default="{ open }">
@@ -157,11 +155,13 @@
 
 <script>
 import axios from "axios";
+import { mapActions, mapState, mapGetters } from 'vuex';
 export default {
   layout: "UserView",
   middleware: "middlewareku",
   data() {
     return {
+      panel:[0,1,2,3],
       databarang: {
         userid: null,
         nama: null,
@@ -174,44 +174,34 @@ export default {
   },
 
   methods: {
+    ...mapActions(['tambahdata']),
     buattoko() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/createtoko/" + this.userid,
-          this.databarang
-        )
-        .then((respon) => {
-          this.$toasted.show("Berhasil hapus keranjang", {
-            theme: "success",
-            position: "top-right",
-            className: "edit-toast",
-            duration: 3000,
-          });
-          this.$router.push("/user-view/toko-user");
-          console.log(respon);
-        });
+      this.databarang.userid=this.userid
+
+        this.$store.dispatch('toko/tambahdata', this.databarang )
+        console.log("tes")
     },
-    upload(foto) {
-      let files = foto.target.files[0];
-      this.preview = URL.createObjectURL(files);
-      this.photo = files;
-    },
-    buattoko() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/createtoko/" + this.userid,
-          this.databarang
-        )
-        .then((respon) => {
-          this.$router.push("/user-view/toko-user");
-          console.log(respon);
-        });
-      // let formData = new FormData()
-      // formData.append('logo', this.photo)
-      //   axios.post('http://127.0.0.1:8000/api/createtoko/'+ this.userid, formData, {
-      //         'content-type': 'multipart/form-data'
-      //       })
-    },
+    // upload(foto) {
+    //   let files = foto.target.files[0];
+    //   this.preview = URL.createObjectURL(files);
+    //   this.photo = files;
+    // },
+    // buattoko() {
+    //   axios
+    //     .post(
+    //       "http://127.0.0.1:8000/api/createtoko/" + this.userid,
+    //       this.databarang
+    //     )
+    //     .then((respon) => {
+    //       this.$router.push("/user-view/toko-user");
+    //       console.log(respon);
+    //     });
+    //   // let formData = new FormData()
+    //   // formData.append('logo', this.photo)
+    //   //   axios.post('http://127.0.0.1:8000/api/createtoko/'+ this.userid, formData, {
+    //   //         'content-type': 'multipart/form-data'
+    //   //       })
+    // },
     backprofil() {
       this.$router.push("/user-view");
     },

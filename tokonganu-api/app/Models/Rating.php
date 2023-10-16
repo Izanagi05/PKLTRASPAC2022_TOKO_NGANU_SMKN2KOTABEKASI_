@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $primaryKey = 'rating_id';
     protected $table ='rating';
     protected $fillable = [

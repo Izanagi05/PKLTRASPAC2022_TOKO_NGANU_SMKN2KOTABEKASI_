@@ -5,38 +5,38 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Detail_Transakasi extends Model
 {
     use HasFactory;
-    // public $timestamps = false;
-    protected $primaryKey = 'transaksi_id';
-    protected $table ='transaksi';
+    protected $primaryKey = 'detail_transaksi_id';
+    protected $table ='detail_transakasi';
     protected $fillable = [
-        'transaksi_id',
         'user_id',
         'toko_id',
         'barang_id',
-        'varian_id',
         'kategori_id',
-        'admin_konfirmasi',
+        'varian_id',
+        'transaksi_id',
         'status',
+        'admin_konfirmasi',
         'jumlah',
-        'total_harga',
+        'subtotal'
     ];
 
-    public function transaksiUser(){
+
+    public function detailTransaksiUser(){
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function transaksiToko(){
+    public function detailTransaksiToko(){
         return $this->belongsTo(Toko::class, 'toko_id');
     }
-    public function transaksiBarang(){
+    public function detailTransaksiBarang(){
         return $this->belongsTo(Barang::class, 'barang_id');
     }
-    public function transaksiVarian(){
+    public function detailTransaksiVarian(){
         return $this->belongsTo(Varian::class, 'varian_id');
     }
-    public function transaksiKategori(){
+    public function detailTransaksiKategori(){
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }

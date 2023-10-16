@@ -71,7 +71,7 @@ class VarianBarangController extends Controller
         $validatedData['barang_id'] = $id;
         Varian::create($validatedData);
         return response()->json([
-            'data' => 'sukses',
+            'data' => $validatedData,
             'message' => 'Berhasil tambah data',
             'success' => true,
             'status' => 201,
@@ -104,8 +104,9 @@ class VarianBarangController extends Controller
                 $validasi['foto_barang_varian'] = $request->file('foto_barang_varian')->store('foto_barang_varian_toko');
             }
         $data = Varian::where('varian_id', $id)->update($validasi);
+        $validasi['varian_id']=$id;
         return response()->json([
-            'data' => 'sukses',
+            'data' => $validasi,
             'message' => 'Berhasil ubah data',
             'success' => true,
             'status' => 201,
@@ -122,10 +123,10 @@ class VarianBarangController extends Controller
     }
     public function deletevarianbarang($id ){
     try {
-        $data = Varian::where('varian_id', $id)->delete();
         if (!empty(Varian::find($id)->foto_barang_varian)) {
             Storage::delete(Varian::find($id)->foto_barang_varian);
         }
+        $data = Varian::where('varian_id', $id)->delete();
         return response()->json([
             'data' => $data,
             'message' => 'Berhasil hapus',

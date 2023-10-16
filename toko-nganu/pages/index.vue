@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="ppp">
-      <div class="contact white--text">
-        <div class="contact-text font-weight-regular">
-          <button class="kontak" type="submit" @click="kontak">
+    <div class="mb-10">
+      <!-- <div class="btn-warnaku white--text">
+        <div class="py-2 font-weight-regular">
+          <button class="ml-4" type="submit" @click="kontak">
             <v-icon color="white">mdi-phone</v-icon>
             +62-815-6315-10389
           </button>
         </div>
-      </div>
-      <div class="container pb-3">
+      </div> -->
+      <div class="container pb-4">
         <v-row>
           <v-col
             class="d-flex col-12 col-lg-6 col-md-4 col-sm-12 col-xs-12 d-flex align-center"
@@ -31,7 +31,7 @@
                 single-line
                 hide-details
                 outlined
-                @keyup.enter="getsearchbarang()"
+                @keyup.enter="getkategori(-2)"
                 append-icon="mdi-magnify"
                 placehoder="cari"
               ></v-text-field>
@@ -43,7 +43,7 @@
             </nuxt-link>
             <nuxt-link to="/user-view" class="text-decoration-none ml-2">
               <v-btn elevation="2" fab icon color="d9d9d9">
-                <v-avatar class="foto-profilan">
+                <v-avatar class="bg-greyku">
                   <img
                     :src="
                       'http://127.0.0.1:8000/storage/' +
@@ -53,9 +53,9 @@
                 </v-avatar>
               </v-btn>
             </nuxt-link>
-            <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
+            <!-- <div class="display-5 my-auto ml-2 font-weight-bold text-truncate">
               {{ $cookies.get("cookieku").data.nama }}
-            </div>
+            </div> -->
           </v-col>
         </v-row>
       </div>
@@ -63,16 +63,8 @@
     <div class="all-home">
       <div class="container">
         <div class="home-image">
-          <div v-if="firstLoad" class="custom-skeleton">
-            <v-skeleton-loader
-              :loading="loading"
-              type="image"
-              height="390"
-            ></v-skeleton-loader>
-          </div>
           <v-carousel
-            v-else
-            no-autoplay
+            cycle
             height="auto"
             hide-delimiter-background
             show-arrows-on-hover
@@ -86,100 +78,69 @@
             </v-carousel-item>
           </v-carousel>
         </div>
-        <div>
-          <div v-if="firstLoad" class="d-flex mt-8">
-            <v-skeleton-loader
-              v-for="(ktg, index) in allkategori"
-              :key="index"
-              class="ma-2"
-              :loading="loading"
-              max-width="120"
-              type="button"
-            ></v-skeleton-loader>
-          </div>
-
-          <div v-else class="d-flex mt-8">
-            <v-btn
-              v-if="!loading"
-              outlined
-              @click="getkategori(-1)"
-              :class="[
-                'ma-2  rounded-xl text-capitalize',
-                fcek === true ? 'btn-warnaku white--text' : '',
-              ]"
-            >
-              Semua Kategori
-            </v-btn>
-            <v-btn
-              outlined
-              v-for="(ktg, index) in allkategori"
-              :class="[
-                'ma-2  rounded-xl text-capitalize',
-                ktg.kategori_id === fcek ? 'btn-warnaku white--text' : '',
-              ]"
-              :key="index"
-              @click="getkategori(ktg.kategori_id)"
-              class="ma-2 rounded-xl"
-            >
-              {{ ktg.nama }}
-            </v-btn>
-          </div>
+        <div class="d-flex mt-8">
+          <v-btn
+            outlined
+            @click="getkategori(-1)"
+            :class="[
+              'ma-2  rounded-xl text-capitalize',
+              fcek === true ? 'btn-warnaku white--text' : '',
+            ]"
+          >
+            Semua Kategori
+          </v-btn>
+          <v-btn
+            outlined
+            v-for="(ktg, index) in allkategori"
+            :class="[
+              'ma-2  rounded-xl text-capitalize',
+              ktg.kategori_id === fcek ? 'btn-warnaku white--text' : '',
+            ]"
+            :key="index"
+            @click="getkategori(ktg.kategori_id)"
+            class="ma-2 rounded-xl"
+          >
+            {{ ktg.nama }}
+          </v-btn>
+        </div>
+        <div class="recomend font-weight-bold text-h6">
+          Rekomendasi untuk anda
         </div>
         <div>
-          <div v-if="firstLoad">
-            <v-skeleton-loader
-              :loading="loading"
-              width="500"
-              type="heading"
-            ></v-skeleton-loader>
-          </div>
-
-          <div v-else>
-            <div class="font-weight-bold text-h6">Rekomendasi Untuk Kamu</div>
-          </div>
-        </div>
-        <div class="product-card">
-          <v-row class="p-0">
-            <v-col
-              cols="5"
-              :class="[
-                '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
-                $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
-              ]"
-              v-for="(brg, index) in getdataall"
-              :key="index"
-            >
-              <v-skeleton-loader
-                v-if="firstLoad"
-                width="300"
-                type="card, list-item-three-line"
-              />
-              <v-card
-                v-else
-                color="#ffffff"
+          <div class="product-card">
+            <v-row class="p-0">
+              <v-col
+                cols="6"
+                :class="[
+                  '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                  $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
+                ]"
+                v-for="(brg, index) in getdataall"
+                :key="index"
+              >
+                <v-card   color="#ffffff"
                 class="rounded-lg"
                 elevation="1"
                 width="300"
-                @click="todetail(brg)"
-              >
-                <div
-                  v-for="(ft, i) in brg.barang_foto_first"
-                  :key="i"
-                  max-width="100"
-                  class="image-cont d-flex justify-center align-center"
-                >
-                  <img
-                    :src="'http://127.0.0.1:8000/storage/' + ft.file"
-                    object-fit="cover"
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
-                <div class="pa-4">
-                  <div class="font-weight-medium text-capitalize">
-                    {{ brg.nama }}
-                  </div>
+                @click="todetail(brg)">
                   <div
+                    v-for="(ft, i) in brg.barang_foto_first"
+                    :key="i"
+                    max-width="100"
+                    class="image-container2 d-flex justify-center align-center"
+                  >
+                    <img
+                      :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                      object-fit="cover"
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                  <div class="pa-4">
+                    <div class="font-weight-medium">
+                      {{ brg.nama }}
+                    </div>
+                    <div
                     class="font-weight-medium d-flex"
                     v-for="(vrn, i) in brg.barang_varian_first"
                     :key="i"
@@ -198,7 +159,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <div class="btn-card mt-2 pb-1">
+                  <div class="btn-card mt-2 pb-1 d-flex align-center">
                     <v-rating
                       v-model="brg.average_rating"
                       background-color="white"
@@ -208,11 +169,14 @@
                       hover
                       size="18"
                     ></v-rating>
+                    <p class="ma-0">{{ brg.average_rating }}</p>
                   </div>
-                </div>
-              </v-card>
-            </v-col>
-          </v-row>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
+          <div></div>
         </div>
       </div>
     </div>
@@ -229,10 +193,8 @@ export default {
       set: 0,
       cari: null,
       fcek: null,
-      rating: 3.5,
+      rating: 1,
       currentRating: 0,
-      firstLoad: true,
-      loading: true,
 
       hasilcari: [],
       no_admin: "6281563151038",
@@ -322,12 +284,7 @@ export default {
       this.$router.push(`/detail/${barang.barang_id}`);
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.firstLoad = false;
-      this.loading = false;
-    }, 3000);
-  },
+  mounted() {},
 
   created() {
     const userid = this.$cookies.get("cookieku");
@@ -343,41 +300,15 @@ export default {
 };
 </script>
 <style scoped>
-.custom-skeleton {
-  height: 100%;
-}
-
-.custom-skeleton ::v-deep .v-skeleton-loader > * {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.col-5 {
-  flex: 0 0 20%;
-  max-width: 20%;
-}
-
-.contact {
-  background: #2f432d;
-  padding: 9px 123px 10px 123px;
-}
-
-.ppp {
-  overflow: hidden;
-  margin-bottom: 51px;
-  font-family: "Poppins", sans-serif;
-}
-
-.image-cont {
+.image-container2 {
   height: 200px;
   overflow: hidden;
 }
 
-.image-cont img {
+.image-container2 img {
   object-fit: cover;
   object-position: center;
 }
-
 .col-lg-5 {
   flex: 0 0 20%;
   max-width: 20%;

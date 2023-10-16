@@ -75,14 +75,14 @@
           </div>
 
           <div class="d-flex justify-end mt-8">
-            <v-btn class="rounded-xl px-8" outlined @click="closetambah"
+            <v-btn class="rounded-lg px-8" outlined @click="closetambah"
               >Close</v-btn
             >
             <v-btn
-              class="rounded-xl ml-8 px-8 white--text"
-              color="#4c60af"
+              class="rounded-lg ml-8 px-8 white--text"
+              color="#2f432d"
               @click="konfirmtambah"
-              >Ubah</v-btn
+              >Tambah</v-btn
             >
           </div>
         </div>

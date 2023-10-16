@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Varian extends Model
 {
     use HasFactory;
-    public $timestamps=false;
+    // public $timestamps=false;
     protected $primaryKey = 'varian_id';
     protected $table ='varian';
     protected $fillable = [
