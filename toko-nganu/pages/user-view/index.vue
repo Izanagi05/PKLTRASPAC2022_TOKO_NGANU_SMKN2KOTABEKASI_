@@ -148,17 +148,25 @@ export default {
       userid: null,
       menus: [
         {
+          class: "userprofile",
           title: "User Profile",
           link: "/user-view/profile-user",
           icon: "mdi-account",
         },
-        { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
         {
+          class: "toko",
+          title: "Toko",
+          link: "/user-view/toko-user",
+          icon: "mdi-storefront",
+        },
+        {
+          class: "tambahtoko",
           title: "Tambah Toko",
           link: "/user-view/tambah-toko",
           icon: "mdi-store-plus",
         },
         {
+          class: "tambahbarang",
           title: "Tambah Barang",
           link: "/user-view/crud",
           icon: "mdi-package-variant-closed-plus",

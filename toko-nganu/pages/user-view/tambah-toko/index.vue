@@ -127,7 +127,7 @@
 </template>
 
 <style scoped>
-.edit-toast{
+.edit-toast {
   background: green;
   color: white;
   padding: 10px;
@@ -162,6 +162,7 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
+      panel: [0, 1],
       databarang: {
         userid: null,
         nama: null,
