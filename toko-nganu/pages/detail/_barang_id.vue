@@ -3,41 +3,40 @@
     <Navbar />
 
     <v-container
-      ><div class="navigasi ml-6">
-        <v-breadcrumbs :items="items">
-          <template v-slot:divider>
-            <v-icon>mdi-chevron-right</v-icon>
-          </template>
-        </v-breadcrumbs>
+      ><div class="mb-2" v-for="(dtlbrg, index) in detailbarang" :key="index">
+        <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+          Home </NuxtLink
+        ><span class="mdi mdi-chevron-right"
+          ><b>{{ dtlbrg.nama }}</b></span
+        >
       </div>
       <div class="content" v-for="(dtlbrg, index) in detailbarang" :key="index">
         <v-row>
-          <v-col>
+          <v-col cols="4">
             <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
-              <v-row>
-                <v-col cols="6">
-                  <v-carousel
-                    no-autoplay
-                    height="auto"
-                    hide-delimiter-background
-                    show-arrows-on-hover
-                    class="object-fit-cover"
-                  >
-                    <v-carousel-item
-                      v-for="(ft, index) in allfotobybrgid"
-                      :key="index"
-                    >
-                      <v-img
-                        :src="'http://127.0.0.1:8000/storage/' + ft.file"
-                        width="500px"
-                      ></v-img>
-                    </v-carousel-item>
-                  </v-carousel>
-                </v-col>
-              </v-row>
+              <v-carousel
+                no-autoplay
+                height="380"
+                width="380"
+                hide-delimiter-background
+                show-arrows-on-hover
+                class="object-fit-cover"
+              >
+                <v-carousel-item
+                  v-for="(ft, index) in allfotobybrgid"
+                  :key="index"
+                >
+                  <v-img
+                    contain
+                    :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                    width="auto"
+                    height="380"
+                  ></v-img>
+                </v-carousel-item>
+              </v-carousel>
             </div>
           </v-col>
-          <v-col>
+          <v-col cols="6" style="overflow-y: scroll; max-height: 1000px">
             <div class="detail pt-4">
               <div class="nama-barang font-weight-bold" style="font-size: 30px">
                 {{ dtlbrg.nama }}
@@ -45,101 +44,139 @@
               <v-row align="center">
                 <v-col cols="auto">
                   <div>
-                    <span class="ml-2">HARGA</span>
+                    <span>Rp{{ hargaVarianTerpilih }}</span>
                   </div>
                 </v-col>
               </v-row>
-              Pilih Varian : {{ namasetvar }}
-              <v-row>
-                <v-col
+
+              <div class="d-flex mt-8">
+                <v-btn
                   v-for="(varian, index) in dtlbrg.barang_varian"
                   :key="index"
+                  outlined
+                  :color="pilihan === varian.varian_id ? 'green' : 'grey'"
+                  class="mr-2 rounded-lg text-capitalize"
+                  @click="pilihanvarian(varian)"
+                  ><v-img
+                    :src="
+                      'http://127.0.0.1:8000/storage/' +
+                      varian.foto_barang_varian
+                    "
+                    width="20"
+                    height="auto"
+                    class="mr-2"
+                  ></v-img
+                  >{{ varian.nama }}</v-btn
                 >
-                  <!-- <p>stok: {{ varian.stok }}</p>
-                <p>harga {{ varian.harga }}</p> -->
-                  <p></p>
-                  <v-btn @click="pilihanvarian(varian)">{{
-                    varian.nama
-                  }}</v-btn>
-                </v-col>
-              </v-row>
-            </div>
-            <div class="button pb-4" style="padding-top: 200px">
-              <v-row>
-                <v-col cols="4">
-                  <div class="tambah-troli pl-6">
+              </div>
+              <div class="pt-2">
+                {{ dtlbrg.deskripsi }}
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+                <p>Selengkapnya...</p>
+              </div>
+            </div> </v-col
+          ><v-col cols="2">
+            <div class="button">
+              <div>
+                <div class="d-flex text-capitalize pb-2">
+                  <div>
+                    <v-img
+                      :src="'http://127.0.0.1:8000/storage/' + fotosetvar"
+                      width="50"
+                      height="auto"
+                    ></v-img>
+                  </div>
+                  <p class="ml-3 mt-3">{{ namasetvar }}</p>
+                </div>
+                <div class="d-flex">
+                  <v-card class="d-flex align-center rounded-xl" outlined>
                     <v-btn
-                      class="rounded-pill"
-                      x-large
-                      outlined
-                      @click="tambahkeranjang(dtlbrg)"
-                      >Tambah <span class="mdi mdi-cart-outline"></span
-                    ></v-btn>
+                      depressed
+                      @click="countmin(dataa)"
+                      :disabled="jumlahBarangDibeli === 1"
+                      class="ma-2 rounded-xl"
+                      small
+                      icon
+                    >
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
+                    {{ jumlahBarangDibeli }}
+                    <v-btn
+                      depressed
+                      @click="countplus(dataa)"
+                      class="ma-2 rounded-xl pluskuantitas"
+                      small
+                      icon
+                    >
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-card>
+                  <div class="pl-2 pt-3">
+                    <p>Stok: {{ stokVarianTerpilih }}</p>
                   </div>
-                </v-col>
-                <v-col cols="6">
-                  <div
-                    class="beli-sekarang"
-                    v-for="(belisekarangData, index) in detailbarang"
-                    :key="index"
-                  >
-                    <v-dialog v-model="dialog" persistent max-width="290">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          v-bind="attrs"
-                          v-on="on"
-                          class="rounded-pill"
-                          width="287px"
-                          x-large
-                          outlined
-                          capitallize
-                          style="background: #2f432d; color: white; size: 105px"
-                          >Beli Sekarang</v-btn
-                        >
-                      </template>
-                      <v-card>
-                        <v-card-title class="text-h5">{{
-                          belisekarangData.nama
-                        }}</v-card-title>
-                        <v-card-text>{{
-                          belisekarangData.deskripsi
-                        }}</v-card-text>
-                        <div
-                          v-for="(pc, index) in allfotobybrgid"
-                          :key="index"
-                          :src="belisekarangData.foto"
-                          width="100%"
-                        >
-                          <v-img
-                            v-if="'http://127.0.0.1:8000/storage/' + pc.file"
-                            :src="'http://127.0.0.1:8000/storage/' + pc.file"
-                          ></v-img>
-                        </div>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn
-                            color="green darken-1"
-                            text
-                            @click="dialog = false"
-                          >
-                            Disagree
-                          </v-btn>
-                          <v-btn
-                            color="green darken-1"
-                            text
-                            @click="dialog = false"
-                          >
-                            Agree
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
-          </v-col>
+                </div>
+
+                <p>Subtotal: Rp{{ subtotal }}</p>
+              </div>
+
+              <div class="tambah-troli">
+                <v-btn
+                  class="rounded-lg d-block text-capitalize"
+                  large
+                  outlined
+                  width="100%"
+                  @click="tambahkeranjang(dtlbrg)"
+                  >Tambah <span class="mdi mdi-cart-outline"></span
+                ></v-btn>
+              </div>
+              <div
+                class="beli-sekarang pt-2"
+                v-for="(belisekarangData, index) in detailbarang"
+                :key="index"
+              >
+                <v-btn
+                  class="rounded-lg d-block text-capitalize"
+                  width="100%"
+                  large
+                  outlined
+                  style="background: #2f432d; color: white; size: 105px"
+                  >Beli Sekarang</v-btn
+                >
+              </div>
+            </div></v-col
+          >
         </v-row>
+
         <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
           <div>
             <div class="product-card">
@@ -231,13 +268,6 @@ export default {
   middleware: "middlewareku",
   data() {
     return {
-      items: [
-        {
-          text: "Home",
-          disabled: false,
-          href: "/",
-        },
-      ],
       prm: this.$route.params,
       detailbarang: [],
       userid: null,
@@ -258,7 +288,12 @@ export default {
       gettk: "",
       pilihan: null,
       setpil: 0,
+      fotosetvar: "",
       namasetvar: "",
+      stokVarianTerpilih: null,
+      hargaVarianTerpilih: null,
+      jumlahBarangDibeli: 1,
+      subtotal: null,
     };
   },
   methods: {
@@ -276,6 +311,12 @@ export default {
         )
         .then((respon) => {
           this.detailbarang = respon.data?.data;
+          this.pilihan = this.detailbarang[0].barang_varian[0].varian_id;
+          this.namasetvar = this.detailbarang[0].barang_varian[0].nama;
+          this.stokVarianTerpilih = this.detailbarang[0].barang_varian[0].stok;
+          this.subtotal = this.hargaVarianTerpilih * this.jumlahBarangDibeli;
+          this.hargaVarianTerpilih =
+            this.detailbarang[0].barang_varian[0].harga;
         });
     },
     getfotobyidbrg() {
@@ -288,6 +329,9 @@ export default {
     pilihanvarian(varian) {
       this.pilihan = varian.varian_id;
       this.namasetvar = varian.nama;
+      this.fotosetvar = varian.foto_barang_varian;
+      this.stokVarianTerpilih = varian.stok;
+      this.hargaVarianTerpilih = varian.harga;
       this.$toasted.success("varian pilihan : " + this.namasetvar, {
         position: "top-right",
         className: "edit-toast",
@@ -295,26 +339,57 @@ export default {
       });
     },
     tambahkeranjang() {
-      // console.log(dtlbrg)
-      (this.detbarker.user_id = this.userid),
-        (this.detbarker.barang_id = this.prm.barang_id),
-        (this.detbarker.kuantitas = 1),
-        (this.detbarker.varian_id = this.pilihan);
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/addkeranjangbyuser/" + this.userid,
-          this.detbarker
-        )
-        .then((respon) => {
-          console.log(respon);
-          this.$toasted.show("Berhasil ditambah", {
-            theme: "success",
-            position: "top-right",
-            className: "edit-toast2",
-            duration: 3000,
+      if (this.jumlahBarangDibeli <= this.stokVarianTerpilih) {
+        this.subtotal = this.hargaVarianTerpilih * this.jumlahBarangDibeli;
+        const keranjangData = {
+          user_id: this.userid,
+          barang_id: this.prm.barang_id,
+          kuantitas: this.jumlahBarangDibeli,
+          varian_id: this.pilihan,
+        };
+        axios
+          .post(
+            "http://127.0.0.1:8000/api/addkeranjangbyuser/" + this.userid,
+            keranjangData
+          )
+          .then((respon) => {
+            console.log(respon);
+            this.$toasted.show("Berhasil ditambah", {
+              theme: "success",
+              position: "top-right",
+              className: "edit-toast2",
+              duration: 3000,
+            });
           });
+        console.log(this.pilihan);
+      } else {
+        this.$toasted.error("Jumlah melebihi stok varian", {
+          theme: "error",
+          position: "top-right",
+          className: "edit-toast2",
+          duration: 3000,
         });
-      console.log(this.pilihan);
+      }
+    },
+    countmin(dataa) {
+      if (this.jumlahBarangDibeli > 1) {
+        this.jumlahBarangDibeli--;
+        this.subtotal = this.jumlahBarangDibeli * this.hargaVarianTerpilih;
+      }
+    },
+
+    countplus(dataa) {
+      if (this.jumlahBarangDibeli < this.stokVarianTerpilih) {
+        this.jumlahBarangDibeli++;
+        this.subtotal = this.jumlahBarangDibeli * this.hargaVarianTerpilih;
+      } else {
+        this.$toasted.error("Jumlah melebihi stok varian", {
+          theme: "error",
+          position: "top-right",
+          className: "edit-toast2",
+          duration: 3000,
+        });
+      }
     },
   },
 
@@ -323,6 +398,7 @@ export default {
     this.userid = usid.data.id;
     this.getbarangtokobyid();
     this.getfotobyidbrg();
+
     if (this.detailbarang.nama) {
       this.items.push({
         text: this.detailbarang.nama,
