@@ -13,7 +13,7 @@
       :closeedit="closeedit"
       :updateedit="updatetoko"
     />
-    <div class="pb-5 font-weight-medium">Detail Toko</div>
+    <div class="pb-5 font-weight-medium text-h6">Detail Toko</div>
     <div>
       <div class="button-add pl-4 pb-6">
         <nuxt-link class="text-decoration-none" to="/user-view/tambah-barang"

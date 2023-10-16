@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="pb-5 font-weight-medium">Tambah Toko</div>
-    <div class="text-center justify-center">
-      <div class="dalam-container">
+    <div class="pb-5 font-weight-medium text-h6">Tambah Toko</div>
+    <div class=" ">
+      <div class="">
         <!-- <div class="foto-profil">
           <v-avatar width="170px" height="170px">
             <img src="https://cdn.vuetifyjs.com/images/cards/cooking.png" />
@@ -10,10 +10,10 @@
           <h2>Tambah Toko</h2>
         </div> -->
         <v-row>
-          <v-col cols="3">
+          <v-col cols="12" lg="3">
             <div class="list">Nama Toko</div>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="12" lg="9">
             <v-text-field
               v-model="databarang.nama"
               placeholder="Masukan Nama Untuk Toko"
@@ -21,10 +21,10 @@
               rounded-lg
             ></v-text-field>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" lg="3">
             <div class="list">Alamat Toko</div>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="12" lg="9">
             <v-text-field
               v-model="databarang.alamat"
               placeholder="Masukan Alamat Untuk Toko"
@@ -32,10 +32,10 @@
               rounded-lg
             ></v-text-field>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" lg="3">
             <div class="list">Deskripsi Toko</div>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="12" lg="9">
             <v-text-field
               v-model="databarang.deskripsi"
               placeholder="Masukan Deskripsi Untuk Toko"
@@ -43,10 +43,10 @@
               rounded-lg
             ></v-text-field>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" lg="3">
             <div class="list">No Telepon</div>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="12" lg="9">
             <v-text-field
               v-model="databarang.no_telepon"
               placeholder="Masukan Deskripsi Untuk Toko"
@@ -68,7 +68,7 @@
               </v-btn>
             </nuxt-link>
           </v-col>
-          <v-col class="order-2 order-lg-1" cols="12"  lg="3"  md="12" sm="12" xs="12">
+          <v-col class="order-1 order-lg-2" cols="12"  lg="3"  md="12" sm="12" xs="12">
             <v-btn
               rounded-lg
               block

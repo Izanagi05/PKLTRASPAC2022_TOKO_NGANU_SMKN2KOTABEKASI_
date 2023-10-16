@@ -1,31 +1,9 @@
 <template>
   <div>
-    <div class="mb-10">
-      <!-- <div class="btn-warnaku white--text">
-        <div class="py-2 font-weight-regular">
-          <button class="ml-4" type="submit" @click="kontak">
-            <v-icon color="white">mdi-phone</v-icon>
-            +62-815-6315-10389
-          </button>
-        </div>
-      </div> -->
-      <div class="container pb-4">
-        <v-row>
-          <v-col
-            class="d-flex col-12 col-lg-6 col-md-4 col-sm-12 col-xs-12 d-flex align-center"
-          >
-            <v-img
-              :src="require('~/assets/logo_nganu.png')"
-              max-width="40"
-            ></v-img>
-            <div class="font-weight-bold text-h5 ml-4">Toko nganu</div>
-          </v-col>
-          <v-col
-            class="d-flex col-12 col-lg-6 col-md-8 col-sm-12 col-xs-12 justify-end"
-          >
-            <div flat class="rounded-pill" color="#d9d9d9">
-              <v-text-field
-                class="nyari rounded-pill"
+    <v-dialog v-model="dialogsearch" max-width="600px">
+      <v-card class="pa-4">
+        <v-text-field
+                class="nyari rounded-lg"
                 v-model="cari"
                 label="Cari Nganu"
                 single-line
@@ -35,16 +13,66 @@
                 append-icon="mdi-magnify"
                 placehoder="cari"
               ></v-text-field>
+            </v-card>
+          </v-dialog>
+    <div class="mb-10">
+      <div class="container pb-4">
+        <v-row>
+          <v-col cols="8" lg="8" md="8" class="d-flex d-flex align-center">
+            <v-img
+              :src="require('~/assets/logo_nganu.png')"
+              :max-width="$vuetify.breakpoint.smAndDown ? '20' : '30'"
+            ></v-img>
+            <div
+              :class="[
+                'font-weight-bold',
+                $vuetify.breakpoint.smAndDown ? 'ml-2' : 'ml-4 text-h6',
+              ]"
+            >
+              Toko nganu
+            </div>
+          </v-col>
+          <v-col cols="4" lg="4" md="4" class="d-flex justify-end">
+            <div flat class="rounded-pill" color="#d9d9d9">
+
+              <v-btn
+                elevation="2"
+                fab
+                color="#ffffff"
+                @click="dialogsearch=true"
+                :small="$vuetify.breakpoint.smAndDown ? true : false"
+                ><v-icon
+                  :small="$vuetify.breakpoint.smAndDown ? true : false"
+                  color="#d9d9d9"
+                  >mdi-magnify</v-icon
+                ></v-btn
+              >
             </div>
             <nuxt-link to="/keranjang" class="text-decoration-none ml-2">
-              <v-btn elevation="2" fab color="d9d9d9" icon
-                ><v-icon size="29px">mdi-cart</v-icon></v-btn
+              <v-btn
+                elevation="2"
+                fab
+                color="#ffffff"
+                :small="$vuetify.breakpoint.smAndDown ? true : false"
+                ><v-icon
+                  :small="$vuetify.breakpoint.smAndDown ? true : false"
+                  color="#d9d9d9"
+                  >mdi-cart</v-icon
+                ></v-btn
               >
             </nuxt-link>
             <nuxt-link to="/user-view" class="text-decoration-none ml-2">
-              <v-btn elevation="2" fab icon color="d9d9d9">
-                <v-avatar class="bg-greyku">
-                  <img
+              <v-btn
+                elevation="2"
+                fab
+                color="#ffffff"
+                :small="$vuetify.breakpoint.smAndDown ? true : false"
+              >
+                <v-avatar
+                  class="foto-profilan bg-greyku"
+                  :size="$vuetify.breakpoint.smAndDown ? '35' : '50'"
+                >
+                  <v-img
                     :src="
                       'http://127.0.0.1:8000/storage/' +
                       $cookies.get(`cookieku`).data.foto_profil
@@ -78,7 +106,7 @@
             </v-carousel-item>
           </v-carousel>
         </div>
-        <div class="d-flex mt-8">
+        <div class="d-flex mt-8 overflow-x-auto">
           <v-btn
             outlined
             @click="getkategori(-1)"
@@ -118,11 +146,13 @@
                 v-for="(brg, index) in getdataall"
                 :key="index"
               >
-                <v-card   color="#ffffff"
-                class="rounded-lg"
-                elevation="1"
-                width="300"
-                @click="todetail(brg)">
+                <v-card
+                  color="#ffffff"
+                  class="rounded-lg"
+                  elevation="1"
+                  width="300"
+                  @click="todetail(brg)"
+                >
                   <div
                     v-for="(ft, i) in brg.barang_foto_first"
                     :key="i"
@@ -141,36 +171,38 @@
                       {{ brg.nama }}
                     </div>
                     <div
-                    class="font-weight-medium d-flex"
-                    v-for="(vrn, i) in brg.barang_varian_first"
-                    :key="i"
-                  >
-                    <div v-if="brg" class="mr-1">Rp</div>
-                    {{ vrn.harga | currency("id-ID", "IDR") }}
-                  </div>
-                  <v-row align="center">
-                    <v-col cols="auto">
-                      <div class="d-flex align-center">
-                        <v-img
-                          :src="require('~/assets/pajamas_tanuki-verified.png')"
-                          max-width="16"
-                        ></v-img>
-                        <span class="ml-2">{{ brg.toko?.nama }}</span>
-                      </div>
-                    </v-col>
-                  </v-row>
-                  <div class="btn-card mt-2 pb-1 d-flex align-center">
-                    <v-rating
-                      v-model="brg.average_rating"
-                      background-color="white"
-                      color="yellow accent-4"
-                      dense
-                      half-increments
-                      hover
-                      size="18"
-                    ></v-rating>
-                    <p class="ma-0">{{ brg.average_rating }}</p>
-                  </div>
+                      class="font-weight-medium d-flex"
+                      v-for="(vrn, i) in brg.barang_varian_first"
+                      :key="i"
+                    >
+                      <div v-if="brg" class="mr-1">Rp</div>
+                      {{ vrn.harga | currency("id-ID", "IDR") }}
+                    </div>
+                    <v-row align="center">
+                      <v-col cols="auto">
+                        <div class="d-flex align-center">
+                          <v-img
+                            :src="
+                              require('~/assets/pajamas_tanuki-verified.png')
+                            "
+                            max-width="16"
+                          ></v-img>
+                          <span class="ml-2">{{ brg.toko?.nama }}</span>
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card mt-2 pb-1 d-flex align-center">
+                      <v-rating
+                        v-model="brg.average_rating"
+                        background-color="white"
+                        color="yellow accent-4"
+                        dense
+                        half-increments
+                        hover
+                        size="18"
+                      ></v-rating>
+                      <p class="ma-0">{{ brg.average_rating }}</p>
+                    </div>
                   </div>
                 </v-card>
               </v-col>
@@ -192,6 +224,7 @@ export default {
     return {
       set: 0,
       cari: null,
+      dialogsearch: false,
       fcek: null,
       rating: 1,
       currentRating: 0,
@@ -273,6 +306,7 @@ export default {
             this.getdataall = respon.data?.data;
             console.log(this.getdataall);
           });
+          this.dialogsearch=false
       }
     },
     todetail(brg) {

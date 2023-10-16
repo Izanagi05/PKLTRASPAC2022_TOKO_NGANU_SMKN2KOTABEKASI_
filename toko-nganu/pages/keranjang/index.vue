@@ -52,7 +52,7 @@
                   md="3"
                   sm="4"
                   xs="4"
-                  class="d-flex align-center"
+                  class=" align-center"
                 >
                   <v-img
                     class="rounded-xl"
@@ -60,7 +60,7 @@
                     height="100"
                     width="100"
                   ></v-img>
-                  <div class="ml-2">
+                  <!-- <div class="ml-2">
                     <div class="text-body-2 font-weight-regular">
                       {{ dataa?.nama_barang }}
                     </div>
@@ -70,7 +70,7 @@
                     <div class="text-body-2 font-weight-regular">
                       {{ dataa?.harga }}
                     </div>
-                  </div>
+                  </div> -->
                 </v-col>
                 <v-col cols="7" lg="8" md="9" sm="8" xs="8">
                   <v-row class="ma-0">
@@ -307,8 +307,9 @@ export default {
         )
         .then((respon) => {
           console.log(respon);
-          location.reload();
+          // location.reload();
           // alert("berhasil hapus");
+          this.getkeranjang()
           this.$toasted.show("Berhasil hapus keranjang", {
             theme: "success",
             position: "top-right",

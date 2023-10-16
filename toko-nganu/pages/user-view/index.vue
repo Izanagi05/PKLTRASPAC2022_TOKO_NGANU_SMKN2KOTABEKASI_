@@ -1,19 +1,21 @@
 <template>
   <div>
     <div class=" ">
-      <div class="mb-4">
+      <!-- <div class="mb-4">
         <NuxtLink to="/" class="my-2 text-decoration-none black--text">
           Home </NuxtLink
         ><span class="mdi mdi-chevron-right"><b>Profil Pengguna</b></span>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         :class="[
           'font-weight-bold  mb-2',
           $vuetify.breakpoint.smAndDown ? 'text-subtitle-1' : 'text-h6',
         ]"
       >
         Profil Pengguna
-      </div>
+      </div> -->
+
+    <div class="pb-5 font-weight-medium text-h6">Info Pengguna</div>
       <div>
         <div class="d-flex mt-4">
           <v-avatar class="foto-profilan" :size="$vuetify.breakpoint.smAndDown?'100':'200'">

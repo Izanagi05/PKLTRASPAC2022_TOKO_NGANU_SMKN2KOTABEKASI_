@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="">
-      <div class="mb-2">
+      <!-- <div class="mb-2">
           <NuxtLink to="/" class="my-2 text-decoration-none black--text">
             Home </NuxtLink
           ><span class="mdi mdi-chevron-right "><b>Profil Pengguna</b></span>
@@ -13,7 +13,9 @@
           ]"
         >
           Edit Profil
-        </div>
+        </div> -->
+
+    <div class="pb-5 font-weight-medium text-h6">Edit profil</div>
       <v-row class="isi my-0 ">
         <v-col cols="12" lg="4" md="4" sm="12" xs="12">
 
@@ -87,10 +89,10 @@
             </v-row>
             <div class="button pb-6 pt-5">
               <v-row class="justify-end">
-                <v-col class="order-2 order-lg-1" cols="12"  lg="4"  md="12" sm="12" xs="12">
+                <v-col class="order-2 order-lg-1" cols="12"  lg="3"  md="12" sm="12" xs="12">
                     <v-btn class="rounded-lg " block  outlined @click="backprofil">Batal</v-btn>
                 </v-col>
-                <v-col class="order-1 order-lg-2 " cols="12" lg="6"  md="12" sm="12" xs="12">
+                <v-col class="order-1 order-lg-2 " cols="12" lg="5"  md="12" sm="12" xs="12">
                     <v-btn class="rounded-lg white--text" block  color="#2f432d"
                       @click="updateuser">Simpan</v-btn>
                 </v-col>
@@ -198,7 +200,7 @@ export default {
         className: 'edit-toast',
         duration: 3000
       })
-              this.cookie.update('cookieku', respon.data);
+              // this.cookie.update('cookieku', respon.data);
           // this.$toast.success("Berhasil diubah");
         });
       this.$router.push("/user-view");

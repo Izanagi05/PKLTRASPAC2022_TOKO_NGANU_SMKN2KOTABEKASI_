@@ -93,7 +93,7 @@ class TransaksiController extends Controller
             ];
             $validasi = $request->validate($rules);
             $transaksiSebelumPembaruan = Transaksi::where('transaksi_id', $id)->first();
-            if ($validasi['admin_konfirmasi'] === "Ya"||$validasi['admin_konfirmasi'] ==='Tidak') {
+            if ($validasi['admin_konfirmasi'] === "Ya" || $validasi['admin_konfirmasi'] === 'Tidak') {
                 Transaksi::where('transaksi_id', $id)->update($validasi);
             }
 
@@ -123,15 +123,19 @@ class TransaksiController extends Controller
                 $req['transaksi_id'] = $transaksiSebelumPembaruan->transaksi_id;
                 $req['jumlah'] = $transaksiSebelumPembaruan->jumlah;
                 $req['subtotal'] = floatval($transaksiSebelumPembaruan->jumlah) * $hargapervarian;
-                Detail_Transakasi::create($req);
 
-                Varian::where('varian_id', $transaksiSebelumPembaruan->varian_id)->decrement('stok', $transaksiSebelumPembaruan->jumlah);
+                $stokSebelumPembaruan = Varian::where('varian_id', $transaksiSebelumPembaruan->varian_id)->value('stok');
+                $jumlahYangAkanDikurangkan = $transaksiSebelumPembaruan->jumlah;
+                if ($stokSebelumPembaruan >= $jumlahYangAkanDikurangkan) {
+                    Detail_Transakasi::create($req);
+                    Varian::where('varian_id', $transaksiSebelumPembaruan->varian_id)->decrement('stok', $jumlahYangAkanDikurangkan);
+                }
+                // Varian::where('varian_id', $transaksiSebelumPembaruan->varian_id)->decrement('stok', $transaksiSebelumPembaruan->jumlah);
                 // Varian::where('varian_id', $transaksiSebelumPembaruan->varian_id)->update([
                 //     'stok'=>-$transaksiSebelumPembaruan->jumlah
                 // ]);
-            } elseif($validasi['admin_konfirmasi'] !=='Ya'){
-
-            } else{
+            } elseif ($validasi['admin_konfirmasi'] !== 'Ya') {
+            } else {
 
                 //     if($validasi['admin_konfirmasi']==="Ya"  && $transaksiSebelumPembaruan->admin_konfirmasi === "Ya"){
                 $req['user_id'] = $transaksiSebelumPembaruan->user_id;

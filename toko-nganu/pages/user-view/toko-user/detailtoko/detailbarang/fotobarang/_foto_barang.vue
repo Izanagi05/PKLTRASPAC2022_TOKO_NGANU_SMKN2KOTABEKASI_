@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div
-      class="judul pb-4 pt-2 font-weight-bold"
-      style="font-family: 'Poppins', sans-serif; font-size: 30px"
-    >
-      <center>Detail Foto Barang</center>
-    </div>
+
+    <div class="pb-5 font-weight-medium text-h6">Detail Varian</div>
     <DialogDelete
       :dialogDelete="dialogDelete"
       :confirmhapus="confirmhapusfoto"
@@ -27,7 +23,7 @@
       :konfirmtambah="konfirmtambahfoto"
     />
     <div>
-      <div class="btn-add pb-6 pl-4">
+      <div class="btn-add pb-6 ">
         <v-btn
           class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-lg white--text"
           color="#2f432d"
@@ -43,11 +39,15 @@
         class=""
       >
         <template v-slot:[`item.file`]="{ item }">
+          <div class="image-container3 rounded-lg d-flex justify-center align-center">
           <v-img
-            width="200"
+          class="rounded-lg"
+            width="80%"
+            height="80%"
             :src="'http://127.0.0.1:8000/storage/' + item.file"
           >
           </v-img>
+          </div>
         </template>
         <template v-slot:[`item.aksi`]="{ item }">
           <v-btn
@@ -182,7 +182,7 @@ export default {
         // this.getfoto();
         console.log(this.fotoTambah)
         // this.fotobarang.push(this.detaildatadialog);
-      // this.closeadd();
+      this.closeadd();
     },
 
     upload(foto) {
@@ -261,6 +261,16 @@ export default {
 };
 </script>
 <style scoped>
+.image-container3 {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.image-container3 img {
+  object-fit: cover;
+  object-position: center;
+}
 .edit-toast {
   background: green;
   color: white;

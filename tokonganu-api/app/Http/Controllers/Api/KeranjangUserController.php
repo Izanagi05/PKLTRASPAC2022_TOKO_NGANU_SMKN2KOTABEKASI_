@@ -76,7 +76,7 @@ class KeranjangUserController extends Controller
             'barang_id'=> 'required',
             'kategori_id'=> 'required',
             'kuantitas' => '',
-            'varian_id' => 'unique:keranjang_user',
+            'varian_id' => 'required',
         ]);
 
         $validatedData['user_id'] = $user;
