@@ -6,6 +6,7 @@
         v-for="(dt, i) in alldatadetailtransakasi"
         :key="i"
         class="pa-6 ma-2"
+        @click="openDialog(dt)"
       >
         <div class="d-flex justify-space-between mb-4">
           <div class="d-flex align-center">
@@ -26,9 +27,7 @@
             </div>
             <div class="">
               <p class="ma-0 text-body-2 grey--text">subtotal</p>
-              <p class="ma-0 font-weight-bold text-h5">
-              Rp. {{ dt.subtotal }}
-              </p>
+              <p class="ma-0 font-weight-bold text-h5">Rp. {{ dt.subtotal }}</p>
             </div>
           </v-col>
           <v-col>
@@ -51,11 +50,31 @@
           </v-col>
           <v-col>
             <p class="ma-0 text-body-2 grey--text">Jumlah dibeli</p>
-            <p class="ma-0 text-body-1 font-weight-medium">{{ dt.jumlah }}</p>
+            <p class="ma-0 text-body-1 font-weight-medium">
+              {{ dt.jumlah }}
+            </p>
+          </v-col>
+          <v-col>
+            <p class="ma-0 text-body-2 grey--text">Rating</p>
+            <p class="ma-0 text-body-1 font-weight-medium">
+              {{ newRating }}
+            </p>
           </v-col>
         </v-row>
       </v-card>
     </div>
+    <v-dialog v-model="dialog" max-width="400">
+      <v-card>
+        <v-card-title>Isi Rating</v-card-title>
+        <v-card-text>
+          <v-text-field v-model="newRating" label="Rating" type="number" />
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="submitRating">Submit</v-btn>
+          <v-btn color="error" @click="closeDialog">Batal</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -65,10 +84,38 @@ export default {
   data() {
     return {
       alldatadetailtransakasi: [],
+      dialog: false,
+      newRating: 0,
+      selectedTransaction: null,
     };
   },
 
   methods: {
+    openDialog(transaction) {
+      this.selectedTransaction = transaction;
+      this.dialog = true;
+    },
+    closeDialog() {
+      this.dialog = false;
+    },
+    submitRating() {
+      const ratingData = {
+        barang_id: this.selectedTransaction.barang_id,
+        user_id: this.selectedTransaction.user_id,
+        rating: this.newRating,
+      };
+
+      axios
+        .post("http://127.0.0.1:8000/api/createrating", ratingData)
+        .then((response) => {
+          console.log("Rating terkirim!");
+        })
+        .catch((error) => {
+          console.error("Gagal mengirim rating:", error);
+        });
+
+      this.closeDialog();
+    },
     getalldetailtransakasi() {
       axios
         .get(
