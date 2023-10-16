@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavbarPolos />
     <div class="toko-container">
       <div>Tambah barang toko</div>
       <v-text-field v-model="databarang.nama" placeholder="Nama"></v-text-field>
@@ -36,6 +35,7 @@
 <script>
 import axios from "axios";
 export default {
+  layout: 'UserView',
   middleware: "middlewareku",
   data() {
     return {

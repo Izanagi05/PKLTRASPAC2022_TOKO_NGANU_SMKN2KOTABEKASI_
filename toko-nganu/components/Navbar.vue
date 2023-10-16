@@ -1,20 +1,20 @@
 <template>
-  <div :class="[$vuetify.breakpoint.mdAndUp?'mb-10':'']">
-    <div class="btn-warnaku white--text">
+  <div :class="[$vuetify.breakpoint.mdAndUp?'m':'']">
+    <!-- <div class="btn-warnaku white--text">
         <div class="py-1 font-weight-regular">
           <button class=" ml-4" type="submit" @click="kontak">
             <v-icon color="white">mdi-phone</v-icon>
             +62-815-6315-10389
           </button>
         </div>
-      </div>
+      </div> -->
     <div class="container">
-      <v-row>
-        <v-col cols="6" lg="6" md="6" class="d-flex d-flex align-center">
+      <v-row class="my-0">
+        <v-col cols="6" lg="6" md="6" class="d-flex py-0 d-flex align-center">
               <v-img :src="require('~/assets/logo_nganu.png')" :max-width="$vuetify.breakpoint.smAndDown?'20':'30'"></v-img>
               <div :class="['font-weight-bold', $vuetify.breakpoint.smAndDown?'ml-2':'ml-4 text-h6']">Toko nganu</div>
           </v-col>
-        <v-col cols="6" lg="6" md="6" class="d-flex justify-end justify-lg-end justify-md-end justify-sm-end">
+        <v-col cols="6" lg="6" md="6" class="d-flex py-0 justify-end justify-lg-end justify-md-end justify-sm-end">
           <div class="d-flex ">
             <nuxt-link to="/keranjang" class="text-decoration-none  ">
               <v-btn elevation="2" fab color="#ffffff" :small="$vuetify.breakpoint.smAndDown?true:false"

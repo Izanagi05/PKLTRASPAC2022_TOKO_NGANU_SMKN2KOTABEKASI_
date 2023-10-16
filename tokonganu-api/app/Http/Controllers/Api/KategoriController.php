@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Barang;
+use App\Models\Foto_Barang;
+use Illuminate\Support\Facades\Storage;
 
 class KategoriController extends Controller
 {
@@ -87,7 +89,21 @@ class KategoriController extends Controller
     public function deletekategori($id)
     {
         try {
-            $data = Kategori::where('kategori_id', $id)->delete();
+            $data = Kategori::find($id);
+            $dataBarang = Barang::where('kategori_id', $id)->get();
+            foreach ($dataBarang as $key => $brg) {
+                foreach ($brg->BarangFoto as $foto) {
+                    // Hapus foto dari storage
+                    if (!empty($foto->file)) {
+                        Storage::delete($foto->file);
+                    }
+                }
+                $brg->BarangFoto()->delete();
+                $brg->barangVarian()->delete();
+                // $brg->delete();
+            }
+            $data->Barang()->delete();
+            $data->delete();
             return response()->json([
                 'data' => 'sukses',
                 'message' => 'Berhasil hapus data',

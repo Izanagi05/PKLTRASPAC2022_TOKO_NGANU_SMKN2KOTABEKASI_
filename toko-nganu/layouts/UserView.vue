@@ -1,44 +1,76 @@
 <template>
   <div>
-    <Navbar />
-    <v-row>
-      <v-col sm="3" class="mt-5">
-        <div class="sub-title" style="margin-left: 27px, margin-right=36px">
-          Profil Pengguna
-        </div>
-        <div class="menu mt-2">
-          <NuxtLink
-            v-for="(menu, i) in menus"
-            :key="i"
-            :to="menu.link"
-            class="my-4 black--text text-decoration-none"
+    <v-app>
+      <Navbar />
+      <div class="container">
+        <v-row>
+          <v-col
+            cols="12 "
+            lg="3"
+            md="3"
+            sm="12"
+            xs="12"
+            order="2"
+            class="kiri py-0 justify-space-between order-lg-1 order-md-1 order-sm-2 order-xs-2"
           >
-            <v-icon large>{{ menu.icon }}</v-icon> {{ menu.title }}
-          </NuxtLink>
-
-          <NuxtLink
-            v-if="cekuserrole === 'Admin'"
-            to="/halaman-admin"
-            class="my-4 black--text text-decoration-none"
+            <v-card class="sidebar-profil pa-5 pt-8 rounded-lg" style="height:100%;">
+              <div
+                :class="[
+                  'font-weight-bold  mb-4',
+                  $vuetify.breakpoint.smAndDown ? 'text-subtitle-6' : 'text-h5',
+                ]"
+              >
+                Profil Pengguna
+              </div>
+              <div v-for="(rute, i) in routersdata" :key="i">
+                <v-btn
+                  text
+                  depressed
+                  @click="$router.push(rute.rt)"
+                  width="100%"
+                  :class="['font-weight-medium d-flex align-items my-4 justify-start py-6 text-capitalize', isaktif(rute.rt)?'border-left':'']"
+                >
+                  <v-icon large color="#616161" class="mr-2">{{
+                    rute.icon
+                  }}</v-icon>
+                  <div :class="[isaktif(rute.rt)?'font-weight-medium black--text':'font-weight-regular grey--text text--lighten-1']">
+                   {{ rute.nama }}
+                  </div>
+                </v-btn>
+              </div>
+              <div>
+                <v-btn
+                  text
+                  depressed
+                  @click="logout()"
+                  width="100%"
+                  class="font-weight-medium d-flex mt-15 align-items justify-start py-8 text-capitalize"
+                  ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
+                  >Logout</v-btn
+                >
+              </div>
+            </v-card>
+          </v-col>
+          <v-col
+            cols="12"
+            lg="9"
+            md="9"
+            sm="12"
+            xs="12"
+            order="1"
+            class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex align-center"
+            style="height: 85vh; overflow-x:scroll;"
           >
-            <v-icon large>mdi-database</v-icon> Admin
-          </NuxtLink>
-
-          <div v-else></div>
-        </div>
-        <div class="logout" style="margin-left: 27px">
-          <v-btn text @click="logout()" class="mdi-35px"
-            ><v-icon>mdi-logout</v-icon>Logout</v-btn
-          >
-        </div>
-      </v-col>
-      <v-col sm="9">
-        <nuxt />
-      </v-col>
-    </v-row>
+            <div style="width: 100%;">
+              <nuxt />
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </v-app>
   </div>
 </template>
-  
+
   <script>
 import axios from "axios";
 
@@ -53,28 +85,51 @@ export default {
       },
       cekuserrole: null,
       userid: null,
-      menus: [
-        {
-          title: "User Profile",
-          link: "/user-view/profile-user",
-          icon: "mdi-account",
-        },
-        { title: "Toko", link: "/user-view/toko-user", icon: "mdi-storefront" },
-        {
-          title: "Tambah Toko",
-          link: "/user-view/tambah-toko",
-          icon: "mdi-store-plus",
-        },
-        {
-          title: "Tambah Barang",
-          link: "/user-view/crud",
-          icon: "mdi-package-variant-closed-plus",
-        },
-      ],
     };
   },
 
   methods: {
+
+    rutess() {
+      var rutes = [
+        {
+          show: true,
+          nama: "Info User",
+          rt: "/user-view",
+          icon: "mdi-account",
+        },
+        {
+          show: this.cekuserrole === "Admin",
+          nama: "Admin",
+          rt: "/halaman-admin",
+          icon: "mdi-account-tie",
+        },
+        {
+          show: true,
+          nama: "Toko",
+          rt: "/user-view/toko-user",
+          icon: "mdi-storefront",
+        },
+        {
+          show: true,
+          nama: "Buka Toko",
+          rt: "/user-view/tambah-toko",
+          icon: "mdi-store-plus",
+        },
+        {
+          show: true,
+          nama: "Tambah Barang",
+          rt: "/user-view/tambah-barang",
+          icon: "mdi-package-variant-closed-plus",
+        },
+      ];
+      this.routersdata = rutes.filter(function (link) {
+        return link.show;
+      });
+    },
+       isaktif (pathh) {
+      return this.$route.path === pathh
+    },
     getuser() {
       axios
         .get("http://127.0.0.1:8000/api/getuserlogin/" + this.userid)
@@ -93,8 +148,9 @@ export default {
   created() {
     const usid = this.$cookies.get("cookieku");
     this.userid = usid.data.id;
-    this.getuser();
     this.cekuserrole = usid.role;
+    this.getuser();
+    this.rutess();
   },
   mounted() {
     this.getuser();
@@ -103,71 +159,5 @@ export default {
 </script>
 
 <style>
-.contact {
-  background-color: #2f432d;
-  padding: 5px 0px 7px 154px;
-}
-.home-container {
-  padding: 0px 123px;
-}
-.content {
-  display: flex;
-  gap: 38px;
-}
-.sub-title {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-}
-.menu {
-  display: grid;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  /* margin-top: 69px; */
-}
-.logout {
-  margin-top: 120px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-}
-.pembatas {
-  border-left: 8px solid #d9d9d9;
-  border-radius: 20px;
-  height: 450px;
-  margin-right: 10px;
-}
-.profil-btn {
-  height: 30px;
-  width: 114px;
-}
-.profil-btn:hover {
-  background: #2f432d;
-  color: rgb(255, 255, 255);
-}
-.kiri {
-  margin-top: 19px;
-}
-.my-link {
-  text-decoration: none;
-  color: #000000;
-  margin-bottom: 43px;
-}
-.isi {
-  margin-top: 26px;
-}
-.btn-card {
-  margin-top: 30px;
-}
-.informasi-judul {
-  font-family: Poppins;
-  font-weight: 700;
-  font-size: 20px;
-}
-.foto-profilan {
-  background: #d9d9d9;
-}
 </style>
 
-  

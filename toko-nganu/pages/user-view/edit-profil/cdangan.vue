@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <NavbarPolos2 /> -->
     <Navbar />
     <div class="container">
       <div
@@ -19,8 +18,7 @@
                   :src="
                     'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
                   "
-                />
-                <!-- {{ editprofil.foto_profil }} -->
+                /> 
               </v-avatar>
             </div>
             <div class="btn-card pb-1 pt-3 d-flex justify-center">

@@ -60,6 +60,7 @@
         </v-row>
       </div>
     </div>
+
     <div class="all-home">
       <div class="container">
         <div class="home-image">
@@ -101,12 +102,18 @@
           <div v-else class="d-flex mt-8">
             <v-btn
               v-if="!loading"
-              outlined
+              outlined 
+              @click="getallbarang()"
+              :class="
+                fcek === true
+                  ? 'ma-2 rounded-xl warnaku white--text'
+                  : 'ma-2 rounded-xl'
+              " 
               @click="getkategori(-1)"
               :class="[
                 'ma-2  rounded-xl text-capitalize',
                 fcek === true ? 'btn-warnaku white--text' : '',
-              ]"
+              ]" 
             >
               Semua Kategori
             </v-btn>
@@ -117,9 +124,15 @@
                 'ma-2  rounded-xl text-capitalize',
                 ktg.kategori_id === fcek ? 'btn-warnaku white--text' : '',
               ]"
-              :key="index"
+              :key="index" 
+              @click="getkategori(ktg)"
+              :class="
+                ktg === fcek
+                  ? 'ma-2 rounded-xl warnaku white--text'
+                  : 'ma-2 rounded-xl'
+              " 
               @click="getkategori(ktg.kategori_id)"
-              class="ma-2 rounded-xl"
+              class="ma-2 rounded-xl" 
             >
               {{ ktg.nama }}
             </v-btn>
@@ -138,6 +151,245 @@
             <div class="font-weight-bold text-h6">Rekomendasi Untuk Kamu</div>
           </div>
         </div>
+ 
+        <div>
+          <div class="product-card">
+            <div v-if="set == 0">
+              <v-row class="p-0">
+                <v-col
+                  cols="5"
+                  :class="[
+                    '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                    $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
+                  ]"
+                  v-for="(brg, index) in allbarang"
+                  :key="index"
+                >
+                  <v-skeleton-loader
+                    v-if="firstLoad"
+                    width="300"
+                    type="card, list-item-three-line"
+                  />
+                  <v-card
+                    v-else
+                    color="#ffffff"
+                    class="rounded-lg"
+                    elevation="1"
+                    width="300"
+                  >
+                    <div
+                      v-for="(ft, i) in brg.barang_foto_first"
+                      :key="i"
+                      max-width="100"
+                      class="image-cont d-flex justify-center align-center"
+                    >
+                      <img
+                        :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                        object-fit="cover"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                    <div class="pa-4">
+                      <div class="font-weight-medium text-capitalize">
+                        {{ brg.nama }}
+                      </div>
+                      <div
+                        class="font-weight-medium d-flex"
+                        v-for="(vrn, i) in brg.barang_varian_first"
+                        :key="i"
+                      >
+                        <div v-if="brg" class="mr-1">Rp</div>
+                        {{ vrn.harga | currency("id-ID", "IDR") }}
+                      </div>
+                      <v-row align="center">
+                        <v-col cols="auto">
+                          <div class="d-flex align-center">
+                            <v-img
+                              :src="
+                                require('~/assets/pajamas_tanuki-verified.png')
+                              "
+                              max-width="16"
+                            ></v-img>
+                            <span class="ml-2">{{ brg.toko?.nama }}</span>
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card mt-2 pb-1">
+                        <v-rating
+                          v-model="rating"
+                          background-color="white"
+                          color="yellow accent-4"
+                          dense
+                          half-increments
+                          hover
+                          size="18"
+                        ></v-rating>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="tampil3" v-if="set == 2">
+              <v-row class="p-0">
+                <v-col
+                  cols="5"
+                  :class="[
+                    'mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                    $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
+                  ]"
+                  v-for="(brg, index) in hasilcari.data"
+                  :key="index"
+                >
+                  <v-skeleton-loader
+                    v-if="firstLoad"
+                    width="300"
+                    type="card, list-item-three-line"
+                  />
+                  <v-card
+                    v-else
+                    color="#ffffff"
+                    class="rounded-lg"
+                    elevation="1"
+                    width="300"
+                  >
+                    <div
+                      v-for="(ft, i) in brg.barang_foto_first"
+                      :key="i"
+                      max-width="100"
+                      class="image-cont d-flex justify-center align-center"
+                    >
+                      <img
+                        :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                        object-fit="cover"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                    <div class="pa-4">
+                      <div class="font-weight-medium text-capitalize">
+                        {{ brg.nama }}
+                      </div>
+                      <div
+                        class="font-weight-medium d-flex"
+                        v-for="(vrn, i) in brg.barang_varian_first"
+                        :key="i"
+                      >
+                        <div v-if="brg" class="mr-1">Rp</div>
+                        {{ vrn.harga | currency("id-ID", "IDR") }}
+                      </div>
+                      <v-row align="center">
+                        <v-col cols="auto">
+                          <div class="d-flex align-center">
+                            <v-img
+                              :src="
+                                require('~/assets/pajamas_tanuki-verified.png')
+                              "
+                              max-width="16"
+                            ></v-img>
+                            <span class="ml-2">{{ brg.toko?.nama }}</span>
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card mt-2 pb-1">
+                        <v-rating
+                          v-model="rating"
+                          background-color="white"
+                          color="yellow accent-4"
+                          dense
+                          half-increments
+                          hover
+                          size="18"
+                        ></v-rating>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="tampil2" v-if="set == 1">
+              <v-row
+                class="p-0"
+                v-for="(brg, index) in hasilKategori"
+                :key="index"
+              >
+                <v-col
+                  cols="5"
+                  :class="[
+                    '   mt-4   col-md-4  col-sm-6 col-xs-6 d-flex justify-center  ',
+                    $vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',
+                  ]"
+                  v-for="(barang, index) in brg.barang"
+                  :key="index"
+                >
+                  <v-skeleton-loader
+                    v-if="firstLoad"
+                    width="300"
+                    type="card, list-item-three-line"
+                  />
+                  <v-card
+                    v-else
+                    color="#ffffff"
+                    class="rounded-lg"
+                    elevation="1"
+                    width="300"
+                  >
+                    <div
+                      v-for="(ft, i) in barang.barang_foto_first"
+                      :key="i"
+                      max-width="100"
+                      class="image-cont d-flex justify-center align-center"
+                    >
+                      <img
+                        :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                        object-fit="cover"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                    <div class="pa-4">
+                      <div class="font-weight-medium text-capitalize">
+                        {{ barang.nama }}
+                      </div>
+                      <div
+                        class="font-weight-medium d-flex"
+                        v-for="(vrn, i) in barang.barang_varian_first"
+                        :key="i"
+                      >
+                        <div v-if="barang" class="mr-1">Rp</div>
+                        {{ vrn.harga | currency("id-ID", "IDR") }}
+                      </div>
+                      <v-row align="center">
+                        <v-col cols="auto">
+                          <div class="d-flex align-center">
+                            <v-img
+                              :src="
+                                require('~/assets/pajamas_tanuki-verified.png')
+                              "
+                              max-width="16"
+                            ></v-img>
+                            <span class="ml-2">{{ barang.toko?.nama }}</span>
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <div class="btn-card mt-2 pb-1">
+                        <v-rating
+                          v-model="rating"
+                          background-color="white"
+                          color="yellow accent-4"
+                          dense
+                          half-increments
+                          hover
+                          size="18"
+                        ></v-rating>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+          </div> 
         <div class="product-card">
           <v-row class="p-0">
             <v-col
@@ -213,6 +465,7 @@
               </v-card>
             </v-col>
           </v-row>
+ 
         </div>
       </div>
     </div>
@@ -225,14 +478,19 @@ import Footer from "~/components/Footer.vue";
 export default {
   middleware: "middlewareku",
   data() {
-    return {
+    return { 
+      rating: 3.5,
+      firstLoad: true,
+      set: 0,
+      cari: null,
+      fcek: null, 
       set: 0,
       cari: null,
       fcek: null,
       rating: 3.5,
       currentRating: 0,
       firstLoad: true,
-      loading: true,
+      loading: true, 
 
       hasilcari: [],
       no_admin: "6281563151038",
@@ -262,10 +520,8 @@ export default {
     };
   },
   methods: {
-    setRating(rating) {
-      this.currentRating = rating;
-    },
     search() {
+ 
       console.log("ets" + this.searchteks);
     },
     kontak() {
@@ -276,10 +532,27 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/gettoko/" + this.tokouser)
         .then((respon) => {
-          this.Toko = respon.data;
+          this.Toko = respon.data?.data;
         });
+ 
+    },
+    getallbarang() {
+      axios.get("http://127.0.0.1:8000/api/getallbarangtoko").then((respon) => {
+        this.allbarang = respon.data?.data;
+      });
+      this.set = 0;
+      this.fcek = true;
     },
     getsearchbarang() {
+      axios
+        .get("http://127.0.0.1:8000/api/search/" + this.cari)
+        .then((respon) => {
+          this.hasilcari = respon.data?.data;
+          console.log(respon.data?.data);
+        }); 
+    },
+    getsearchbarang() {
+ 
       this.set = 2;
     },
     getallkategori() {
@@ -288,6 +561,16 @@ export default {
       });
     },
     getkategori(ktg) {
+ 
+      axios
+        .get(`http://127.0.0.1:8000/api/getkategori/${ktg.kategori_id}`)
+        .then((respon) => {
+          console.log(respon.data?.data);
+          this.hasilKategori = respon.data?.data;
+        });
+      this.set = 1;
+      this.fcek = ktg;
+ 
       this.getdataallcheck = ktg;
       if (this.getdataallcheck == -1) {
         axios
@@ -312,6 +595,7 @@ export default {
             console.log(this.getdataall);
           });
       }
+ 
     },
     todetail(brg) {
       // console.log(brg.barang_id)
@@ -322,12 +606,14 @@ export default {
       this.$router.push(`/detail/${barang.barang_id}`);
     },
   },
+ 
   mounted() {
     setTimeout(() => {
       this.firstLoad = false;
       this.loading = false;
     }, 3000);
   },
+ 
 
   created() {
     const userid = this.$cookies.get("cookieku");
@@ -338,7 +624,17 @@ export default {
     this.getallkategori();
     this.getkategori(-1);
     this.getsearchbarang();
+ 
+    this.getallbarang();
+  },
+  mounted() {
+    setTimeout(() => {
+      this.firstLoad = false;
+      this.loading = false;
+    }, 3000);
+ 
     // this.getallbarang();
+ 
   },
 };
 </script>
