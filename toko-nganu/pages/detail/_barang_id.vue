@@ -283,6 +283,8 @@ export default {
         barang_id: 1,
         kuantitas: 1,
         varian_id: 1,
+        kategori_id: 1,
+        toko_id: 1,
       },
       Toko: [],
       gettk: "",
@@ -290,6 +292,7 @@ export default {
       setpil: 0,
       fotosetvar: "",
       namasetvar: "",
+
       stokVarianTerpilih: null,
       hargaVarianTerpilih: null,
       jumlahBarangDibeli: 1,
@@ -339,37 +342,28 @@ export default {
       });
     },
     tambahkeranjang() {
-      if (this.jumlahBarangDibeli <= this.stokVarianTerpilih) {
-        this.subtotal = this.hargaVarianTerpilih * this.jumlahBarangDibeli;
-        const keranjangData = {
-          user_id: this.userid,
-          barang_id: this.prm.barang_id,
-          kuantitas: this.jumlahBarangDibeli,
-          varian_id: this.pilihan,
-        };
-        axios
-          .post(
-            "http://127.0.0.1:8000/api/addkeranjangbyuser/" + this.userid,
-            keranjangData
-          )
-          .then((respon) => {
-            console.log(respon);
-            this.$toasted.show("Berhasil ditambah", {
-              theme: "success",
-              position: "top-right",
-              className: "edit-toast2",
-              duration: 3000,
-            });
+      // console.log( this.detailbarang[0]?.kategori_id)
+      (this.detbarker.user_id = this.userid),
+        (this.detbarker.toko_id = this.detailbarang[0]?.toko_id),
+        (this.detbarker.kategori_id = this.detailbarang[0]?.kategori_id),
+        (this.detbarker.barang_id = this.prm.barang_id),
+        (this.detbarker.kuantitas = 1),
+        (this.detbarker.varian_id = this.pilihan);
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/addkeranjangbyuser/" + this.userid,
+          this.detbarker
+        )
+        .then((respon) => {
+          console.log(respon);
+          this.$toasted.show("Berhasil ditambah", {
+            theme: "success",
+            position: "top-right",
+            className: "edit-toast2",
+            duration: 3000,
           });
-        console.log(this.pilihan);
-      } else {
-        this.$toasted.error("Jumlah melebihi stok varian", {
-          theme: "error",
-          position: "top-right",
-          className: "edit-toast2",
-          duration: 3000,
         });
-      }
+      console.log(this.pilihan);
     },
     countmin(dataa) {
       if (this.jumlahBarangDibeli > 1) {
@@ -398,14 +392,6 @@ export default {
     this.userid = usid.data.id;
     this.getbarangtokobyid();
     this.getfotobyidbrg();
-
-    if (this.detailbarang.nama) {
-      this.items.push({
-        text: this.detailbarang.nama,
-        disabled: true,
-        href: "breadcrumbs_link_1",
-      });
-    }
   },
 };
 </script>
