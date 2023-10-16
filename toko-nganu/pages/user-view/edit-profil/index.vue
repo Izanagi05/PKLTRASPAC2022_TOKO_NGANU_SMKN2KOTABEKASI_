@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="">
       <div class="mb-2">
           <NuxtLink to="/" class="my-2 text-decoration-none black--text">
             Home </NuxtLink
@@ -20,21 +20,21 @@
             <div class="  ">
 
               <div class="d-flex justify-center">
-              <v-avatar style="width:14vw;height: 14vw;">
+              <v-avatar :size="$vuetify.breakpoint.smAndDown?'100':'200'">
                 <img v-if="editprofil.foto_profil" :src="'http://127.0.0.1:8000/storage/' + editprofil.foto_profil
                   " />
               </v-avatar>
               </div>
               <div class="btn-card  pb-1 pt-3 d-flex justify-center mt-2 ">
-              <v-btn class=" rounded-pill font-weight-medium " style="width: 80%;"  outlined rounded
+              <v-btn class=" rounded-lg font-weight-medium " style="width: 80%;"  outlined
                 @click="dialog = true">
                 Pilih Foto
               </v-btn>
             </div>
             </div>
             <div class="dialog">
-              <v-dialog v-model="dialog" width="500px" height="700px">
-                <v-card>
+              <v-dialog class="rounded-xl" v-model="dialog" width="500px" height="700px">
+                <v-card class="rounded-xl">
                   <v-card-text>
                     <div class="preview-foto pt-6">
                       <v-img :src="preview" v-if="preview" width="200px"></v-img>
@@ -46,10 +46,10 @@
                     <div class="btn-dialog pl-4 pb-4">
                       <v-row>
                         <v-col cols="6">
-                          <v-btn @click="batalkonfirmfoto">Batal</v-btn>
+                          <v-btn @click="batalkonfirmfoto" class="rounded-lg " block  outlined>Batal</v-btn>
                         </v-col>
                         <v-col cols="6">
-                          <v-btn type="submit" @click="konfirmfoto">Pilih</v-btn>
+                          <v-btn type="submit" @click="konfirmfoto" class="rounded-lg white--text" block  color="#2f432d">Pilih</v-btn>
                         </v-col>
                       </v-row>
                     </div>
@@ -65,33 +65,33 @@
               </v-col>
               <v-col cols="12"  class="">
                 <v-row class="text-nama pt-5 ">
-                  <v-col cols="2" class="py-0">Nama</v-col>
-                  <v-col cols="10" class="py-0">
-                    <v-text-field class="rounded-lg "  filled v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
+                  <v-col cols="12" lg="2" class="py-0">Nama</v-col>
+                  <v-col cols="12" lg="10" class="py-0">
+                    <v-text-field class="rounded-lg "   v-model="editprofil.nama" label="Masukkan Nama"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row class="text-nama  ">
-                  <v-col cols="2" class="py-0">Telepon</v-col>
-                  <v-col cols="10" class="py-0">
-                  <v-text-field class="rounded-lg "  type="number" filled v-model="editprofil.no_telepon"
+                  <v-col cols="12" lg="2" class="py-0">Telepon</v-col>
+                  <v-col cols="12" lg="10" class="py-0">
+                  <v-text-field class="rounded-lg "  type="number"  v-model="editprofil.no_telepon"
                   label="Masukkan No.Telepon"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row class="text-nama  ">
-                  <v-col cols="2" class="py-0">Email</v-col>
-                  <v-col cols="10" class="py-0">
-                  <v-text-field class="rounded-lg "  filled v-model="editprofil.email" label="Masukkan Email"></v-text-field>
+                  <v-col cols="12" lg="2" class="py-0">Email</v-col>
+                  <v-col cols="12" lg="10" class="py-0">
+                  <v-text-field class="rounded-lg "   v-model="editprofil.email" label="Masukkan Email"></v-text-field>
                 </v-col>
               </v-row>
               </v-col>
             </v-row>
             <div class="button pb-6 pt-5">
               <v-row class="justify-end">
-                <v-col class="" cols="12"  lg="4"  md="4" sm="4" xs="4">
-                    <v-btn class="rounded-pill " block  outlined @click="backprofil">Batal</v-btn>
+                <v-col class="order-2 order-lg-1" cols="12"  lg="4"  md="12" sm="12" xs="12">
+                    <v-btn class="rounded-lg " block  outlined @click="backprofil">Batal</v-btn>
                 </v-col>
-                <v-col class="" cols="12" lg="6"  md="6" sm="4" xs="4">
-                    <v-btn class="rounded-pill white--text" block  color="#2f432d"
+                <v-col class="order-1 order-lg-2 " cols="12" lg="6"  md="12" sm="12" xs="12">
+                    <v-btn class="rounded-lg white--text" block  color="#2f432d"
                       @click="updateuser">Simpan</v-btn>
                 </v-col>
               </v-row>

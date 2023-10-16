@@ -4,13 +4,13 @@
       <v-row class="mb-4 mx-8">
         <v-col
           cols="12"
-          lg="3"
+
           md="3"
-          class="justify-center order-1 order-lg-1 order-md-1"
+          :class="['justify-center order-1 order-lg-1 order-md-1',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',]"
         >
           <div class="d-flex">
             <v-img
-              :src="require('~/assets/logo_nganu.png')"
+              :src="require('~/assets/logonganu-putih.png')"
               :max-width="$vuetify.breakpoint.smAndDown ? '20' : '30'"
             ></v-img>
             <div
@@ -26,31 +26,31 @@
             Temukan produk berkualitas dengan harga terbaik."
           </div>
         </v-col>
-        <v-col cols="4" lg="1" class="order-2 order-lg-2 order-md-2">
-          <ul class="black--text list-none pa-0 text-decoration-none">
+        <v-col cols="4" :class="[' order-2 order-lg-2 order-md-2',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '']">
+          <ul class="white--text list-none pa-0 text-decoration-none">
             <li class="font-weight-bold mb-2">Bantuan</li>
             <li v-for="(listbt, i) in listbantuan" :key="i" class="mb-2">
               <nuxt-link
-                class="black--text list-none text-decoration-none"
+                class="white--text list-none text-decoration-none"
                 :to="listbt.bantuanlink"
                 >{{ listbt.bantuantext }}</nuxt-link
               >
             </li>
           </ul>
         </v-col>
-        <v-col cols="4" lg="2" md="2" class="order-4 order-lg-3 order-md-3">
-          <ul class="black--text list-none pa-0 text-decoration-none">
+        <v-col cols="4"   md="2" :class="[' order-4 order-lg-3 order-md-3',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',]">
+          <ul class="white--text list-none pa-0 text-decoration-none">
             <li class="font-weight-bold mb-2">Produk</li>
             <li v-for="(listbt, i) in listproduk" :key="i" class="mb-2">
               <nuxt-link
-                class="black--text list-none text-decoration-none"
+                class="white--text list-none text-decoration-none"
                 :to="listbt.bantuanlink"
                 >{{ listbt.bantuantext }}</nuxt-link
               >
             </li>
           </ul>
         </v-col>
-        <v-col cols="8" lg="4" md="4" class="order-5 order-lg-4 order-md-4">
+        <v-col cols="8"  md="4" :class="[' order-5 order-lg-4 order-md-4',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',]">
           <div class="font-weight-bold">Ikuti Kami</div>
           <div class="d-flex">
             <v-icon> mdi-instagram </v-icon>
@@ -67,7 +67,7 @@
             kebutuhan Anda.
           </div>
         </v-col>
-        <v-col cols="8" lg="2" md="2" class="order-3 order-lg-5 order-md-5">
+        <v-col cols="8"  md="2" :class="['order-3 order-lg-5 order-md-5',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',]">
           <div class="font-weight-bold">Alamat</div>
           <div class="d-flex">
             <v-icon> mdi-adress </v-icon>
@@ -97,14 +97,14 @@ export default {
   data() {
     return {
       listbantuan: [
-        { bantuanlink: "#", bantuantext: "Tentang" },
-        { bantuanlink: "#", bantuantext: "Kontak Kami" },
-        { bantuanlink: "#", bantuantext: "FAQS" },
+        { bantuanlink: "/company/tentang", bantuantext: "Tentang" },
+        { bantuanlink: "/company/kontak", bantuantext: "Kontak Kami" },
+        { bantuanlink: "/faqs", bantuantext: "FAQS" },
       ],
       listproduk: [
-        { bantuanlink: "#", bantuantext: "Keranjang" },
-        { bantuanlink: "#", bantuantext: "Toko saya" },
-        { bantuanlink: "#", bantuantext: "Akun saya" },
+        { bantuanlink: "/keranjang", bantuantext: "Keranjang" },
+        { bantuanlink: "/user-view/toko-user", bantuantext: "Toko saya" },
+        { bantuanlink: "/user-view", bantuantext: "Akun saya" },
       ],
     };
   },

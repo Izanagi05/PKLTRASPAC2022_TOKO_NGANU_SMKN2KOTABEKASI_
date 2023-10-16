@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pl-15 pb-5 font-weight-medium">Detail Barang</div>
+    <div class="pl-15s pb-5 font-weight-medium">Detail Barang</div>
     <!-- <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-xl">
         <v-card class="pt-15 px-8 pb-8 rounded-xl">
           <div class="text-h6 pl-4">Apakah kamu yakin ingin menghapus item ini?</div>
@@ -21,9 +21,10 @@
       </v-card>
     </v-dialog> -->
 
-    <DialogDelete :dialogDelete="dialogDelete" :confirmhapus="confirmhapusbarang" :closeDelete="closeDelete"/>
-    <DialogUpdate :dialogedit="dialogedit" item="Barang"  :detaildatadialog="detaildatadialog" :closeedit="closeedit" :updateedit="updatebarang"/>
-    <v-data-table class="px-15" :headers="headers" :items="Toko">
+    <DialogDelete  :dialogDelete="dialogDelete" :confirmhapus="confirmhapusbarang" :closeDelete="closeDelete"/>
+    <DialogUpdate :dialogedit="dialogedit" item="Barang" :kategori="Kategori" :detaildatadialog="detaildatadialog" :closeedit="closeedit" :updateedit="updatebarang"/>
+    <div  style="height: 80vh; overflow-y: scroll;" class="rounded-lg">
+    <v-data-table class="" :headers="headers" :items="Toko">
       <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
           class="mx-2 white--text btn-crkuup"
@@ -35,17 +36,19 @@
           <v-icon dark>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          class="mx-2"
+          class="rounded-xl mx-2"
           small
           @click="detailbarang(item)"
+
           style="margin: 15px 15px 15px 0px"
         >
           buat varian
         </v-btn>
         <v-btn
-          class="mx-2"
+          class="rounded-xl mx-2"
           small
           @click="detailfotobarang(item)"
+
           style="margin: 15px 15px 15px 0px"
         >
           info foto barang
@@ -61,6 +64,7 @@
         </v-btn>
       </template>
     </v-data-table>
+    </div>
   </div>
 </template>
 <script>
@@ -73,7 +77,6 @@ export default {
       prm: this.$route.params,
       dialogedit: false,
       dialogDelete: false,
-      Toko: [],
       barangtoko: null,
       headers: [
         { text: "Nama Barang", value: "nama" },
@@ -82,10 +85,13 @@ export default {
       ],
       detaildatadialog: {
         barang_id: "",
+        kategori_id: "",
         nama: "",
         deskripsi: "",
       },
       defaultItem: {
+        barang_id: "",
+        kategori_id: "",
         nama: "",
         deskripsi: "",
       },
@@ -93,13 +99,18 @@ export default {
       // Toko:null,
     };
   },
+  computed:{
+    Toko(){
+      return this.$store.state.barang.alldatabarang
+    },
+    Kategori(){
+      return this.$store.state.kategori.alldatakategori
+    }
+  },
   methods: {
     getbarang() {
-      axios
-        .get("http://127.0.0.1:8000/api/getbarang/" + this.prm.toko_id)
-        .then((respon) => {
-          this.Toko = respon.data?.data;
-        });
+      this.$store.dispatch('barang/getdatabarang', this.prm.toko_id )
+      this.$store.dispatch('kategori/getdatakategori')
     },
     detailbarang(item) {
       this.$router.push(
@@ -115,6 +126,14 @@ export default {
       this.indexnya = this.Toko.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
       this.dialogedit = true;
+      console.log(item)
+    },
+
+    updatebarang() {
+      this.$store.dispatch('barang/ubahdata',  this.detaildatadialog )
+      console.log(this.detaildatadialog)
+      this.closeedit()
+      this.$toast.success("Berhasil update");
     },
     closeedit() {
       this.$nextTick(() => {
@@ -122,37 +141,13 @@ export default {
       });
       this.dialogedit = false;
     },
-    updatebarang() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/updatebarang/" +
-            this.detaildatadialog.barang_id,
-          this.detaildatadialog
-        )
-        .then((respon) => {
-          console.log(respon.data);
-        });
-      Object.assign(this.Toko[this.indexnya], this.detaildatadialog);
-      this.dialogedit = false;
-      this.$toast.success("Berhasil update");
-    },
-
     hapusbarang(item) {
       this.editedIndex = this.Toko.indexOf(item);
       this.detaildatadialog = Object.assign({}, item);
       this.dialogDelete = true;
     },
     confirmhapusbarang() {
-      axios
-        .delete(
-          "http://127.0.0.1:8000/api/deletebarang/" +
-            this.detaildatadialog.barang_id
-        )
-        .then((respon) => {
-          console.log(respon);
-          this.$toast.success("Berhasil hapus");
-        });
-      this.Toko.splice(this.editedIndex, 1);
+      this.$store.dispatch('barang/hapusdata', this.detaildatadialog.barang_id)
       this.closeDelete();
     },
     closeDelete() {

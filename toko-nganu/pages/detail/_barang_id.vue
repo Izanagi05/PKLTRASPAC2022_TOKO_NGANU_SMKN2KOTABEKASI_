@@ -250,9 +250,11 @@ export default {
 
       detbarker: {
         user_id: "",
-        barang_id: 1,
-        kuantitas: 1,
-        varian_id: 1,
+        toko_id: null,
+        kategori_id: null,
+        barang_id: null,
+        kuantitas: null,
+        varian_id: null,
       },
       Toko: [],
       gettk: "",
@@ -295,8 +297,10 @@ export default {
       });
     },
     tambahkeranjang() {
-      // console.log(dtlbrg)
+      // console.log( this.detailbarang[0]?.kategori_id)
       (this.detbarker.user_id = this.userid),
+      (this.detbarker.toko_id =this.detailbarang[0]?.toko_id),
+      (this.detbarker.kategori_id =this.detailbarang[0]?.kategori_id),
         (this.detbarker.barang_id = this.prm.barang_id),
         (this.detbarker.kuantitas = 1),
         (this.detbarker.varian_id = this.pilihan);

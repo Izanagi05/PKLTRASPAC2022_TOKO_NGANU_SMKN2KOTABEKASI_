@@ -28,18 +28,35 @@ class TokoUserController extends Controller
 
     public function createtoko(Request $request, $id)
     {
-        $user = $id;
-        $validatedData = $request->validate([
+        try{
+
+            $user = $id;
+            $validatedData = $request->validate([
             'user_id' => '',
-            'nama' => '',
-            'deskripsi' => '',
-            'alamat' => '',
-            'no_telepon' => '',
+            'nama' => 'required|string',
+            'deskripsi' => 'required',
+            'alamat' => 'required|string',
+            'no_telepon' => 'required|numeric',
             'logo' => '',
         ]);
 
         $validatedData['user_id'] = $user;
+        $validatedData['logo'] = 'logotoko/default.png';
         Toko::create($validatedData);
+        return response()->json([
+            'data' => $validatedData,
+            'message' => 'Berhasil ambil data toko barang',
+            'success' => true,
+            'status' => 201,
+        ], 201);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'data' => null,
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+            'success' => false,
+            'status' => 500,
+        ], 500);
+    }
     }
 
     public function updatetoko(Request $request, $id)
@@ -52,8 +69,10 @@ class TokoUserController extends Controller
         //     "no_telepon" => $request->no_telepon,
         //     "logo" => $request->logo
         // ]);
-        $rules = [
-            'nama' => 'required',
+        try{
+
+            $rules = [
+                'nama' => 'required',
             'deskripsi' => 'required',
             'alamat' => 'required',
             'no_telepon' => 'required',
@@ -70,8 +89,22 @@ class TokoUserController extends Controller
                 $validasi['logo'] = $request->file('logo')->store('logotoko');
             }
             $data = Toko::where('toko_id', $id)->update($validasi);
-            return response()->json($data, 200);
+            $validasi['toko_id']=$id;
+            return response()->json([
+                'data' => $validasi,
+                'message' => 'Berhasil ambil data toko barang',
+                'success' => true,
+                'status' => 201,
+            ], 201);
         }
+    }catch (\Throwable $e) {
+        return response()->json([
+            'data' => null,
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+            'success' => false,
+            'status' => 500,
+        ], 500);
+    }
     }
     public function deletetoko($id)
     {
@@ -87,6 +120,12 @@ class TokoUserController extends Controller
                     // Hapus foto dari storage
                     if (!empty($foto->file)) {
                         Storage::delete($foto->file);
+                    }
+                }
+                foreach ($brg->barangVarian as $foto) {
+                    // Hapus foto dari storage
+                    if (!empty($foto->foto_barang_varian)) {
+                        Storage::delete($foto->foto_barang_varian);
                     }
                 }
                 $brg->BarangFoto()->delete();

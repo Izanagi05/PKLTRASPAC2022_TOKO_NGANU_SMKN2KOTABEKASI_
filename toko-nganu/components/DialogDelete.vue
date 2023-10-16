@@ -9,11 +9,11 @@
             Item yang sudah dihapus tidak bisa dikembalikan lagi
           </div>
           <div class="d-flex justify-end mt-15">
-            <v-btn class="rounded-xl px-8" outlined @click="closeDelete"
+            <v-btn class="rounded-lg px-8" outlined @click="closeDelete"
               >Batal</v-btn
             >
             <v-btn
-              class="rounded-xl px-8 ml-8 white--text"
+              class="rounded-lg px-8 ml-8 white--text"
               color="#FF3548"
               @click="confirmhapus"
               >Hapus</v-btn

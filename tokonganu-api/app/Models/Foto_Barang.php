@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Foto_Barang extends Model
 {
     use HasFactory;
-    public $timestamps= false;
+    // public $timestamps= false;
     protected $primaryKey = 'foto_barang_id';
     protected $table ='foto_barang';
     protected $fillable = [
@@ -18,4 +18,7 @@ class Foto_Barang extends Model
     public function FotoBarang(){
         return $this->belongsTo(Barang::class, 'barang_id');
     }
+    // public function FotoVarian(){
+    //     return $this->belongsTo(Varian::class, 'foto_barang_id');
+    // }
 }

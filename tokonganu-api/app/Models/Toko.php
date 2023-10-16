@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Toko extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $primaryKey = 'toko_id';
     protected $table ='toko';
     protected $fillable = [

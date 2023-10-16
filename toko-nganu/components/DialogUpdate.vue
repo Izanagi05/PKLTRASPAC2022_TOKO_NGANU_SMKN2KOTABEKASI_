@@ -58,13 +58,29 @@
               v-on:change="upload"
             />
           </div>
-          <div v-if="$route.path.includes('/user-view/toko-user/detailtoko/')  && !$route.path.includes('/varianbarang/')  && !$route.path.includes('/fotobarang/')">
+          <div
+            v-if="
+              $route.path.includes('/user-view/toko-user/detailtoko/') &&
+              !$route.path.includes('/varianbarang/') &&
+              !$route.path.includes('/fotobarang/')
+            "
+          >
             <v-text-field
               type="text"
               v-model="detaildatadialog.nama"
               label="Name"
               outline
             ></v-text-field>
+            <select v-model="detaildatadialog.kategori_id" label="Pilih">
+              <option disabled>Pilih Kategori</option>
+              <option
+                v-for="(toko, index) in kategori"
+                :value="toko.kategori_id"
+                :key="index"
+              >
+                {{ toko.nama }}
+              </option>
+            </select>
             <v-text-field
               type="text"
               v-model="detaildatadialog.deskripsi"
@@ -72,13 +88,7 @@
               outline
             ></v-text-field>
           </div>
-          <div
-            v-if="
-              $route.path.includes(
-                '/varianbarang/'
-              )
-            "
-          >
+          <div v-if="$route.path.includes('/varianbarang/')">
             <v-text-field
               type="text"
               v-model="detaildatadialog.nama"
@@ -97,22 +107,28 @@
               label="stok"
               outline
             ></v-text-field>
-          </div>
-
-          <div
-            v-if="
-              $route.path.includes(
-                '/fotobarang/'
-              )
-            "
-          >
-          <label
+            <label
               for="fileInput"
               class="custom-file-upload rounded-lg py-2 px-4 white--text"
             >
               <span>Choose File</span>
             </label>
-          <input
+            <input
+              class="inputfileku"
+              id="fileInput"
+              type="file"
+              v-on:change="upload"
+            />
+          </div>
+
+          <div v-if="$route.path.includes('/fotobarang/')">
+            <label
+              for="fileInput"
+              class="custom-file-upload rounded-lg py-2 px-4 white--text"
+            >
+              <span>Choose File</span>
+            </label>
+            <input
               class="inputfileku"
               id="fileInput"
               type="file"
@@ -121,11 +137,11 @@
           </div>
 
           <div class="d-flex justify-end mt-8">
-            <v-btn class="rounded-xl px-8" outlined @click="closeedit"
+            <v-btn class="rounded-lg px-8" outlined @click="closeedit"
               >Close</v-btn
             >
             <v-btn
-              class="rounded-xl ml-8 px-8 white--text"
+              class="rounded-lg ml-8 px-8 white--text"
               color="#4caf50"
               @click="updateedit"
               >Ubah</v-btn
@@ -141,6 +157,7 @@ export default {
   props: [
     "dialogedit",
     "detaildatadialog",
+    "kategori",
     "upload",
     "closeedit",
     "item",

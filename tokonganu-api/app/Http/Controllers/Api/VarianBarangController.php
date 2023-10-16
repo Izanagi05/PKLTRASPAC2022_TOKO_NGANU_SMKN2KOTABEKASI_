@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Varian;
+use Illuminate\Support\Facades\Storage;
 
 class VarianBarangController extends Controller
 {
@@ -12,6 +13,10 @@ class VarianBarangController extends Controller
     try {
 
         $data = Varian::where('barang_id', $id)->get();
+        // foreach ($data as $key => $dt) {
+        //     # code...
+        //     $data[$key]['varian_foto']= $dt->VarianFoto;
+        // }
         return response()->json([
             'data' => $data,
             'message' => 'Berhasil cari data varian',
@@ -55,16 +60,23 @@ class VarianBarangController extends Controller
             'nama'=> 'required',
             'harga' => 'required',
             'stok' => 'required',
+            'foto_barang_varian' => '',
         ]);
+        if($validatedData){
 
+            if($request->file('foto_barang_varian')){
+                $validatedData['foto_barang_varian']= $request->file('foto_barang_varian')->store('foto_barang_varian_toko');
+
+            }
         $validatedData['barang_id'] = $id;
         Varian::create($validatedData);
         return response()->json([
-            'data' => 'sukses',
+            'data' => $validatedData,
             'message' => 'Berhasil tambah data',
             'success' => true,
             'status' => 201,
         ], 201);
+    }
     } catch (\Throwable $e) {
         return response()->json([
             'data' => null,
@@ -77,17 +89,29 @@ class VarianBarangController extends Controller
     public function updatevarianbarang(Request $request, $id ){
 
         try {
-        $data = Varian::where('varian_id', $id)->update([
-            "nama" => $request->nama,
-            "harga" => $request->harga,
-            "stok" => $request->stok,
-        ]);
+            $rules = [
+                "nama" => 'required',
+                "harga" => 'required',
+                "stok" => 'required|numeric',
+                "foto_barang_varian" => 'required',
+            ];
+            $validasi = $request->validate($rules);
+            if ($validasi) {
+            if ($request->file('foto_barang_varian')) {
+                if (!empty(Varian::find($id)->foto_barang_varian)) {
+                    Storage::delete(Varian::find($id)->foto_barang_varian);
+                }
+                $validasi['foto_barang_varian'] = $request->file('foto_barang_varian')->store('foto_barang_varian_toko');
+            }
+        $data = Varian::where('varian_id', $id)->update($validasi);
+        $validasi['varian_id']=$id;
         return response()->json([
-            'data' => 'sukses',
+            'data' => $validasi,
             'message' => 'Berhasil ubah data',
             'success' => true,
             'status' => 201,
         ], 201);
+    }
     } catch (\Throwable $e) {
         return response()->json([
             'data' => null,
@@ -99,6 +123,9 @@ class VarianBarangController extends Controller
     }
     public function deletevarianbarang($id ){
     try {
+        if (!empty(Varian::find($id)->foto_barang_varian)) {
+            Storage::delete(Varian::find($id)->foto_barang_varian);
+        }
         $data = Varian::where('varian_id', $id)->delete();
         return response()->json([
             'data' => $data,
