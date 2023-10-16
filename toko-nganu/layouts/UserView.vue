@@ -59,7 +59,7 @@
             sm="12"
             xs="12"
             order="1"
-            class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex align-center"
+            class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex "
           >
             <div style="width: 100%;">
               <nuxt />

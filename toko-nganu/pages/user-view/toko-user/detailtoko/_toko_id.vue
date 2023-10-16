@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class="pl-15s pb-5 font-weight-medium">Detail Barang</div>
-    <!-- <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-xl">
-        <v-card class="pt-15 px-8 pb-8 rounded-xl">
+    <div class="pl-15s pb-5 font-weight-medium text-h6">Detail Barang</div>
+    <!-- <v-dialog v-model="dialogDelete"  max-width="800px" class="rounded-lg">
+        <v-card class="pt-15 px-8 pb-8 rounded-lg">
           <div class="text-h6 pl-4">Apakah kamu yakin ingin menghapus item ini?</div>
           <div class="grey--text text-body-2 pl-4 mt-4">
             Item yang sudah dihapus tidak bisa dikembalikan lagi
           </div>
           <div class="d-flex justify-end mt-15">
-            <v-btn class="rounded-xl" outlined @click="closeDelete"
+            <v-btn class="rounded-lg" outlined @click="closeDelete"
               >Batal</v-btn
             >
             <v-btn
-            class="rounded-xl ml-8 white--text"
+            class="rounded-lg ml-8 white--text"
               color="#FF3548"
             @click="confirmhapusbarang"
             >Hapus</v-btn
@@ -25,7 +25,29 @@
     <DialogUpdate :dialogedit="dialogedit" item="Barang" :kategori="Kategori" :detaildatadialog="detaildatadialog" :closeedit="closeedit" :updateedit="updatebarang"/>
     <div  style="height: 80vh; overflow-y: scroll;" class="rounded-lg">
     <v-data-table class="" :headers="headers" :items="Toko">
-      <template v-slot:[`item.aksi`]="{ item }">
+      <template v-slot:[`item.aksivarian`]="{ item }">
+        <v-btn
+          class="rounded-lg mx-2"
+          small
+          @click="detailbarang(item)"
+
+          style="margin: 15px 15px 15px 0px"
+        >
+          buat varian
+        </v-btn>
+        </template>
+        <template v-slot:[`item.aksifotobarang`]="{ item }">
+        <v-btn
+        class="rounded-lg mx-2"
+          small
+          @click="detailfotobarang(item)"
+
+          style="margin: 15px 15px 15px 0px"
+        >
+          info foto barang
+        </v-btn>
+        </template>
+        <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
           class="mx-2 white--text btn-crkuup"
           fab
@@ -34,24 +56,6 @@
           style="margin: 15px 15px 15px 0px"
         >
           <v-icon dark>mdi-pencil</v-icon>
-        </v-btn>
-        <v-btn
-          class="rounded-xl mx-2"
-          small
-          @click="detailbarang(item)"
-
-          style="margin: 15px 15px 15px 0px"
-        >
-          buat varian
-        </v-btn>
-        <v-btn
-          class="rounded-xl mx-2"
-          small
-          @click="detailfotobarang(item)"
-
-          style="margin: 15px 15px 15px 0px"
-        >
-          info foto barang
         </v-btn>
         <v-btn
           class="mx-2 white--text btn-crkuhap"
@@ -81,6 +85,8 @@ export default {
       headers: [
         { text: "Nama Barang", value: "nama" },
         { text: "Deskripsi", value: "deskripsi" },
+        { text: "Detail Varian", value: "aksivarian" },
+        { text: "Detail Foto", value: "aksifotobarang" },
         { text: "Aksi", value: "aksi" },
       ],
       detaildatadialog: {

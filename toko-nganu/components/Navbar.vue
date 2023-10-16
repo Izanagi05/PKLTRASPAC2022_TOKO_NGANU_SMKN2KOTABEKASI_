@@ -59,7 +59,7 @@
                     <v-img
                       :src="
                         'http://127.0.0.1:8000/storage/' +
-                        $cookies.get(`cookieku`).data.foto_profil
+                        UserLogin?.foto_profil
                       "
                     />
                   </v-avatar>
@@ -106,7 +106,7 @@
                 <v-btn
                   text
                   depressed
-                  @click="logout()"
+                  @click="logout"
                   width="100%"
                   class="font-weight-medium d-flex mt-15 align-items justify-start py-8 text-capitalize"
                   ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
@@ -139,6 +139,11 @@ export default {
       nama: "tes",
       no_admin: "6281563151038",
     };
+  },
+  computed: {
+    UserLogin() {
+      return this.$store.state.users.datauserlogin;
+    },
   },
   methods: {
      route() {
@@ -206,6 +211,7 @@ export default {
       this.$store.dispatch("users/logout");
     },
   created() {
+    this.$store.dispatch("toko/getdatatoko", this.tokouser);
     this.getuserlogin();
     this.route();
   },

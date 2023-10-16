@@ -53,11 +53,11 @@
         <v-col cols="8"  md="4" :class="[' order-5 order-lg-4 order-md-4',$vuetify.breakpoint.lgAndUp ? 'col-lg-5' : '',]">
           <div class="font-weight-bold">Ikuti Kami</div>
           <div class="d-flex">
-            <v-icon> mdi-instagram </v-icon>
-            <v-icon> mdi-instagram </v-icon>
-            <v-icon> mdi-instagram </v-icon>
-            <v-icon> mdi-instagram </v-icon>
-            <v-icon> mdi-instagram </v-icon>
+            <v-icon color="white"> mdi-instagram </v-icon>
+            <v-icon color="white"> mdi-instagram </v-icon>
+            <v-icon color="white"> mdi-instagram </v-icon>
+            <v-icon color="white"> mdi-instagram </v-icon>
+            <v-icon color="white"> mdi-instagram </v-icon>
           </div>
           <div
             v-if="$vuetify.breakpoint.mdAndUp"

@@ -1,36 +1,32 @@
 <template>
   <div>
-    <div class="pb-5 font-weight-medium">Tambah barang</div>
+    <div class="pb-5 font-weight-medium text-h6">Tambah barang</div>
     <div class="">
-      <v-row justify="center">
-        <v-col cols="12" lg="9" class="px-4">
           <v-row>
-            <v-col cols="3" class="px-0">
-              <div class="list">Nama Barang</div>
+            <v-col cols="12" lg="3" class="">
+              <div class="">Nama Barang</div>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="12" lg="9">
               <v-text-field
-                label="Masukan Nama Barang"
-                placeholder="Masukan Nama Barang"
+                label=" Nama Barang"
+                placeholder=" Nama Barang"
                 solo
                 class="rounded-lg"
                 v-model="databarang.nama"
               ></v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="px-0">
-              <div class="list">Kategori</div>
+            <v-col cols="12" lg="3" class="">
+              <div class="">Kategori</div>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="12" lg="9">
               <v-expansion-panels class="panel">
                 <v-expansion-panel solo class="panel-kategori">
                   <v-expansion-panel-header v-slot="{ open }">
                     <v-row no-gutters>
-                      <v-col>Masukan Kategori </v-col>
+                      <v-col> Kategori </v-col>
                       <v-col cols="8" class="text--secondary">
                         <v-fade-transition leave-absolute>
-                          <span v-if="open" key="0"> Pilih Kategori </span>
+                          <span v-if="open" key="0">Pilih Kategori </span>
                           <span v-else>
                             <div>
                               {{ getKategoriText(databarang.kategori_id) }}
@@ -68,17 +64,15 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="px-0">
-              <div class="list">Toko</div>
+            <v-col cols="12" lg="3" class="">
+              <div class="">Toko</div>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="12" lg="9">
               <v-expansion-panels solo class="">
                 <v-expansion-panel solo class="">
                   <v-expansion-panel-header v-slot="{ open }">
                     <v-row no-gutters>
-                      <v-col> Masukan Toko </v-col>
+                      <v-col> Toko </v-col>
                       <v-col cols="8" class="text--secondary">
                         <v-fade-transition leave-absolute>
                           <span v-if="open" key="0">Pilih Toko</span>
@@ -121,44 +115,40 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="px-0">
-              <div class="list">Deskripsi</div>
+            <v-col cols="12" lg="3" class="">
+              <div class="">Deskripsi</div>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="12" lg="9">
               <v-textarea
                 solo
                 class="rounded-lg"
                 name="input-7-4"
-                label="Masukan Deskripsi Barang"
+                label="Deskripsi Barang"
                 v-model="databarang.deskripsi"
               ></v-textarea>
             </v-col>
           </v-row>
-        </v-col>
-      </v-row>
-      <v-row class="judul" justify="end">
+      <v-row class="" justify="end">
         <v-col class="order-2 order-lg-1" cols="12"  lg="2"  md="12" sm="12" xs="12">
-          <nuxt-link to="/user-view">
+          <nuxt-link to="/user-view" class="text-decoration-none">
             <v-btn
-              rounded
+              rounded-lg
+              block
               outlined
-              width="150px"
-              class="button-aksi text-capitalize"
+              class=" text-capitalize"
             >
               Batal
             </v-btn>
           </nuxt-link>
         </v-col>
-        <v-col class="order-2 order-lg-1" cols="12"  lg="2"  md="12" sm="12" xs="12">
+        <v-col class="order-1 order-lg-2" cols="12"  lg="2"  md="12" sm="12" xs="12">
           <v-btn
-            outlined
-            rounded
-            width="150px"
-            class="button-aksi-jual text-capitalize"
+            rounded-lg
+            block
+            color="#2f432d"
+            class="text-capitalize white--text"
             @click="tbhbarang()"
-            >Jual</v-btn
+            >Buat</v-btn
           ></v-col
         >
       </v-row>
@@ -257,9 +247,7 @@ export default {
   margin-right: 20px;
 }
 
-.list {
-  margin-bottom: 50px;
-}
+
 
 .button-aksi-jual {
   color: rgb(255, 255, 255) !important;

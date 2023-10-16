@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pl-15 pb-5 font-weight-medium">Detail Varian</div>
+    <div class="pb-5 font-weight-medium text-h6">Detail Varian</div>
     <DialogTambah
       :dialogtambah="dialogadd"
       item="Varian"
@@ -23,7 +23,7 @@
       :upload="uploadupdate"
       :updateedit="updatevarian"
     />
-    <div class="pb-6 pl-4">
+    <div class="pb-6">
       <v-btn
         class="text-capitalize px-8 mb-6 text-body-1 font-weight-medium rounded-lg white--text"
         color="#2f432d"
@@ -35,8 +35,9 @@
 
     <v-data-table data-app class="" :headers="headers" :items="barang">
       <template v-slot:[`item.foto_barang_varian`]="{ item }">
-        <div class="image-container3 d-flex justify-center align-center">
+        <div class="image-container3 rounded-lg d-flex justify-center align-center">
           <v-img
+          class="rounded-lg"
             width="80%"
             height="80%"
             :src="'http://127.0.0.1:8000/storage/' + item.foto_barang_varian"
