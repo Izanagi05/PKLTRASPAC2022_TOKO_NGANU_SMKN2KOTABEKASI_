@@ -18,7 +18,7 @@
                 no-autoplay
                 height="380"
                 width="380"
-                hide-delimiter-background
+                hide-delimiter
                 show-arrows-on-hover
                 class="object-fit-cover"
               >
@@ -169,6 +169,7 @@
                   width="100%"
                   large
                   outlined
+                  @click="transaksi(dtlbrg)"
                   style="background: #2f432d; color: white; size: 105px"
                   >Beli Sekarang</v-btn
                 >
@@ -225,7 +226,7 @@
                         :key="i"
                       >
                         <div v-if="brg" class="mr-1">Rp</div>
-                        {{ vrn.harga | currency("id-ID", "IDR") }}
+                        {{ vrn.harga }}
                       </div>
                       <v-row align="center">
                         <v-col cols="auto">
@@ -384,6 +385,26 @@ export default {
           duration: 3000,
         });
       }
+    },
+    transaksi(dtlbrg) {
+      const detbarker = {
+        user_id: this.userid,
+        toko_id: dtlbrg.toko_id,
+        barang_id: this.prm.barang_id,
+        varian_id: this.pilihan,
+        kategori_id: dtlbrg.kategori_id,
+        jumlah: this.jumlahBarangDibeli,
+        total_harga: this.subtotal,
+      };
+
+      axios
+        .post("http://localhost:8000/api/createtransaksi", detbarker)
+        .then((respon) => {
+          console.log(respon.data);
+        })
+        .catch((error) => {
+          console.error("Error while creating transaction:", error);
+        });
     },
   },
 

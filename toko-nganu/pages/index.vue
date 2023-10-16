@@ -118,11 +118,13 @@
                 v-for="(brg, index) in getdataall"
                 :key="index"
               >
-                <v-card   color="#ffffff"
-                class="rounded-lg"
-                elevation="1"
-                width="300"
-                @click="todetail(brg)">
+                <v-card
+                  color="#ffffff"
+                  class="rounded-lg"
+                  elevation="1"
+                  width="300"
+                  @click="todetail(brg)"
+                >
                   <div
                     v-for="(ft, i) in brg.barang_foto_first"
                     :key="i"
@@ -141,36 +143,38 @@
                       {{ brg.nama }}
                     </div>
                     <div
-                    class="font-weight-medium d-flex"
-                    v-for="(vrn, i) in brg.barang_varian_first"
-                    :key="i"
-                  >
-                    <div v-if="brg" class="mr-1">Rp</div>
-                    {{ vrn.harga | currency("id-ID", "IDR") }}
-                  </div>
-                  <v-row align="center">
-                    <v-col cols="auto">
-                      <div class="d-flex align-center">
-                        <v-img
-                          :src="require('~/assets/pajamas_tanuki-verified.png')"
-                          max-width="16"
-                        ></v-img>
-                        <span class="ml-2">{{ brg.toko?.nama }}</span>
-                      </div>
-                    </v-col>
-                  </v-row>
-                  <div class="btn-card mt-2 pb-1 d-flex align-center">
-                    <v-rating
-                      v-model="brg.average_rating"
-                      background-color="white"
-                      color="yellow accent-4"
-                      dense
-                      half-increments
-                      hover
-                      size="18"
-                    ></v-rating>
-                    <p class="ma-0">{{ brg.average_rating }}</p>
-                  </div>
+                      class="font-weight-medium d-flex"
+                      v-for="(vrn, i) in brg.barang_varian_first"
+                      :key="i"
+                    >
+                      <div v-if="brg" class="mr-1">Rp</div>
+                      {{ vrn.harga }}
+                    </div>
+                    <v-row align="center">
+                      <v-col cols="auto">
+                        <div class="d-flex align-center">
+                          <v-img
+                            :src="
+                              require('~/assets/pajamas_tanuki-verified.png')
+                            "
+                            max-width="16"
+                          ></v-img>
+                          <span class="ml-2">{{ brg.toko?.nama }}</span>
+                        </div>
+                      </v-col>
+                    </v-row>
+                    <div class="btn-card mt-2 pb-1 d-flex align-center">
+                      <v-rating
+                        v-model="brg.average_rating"
+                        background-color="white"
+                        color="yellow accent-4"
+                        dense
+                        half-increments
+                        hover
+                        size="18"
+                      ></v-rating>
+                      <p class="ma-0">{{ brg.average_rating }}</p>
+                    </div>
                   </div>
                 </v-card>
               </v-col>
