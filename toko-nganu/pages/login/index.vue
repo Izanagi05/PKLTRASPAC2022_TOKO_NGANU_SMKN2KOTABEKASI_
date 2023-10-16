@@ -18,7 +18,7 @@
                   Login
                 </div>
 
-                <v-sheet width="300" class="mx-auto">
+                <v-sheet width="300" class="mx-auto o">
                   <v-form fast-fail @submit.prevent="loginuser()">
                     <v-text-field
                       v-model="email"
