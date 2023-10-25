@@ -32,14 +32,16 @@
     >
     <nuxt-link to="/user-view" class="text-decoration-none"
       ><v-avatar size="36">
-        <img
-          src="path/to/your/profile-image.jpg"
-          alt="Profile Image"
-        /> </v-avatar
+        <v-img
+                      :src="
+                        'http://127.0.0.1:8000/storage/' +
+                        datauserLoginKu?.foto_profil
+                      "/>
+      </v-avatar
     ></nuxt-link>
   </v-app-bar>
 </template>
-    
+
   <script>
 export default {
   data() {
@@ -54,7 +56,7 @@ export default {
   },
 };
 </script>
-  
+
   <style scoped>
 .non-fixed-app-bar {
   position: absolute;
@@ -62,4 +64,3 @@ export default {
   z-index: 1000;
 }
 </style>
-  

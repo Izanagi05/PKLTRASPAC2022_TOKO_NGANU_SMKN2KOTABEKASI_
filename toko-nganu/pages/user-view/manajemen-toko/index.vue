@@ -55,53 +55,14 @@
     </div>
     <div class="mt-4">
       <v-data-table :headers="headers" :items="alldatatransakasi">
-        <template v-slot:[`item.aksistatus`]="{ item }">
-          <div> 
-            <v-chip
-              @click="editstatus(item)"
-              :class="statuscolor(item).textClass"
-              :color="statuscolor(item).bgColor"
-            >
-              {{ item.status }}
-            </v-chip>
-          </div>
-        </template>
-        <template v-slot:[`item.total_harga`]="{ item }">
-          <div>Rp. {{ item.total_harga }}</div>
-        </template>
-        <template v-slot:[`item.aksikonfirm`]="{ item }">
-          <div>
-            <v-btn
-              icon
-              small
-              color="#4caf50"
-              @click="setYaTidak('Ya', item)"
-              :disabled="item.admin_konfirmasi === 'Ya' ? true : false"
-              ><v-icon>mdi-check</v-icon></v-btn
-            >
-            <v-btn
-              icon
-              small
-              color="#ff5252"
-              @click="setYaTidak('Tidak', item)"
-              :disabled="
-                item.admin_konfirmasi === 'Ya' ||
-                item.admin_konfirmasi === 'Tidak'
-                  ? true
-                  : false
-              "
-              ><v-icon>mdi-close</v-icon></v-btn
-            >
-          </div>
-        </template>
         <template v-slot:[`item.aksidelete`]="{ item }">
           <div>
             <v-btn icon small color="#ff5252" @click="deleteTransaksi(item)"
               ><v-icon>mdi-trash-can-outline</v-icon></v-btn
-            > 
+            >
               <v-chip @click="editstatus(item)" :class="statuscolor(item).textClass" :color="statuscolor(item).bgColor">
                 {{ item.status }}
-              </v-chip> 
+              </v-chip>
           </div>
         </template>
         <template v-slot:[`item.total_harga`]="{ item }" >
