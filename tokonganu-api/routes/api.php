@@ -34,6 +34,10 @@ Route::post('/login', [LoginController::class, 'postlogin']);
 Route::get('/getalluser', [AdminController::class, 'getalluser']);
 Route::get('/getalltoko', [AdminController::class, 'getalltoko']);
 Route::delete('/deleteuser/{id}', [AdminController::class, 'deleteuser']);
+Route::get('/getjumlahallbarangkategorirating', [AdminController::class, 'getjumlahallbarangkategorirating']);
+Route::get('/getjumlahallkategori', [AdminController::class, 'getjumlahallkategori']);
+Route::get('/getjumlahallrating', [AdminController::class, 'getjumlahallrating']);
+Route::get('/gettransaksiterbaru', [AdminController::class, 'gettransaksiterbaru']);
 //</admin>
 
 Route::get('/getuserlogin/{id}', [UserController::class, 'getuserlogin']);
@@ -51,6 +55,7 @@ Route::post('/updatetoko/{id}', [TokoUserController::class, 'updatetoko']);
 Route::delete('/hapustoko/{id}', [TokoUserController::class, 'deletetoko']);
 Route::post('/createtoko/{id}', [TokoUserController::class, 'createtoko']);
 Route::get('/gettoko/{id}', [TokoUserController::class, 'getbarangbytokouser']);
+Route::get('/searchtoko/{search?}', [TokoUserController::class, 'searchtoko']);
 
 
 Route::post('/createbarang/{id}', [BarangController::class, 'createbarang']);
@@ -71,6 +76,7 @@ Route::delete('/deletevarianbarang/{id}', [VarianBarangController::class, 'delet
 
 
 Route::get('/getfotobarang/{id}', [FotoBarangController::class, 'getfotobarang']);
+Route::get('/getfotobarangandvarianfoto/{id}', [FotoBarangController::class, 'getfotobarangandvarianfoto']);
 Route::post('/createfotobarang/{id}', [FotoBarangController::class, 'createfotobarang']);
 Route::post('/updatefotobarang/{id}', [FotoBarangController::class, 'updatefotobarang']);
 Route::delete('/deletefotobarang/{id}', [FotoBarangController::class, 'deletefotobarang']);

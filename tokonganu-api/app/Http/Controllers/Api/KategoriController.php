@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Barang;
 use App\Models\Foto_Barang;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class KategoriController extends Controller
 {
@@ -14,6 +15,10 @@ class KategoriController extends Controller
     {
         try {
             $kategori = Kategori::get();
+            foreach ($kategori as $key => $dt) {
+                # code...
+                $dt['tgl_formatku']=Carbon::parse($dt->created_at)->formatLocalized('%e %B %Y');
+            }
             return response()->json([
                 'data' => $kategori,
                 'message' => 'Berhasil get data kategori',

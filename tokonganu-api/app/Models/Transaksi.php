@@ -39,4 +39,7 @@ class Transaksi extends Model
     public function transaksiKategori(){
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+    public function transaksiFotoBarangFirst(){
+        return $this->belongsTo(Foto_Barang::class, 'barang_id', 'barang_id')->limit(1);
+    }
 }

@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Barang;
+use App\Models\Kategori;
+use App\Models\Rating;
 use App\Models\Toko;
+use App\Models\Transaksi;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -70,5 +75,89 @@ class AdminController extends Controller
         ], 500);
     }
 
+    }
+    public function getjumlahallbarangkategorirating(){
+        try {
+            //code...
+            $data=[];
+            $data['JBarang']=count(Barang::all());
+            $data['JKategori']=count(Kategori::all());
+            $data['JRating']=count(Rating::all());
+            // foreach ($data as $key => $dt) {
+            //     $dt->jumlahbarang=$dt['JBarang'];
+            //     # code...
+            // }
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
+
+    public function gettransaksiterbaru(){
+        try {
+            //code...
+            $data=Transaksi::latest()
+            ->take(10) // Ambil 10 hasil terbaru
+            ->get();
+            foreach ($data as $transaction) {
+                $transaction->xjumlah = 'x ' . $transaction->jumlah;
+                $transaction->foto_barang_first = $transaction->transaksiFotoBarangFirst->file;
+                $transaction['ftgl_transaksi']= Carbon::parse($transaction->tgl_transakasi)->format('d/m/Y');
+                $transaction->nama_pengguna = $transaction->transaksiUser->nama;
+                $transaction->nama_varian = $transaction->transaksiVarian->nama;
+                $transaction->nama_barang = $transaction->transaksiBarang->nama;
+                $transaction->nama_kategori = $transaction->transaksiKategori->nama;
+                $transaction->nama_toko = $transaction->transaksiToko->nama;
+                $transaction->ongkos_kirim = '5000';
+                unset($transaction->transaksiUser);
+                unset($transaction->transaksiVarian);
+                unset($transaction->transaksiBarang);
+                unset($transaction->transaksiKategori);
+                unset($transaction->transaksiToko);
+                unset($transaction->transaksiFotoBarangFirst);
+            }
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
+    public function templet(){
+        try {
+            //code...
+            $data=Transaksi::get();
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil ambil data',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
     }
 }

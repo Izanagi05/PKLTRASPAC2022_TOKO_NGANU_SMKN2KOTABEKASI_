@@ -5,7 +5,7 @@
       <v-card
         v-for="(dt, i) in alldatadetailtransakasi"
         :key="i"
-        class="pa-6 ma-2"
+        class="pa-6 ma-2 rounded-lg"
         @click="openDialog(dt)"
       >
         <div class="d-flex justify-space-between mb-4">
@@ -53,25 +53,31 @@
             <p class="ma-0 text-body-1 font-weight-medium">
               {{ dt.jumlah }}
             </p>
+            
           </v-col>
-          <v-col>
-            <p class="ma-0 text-body-2 grey--text">Rating</p>
-            <p class="ma-0 text-body-1 font-weight-medium">
-              {{ newRating }}
-            </p>
-          </v-col>
+          <!-- <v-col>
+          </v-col> -->
         </v-row>
       </v-card>
     </div>
     <v-dialog v-model="dialog" max-width="400">
-      <v-card>
+      <v-card class="rounded-lg">
         <v-card-title>Isi Rating</v-card-title>
         <v-card-text>
-          <v-text-field v-model="newRating" label="Rating" type="number" />
+          <!-- <v-text-field v-model="newRating" label="Rating" type="number" /> -->
+          <v-rating
+                        v-model="newRating"
+                        background-color="yellow"
+                        color="yellow accent-4"
+                        dense
+                        half-increments
+                        hover
+                        size="18"
+                      ></v-rating>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" @click="submitRating">Submit</v-btn>
-          <v-btn color="error" @click="closeDialog">Batal</v-btn>
+          <v-btn color="#2f432d" rounded-lg class="white--text text-capitalize" @click="submitRating">Submit</v-btn>
+          <v-btn outlined rounded-lg @click="closeDialog" class="text-capitalize">Batal</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

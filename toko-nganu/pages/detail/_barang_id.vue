@@ -57,7 +57,12 @@
             lg="6"
             :class="$vuetify.breakpoint.xs ? '' : 'overflowku'"
           >
-            <div class="detail pt-4">
+            <div
+              class="detail"
+              :class="{
+                'pt-4': !$vuetify.breakpoint.smAndDown,
+              }"
+            >
               <div class="nama-barang font-weight-bold" style="font-size: 30px">
                 {{ dtlbrg.nama }}
               </div>

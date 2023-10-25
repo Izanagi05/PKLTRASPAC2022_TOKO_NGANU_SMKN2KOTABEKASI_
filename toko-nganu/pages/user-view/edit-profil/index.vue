@@ -15,7 +15,7 @@
           Edit Profil
         </div> -->
 
-    <div class="pb-5 font-weight-medium text-h6">Edit profil</div>
+    <div class="pb-5 font-weight-medium q text-h6">Edit profil</div>
       <v-row class="isi my-0 ">
         <v-col cols="12" lg="4" md="4" sm="12" xs="12">
 

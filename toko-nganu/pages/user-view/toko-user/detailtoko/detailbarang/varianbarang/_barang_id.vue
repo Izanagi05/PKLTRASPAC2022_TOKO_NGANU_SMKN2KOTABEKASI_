@@ -47,16 +47,18 @@
       </template>
       <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
-          class="mx-2 white--text btn-crkuup"
-          fab
+          class="mx-2 "
+          icon
+          color="#4caf50"
           small
           @click="ubahvarian(item)"
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          class="mx-2 white--text btn-crkuhap"
-          fab
+          class="mx-2 "
+          icon
+          color="#ff5252"
           small
           @click="hapusvarian(item)"
         >

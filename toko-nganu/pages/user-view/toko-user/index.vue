@@ -50,20 +50,22 @@
         <template v-slot:[`item.aksi`]="{ item }">
           <div class="d-flex">
             <v-btn
-              class="mx-2 white--text btn-crkuup"
-              fab
+              class="mx-2"
+              icon
+              color="#4caf50"
               small
               @click="ubahdata(item)"
             >
-              <v-icon dark>mdi-pencil</v-icon>
+              <v-icon >mdi-pencil</v-icon>
             </v-btn>
             <v-btn
-              class="mx-2 white--text btn-crkuhap"
-              fab
+              class="mx-2 "
+              icon
+              color="#ff5252"
               small
               @click="hapustoko(item)"
             >
-              <v-icon dark>mdi-delete</v-icon>
+              <v-icon >mdi-delete</v-icon>
             </v-btn>
           </div>
         </template>
