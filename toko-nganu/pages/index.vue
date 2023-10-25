@@ -207,11 +207,9 @@
                     </div>
                   </div>
                 </v-card>
-
               </v-col>
             </v-row>
           </div>
-
         </div>
       </div>
     </div>

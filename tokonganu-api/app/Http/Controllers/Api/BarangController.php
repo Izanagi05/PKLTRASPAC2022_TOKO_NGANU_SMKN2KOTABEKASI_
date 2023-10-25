@@ -82,7 +82,7 @@ class BarangController extends Controller
                     $totalRating += $rating->rating;
                 }
                 $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
-                $data[$key]['average_rating'] = $averageRating;
+                $data[$key]['average_rating'] = round($averageRating,1);
                 // dd($averageRating);
             }
             // $data->Toko()->get();

@@ -64,22 +64,21 @@
       <v-data-table :headers="headers" :items="alldatatransakasi">
         <template v-slot:[`item.aksistatus`]="{ item }">
           <div>
-            <!-- <v-btn depressed text > -->
               <v-chip @click="editstatus(item)" :class="statuscolor(item).textClass" :color="statuscolor(item).bgColor">
-  {{ item.status }}
-</v-chip>
-<!-- </v-btn> -->
-</div>
-</template>
-<template v-slot:[`item.total_harga`]="{ item }">
- Rp. {{ item.total_harga }}
-  </template>
-        <template v-slot:[`item.aksikonfirm`]="{ item }">
-          <div>
-            <v-btn icon small color="#4caf50" @click="setYaTidak('Ya', item)" :disabled="item.admin_konfirmasi==='Ya'?true:false"><v-icon>mdi-check</v-icon></v-btn>
-            <v-btn icon small color="#ff5252" @click="setYaTidak('Tidak', item)" :disabled="item.admin_konfirmasi==='Ya'||item.admin_konfirmasi==='Tidak'?true:false"><v-icon>mdi-close</v-icon></v-btn>
+                {{ item.status }}
+              </v-chip>
           </div>
         </template>
+        <template v-slot:[`item.total_harga`]="{ item }" >
+          <div>Rp. {{ item.total_harga }}</div>
+        </template>
+          <template v-slot:[`item.aksikonfirm`]="{ item }">
+            <div>
+              <v-btn icon small color="#4caf50" @click="setYaTidak('Ya', item)" :disabled="item.admin_konfirmasi==='Ya'?true:false"><v-icon>mdi-check</v-icon></v-btn>
+              <v-btn icon small color="#ff5252" @click="setYaTidak('Tidak', item)" :disabled="item.admin_konfirmasi==='Ya'||item.admin_konfirmasi==='Tidak'?true:false"><v-icon>mdi-close</v-icon></v-btn>
+              <v-btn icon small color="#ff5252" @click="setDelete(item)"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
+            </div>
+          </template>
       </v-data-table>
     </div>
   </div>
