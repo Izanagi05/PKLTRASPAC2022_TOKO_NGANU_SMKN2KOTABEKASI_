@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar v-if="$vuetify.breakpoint.mdAndUp" />
+    <NavbarMobileDetail v-else />
 
     <v-container
       ><div
@@ -8,21 +9,30 @@
         v-for="(dtlbrg, index) in detailbarang"
         :key="index"
       >
-        <NuxtLink to="/" class="my-2 text-decoration-none black--text">
-          Home </NuxtLink
-        ><span class="mdi mdi-chevron-right"
-          ><b>{{ dtlbrg.nama }}</b></span
-        >
+        <div v-if="!$vuetify.breakpoint.xs">
+          <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+            Home
+          </NuxtLink>
+          <span class="mdi mdi-chevron-right"
+            ><b>{{ dtlbrg.nama }}</b></span
+          >
+        </div>
       </div>
       <div class="content" v-for="(dtlbrg, index) in detailbarang" :key="index">
         <v-row>
-          <v-col cols="4">
-            <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
+          <v-col cols="12" sm="12" md="4" lg="4">
+            <div
+              class="foto-produk"
+              :class="{
+                'pt-4': !$vuetify.breakpoint.smAndDown,
+                'pb-4': !$vuetify.breakpoint.smAndDown,
+              }"
+            >
               <v-carousel
                 no-autoplay
                 height="380"
                 width="380"
-                hide-delimiter
+                hide-delimiters
                 show-arrows-on-hover
                 class="object-fit-cover"
               >
@@ -31,16 +41,22 @@
                   :key="index"
                 >
                   <v-img
-                    contain
                     :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                    :aspect-ratio="1"
                     width="auto"
-                    height="380"
                   ></v-img>
                 </v-carousel-item>
               </v-carousel>
             </div>
           </v-col>
-          <v-col cols="6" style="overflow-y: scroll; max-height: 1000px">
+
+          <v-col
+            cols="12"
+            sm="12"
+            md="6"
+            lg="6"
+            :class="$vuetify.breakpoint.xs ? '' : 'overflowku'"
+          >
             <div class="detail pt-4">
               <div class="nama-barang font-weight-bold" style="font-size: 30px">
                 {{ dtlbrg.nama }}
@@ -108,10 +124,18 @@
                 <p>Selengkapnya...</p>
                 <p>Selengkapnya...</p>
               </div>
-            </div> </v-col
-          ><v-col cols="2">
-            <div class="button">
-              <div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="12" md="2" lg="2">
+            <div
+              :class="[
+                'pa-4 white',
+                $vuetify.breakpoint.xs
+                  ? 'smCheckoutBox rounded-t-lg elevation-20'
+                  : 'rounded-lg',
+              ]"
+            >
+              <div elevation="10" class="varian-detail" v-if="showVarianDetail">
                 <div class="d-flex text-capitalize pb-2">
                   <div>
                     <v-img
@@ -126,7 +150,7 @@
                   <v-card class="d-flex align-center rounded-xl" outlined>
                     <v-btn
                       depressed
-                      @click="countmin(dataa)"
+                      @click="countmin()"
                       :disabled="jumlahBarangDibeli === 1"
                       class="ma-2 rounded-xl"
                       small
@@ -137,7 +161,7 @@
                     {{ jumlahBarangDibeli }}
                     <v-btn
                       depressed
-                      @click="countplus(dataa)"
+                      @click="countplus()"
                       class="ma-2 rounded-xl pluskuantitas"
                       small
                       icon
@@ -152,37 +176,57 @@
 
                 <p>Subtotal: Rp{{ subtotal }}</p>
               </div>
-
-              <div class="tambah-troli">
-                <v-btn
-                  class="rounded-lg d-block text-capitalize"
-                  large
-                  outlined
-                  width="100%"
-                  @click="tambahkeranjang(dtlbrg)"
-                  >Tambah <span class="mdi mdi-cart-outline"></span
-                ></v-btn>
-              </div>
-              <div
-                class="beli-sekarang pt-2"
-                v-for="(belisekarangData, index) in detailbarang"
-                :key="index"
-              >
-                <v-btn
-                  class="rounded-lg d-block text-capitalize"
-                  width="100%"
-                  large
-                  outlined
-                  @click="transaksi(dtlbrg)"
-                  style="background: #2f432d; color: white; size: 105px"
-                  >Beli Sekarang</v-btn
+              <v-row class="justify-space-between">
+                <v-col cols="2" sm="2" xs="2" md="12" lg="12" class="">
+                  <v-btn
+                    v-if="$vuetify.breakpoint.smAndDown"
+                    elevation="2"
+                    icon
+                    @click="toggleVarianDetail"
+                    color="green"
+                  >
+                    <v-icon dark>{{
+                      showVarianDetail ? "mdi-chevron-down" : "mdi-chevron-up"
+                    }}</v-icon>
+                  </v-btn>
+                </v-col>
+                <v-col cols="5" sm="5" xs="5" md="12" lg="12" class="">
+                  <v-btn
+                    class="rounded-lg d-block text-capitalize"
+                    outlined
+                    width="100%"
+                    @click="tambahkeranjang(dtlbrg)"
+                    >Tambah <span class="mdi mdi-cart-outline"></span
+                  ></v-btn>
+                </v-col>
+                <v-col
+                  cols="5"
+                  sm="5"
+                  xs="5"
+                  md="12"
+                  lg="12"
+                  :class="[
+                    'beli-sekarang ',
+                    $vuetify.breakpoint.smAndDown
+                      ? 'd-flex justify-end'
+                      : 'pt-2',
+                  ]"
+                  v-for="(belisekarangData, index) in detailbarang"
+                  :key="index"
                 >
-              </div>
-            </div></v-col
-          >
+                  <v-btn
+                    class="rounded-lg d-block text-capitalize white--text"
+                    width="100%"
+                    @click="transaksi(dtlbrg)"
+                    color="#2f532d"
+                    >Beli Sekarang</v-btn
+                  >
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
         </v-row>
-
-        <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
+        <!-- <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
           <div>
             <div class="product-card">
               <v-row class="p-0">
@@ -262,8 +306,9 @@
               </v-row>
             </div>
           </div>
-        </div></div
-    ></v-container>
+        </div> -->
+      </div></v-container
+    >
   </div>
 </template>
 
@@ -302,6 +347,7 @@ export default {
       hargaVarianTerpilih: null,
       jumlahBarangDibeli: 1,
       subtotal: null,
+      showVarianDetail: false,
     };
   },
   methods: {
@@ -335,6 +381,7 @@ export default {
         });
     },
     pilihanvarian(varian) {
+      this.showVarianDetail = true;
       this.pilihan = varian.varian_id;
       this.namasetvar = varian.nama;
       this.fotosetvar = varian.foto_barang_varian;
@@ -370,14 +417,14 @@ export default {
         });
       console.log(this.pilihan);
     },
-    countmin(dataa) {
+    countmin() {
       if (this.jumlahBarangDibeli > 1) {
         this.jumlahBarangDibeli--;
         this.subtotal = this.jumlahBarangDibeli * this.hargaVarianTerpilih;
       }
     },
 
-    countplus(dataa) {
+    countplus() {
       if (this.jumlahBarangDibeli < this.stokVarianTerpilih) {
         this.jumlahBarangDibeli++;
         this.subtotal = this.jumlahBarangDibeli * this.hargaVarianTerpilih;
@@ -410,6 +457,9 @@ export default {
           console.error("Error while creating transaction:", error);
         });
     },
+    toggleVarianDetail() {
+      this.showVarianDetail = !this.showVarianDetail;
+    },
   },
 
   created() {
@@ -417,6 +467,9 @@ export default {
     this.userid = usid.data.id;
     this.getbarangtokobyid();
     this.getfotobyidbrg();
+    if (!this.$vuetify.breakpoint.smAndDown) {
+      this.showVarianDetail = true;
+    }
   },
 };
 </script>
@@ -433,5 +486,16 @@ export default {
   color: white;
   padding: 10px;
   border-radius: 20px;
+}
+.smCheckoutBox {
+  z-index: 100;
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  bottom: 0;
+}
+.overflowku {
+  overflow-y: scroll;
+  height: 80vh;
 }
 </style>
