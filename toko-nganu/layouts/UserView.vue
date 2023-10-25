@@ -34,8 +34,14 @@
                   <v-icon large color="#616161" class="mr-2">{{
                     rute.icon
                   }}</v-icon>
-                  <div :class="[isaktif(rute.rt)?'font-weight-medium black--text':'font-weight-regular grey--text text--lighten-1']">
-                   {{ rute.nama }}
+                  <div
+                    :class="[
+                      isaktif(rute.rt)
+                        ? 'font-weight-medium black--text'
+                        : 'font-weight-regular grey--text text--lighten-1',
+                    ]"
+                  >
+                    {{ rute.nama }}
                   </div>
                 </v-btn>
               </div>
@@ -61,7 +67,7 @@
             order="1"
             class="d-flex my-0  py-0 order-lg-2 order-md-2 order-sm-1 order-xs-1 d-flex "
           >
-            <div style="width: 100%;">
+            <div style="width: 100%">
               <nuxt />
             </div>
           </v-col>
@@ -96,30 +102,35 @@ export default {
       var rutes = [
         {
           show: true,
+          class: "userprofile",
           nama: "Info User",
           rt: "/user-view",
           icon: "mdi-account",
         },
         {
           show: this.cekuserrole === "Admin",
+          class: "admin",
           nama: "Admin",
           rt: "/halaman-admin",
           icon: "mdi-account-tie",
         },
         {
           show: true,
+          class: "toko",
           nama: "Toko",
           rt: "/user-view/toko-user",
           icon: "mdi-storefront",
         },
         {
           show: true,
+          class: "tambahtoko",
           nama: "Buka Toko",
           rt: "/user-view/tambah-toko",
           icon: "mdi-store-plus",
         },
         {
           show: true,
+          class: "tambahbarang",
           nama: "Tambah Barang",
           rt: "/user-view/tambah-barang",
           icon: "mdi-package-variant-closed-plus",
@@ -135,8 +146,8 @@ export default {
         return link.show;
       });
     },
-       isaktif (pathh) {
-      return this.$route.path === pathh
+    isaktif(pathh) {
+      return this.$route.path === pathh;
     },
     getuser() {
       axios

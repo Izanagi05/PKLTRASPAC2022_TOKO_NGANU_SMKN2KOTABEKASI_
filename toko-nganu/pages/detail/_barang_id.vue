@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar v-if="$vuetify.breakpoint.mdAndUp" />
+    <NavbarMobileDetail v-else />
 
     <v-container
       ><div
@@ -8,21 +9,30 @@
         v-for="(dtlbrg, index) in detailbarang"
         :key="index"
       >
-        <NuxtLink to="/" class="my-2 text-decoration-none black--text">
-          Home </NuxtLink
-        ><span class="mdi mdi-chevron-right"
-          ><b>{{ dtlbrg.nama }}</b></span
-        >
+        <div v-if="!$vuetify.breakpoint.xs">
+          <NuxtLink to="/" class="my-2 text-decoration-none black--text">
+            Home
+          </NuxtLink>
+          <span class="mdi mdi-chevron-right"
+            ><b>{{ dtlbrg.nama }}</b></span
+          >
+        </div>
       </div>
       <div class="content" v-for="(dtlbrg, index) in detailbarang" :key="index">
         <v-row>
           <v-col cols="12" sm="12" md="4" lg="4">
-            <div class="foto-produk pt-4 pb-4" style="margin-left: 35px">
+            <div
+              class="foto-produk"
+              :class="{
+                'pt-4': !$vuetify.breakpoint.smAndDown,
+                'pb-4': !$vuetify.breakpoint.smAndDown,
+              }"
+            >
               <v-carousel
                 no-autoplay
                 height="380"
                 width="380"
-                hide-delimiter
+                hide-delimiters
                 show-arrows-on-hover
                 class="object-fit-cover"
               >
@@ -31,15 +41,15 @@
                   :key="index"
                 >
                   <v-img
-                    contain
                     :src="'http://127.0.0.1:8000/storage/' + ft.file"
+                    :aspect-ratio="1"
                     width="auto"
-                    height="380"
                   ></v-img>
                 </v-carousel-item>
               </v-carousel>
             </div>
           </v-col>
+
           <v-col
             cols="12"
             sm="12"
@@ -47,7 +57,12 @@
             lg="6"
             :class="$vuetify.breakpoint.xs ? '' : 'overflowku'"
           >
-            <div class="detail pt-4">
+            <div
+              class="detail"
+              :class="{
+                'pt-4': !$vuetify.breakpoint.smAndDown,
+              }"
+            >
               <div class="nama-barang font-weight-bold" style="font-size: 30px">
                 {{ dtlbrg.nama }}
               </div>
@@ -114,17 +129,18 @@
                 <p>Selengkapnya...</p>
                 <p>Selengkapnya...</p>
               </div>
-            </div> </v-col
-          ><v-col cols="12" sm="12" md="2" lg="2">
+            </div>
+          </v-col>
+          <v-col cols="12" sm="12" md="2" lg="2">
             <div
               :class="[
-                ' pa-4 white',
+                'pa-4 white',
                 $vuetify.breakpoint.xs
-                  ? 'smCheckoutBox rounded-t-lg  elevation-20'
-                  : ' rounded-lg ',
+                  ? 'smCheckoutBox rounded-t-lg elevation-20'
+                  : 'rounded-lg',
               ]"
             >
-              <div>
+              <div elevation="10" class="varian-detail" v-if="showVarianDetail">
                 <div class="d-flex text-capitalize pb-2">
                   <div>
                     <v-img
@@ -165,15 +181,21 @@
 
                 <p>Subtotal: Rp{{ subtotal }}</p>
               </div>
-              <v-row class="justify-space-between"
-
-              >
-              <!-- :class="[
-                  $vuetify.breakpoint.xs
-                    ? 'd-flex align-items-center justify-space-between'
-                    : '',
-                ]" -->
-                <v-col cols="4" sm="4" xs="4" md="12"  lg="12"   class="">
+              <v-row class="justify-space-between">
+                <v-col cols="2" sm="2" xs="2" md="12" lg="12" class="">
+                  <v-btn
+                    v-if="$vuetify.breakpoint.smAndDown"
+                    elevation="2"
+                    icon
+                    @click="toggleVarianDetail"
+                    color="green"
+                  >
+                    <v-icon dark>{{
+                      showVarianDetail ? "mdi-chevron-down" : "mdi-chevron-up"
+                    }}</v-icon>
+                  </v-btn>
+                </v-col>
+                <v-col cols="5" sm="5" xs="5" md="12" lg="12" class="">
                   <v-btn
                     class="rounded-lg d-block text-capitalize"
                     outlined
@@ -182,9 +204,18 @@
                     >Tambah <span class="mdi mdi-cart-outline"></span
                   ></v-btn>
                 </v-col>
-                <v-col  cols="6" sm="6" xs="6" md="12"  lg="12"
-                  :class="['beli-sekarang ',
-                  $vuetify.breakpoint.smAndDown?'d-flex justify-end':'pt-2']"
+                <v-col
+                  cols="5"
+                  sm="5"
+                  xs="5"
+                  md="12"
+                  lg="12"
+                  :class="[
+                    'beli-sekarang ',
+                    $vuetify.breakpoint.smAndDown
+                      ? 'd-flex justify-end'
+                      : 'pt-2',
+                  ]"
                   v-for="(belisekarangData, index) in detailbarang"
                   :key="index"
                 >
@@ -192,17 +223,15 @@
                     class="rounded-lg d-block text-capitalize white--text"
                     width="100%"
                     @click="transaksi(dtlbrg)"
-                    color="#2f432d"
-
+                    color="#2f532d"
                     >Beli Sekarang</v-btn
                   >
                 </v-col>
               </v-row>
-            </div></v-col
-          >
+            </div>
+          </v-col>
         </v-row>
-
-        <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
+        <!-- <div class="rekomendasi pb-6 item-center" style="margin-left: 35px">
           <div>
             <div class="product-card">
               <v-row class="p-0">
@@ -282,8 +311,9 @@
               </v-row>
             </div>
           </div>
-        </div></div
-    ></v-container>
+        </div> -->
+      </div></v-container
+    >
   </div>
 </template>
 
@@ -322,6 +352,7 @@ export default {
       hargaVarianTerpilih: null,
       jumlahBarangDibeli: 1,
       subtotal: null,
+      showVarianDetail: false,
     };
   },
   methods: {
@@ -355,6 +386,7 @@ export default {
         });
     },
     pilihanvarian(varian) {
+      this.showVarianDetail = true;
       this.pilihan = varian.varian_id;
       this.namasetvar = varian.nama;
       this.fotosetvar = varian.foto_barang_varian;
@@ -430,6 +462,9 @@ export default {
           console.error("Error while creating transaction:", error);
         });
     },
+    toggleVarianDetail() {
+      this.showVarianDetail = !this.showVarianDetail;
+    },
   },
 
   created() {
@@ -437,6 +472,9 @@ export default {
     this.userid = usid.data.id;
     this.getbarangtokobyid();
     this.getfotobyidbrg();
+    if (!this.$vuetify.breakpoint.smAndDown) {
+      this.showVarianDetail = true;
+    }
   },
 };
 </script>

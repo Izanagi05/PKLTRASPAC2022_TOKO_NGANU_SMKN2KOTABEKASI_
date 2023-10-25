@@ -176,7 +176,9 @@
                       :key="i"
                     >
                       <div v-if="brg" class="mr-1">Rp</div>
-                      {{ vrn.harga | currency("id-ID", "IDR") }}
+
+                      {{ vrn.harga }}
+
                     </div>
                     <v-row align="center">
                       <v-col cols="auto">
@@ -205,11 +207,9 @@
                     </div>
                   </div>
                 </v-card>
-
               </v-col>
             </v-row>
           </div>
-
         </div>
       </div>
     </div>
