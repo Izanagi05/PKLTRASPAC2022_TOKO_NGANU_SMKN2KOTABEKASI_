@@ -15,18 +15,11 @@
         >
       </v-card>
     </v-dialog>
-    <!-- <v-dialog v-model="dialogsetkonfirm">
-      <v-card class="pa-4">
-        Ya /tidak
-        <v-btn class="rounded-lg px-8" outlined @click="closesetkonfirm">Close</v-btn>
-        <v-btn
-          class="rounded-lg ml-8 px-8 white--text"
-          color="#4caf50"
-          @click="konfirmset"
-          >Ubah</v-btn
-        >
-      </v-card>
-    </v-dialog> -->
+    <DialogDelete
+      :dialogDelete="dialogDelete"
+      :confirmhapus="confirmhapustransaksi"
+      :closeDelete="closeDelete"
+    />
     <div
       :class="[
         'font-weight-bold  mb-2',
@@ -64,20 +57,48 @@
       <v-data-table :headers="headers" :items="alldatatransakasi">
         <template v-slot:[`item.aksistatus`]="{ item }">
           <div>
-            <!-- <v-btn depressed text > -->
-              <v-chip @click="editstatus(item)" :class="statuscolor(item).textClass" :color="statuscolor(item).bgColor">
-  {{ item.status }}
-</v-chip>
-<!-- </v-btn> -->
-</div>
-</template>
-<template v-slot:[`item.total_harga`]="{ item }">
- Rp. {{ item.total_harga }}
-  </template>
+            <v-chip
+              @click="editstatus(item)"
+              :class="statuscolor(item).textClass"
+              :color="statuscolor(item).bgColor"
+            >
+              {{ item.status }}
+            </v-chip>
+          </div>
+        </template>
+        <template v-slot:[`item.total_harga`]="{ item }">
+          <div>Rp. {{ item.total_harga }}</div>
+        </template>
         <template v-slot:[`item.aksikonfirm`]="{ item }">
           <div>
-            <v-btn icon small color="#4caf50" @click="setYaTidak('Ya', item)" :disabled="item.admin_konfirmasi==='Ya'?true:false"><v-icon>mdi-check</v-icon></v-btn>
-            <v-btn icon small color="#ff5252" @click="setYaTidak('Tidak', item)" :disabled="item.admin_konfirmasi==='Ya'||item.admin_konfirmasi==='Tidak'?true:false"><v-icon>mdi-close</v-icon></v-btn>
+            <v-btn
+              icon
+              small
+              color="#4caf50"
+              @click="setYaTidak('Ya', item)"
+              :disabled="item.admin_konfirmasi === 'Ya' ? true : false"
+              ><v-icon>mdi-check</v-icon></v-btn
+            >
+            <v-btn
+              icon
+              small
+              color="#ff5252"
+              @click="setYaTidak('Tidak', item)"
+              :disabled="
+                item.admin_konfirmasi === 'Ya' ||
+                item.admin_konfirmasi === 'Tidak'
+                  ? true
+                  : false
+              "
+              ><v-icon>mdi-close</v-icon></v-btn
+            >
+          </div>
+        </template>
+        <template v-slot:[`item.aksidelete`]="{ item }">
+          <div>
+            <v-btn icon small color="#ff5252" @click="deleteTransaksi(item)"
+              ><v-icon>mdi-trash-can-outline</v-icon></v-btn
+            >
           </div>
         </template>
       </v-data-table>
@@ -102,10 +123,26 @@ export default {
         { text: "Total harga ", value: "total_harga" },
         { text: "konfirmasi ", value: "admin_konfirmasi" },
         { text: "setkonfirmasi ", value: "aksikonfirm" },
+        { text: "Hapus ", value: "aksidelete" },
         // { text: "Aksi", value: "aksi" },
       ],
       // datastatus: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-      tokoid: 50,
+      defaultItem: {
+        transaksi_id: null,
+        user_id: null,
+        toko_id: null,
+        barang_id: null,
+        kategori_id: null,
+        varian_id: null,
+        admin_konfirmasi: null,
+        status: null,
+        jumlah: null,
+        metode_bayar: null,
+        total_harga: null,
+      },
+      tokoid: null,
+      dialogDelete: false,
+
       alldatatransakasi: [],
       detaildatadialog: {
         status: null,
@@ -113,11 +150,8 @@ export default {
       editeddetaildatadialog: {
         status: null,
       },
-      defaultItem:{
-      status: '',
-      },
       dialogstatus: false,
-      dialogsetkonfirm:false,
+      dialogsetkonfirm: false,
       psetyatidak: null,
     };
   },
@@ -146,6 +180,28 @@ export default {
       console.log(item);
       this.dialogstatus = true;
     },
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.detaildatadialog = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+    deleteTransaksi(item) {
+      (this.dialogDelete = true), (this.detaildatadialog = item);
+    },
+    confirmhapustransaksi() {
+      axios
+        .delete(
+          "http://localhost:8000/api/deletetransaksi/" +
+            this.detaildatadialog.transaksi_id
+        )
+        .then((respon) => {
+          console.log(respon.data);
+          this.closeDelete();
+          this.getdatatransaksi();
+        });
+    },
     closeedit() {
       // this.detaildatadialog = null;
       this.$nextTick(() => {
@@ -156,20 +212,19 @@ export default {
     konfirmstatus() {
       this.detaildatadialog.status = this.editeddetaildatadialog.status;
       axios
-      .post(
-        "http://localhost:8000/api/updatetransaksi/" +
+        .post(
+          "http://localhost:8000/api/updatetransaksi/" +
             this.detaildatadialog.transaksi_id,
           this.detaildatadialog
         )
         .then((respon) => {
           this.getdatatransaksi();
         });
-        this.dialogstatus = false;
-      },
-      setYaTidak(konfirm, item) {
-        this.detaildatadialog=item
+      this.dialogstatus = false;
+    },
+    setYaTidak(konfirm, item) {
+      this.detaildatadialog = item;
       this.detaildatadialog.admin_konfirmasi = konfirm;
-      // this.psetyatidak=
       axios
         .post(
           "http://localhost:8000/api/updatetransaksi/" +
@@ -181,23 +236,23 @@ export default {
         });
     },
     statuscolor(item) {
-      if (item.admin_konfirmasi === 'Ya') {
+      if (item.admin_konfirmasi === "Ya") {
         return {
-          bgColor: '#E8F5E9',
-          textClass: 'green--text'
+          bgColor: "#E8F5E9",
+          textClass: "green--text",
         };
-      } else if (item.admin_konfirmasi === 'Tidak') {
+      } else if (item.admin_konfirmasi === "Tidak") {
         return {
-          bgColor: '#FFEBEE',
-          textClass: 'red--text'
+          bgColor: "#FFEBEE",
+          textClass: "red--text",
         };
       } else {
         return {
-          bgColor: '#FFF3E0',
-          textClass: 'orange--text'
+          bgColor: "#FFF3E0",
+          textClass: "orange--text",
         };
       }
-    }
+    },
   },
   created() {
     const userid = this.$cookies.get("cookieku");

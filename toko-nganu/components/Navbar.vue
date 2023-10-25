@@ -59,7 +59,7 @@
                     <v-img
                       :src="
                         'http://127.0.0.1:8000/storage/' +
-                        UserLogin?.foto_profil
+                        datauserLoginKu?.foto_profil
                       "
                     />
                   </v-avatar>
@@ -106,7 +106,7 @@
                 <v-btn
                   text
                   depressed
-                  @click="logout"
+                  @click="logout()"
                   width="100%"
                   class="font-weight-medium d-flex mt-15 align-items justify-start py-8 text-capitalize"
                   ><v-icon large color="#616161" class="mr-2">mdi-logout</v-icon
@@ -138,6 +138,7 @@ export default {
       cari: null,
       nama: "tes",
       no_admin: "6281563151038",
+      datauserLoginKu:[]
     };
   },
   computed: {
@@ -182,7 +183,7 @@ export default {
           show: true,
           nama: "Manajemen Toko",
           rt: "/user-view/manajemen-toko",
-          icon: "mdi-package-variant-closed-plus",
+          icon: "mdi-store-check-outline",
         },
       ];
       this.routersdata = rutes.filter(function (link) {
@@ -206,11 +207,12 @@ export default {
     pushprofil() {
       this.$router.push("/user-view/edit-profil");
     },
-  },
-  logout() {
+    logout() {
       this.$store.dispatch("users/logout");
     },
+  },
   created() {
+    this.datauserLoginKu=this.$cookies.get('cookieku')?.data
     this.$store.dispatch("toko/getdatatoko", this.tokouser);
     this.getuserlogin();
     this.route();

@@ -128,7 +128,7 @@ export default {
           show: true,
           nama: "Manajemen Toko",
           rt: "/user-view/manajemen-toko",
-          icon: "mdi-package-variant-closed-plus",
+          icon: "mdi-store-check-outline",
         },
       ];
       this.routersdata = rutes.filter(function (link) {

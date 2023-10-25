@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="dialogsearch" max-width="600px">
-      <v-card class="pa-6 rounded-xl">
+      <v-card class="pa-6 rounded-lg">
         <v-text-field
                 class="nyari rounded-lg"
                 v-model="cari"
@@ -111,7 +111,7 @@
             outlined
             @click="getkategori(-1)"
             :class="[
-              'ma-2  rounded-xl text-capitalize',
+              'ma-2  rounded-lg text-capitalize',
               fcek === true ? 'btn-warnaku white--text' : '',
             ]"
           >
@@ -121,12 +121,12 @@
             outlined
             v-for="(ktg, index) in allkategori"
             :class="[
-              'ma-2  rounded-xl text-capitalize',
+              'ma-2  rounded-lg text-capitalize',
               ktg.kategori_id === fcek ? 'btn-warnaku white--text' : '',
             ]"
             :key="index"
             @click="getkategori(ktg.kategori_id)"
-            class="ma-2 rounded-xl"
+            class="ma-2 rounded-lg"
           >
             {{ ktg.nama }}
           </v-btn>
@@ -194,7 +194,7 @@
                     <div class="btn-card mt-2 pb-1 d-flex align-center">
                       <v-rating
                         v-model="brg.average_rating"
-                        background-color="white"
+                        background-color="yellow"
                         color="yellow accent-4"
                         dense
                         half-increments

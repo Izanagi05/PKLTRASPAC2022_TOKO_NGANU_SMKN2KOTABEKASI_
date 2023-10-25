@@ -11,6 +11,30 @@ use Illuminate\Support\Facades\Storage;
 
 class TokoUserController extends Controller
 {
+    public function searchtoko($search=null)
+    {
+        try {
+            if($search){
+
+                $data = Toko::where('nama', 'LIKE', '%' . $search . '%')->orWhere('deskripsi', 'LIKE', '%' . $search . '%')->get();
+            }else{
+                $data=Toko::get();
+            }
+            return response()->json([
+                'data' => $data,
+                'message' => 'Berhasil cari',
+                'success' => true,
+                'status' => 201,
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'data' => null,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'success' => false,
+                'status' => 500,
+            ], 500);
+        }
+    }
 
     public function getbarangbytokouser($id)
     {

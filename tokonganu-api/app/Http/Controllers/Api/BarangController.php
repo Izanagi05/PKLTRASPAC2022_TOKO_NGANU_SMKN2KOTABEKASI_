@@ -50,6 +50,13 @@ class BarangController extends Controller
     {
         try {
             $data = Barang::where('toko_id', $id)->get();
+            foreach ($data as $key => $dt) {
+                $dt->nama_kategori= $dt->Kategori->nama;
+                $dt->foto_barang_first= $dt->barangFotoFirst->first()->file;
+                unset($dt->Kategori);
+                unset($dt->barangFotoFirst);
+                # code...
+            }
             // return response()->json($data);
             return response()->json([
                 'data' => $data,
@@ -82,7 +89,7 @@ class BarangController extends Controller
                     $totalRating += $rating->rating;
                 }
                 $averageRating = $countRating > 0 ? $totalRating / $countRating : 0;
-                $data[$key]['average_rating'] = $averageRating;
+                $data[$key]['average_rating'] = round($averageRating,1);
                 // dd($averageRating);
             }
             // $data->Toko()->get();

@@ -55,7 +55,7 @@
                   class=" align-center"
                 >
                   <v-img
-                    class="rounded-xl"
+                    class="rounded-lg"
                     :src="require('~/assets/barang.png')"
                     height="100"
                     width="100"
@@ -94,7 +94,7 @@
                       xs="6"
                       class="d-flex justify-end order-4 order-lg-2 order-md-2"
                     >
-                      <div
+                      <!-- <div
                         class="d-flex justify-center bg-greyku rounded-lg"
                         style="width: 60px"
                       >
@@ -123,7 +123,29 @@
                         >
                           <v-icon color="black">mdi-plus</v-icon>
                         </button>
-                      </div>
+                      </div> -->
+                      <v-card class="d-flex align-center rounded-xl" outlined>
+                    <v-btn
+                      depressed
+                      @click="countmin(dataa)"
+                      :disabled="dataa.kuantitas === 1"
+                      class="ma-2 rounded-lg"
+                      small
+                      icon
+                    >
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
+                    {{ dataa.kuantitas }}
+                    <v-btn
+                      depressed
+                      @click="countplus(dataa)"
+                      class="ma-2 rounded-lg pluskuantitas"
+                      small
+                      icon
+                    >
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-card>
                     </v-col>
                     <v-col
                       cols="6"
@@ -165,8 +187,8 @@
                 :class="[
                   'grey lighten-3 pa-4',
                   $vuetify.breakpoint.xs
-                    ? 'smCheckoutBox rounded-t-xl'
-                    : ' rounded-xl ',
+                    ? 'smCheckoutBox rounded-t-lg'
+                    : ' rounded-lg ',
                 ]"
               >
                 <div class="text-h6 font-weight-bold">Rincian Order</div>

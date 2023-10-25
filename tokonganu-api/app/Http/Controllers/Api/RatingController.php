@@ -17,7 +17,7 @@ class RatingController extends Controller
 
 
             return response()->json([
-                'data' => $rating,
+                'data' => number_format($rating, 1),
                 'message' => 'Berhasil get data berdasarkan rating',
                 'success' => true,
                 'status' => 201,

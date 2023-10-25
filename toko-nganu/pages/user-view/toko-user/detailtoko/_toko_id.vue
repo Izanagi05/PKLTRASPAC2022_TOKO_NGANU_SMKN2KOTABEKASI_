@@ -49,22 +49,23 @@
         </template>
         <template v-slot:[`item.aksi`]="{ item }">
         <v-btn
-          class="mx-2 white--text btn-crkuup"
-          fab
+          class="mx-2 "
+          icon
+          color="#4caf50"
           small
           @click="ubahbarang(item)"
           style="margin: 15px 15px 15px 0px"
         >
-          <v-icon dark>mdi-pencil</v-icon>
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          class="mx-2 white--text btn-crkuhap"
-          fab
+          class="mx-2 "
+          icon
+          color="#ff5252"
           small
           @click="hapusbarang(item)"
-          style="background: #ff2a30"
         >
-          <v-icon dark>mdi-delete</v-icon>
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </template>
     </v-data-table>
